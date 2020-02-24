@@ -23,18 +23,3 @@ char *ft_strrchr(const char *s, int c)
 	}
 	return ret;
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char s1[30] = "A Garden Diary";
-	int test = 'r';
-	char *a = strrchr(s1, test);
-	char *b = ft_strrchr(s1, test);
-
-	printf("%s\n", a);
-	printf("%s\n", b);
-}
-*/

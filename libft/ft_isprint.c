@@ -17,15 +17,3 @@ int ft_isprint(int c)
 	else
 		return 0;
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int main()
-{
-	int test = '!';
-	int a = isprint(test);
-	int b = ft_isprint(test);
-	printf("%d %d\n", a, b);
-}
-*/

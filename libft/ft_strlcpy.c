@@ -25,16 +25,3 @@ size_t ft_strlcpy(char *dest, const char *src, size_t size)
 	dest[i] = '\0';
 	return (ft_strlen(src));
 }
-
-
-#include <stdio.h>
-int main()
-{
-	char dest[20];
-	const char src[20] = "hihello";
-	size_t size = 5;
-
-	int a = ft_strlcpy(dest, src, size);
-	printf("%d\n", a);
-	printf("%s\n", dest);
-}

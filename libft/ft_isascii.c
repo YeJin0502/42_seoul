@@ -17,15 +17,3 @@ int ft_isascii(int c)
 	else
 		return 0;
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int main()
-{
-	int test = ' ';
-	int a = isascii(test);
-	int b = ft_isascii(test);
-	printf("%d %d\n", a, b);
-}
-*/

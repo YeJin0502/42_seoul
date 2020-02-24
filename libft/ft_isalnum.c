@@ -21,15 +21,3 @@ int ft_isalnum(int c)
 	else
 		return 0;
 }
-
-/*
-#include <stdio.h>
-#include <ctype.h>
-int main()
-{
-	int test = '0';
-	int a = isalnum(test);
-	int b = ft_isalnum(test);
-	printf("%d %d\n", a, b);
-}
-*/

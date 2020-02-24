@@ -24,19 +24,3 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char *s1 = "  ";
-	char *s2 = "";
-	int n = 10;
-	int real = strncmp(s1, s2, n);
-	int my = ft_strncmp(s1, s2, n);
-
-	printf("%d\n", real);
-	printf("%d\n", my);
-}
-*/

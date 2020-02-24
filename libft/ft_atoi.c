@@ -33,15 +33,3 @@ int ft_atoi(const char *str)
 	}
 	return (num * sign);
 }
-
-/*
-#include <stdlib.h>
-#include <stdio.h>
-int main()
-{
-	char test[20] = "+10023";
-	int a = atoi(test);
-	int b = ft_atoi(test);
-	printf("%d %d\n", a, b);
-}
-*/
