@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 16:52:30 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 16:52:30 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/24 23:57:19 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/24 23:57:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlcpy(char *dest, const char *src, size_t size)
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
+	char *d = (char *)dest;
+	char *s = (char *)src;
 	size_t i;
-
+	
 	i = 0;
-	while (i < size - 1 && src[i])
+	while (i < n)
 	{
-		dest[i] = src[i];
+        d[i] = s[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (ft_strlen(src));
+    return dest;
 }
 
-
+/*
 #include <stdio.h>
+#include <string.h>
 int main()
 {
-	char dest[20];
-	const char src[20] = "hihello";
-	size_t size = 5;
+	char dest1[10] = "hihello";
+	char src1[20] = "moonguwha wowowo";
+	char dest2[10] = "hihello";
+	char src2[20] = "moonguwha wowowo";
+	int n = 5;
 
-	int a = ft_strlcpy(dest, src, size);
-	printf("%d\n", a);
-	printf("%s\n", dest);
+	memcpy(dest1, src1, n);
+	printf("%s\n", dest1);
+	ft_memcpy(dest2, src2, n);
+	printf("%s\n", dest2);
 }
+*/

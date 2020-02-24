@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 16:52:30 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 16:52:30 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 00:48:12 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 00:48:12 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlcpy(char *dest, const char *src, size_t size)
+void *ft_memset(void *s, int c, size_t n)
 {
+	char *ret = (char *) s;
 	size_t i;
-
+	
 	i = 0;
-	while (i < size - 1 && src[i])
+	while (i < n)
 	{
-		dest[i] = src[i];
+		ret[i] = c;
 		i++;
 	}
-	dest[i] = '\0';
-	return (ft_strlen(src));
+	return ret;
 }
 
-
+/*
 #include <stdio.h>
+#include <string.h>
 int main()
 {
-	char dest[20];
-	const char src[20] = "hihello";
-	size_t size = 5;
+	char str1[20] = "helloworld";
+	char str2[20] = "helloworld";
 
-	int a = ft_strlcpy(dest, src, size);
-	printf("%d\n", a);
-	printf("%s\n", dest);
+	printf("%s\n", str1);
+	memset(str1, '.', sizeof(str1) - 1);
+	printf("%s\n", str1);	
+	printf("-------------------\n");
+	printf("%s\n", str2);
+	ft_memset(str2, '.', sizeof(str2) - 1);
+	printf("%s\n", str2);	
 }
+*/

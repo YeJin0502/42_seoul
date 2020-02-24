@@ -10,21 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(const char *str)
-{
-	int i;
-	i = 0;
-	while (str[i])
-		i++;
-	return i;
-}
-/* 헤더파일을 부르는게 낫나? 깔끔한건 그게 깔끔한데, 너무 비효율적인가 싶어서..
-이대로 하면 충돌일어나나? 아니면 static을 이런 곳에 사용해야하나? */
+#include "libft.h"
 
-int ft_strlcat(char *dst, const char *src, int size)
+size_t ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int i;
-	int dst_size;
+	size_t i;
+	size_t dst_size;
 	i = 0;
 	while (dst[i])
 		i++;
@@ -74,9 +65,7 @@ int	ft_strlcat2(char *dest, char *src, int size)
 	dest[i] = '\0';
 	return (k);
 }
-*/
 
-/*
 #include <stdio.h>
 int main()
 {

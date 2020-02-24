@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 14:33:56 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 14:33:56 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/24 23:35:02 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/24 23:35:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 이걸 여기에 해야하는지 헤더파일에 해야하는지 모르겠음. 잘 안되면 그냥 int로 바꿔야지 */
-
 #include "libft.h"
 
-size_t ft_strlen(const char *str)
+char *ft_strdup(const char *s)
 {
+	char *ret;
+	int size;
+	size = ft_strlen(s);
+	ret = (char *)malloc(size + 1);
+	ret[size] = '\0';
+	
 	int i;
 	i = 0;
-	while (str[i])
+	while (i < size)
+	{
+		ret[i] = s[i];
 		i++;
-	return i;
+	}
+	return ret;
 }

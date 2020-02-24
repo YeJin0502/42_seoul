@@ -1,24 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 14:33:56 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 14:33:56 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 02:28:47 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 02:28:47 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 이걸 여기에 해야하는지 헤더파일에 해야하는지 모르겠음. 잘 안되면 그냥 int로 바꿔야지 */
-
 #include "libft.h"
 
-size_t ft_strlen(const char *str)
+void ft_bzero(void *s, size_t n)
 {
+	char *tmp = (char *)s;
+	size_t i;
+
+	i = 0;
+	while (i < n)
+	{
+		tmp[i] = 0;
+		i++;
+	}
+}
+
+/*
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	char a[20] = "moonguwha";
+	printf("%s\n", a);
+	ft_bzero(a, 3);
 	int i;
 	i = 0;
-	while (str[i])
+	while (i < 10)
+	{
+		printf("%c", a[i]);
 		i++;
-	return i;
+	}
 }
+*/
