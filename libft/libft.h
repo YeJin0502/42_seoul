@@ -14,5 +14,8 @@ int ft_toupper(int c);
 int ft_tolower(int c);
 int ft_strlcpy(char *dest, const char *src, int size);
 int ft_strlcat(char *dst, const char *src, int size);
+char *ft_strchr(const char *s, int c);
+char *ft_strrchr(const char *s, int c);
+char *ft_strnstr(const char *big, const char *little, int len);
 
 #endif
