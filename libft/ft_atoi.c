@@ -39,6 +39,9 @@ int ft_atoi(const char *str)
 #include <stdio.h>
 int main()
 {
-	printf("%d %d\n", atoi("  ++10023"), ft_atoi("  ++10023"));
+	char test[20] = "+10023";
+	int a = atoi(test);
+	int b = ft_atoi(test);
+	printf("%d %d\n", a, b);
 }
 */

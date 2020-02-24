@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 14:33:56 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 14:33:56 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/24 16:49:29 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/24 16:49:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// typedef int size_t;
-/* 이걸 여기에 해야하는지 헤더파일에 해야하는지 모르겠음. 잘 안되면 그냥 int로 바꿔야지 */
-
-int ft_strlen(const char *str)
+int ft_tolower(int c)
 {
-	int i;
-	i = 0;
-	while (str[i])
-		i++;
-	return i;
+	if ('A' <= c && c <= 'Z')
+		return (c + ('a' - 'A'));
+	else
+		return (c);
 }
+
+/*
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+	int test = 'C';
+	int a = tolower(test);
+	int b = ft_tolower(test);
+
+	printf("%c %c\n", a, b);
+}
+*/
