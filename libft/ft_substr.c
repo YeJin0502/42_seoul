@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 02:28:47 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 02:28:47 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 16:29:18 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 16:29:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+char *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *tmp;
-	size_t i;
+	char *ret;
+	ret = (char *)malloc(len + 1);
+	if (!ret)
+		return 0;
+	ret[len] = '\0';
 
-	tmp = (char *)s;
+	size_t i;
 	i = 0;
-	while (i < n)
+	while (i < len && s[start+i])
 	{
-		tmp[i] = 0;
+		ret[i] = s[start+i];
 		i++;
 	}
+	return ret;
 }

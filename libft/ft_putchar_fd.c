@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 02:28:47 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 02:28:47 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 22:15:27 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 22:15:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void ft_putchar_fd(char c, int fd)
 {
-	char *tmp;
-	size_t i;
-
-	tmp = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		tmp[i] = 0;
-		i++;
-	}
+	write(fd, &c, 1);
 }

@@ -14,9 +14,10 @@
 
 void *ft_memchr(const void *s, int c, size_t n)
 {
-	char *ret = (char *)s;
+	char *ret;
 	size_t i;
 	
+	ret = (char *)s;
 	i = 0;
 	while (i < n)
 	{
@@ -26,17 +27,3 @@ void *ft_memchr(const void *s, int c, size_t n)
 	}
 	return 0;
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char a[20] = "hi hello world";
-	int c = 'i';
-	size_t n = 8;
-
-	printf("%p\n", memchr(a, c, n));
-	printf("%p\n", ft_memchr(a, c, n));
-}
-*/

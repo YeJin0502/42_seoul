@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 02:28:47 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 02:28:47 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 22:24:50 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 22:24:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void ft_putnbr_fd(int n, int fd)
 {
-	char *tmp;
-	size_t i;
-
-	tmp = (char *)s;
-	i = 0;
-	while (i < n)
+	if (n == -2147483648)
 	{
-		tmp[i] = 0;
-		i++;
+		write(fd, "-2147483648", 11);
+		return;
 	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n/10, fd);
+		ft_putnbr_fd(n%10, fd);
+	}
+	if (n < 9)
+		ft_putchar_fd(n + '0', fd);
+	return;
 }

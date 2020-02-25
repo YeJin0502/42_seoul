@@ -14,10 +14,12 @@
 
 void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char *d = (char *)dest;
-	char *s = (char *)src;
+	char *d;
+	char *s;
 	size_t i;
-	
+
+	d = (char *)dest;
+	s = (char *)src;
 	i = 0;
 	while (i < n)
 	{
@@ -26,21 +28,3 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	}
     return dest;
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char dest1[10] = "hihello";
-	char src1[20] = "moonguwha wowowo";
-	char dest2[10] = "hihello";
-	char src2[20] = "moonguwha wowowo";
-	int n = 5;
-
-	memcpy(dest1, src1, n);
-	printf("%s\n", dest1);
-	ft_memcpy(dest2, src2, n);
-	printf("%s\n", dest2);
-}
-*/

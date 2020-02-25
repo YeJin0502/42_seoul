@@ -14,40 +14,24 @@
 
 void *ft_memmove(void *dest, const void *src, size_t n)
 {
-	void *ret = dest;
-	char *d = (char *)dest;
-	char *s = (char *)src;
+	char *d; 
+	char *s;
 	size_t i;
 
+	d = (char *)dest;
+	s = (char *)src;
 	i = 0;
-	if (dest <= src || d >= s + n)
-		return ret;
-	else
-	{
-		dest = d + n - 1;
-		src = s + n - 1;
+	if (dest <= src)
 		while (i < n)
 		{
-			*(d-i) = *(s-i);
+			d[i] = s[i];
 			i++;
 		}
-	}
-	return ret;
+	else
+		while (n > 0)
+		{
+			d[n - 1] = s[n - 1];
+			n--;
+		}
+	return (dest);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char str1[50] = "1234567890";
-	printf("%s\n", str1);
-	memmove(str1+4, str1+2, 6);
-	printf("%s\n", str1);
-
-	char str2[50] = "1234567890";
-	printf("%s\n", str2);
-	memmove(str2+4, str2+2, 6);
-	printf("%s\n", str2);
-}
-*/

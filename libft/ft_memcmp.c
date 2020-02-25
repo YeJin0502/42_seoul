@@ -14,10 +14,12 @@
 
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char *a = (char *)s1;
-	char *b = (char *)s2;
+	char *a;
+	char *b;
 	size_t i;
 
+	a = (char *)s1;
+	b = (char *)s2;
 	i = 0;
 	while (i < n)
 	{
@@ -29,21 +31,3 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return 0;
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char s1[20] = "aaaa";
-	char s2[20] = "aaa";
-	// int a[10] = {1,6,1};
-	// int b[10] = {1,1,2,3}; // 이건 왜 다르게해도 0만 나오지.. 뭘까
-	size_t n = 8; // 7까지는 1이 나오다가 8부터 갑자기 97이 나온다... 뭐냐
-	int real = memcmp(s1, s2, n);
-	int my = ft_memcmp(s1, s2, n);
-	
-	printf("%d\n", real);
-	printf("%d\n", my);
-}
-*/
