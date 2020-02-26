@@ -1,8 +1,12 @@
-#include "libft.h"
+// ft_split: malloc 실패했을때 free 했는지 함수 살펴볼것.
 
+
+#include "libft.h"
 #include <stdio.h>
 #include <bsd/string.h> // gcc -lbsd 옵션 추가 필요
 #include <ctype.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 static int is_zero(int c)
 {
@@ -59,16 +63,16 @@ int main()
 	}
 
 	// ft_strlcpy
-	char dst1[20] = "helloworldmoon";
+	char dst1_lcpy[20] = "helloworldmoon";
 	char src1_lcpy[10] = "01234567";
-	char dst2[20] = "helloworldmoon";
+	char dst2_lcpy[20] = "helloworldmoon";
 	char src2_lcpy[10] = "01234567";
-	int size = 5;
-	int my_lcpy = ft_strlcpy(dst1, src1_lcpy, size);
-	int real_lcpy = strlcpy(dst2, src2_lcpy, size);
+	int size_lcpy = 5;
+	int my_lcpy = ft_strlcpy(dst1_lcpy, src1_lcpy, size_lcpy);
+	int real_lcpy = strlcpy(dst2_lcpy, src2_lcpy, size_lcpy);
 	if (my_lcpy != real_lcpy)
 		printf("ft_strlcpy ERROR1!\n");
-	if (ft_strncmp(dst1, dst2, 20) != 0)
+	if (ft_strncmp(dst1_lcpy, dst2_lcpy, 20) != 0)
 		printf("ft_strlcpy ERROR2!\n");
 
 	// ft_strlcat
@@ -178,7 +182,7 @@ int main()
 	int n_cpy = 6; // case2. 3
 	char *my_cpy = ft_memcpy(dest_cpy, src_cpy, n_cpy);
 	char *real_cpy = memcpy(dest_cpy, src_cpy, n_cpy);
-	if (ft_memcmp(my_cpy, real_cpy, 11) != 0)
+	if (ft_memcmp(my_cpy, real_cpy, 11) != 0) // memcmp 사용할 때 n을 어떻게 줘야할지 모르겠음.
 		printf("ft_memcpy ERROR!\n");
 	// printf("ft_memcpy: [%s] // ", my_cpy);
 	// printf("memcpy: [%s]\n", real_cpy);
@@ -253,7 +257,7 @@ int main()
 	free(my_sub);
 
 	// ft_strjoin
-	char a_join[10] = "hi";
+	char *a_join = "hi";
 	char b_join[10] = "hello";
 	char *my_join = ft_strjoin(a_join, b_join);
 	if (ft_strncmp(my_join, "hihello", 10) != 0)
@@ -270,30 +274,53 @@ int main()
 	// printf("[%s] <= ft_strtrim\n", my_trim);
 	free(my_trim);
 
-	// // ft_split
-	// char a[50] = " hello world   moon   ";
-	// char c = ' ';
-	// char **test = ft_split(a, c);
-	// int i = 0;
-	// while (test[i])
+	// ft_split
+	char a_split[50] = " aaa bb   cc";
+	char c_split = ' ';
+	char **test_split = ft_split(a_split, c_split);
+	if (ft_strncmp(test_split[0], "aaa", 10) != 0)
+		printf("ft_split ERROR1!\n");
+	if (ft_strncmp(test_split[1], "bb", 10) != 0)
+		printf("ft_split ERROR2!\n");
+	if (ft_strncmp(test_split[2], "cc", 10) != 0)
+		printf("ft_split ERROR3!\n");
+	// int i_split = 0;
+	// while (test_split[i_split])
 	// {
-	// 	printf("%s\n", test[i]);
-	// 	i++;
+	// 	printf("%s\n", test_split[i_split]);
+	// 	i_split++;
 	// }
+	free(test_split);
 
 	// ft_itoa
-	int n_itoa = 6789;
+	int n_itoa = -2147483648;
 	char *my_itoa = ft_itoa(n_itoa);
-	if (ft_strncmp(my_itoa, "6789", 10) != 0)
+	if (ft_strncmp(my_itoa, "-2147483648", 20) != 0)
 		printf("ft_itoa ERROR!\n");
 	// printf("[%s] <= ft_itoa\n", my_itoa);
 	free(my_itoa);
 
 	// ft_strmapi
 
-	// ft_putchar_fd
+	// // ft_putchar_fd
+	// int fd_char = open("fd_char.txt", O_WRONLY | O_CREAT, 0744);
+	// ft_putchar_fd('m', fd_char);
+	// close(fd_char);
+	// fd_char = open("fd_char.txt", O_WRONLY | O_CREAT, 0744);
+	// char buf_char[10];
+	// read(fd_char, buf_char, sizeof(buf_char));
+	// printf("%s\n", buf_char);
 
 	// ft_putstr_fd
+	int fd_str = 0;
+	ft_putstr_fd("hihello", fd_str);
+	printf("%d\n", fd_str);
+
+
+
+    char *s1_charfd= "abc";
+    ft_putstr_fd(s1_charfd, 1);
+
 
 	// ft_putendl_fd
 
@@ -301,3 +328,15 @@ int main()
 
 	printf("test complete.\n");
 }
+
+// 한결님메인문
+// int		main(int argc, char **argv)
+// {
+// 	int		fd;
+// 	if (argc || argv)
+// 		printf("./test_putchar_fd <char>\n");
+// 	fd = open("d1", O_WRONLY | O_CREAT, 0744);
+// 	ft_putchar_fd(argv[1][0], fd);
+// 	close(fd);
+// 	return (0);
+// }

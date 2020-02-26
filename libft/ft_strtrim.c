@@ -12,25 +12,26 @@
 
 #include "libft.h"
 
-static int is_set(char c, char const *set)
+static int	is_set(char c, char const *set)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (set[i])
 	{
 		if (c == set[i])
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
-	int i;
-	int start;
-	int end;
-	char *ret;
+	int		i;
+	int		start;
+	int		end;
+	char	*ret;
 
 	i = -1;
 	start = 0;
@@ -48,5 +49,5 @@ char *ft_strtrim(char const *s1, char const *set)
 	i = 0;
 	while (start <= end)
 		ret[i++] = s1[start++];
-	return ret;
+	return (ret);
 }

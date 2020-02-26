@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	if ('0' <= c && c <= '9')
-		return 8; /* 아니 왜 갑자기 8? 구현은 그냥 1로만 해도 될라나? */
+		return (8);
 	else if ('a' <= c && c <= 'z')
-		return 8;
+		return (8);
 	else if ('A' <= c && c <= 'Z')
-		return 8;
+		return (8);
 	else
-		return 0;
+		return (0);
 }

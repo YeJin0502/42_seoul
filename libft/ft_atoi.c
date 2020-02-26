@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int num;
-	int sign;
+	int	num;
+	int	sign;
 
 	num = 0;
 	sign = 1;
-
 	while (*str == ' ')
 		str++;	
 	if (*str == '+' || *str == '-')
