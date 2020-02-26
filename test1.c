@@ -1,6 +1,5 @@
 // ft_split: malloc 실패했을때 free 했는지 함수 살펴볼것.
 
-
 #include "libft.h"
 #include <stdio.h>
 #include <bsd/string.h> // gcc -lbsd 옵션 추가 필요
@@ -15,14 +14,21 @@ static int is_zero(int c)
 	else return 0;
 }
 
-static int ft_sign(int c)
+static int	n_size(int n)
 {
-	if (c < 0)
-		return -1;
-	else if (c == 0)
-		return 0;
-	else
-		return 1;
+	int	size;
+	
+	size = 0;
+	if (n < 0)
+	{
+		size++;
+	}
+	while (n != 0)
+	{
+		n = n / 10;
+		size++;
+	}
+	return (size);
 }
 
 int main()
@@ -262,7 +268,7 @@ int main()
 	char *my_join = ft_strjoin(a_join, b_join);
 	if (ft_strncmp(my_join, "hihello", 10) != 0)
 		printf("ft_strjoin ERROR!\n");
-	// printf("[%s] <= ft_strjoin\n", my_join);
+	// printf("%s\n", my_join);
 	free(my_join);
 
 	// ft_strtrim
@@ -275,7 +281,7 @@ int main()
 	free(my_trim);
 
 	// ft_split
-	char a_split[50] = " aaa bb   cc";
+	char a_split[50] = " aaa  bb cc";
 	char c_split = ' ';
 	char **test_split = ft_split(a_split, c_split);
 	if (ft_strncmp(test_split[0], "aaa", 10) != 0)
@@ -302,41 +308,115 @@ int main()
 
 	// ft_strmapi
 
-	// // ft_putchar_fd
-	// int fd_char = open("fd_char.txt", O_WRONLY | O_CREAT, 0744);
-	// ft_putchar_fd('m', fd_char);
-	// close(fd_char);
-	// fd_char = open("fd_char.txt", O_WRONLY | O_CREAT, 0744);
-	// char buf_char[10];
-	// read(fd_char, buf_char, sizeof(buf_char));
+	// ft_putchar_fd
+	char buf = 0;
+	size_t count = 0;
+	char test_char = 'm';
+	int fd_char;
+
+	fd_char = open("fd_char.txt", O_WRONLY | O_TRUNC | O_CREAT, 0744);
+	ft_putchar_fd(test_char, fd_char);
+	close(fd_char); // 닫았다가 다시 열지 않으면 프린트가 안됨.
+	
+	fd_char = open("fd_char.txt", O_RDONLY);
+	while (read(fd_char, &buf, 1))
+		count++;
+	close(fd_char);
+
+	char buf_char[20];
+	fd_char = open("fd_char.txt", O_RDONLY);
+	read(fd_char, buf_char, count);
+	close(fd_char);
+
+	if (count != 1)
+		printf("ft_putchar_fd ERROR1!\n");
+	if (buf_char[0] != test_char)
+		printf("ft_putchar_fd ERROR2!\n");
 	// printf("%s\n", buf_char);
 
 	// ft_putstr_fd
+	buf = 0;
+	count = 0;
+	char *test_str = "hihello";
 	int fd_str = 0;
-	ft_putstr_fd("hihello", fd_str);
-	printf("%d\n", fd_str);
 
+	fd_str = open("fd_str.txt", O_WRONLY | O_TRUNC | O_CREAT, 0744);
+	// test_str = "hihellooo" 를 했다가 test_str = "hihello" 를 하면, 뒤의 oo가 지워지지 않음.
+	// 파일을 새로 만들거나, 뭐 자동으로 지워주는 그런건 없나..? -> O_CREAT를 O_TRUNC로 바꿔서 해결.
+	// 0744는 도대체 뭘까. 검색해도 못찾겠다.
+	// 사실 테스트하고 파일은 지웠으면 좋겠는데...
+	ft_putstr_fd(test_str, fd_str);
+	close(fd_str);
 
+	fd_str = open("fd_str.txt", O_RDONLY);
+	while (read(fd_str, &buf, 1))
+		count++;
+	close(fd_str);
 
-    char *s1_charfd= "abc";
-    ft_putstr_fd(s1_charfd, 1);
+	char buf_str[10];
+	fd_str = open("fd_str.txt", O_RDONLY);
+	read(fd_str, buf_str, count);
+	close(fd_str);
 
+	if (count != ft_strlen(test_str))
+		printf("ft_str_fd ERROR1!\n");
+	if (ft_strncmp(buf_str, test_str, count) != 0) // null 문자가 없는지, 크게 비교하면 다르다고 뜸... 왤까.
+		printf("ft_str_fd ERROR2!\n");
+	// printf("%s\n", buf_str);
 
 	// ft_putendl_fd
+	buf = 0;
+	count = 0;
+	char *test_endl1 = "gmoon hello";
+	char *test_endl2 = "gmoon hello\n";
+	int fd_endl = 0;
+
+	fd_endl = open("fd_endl.txt", O_WRONLY | O_TRUNC | O_CREAT, 0744);
+	ft_putendl_fd(test_endl1, fd_endl);
+	close(fd_endl);
+
+	fd_endl = open("fd_endl.txt", O_RDONLY);
+	while (read(fd_endl, &buf, 1))
+		count++;
+	close(fd_endl);
+
+	char buf_endl[20];
+	fd_endl = open("fd_endl.txt", O_RDONLY);
+	read(fd_endl, buf_endl, count);
+	close(fd_endl);
+
+	if (count != ft_strlen(test_endl2))
+		printf("ft_putendl_fd ERROR1!\n");
+	if (ft_strncmp(buf_endl, test_endl2, count) != 0)
+		printf("ft_putendl_fd ERROR2!\n");
 
 	// ft_putnbr_fd
+	buf = 0;
+	count = 0;
+	int test_nbr = -2147483648;
+	int fd_nbr = 0;
 
+	fd_nbr = open("fd_nbr.txt", O_WRONLY | O_TRUNC | O_CREAT, 0744);
+	ft_putnbr_fd(test_nbr, fd_nbr);
+	close(fd_nbr);
+
+	fd_nbr = open("fd_nbr.txt", O_RDONLY);
+	while (read(fd_nbr, &buf, 1))
+		count++;
+	close(fd_nbr);
+
+	char buf_nbr[20];
+	fd_nbr = open("fd_nbr.txt", O_RDONLY);
+	read(fd_nbr, buf_nbr, count);
+	close(fd_nbr);
+
+	if (count != (size_t)n_size(test_nbr))
+		printf("ft_putnbr_fd ERROR1!\n");
+	if (ft_strncmp(buf_endl, test_endl2, count) != 0)
+		printf("ft_putnbr_fd ERROR2!\n");
+
+	// ===================================================== PART2 end
+
+	// test end!
 	printf("test complete.\n");
 }
-
-// 한결님메인문
-// int		main(int argc, char **argv)
-// {
-// 	int		fd;
-// 	if (argc || argv)
-// 		printf("./test_putchar_fd <char>\n");
-// 	fd = open("d1", O_WRONLY | O_CREAT, 0744);
-// 	ft_putchar_fd(argv[1][0], fd);
-// 	close(fd);
-// 	return (0);
-// }
