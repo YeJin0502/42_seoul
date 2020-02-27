@@ -34,13 +34,13 @@ char		*ft_strtrim(char const *s1, char const *set)
 	char	*ret;
 
 	i = -1;
-	start = 0;
-	end = 0;
+	start = -1;
+	end = -1;
 	while (s1[++i])
-		if (is_set(s1[i], set) == 0 && start == 0)
+		if (is_set(s1[i], set) == 0 && start == -1)
 			start = i;
 	while (s1[--i])
-		if (is_set(s1[i], set) == 0 && end == 0)
+		if (is_set(s1[i], set) == 0 && end == -1)
 			end = i;
 	ret = (char *)malloc(end - start + 2);
 	if (!ret)
