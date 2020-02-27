@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 00:32:13 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/27 00:32:13 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/27 20:25:09 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/27 20:25:09 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *curr;
-
-	if (new == NULL)
-		return ;
-	curr = *lst;
-	while (curr->next != NULL)
-		curr = curr->next;
-	curr->next = new;
-	new->next = NULL;
 }
