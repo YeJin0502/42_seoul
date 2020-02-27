@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 00:08:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/27 00:08:55 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/27 00:14:27 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/27 00:14:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int		ft_lstsize(t_list *lst)
 {
-	if (lst != NULL && new != NULL)
+	t_list	*curr;
+	int		count;
+
+	curr = lst->next;
+	count = 0;
+	while (curr != NULL)
 	{
-		new->next = *lst;
-		*lst = new;
+		count++;
+		curr = curr->next;
 	}
+	return (count);
 }

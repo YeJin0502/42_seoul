@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/27 00:14:27 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/27 00:14:27 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/27 00:19:59 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/27 00:19:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*curr;
-	int		count;
+	t_list	*curr = lst->next;
 
-	curr = lst->next;
-	count = 0;
 	while (curr != NULL)
-	{
-		count++;
 		curr = curr->next;
-	}
-	return (count);
+	return (curr);
 }
-
-
-// typedef struct		s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }					t_list;
