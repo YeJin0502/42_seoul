@@ -39,7 +39,7 @@ int main()
 		printf("ft_strlen ERROR!\n");
 
 	// ft_atoi
-	char b[20] = "  -123hello";
+	char b[20] = "\n -123hello";
 	if (ft_atoi(b) != atoi(b))
 		printf("ft_atoi test1 ERROR! // ");
 	char b_2[20] = "  1-23hello";
@@ -118,7 +118,7 @@ int main()
 	if (ft_strncmp(my_chr, real_chr, 20) != 0)
 		printf("ft_strchr ERROR!\n");
 	// printf("ft_strchr: [%s] // ", my_chr);
-	// printf("strchr: [%s]\n", real_chr);	
+	// printf("strchr: [%s]\n", real_chr);
 
 	char s1_chr2[7] = "bonjour";
 	// char s2_chr2[7] = "bonjour"; // 두개 만들 필요가 없음. 내가 항상 헷갈리는 부분..!
@@ -151,10 +151,11 @@ int main()
 	// else printf("strnstr: [null]\n");
 
 	char big2[20] = "abc cde efg";
-	char little2[10] = "cd";
-	n_nstr = 4;
+	char little2[10] = "";
+	n_nstr = 8;
 	char *my_nstr2 = ft_strnstr(big2, little2, n_nstr);
-	if (my_nstr2)
+	char *real_nstr2 = strnstr(big2, little2, n_nstr);
+	if (ft_strncmp(my_nstr2, real_nstr2, 20) != 0)
 		printf("ft_strnstr ERROR2!\n");
 
 	// ft_memchr
