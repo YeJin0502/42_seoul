@@ -76,8 +76,8 @@ int main()
 	int size_lcpy = 0;
 	int my_lcpy = ft_strlcpy(dst1_lcpy, src1_lcpy, size_lcpy);
 	int real_lcpy = strlcpy(dst2_lcpy, src2_lcpy, size_lcpy);
-	printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
-	printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
+	// printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
+	// printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
 	if (my_lcpy != real_lcpy)
 		printf("ft_strlcpy ERROR1!\n");
 	if (ft_strncmp(dst1_lcpy, dst2_lcpy, 20) != 0)
@@ -119,6 +119,13 @@ int main()
 		printf("ft_strchr ERROR!\n");
 	// printf("ft_strchr: [%s] // ", my_chr);
 	// printf("strchr: [%s]\n", real_chr);	
+
+	char s1_chr2[7] = "bonjour";
+	// char s2_chr2[7] = "bonjour"; // 두개 만들 필요가 없음. 내가 항상 헷갈리는 부분..!
+	char c_chr2 = '\0';
+	char *my_chr2 = ft_strchr(s1_chr2, c_chr2);
+	char *real_chr2 = strchr(s1_chr2, c_chr2);
+	printf("test ft_strchr: [%s] [%s]\n", my_chr2, real_chr2); // real은 []. 수정 전 my는 seg fault.
 
 	// ft_strrchr
 	char s_rchr[20] = "hello world";
@@ -162,6 +169,11 @@ int main()
 	// else printf("ft_memchr: [null] // ");
 	// if (real) printf("memchr: [%s]\n", real_mchr);
 	// else printf("memchr: [null]\n");
+
+	int tab_mem[7] = {-49, 49, 1, -1, 0, -2, 2};
+	int *my_mchr_int = ft_memchr(tab_mem, -1, 7);
+	int *real_mchr_int = memchr(tab_mem, -1, 7);
+	printf("test ft_memchr (int *): %p %p\n", my_mchr_int, real_mchr_int);
 
 	// ft_strdup
 	char dup[20] = "ft_strdup OK";
@@ -420,5 +432,5 @@ int main()
 	// ===================================================== PART2 end
 
 	// test end!
-	printf("test complete.\n");
+	printf("===test complete.===\n");
 }

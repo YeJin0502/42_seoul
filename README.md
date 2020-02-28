@@ -1,4 +1,6 @@
 # 42_seoul
-[libft](https://github.com/moon9ua/42_seoul/wiki/libft)<br>
-[get_line_next (개요)](https://github.com/moon9ua/42_seoul/wiki/Get_next_line-%EA%B0%9C%EC%9A%94)<br>
 
+* [libft](https://github.com/moon9ua/42_seoul/wiki/libft)
+* [개요: get_next_line](https://github.com/moon9ua/42_seoul/wiki/개요:-get_next_line)
+* [개요: netwhat](https://github.com/moon9ua/42_seoul/wiki/개요:-netwhat)
+* [개요: printf](https://github.com/moon9ua/42_seoul/wiki/개요:-printf)
