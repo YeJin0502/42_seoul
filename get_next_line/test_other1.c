@@ -154,56 +154,33 @@ int
 ///////////
 
 
-
-
-// int		main()
-// {
-// 	int		fd;
-// 	char	**line;
-// 	char	*temp;
-// 	int		ret;
-
-// 	line = &temp;
-// 	fd = open("test.txt", O_RDONLY);
-// 	ret = get_next_line(fd, line);
-// 	printf("%s\n", *line); // 왜 [%s]로 하면 오류나지?
-// 	return(0);
-// }
-
-/* 정석
-int		main()
+#include <stdio.h>
+#include <fcntl.h>
+int main()
 {
-	int		fd;
-	char	**line;
-	char	*temp;
-	int		ret;
+	int fd;
+	char **line;
+	char *tmp;
+	int ret;
 
-	line = &temp;
-	fd = open("test.txt", O_RDONLY);
-	while ((ret = get_next_line(fd, line)))
-		printf("%s\n", *line);
-	printf("%s\n", *line);
-	free(*line);
-	close(fd);
-	return(0);
-}
-*/
-
-int		main()
-{
-	int		fd;
-	char	**line;
-	char	*temp;
-	int		ret;
-
-	line = &temp;
+	line = &tmp;
 	fd = open("test.txt", O_RDONLY);
 	ret = get_next_line(fd, line);
-	printf("%s\n", *line);
-	while ((ret = get_next_line(fd, line)))
-		printf("%s\n", *line);
-	printf("%s\n", *line);
-	free(*line);
-	close(fd);
-	return(0);
+	printf("%s\n", *line); // 0123456
+	printf("%d\n", ret);
+	ret = get_next_line(fd, line);
+	printf("%s\n", *line); // secondline
+	printf("%d\n", ret);
+	ret = get_next_line(fd, line);
+	printf("%s\n", *line); // secondline
+	printf("%d\n", ret);
 }
+
+/* 결과
+0123456
+1
+secondline
+1
+
+0
+*/

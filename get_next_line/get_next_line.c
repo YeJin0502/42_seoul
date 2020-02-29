@@ -182,13 +182,14 @@ char	*ft_strdup_after_lf(const char *s)
 #include <stdio.h>
 int get_next_line(int fd, char **line)
 {
+	int ret;
 	static char *buf;
-	int i;
 	int flag;
 	int a;
+
+	ret = 1;
 	if (!buf)
 		buf = (char *)malloc(BUFFER_SIZE);
-	i = 0;
 	*line = 0;
 	flag = 0;
 	if (buf)
@@ -201,12 +202,14 @@ int get_next_line(int fd, char **line)
 	}
 	while ((a = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
+		if (a < BUFFER_SIZE)
+			ret = 0;
 		if (is_contain_lf(buf) == 0 && flag == 1)
 			*line = ft_strjoin(*line, buf);
 		if (is_contain_lf(buf) == 1 && flag == 1)
 		{
 			*line = ft_strjoin_until_lf(*line, buf);
-			break;
+			return (ret);
 		}
 		if (is_contain_lf(buf) == 1 && flag == 0)
 			*line = ft_strdup_after_lf(buf);
@@ -216,10 +219,15 @@ int get_next_line(int fd, char **line)
 			flag = 1;
 		}
 	}
-	return (3);
+	return (ret);
 }
 
 ///////////
+// 현재 문제. 버퍼사이즈가 1이면 리턴값 제대로 안나옴.
+// 버퍼사이즈가 크면 마지막에 개행이 붙음.
+// 리턴값에 대한 연구 필요. 다른 테스트 케이스에서도 사이즈 100주면 두번째 줄도 1이 나와버리는데..?
+// EOF라는 것이 무엇일까... 연구 필요.
+
 #include <stdio.h>
 #include <fcntl.h>
 int main()
@@ -233,8 +241,14 @@ int main()
 	fd = open("test.txt", O_RDONLY);
 	ret = get_next_line(fd, line);
 	printf("%s\n", *line); // 0123456
+	printf("%d\n", ret);
 	ret = get_next_line(fd, line);
-	printf("%s\n", *line); // 안됨
+	printf("%s\n", *line); // secondline
+	printf("%d\n", ret);
+	ret = get_next_line(fd, line);
+	printf("%s\n", *line); // secondline
+	printf("%d\n", ret);
+
 	// printf("%s\n", *line);
 	// ret = get_next_line(fd, line);
 	// printf("%s\n", *line);
