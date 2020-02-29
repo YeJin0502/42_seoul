@@ -16,9 +16,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-size_t	ft_strlen(const char *str);
-char	*ft_gnl_strdup(const char *s);
-char	**ft_gnl_split(char const *s, char c);
 
 int get_next_line(int fd, char **line);
 

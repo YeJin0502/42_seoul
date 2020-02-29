@@ -200,9 +200,9 @@ int		main()
 	fd = open("test.txt", O_RDONLY);
 	ret = get_next_line(fd, line);
 	printf("%s\n", *line);
-	// while ((ret = get_next_line(fd, line)))
-		// printf("%s\n", *line);
-	// printf("%s\n", *line);
+	while ((ret = get_next_line(fd, line)))
+		printf("%s\n", *line);
+	printf("%s\n", *line);
 	free(*line);
 	close(fd);
 	return(0);
