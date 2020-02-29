@@ -165,22 +165,16 @@ int main()
 
 	line = &tmp;
 	fd = open("test.txt", O_RDONLY);
+	
 	ret = get_next_line(fd, line);
-	printf("%s\n", *line); // 0123456
-	printf("%d\n", ret);
+	printf("[%s] %d\n", *line, ret);
+
 	ret = get_next_line(fd, line);
-	printf("%s\n", *line); // secondline
-	printf("%d\n", ret);
+	printf("[%s] %d\n", *line, ret);
+
 	ret = get_next_line(fd, line);
-	printf("%s\n", *line); // secondline
-	printf("%d\n", ret);
+	printf("[%s] %d\n", *line, ret);
+
+	ret = get_next_line(fd, line);
+	printf("[%s] %d\n", *line, ret);
 }
-
-/* 결과
-0123456
-1
-secondline
-1
-
-0
-*/
