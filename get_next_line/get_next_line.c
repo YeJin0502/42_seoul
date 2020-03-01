@@ -88,17 +88,17 @@ int	get_next_line(int fd, char **line)
 		if (!(buf = (char *)malloc(BUFFER_SIZE)))
 			return (-1);
 	*line = 0;
-	while (1)
-	{
-		if (read_len == 0)
-			if ((read_len = read(fd, buf, BUFFER_SIZE)) == 0)
-			{
-				*line = ft_strdup(buf, read_len, 0);
-				free(buf);
-				return (0);
-			}
+	if (read_len > 0)
 		if (is_make_line(line, buf, &read_len) == 1)
 			return (1);
+	while ((read_len = read(fd, buf, BUFFER_SIZE)) > 0)
+		if (is_make_line(line, buf, &read_len) == 1)
+			return (1);
+	if (read_len == 0)
+	{
+		*line = ft_strdup(buf, read_len, 0);
+		free(buf);
+		return (0);
 	}
 	return (-1);
 }
