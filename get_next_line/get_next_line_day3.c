@@ -25,10 +25,12 @@ void pull_buf(int *read_len, char *buf)
 	buf[*read_len] = '\0';
 }
 
+
 int get_next_line(int fd, char **line)
 {
 	static char *buf;
 	static int read_len;
+	int jumping_len;
 
 	*line = 0;
 	if (!buf)
@@ -37,23 +39,40 @@ int get_next_line(int fd, char **line)
 	{
 		if (is_contain_lf(buf, read_len) == 1)
 		{
-			*line = ft_strjoin_until_lf(*line, buf);
-			pull_buf(&read_len, buf);
+			*line = ft_strdup_until_lf(buf);
+			jumping_len = ft_jumping_len(buf);
+			buf = ft_memmove(buf, buf + jumping_len, ft_strlen_after_lf(buf));
+			read_len = read_len - jumping_len;
+			buf[read_len] = '\0';
 			return (1);
 		}
 		if (is_contain_lf(buf, read_len) == 0)
-			*line = ft_strjoin(*line, buf);
+			*line = ft_strdup(buf);
 	}	
 	while ((read_len = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		if (is_contain_lf(buf, read_len) == 1)
+		if (*line && (is_contain_lf(buf, read_len) == 1))
 		{
 			*line = ft_strjoin_until_lf(*line, buf);
-			pull_buf(&read_len, buf);
+			jumping_len = ft_jumping_len(buf);
+			buf = ft_memmove(buf, buf + jumping_len, ft_strlen_after_lf(buf));
+			read_len = read_len - jumping_len;
+			buf[read_len] = '\0';
 			return (1);
 		}
-		else if (is_contain_lf(buf, read_len) == 0)
+		else if (!*line && (is_contain_lf(buf, read_len) == 1))
+		{
+			*line = ft_strdup_until_lf(buf);
+			jumping_len = ft_jumping_len(buf);
+			buf = ft_memmove(buf, buf + jumping_len, ft_strlen_after_lf(buf));
+			read_len = read_len - jumping_len;
+			buf[read_len] = '\0';
+			return (1);
+		}
+		else if (*line && (is_contain_lf(buf, read_len) == 0))
 			*line =ft_strjoin(*line, buf);
+		else if (!*line && (is_contain_lf(buf, read_len) == 0))
+			*line = ft_strdup(buf);
 	}
 	return 0;
 }
