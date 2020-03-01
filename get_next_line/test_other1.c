@@ -177,4 +177,7 @@ int main()
 
 	ret = get_next_line(fd, line);
 	printf("[%s] %d\n", *line, ret);
+
+	ret = get_next_line(fd, line);
+	printf("[%s] %d\n", *line, ret);
 }
