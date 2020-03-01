@@ -12,27 +12,7 @@
 
 #include "get_next_line.h"
 
-static char	*ft_strdup(const char *s)
-{
-	int		size;
-	char	*ret;
-	int		i;
-
-	size = ft_strlen(s);
-	ret = (char *)malloc(size + 1);
-	if (!ret)
-		return 0;
-	ret[size] = '\0';
-	i = 0;
-	while (i < size)
-	{
-		ret[i] = s[i];
-		i++;
-	}
-	return (ret);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, int read_len)
 {
 	char	*ret;
 	int		len;
@@ -40,8 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	if (!s1)
-		return (ft_strdup(s2));
-	len = ft_strlen(s1) + ft_strlen(s2);
+		return (ft_strdup(s2, read_len));
+	len = ft_strlen(s1) + read_len;
 	ret = (char *)malloc(len + 1);
 	if (!ret)
 		return (0);
@@ -53,28 +33,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	while (i < len)
 		ret[i++] = s2[j++];
-	return (ret);
-}
-
-static char	*ft_strdup_until_lf(const char *s)
-{
-	int		size;
-	char	*ret;
-	int		i;
-
-	size = 0;
-	while (s[size] != '\n')
-		size++;
-	ret = (char *)malloc(size + 1);
-	if (!ret)
-		return 0;
-	ret[size] = '\0';
-	i = 0;
-	while (i < size)
-	{
-		ret[i] = s[i];
-		i++;
-	}
 	return (ret);
 }
 
@@ -106,6 +64,46 @@ char	*ft_strjoin_until_lf(char const *s1, char const *s2)
 	return (ret);
 }
 
+void pull_buf(int *read_len, char *buf)
+{
+	int jump_len;
+	jump_len = 0;
+	while (buf[jump_len] != '\n')
+		jump_len++;
+	while (buf[jump_len] == '\n')
+		jump_len++;
+	buf = ft_memmove(buf, buf + jump_len, ft_strlen_after_lf(buf, *read_len));
+	*read_len = *read_len - jump_len;
+	buf[*read_len] = '\0';
+}
+
+int	is_make_line(char **line, char *buf, int *read_len)
+{
+	int is_contain_lf;
+	int i;
+
+	is_contain_lf = 0;
+	i = -1;
+	while (++i < *read_len)
+		if (buf[i] == '\n')
+		{
+			is_contain_lf = 1;
+			break;
+		}
+	if (is_contain_lf == 1)
+	{
+		*line = ft_strjoin_until_lf(*line, buf);
+		pull_buf(read_len, buf);
+		return (1);
+	}
+	else
+	{
+		*line = ft_strjoin(*line, buf, *read_len);
+		return (0);
+	}
+}
+
+#include <stdio.h>
 int	get_next_line(int fd, char **line)
 {
 	static char	*buf;
@@ -115,28 +113,17 @@ int	get_next_line(int fd, char **line)
 	if (!buf)
 		buf = (char *)malloc(BUFFER_SIZE);
 	if (read_len > 0)
-	{
-		if (is_contain_lf(buf, read_len) == 1)
-		{
-			*line = ft_strjoin_until_lf(*line, buf);
-			pull_buf(&read_len, buf);
-			return (1);
-		}
-		if (is_contain_lf(buf, read_len) == 0)
-			*line = ft_strjoin(*line, buf);
-	}	
+		if (is_make_line(line, buf, &read_len) == 1)
+			return 1;
 	while ((read_len = read(fd, buf, BUFFER_SIZE)) > 0)
+		if (is_make_line(line, buf, &read_len) == 1)
+			return 1;
+	if (read_len == 0)
 	{
-		if (is_contain_lf(buf, read_len) == 1)
-		{
-			*line = ft_strjoin_until_lf(*line, buf);
-			pull_buf(&read_len, buf);
-			return (1);
-		}
-		else if (is_contain_lf(buf, read_len) == 0)
-			*line =ft_strjoin(*line, buf);
+		*line = ft_strdup(buf, read_len);
+		// free(buf);
+		return 0;
 	}
-	return 0;
 }
 
 /////////////////

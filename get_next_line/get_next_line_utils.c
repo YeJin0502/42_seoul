@@ -22,31 +22,21 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-int	ft_strlen_after_lf(const char *str)
-{
-	int count;
-	count = 0;
-	while (*str != '\n')
-		str++;
-	while (*str)
-	{
-		count++;
-		str++;
-	}
-	return (count - 1);
-}
-
-int is_contain_lf(char *str, int n)
+int	ft_strlen_after_lf(const char *str, int read_len)
 {
 	int i;
+	int count;
+
 	i = 0;
-	while (i < n)
+	count = 0;
+	while (str[i] != '\n')
+		i++;
+	while (i < read_len)
 	{
-		if (str[i] == '\n')
-			return 1;
+		count++;
 		i++;
 	}
-	return 0;
+	return (count - 1);
 }
 
 void	*ft_memmove(void *dest, const void *src, int n)
@@ -73,15 +63,44 @@ void	*ft_memmove(void *dest, const void *src, int n)
 	return (dest);
 }
 
-void pull_buf(int *read_len, char *buf)
+char	*ft_strdup(const char *s, int read_len)
 {
-	int jump_len;
-	jump_len = 0;
-	while (buf[jump_len] != '\n')
-		jump_len++;
-	while (buf[jump_len] == '\n')
-		jump_len++;
-	buf = ft_memmove(buf, buf + jump_len, ft_strlen_after_lf(buf));
-	*read_len = *read_len - jump_len;
-	buf[*read_len] = '\0';
+	int		size;
+	char	*ret;
+	int		i;
+
+	size = read_len;
+	ret = (char *)malloc(size + 1);
+	if (!ret)
+		return 0;
+	ret[size] = '\0';
+	i = 0;
+	while (i < size)
+	{
+		ret[i] = s[i];
+		i++;
+	}
+	return (ret);
+}
+
+char	*ft_strdup_until_lf(const char *s)
+{
+	int		size;
+	char	*ret;
+	int		i;
+
+	size = 0;
+	while (s[size] != '\n')
+		size++;
+	ret = (char *)malloc(size + 1);
+	if (!ret)
+		return 0;
+	ret[size] = '\0';
+	i = 0;
+	while (i < size)
+	{
+		ret[i] = s[i];
+		i++;
+	}
+	return (ret);
 }
