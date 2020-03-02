@@ -1,6 +1,8 @@
 a.out
 *.o
 *.a
-*.txt
 
-42TESTERS-GNL/
+libft/*.txt
+
+get_next_line/test_*
+get_next_line/42TESTERS-GNL/
