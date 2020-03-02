@@ -18,9 +18,7 @@ static int	n_size(int n)
 	
 	size = 0;
 	if (n <= 0)
-	{
 		size++;
-	}
 	while (n != 0)
 	{
 		n = n / 10;
@@ -50,9 +48,8 @@ char		*ft_itoa(int n)
 	}
 	while (size > 0)
 	{
-		ret[size - 1] = n % 10 + '0';
+		ret[(size--) - 1] = n % 10 + '0';
 		n = n / 10;
-		size--;
 	}
 	if (flag == 1)
 		ret[0] = '-';

@@ -1,5 +1,3 @@
-// ft_split: malloc 실패했을때 free 했는지 함수 살펴볼것.
-
 #include "libft.h"
 #include <stdio.h>
 #include <bsd/string.h> // gcc -lbsd 옵션 추가 필요
@@ -120,7 +118,7 @@ int main()
 	// printf("ft_strchr: [%s] // ", my_chr);
 	// printf("strchr: [%s]\n", real_chr);
 
-	char s1_chr2[7] = "bonjour";
+	char s1_chr2[8] = "bonjour";
 	// char s2_chr2[7] = "bonjour"; // 두개 만들 필요가 없음. 내가 항상 헷갈리는 부분..!
 	char c_chr2 = '\0';
 	char *my_chr2 = ft_strchr(s1_chr2, c_chr2);
@@ -178,8 +176,10 @@ int main()
 
 	// ft_strdup
 	char dup[20] = "ft_strdup OK";
-	if (ft_strncmp(dup, ft_strdup(dup), 20) != 0)
+	char *test_dup = ft_strdup(dup);
+	if (ft_strncmp(dup, test_dup, 20) != 0)
 		printf("ft_strdup ERROR!\n");
+	free(test_dup);
 
 	// ft_bzero
 	char s1_b[20] = "helloworld";
@@ -264,6 +264,7 @@ int main()
 	cal[3] = 'a';
 	if (ft_strncmp(cal, "gu", 5) != 0)
 		printf("ft_calloc ERROR!\n");
+	free(cal);
 
 	// ===================================================== PART1 end
 
@@ -296,21 +297,27 @@ int main()
 	free(my_trim);
 
 	// ft_split
-	char a_split[50] = " aaa  bb cc";
+	char a_split[50] = " aaa  bb    c";
 	char c_split = ' ';
 	char **test_split = ft_split(a_split, c_split);
 	if (ft_strncmp(test_split[0], "aaa", 10) != 0)
 		printf("ft_split ERROR1!\n");
 	if (ft_strncmp(test_split[1], "bb", 10) != 0)
 		printf("ft_split ERROR2!\n");
-	if (ft_strncmp(test_split[2], "cc", 10) != 0)
+	if (ft_strncmp(test_split[2], "c", 10) != 0)
 		printf("ft_split ERROR3!\n");
-	// int i_split = 0;
-	// while (test_split[i_split])
-	// {
-	// 	printf("%s\n", test_split[i_split]);
-	// 	i_split++;
-	// }
+	int i_split = 0;
+	while (test_split[i_split])
+	{
+		// printf("%s\n", test_split[i_split]);
+		i_split++;
+	}
+	i_split--;
+	while (i_split >= 0)
+	{
+		free(test_split[i_split]);
+		i_split--;
+	}
 	free(test_split);
 
 	// ft_itoa

@@ -38,6 +38,20 @@ static int	word_len(char const *s, char c)
 	return (i);
 }
 
+static char	*malloc_or_free(char **ret, int i, int wl)
+{
+	char	*s;
+
+	s = (char *)malloc(wl + 1);
+	if (!s)
+	{
+		while (i >= 0)
+			free(ret[i--]);
+		free(ret);
+	}
+	return (s);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
@@ -47,12 +61,8 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	wc = word_count(s, c);
-	ret = (char **)malloc(sizeof(char *) * (wc + 1));
-	if (!ret)
-	{
-		free(ret);
+	if (!(ret = (char **)malloc(sizeof(char *) * (wc + 1))))
 		return 0;
-	}
 	ret[wc] = 0;
 	i = -1;
 	while (++i < wc)
@@ -61,14 +71,7 @@ char	**ft_split(char const *s, char c)
 		while (*s == c)
 			s++;
 		wl = word_len(s, c);
-		ret[i] = (char *)malloc(wl + 1);
-		if (!ret[i])
-		{
-			while (i >= 0)
-				free(ret[i--]);
-			free(ret);
-			return (0);
-		}
+		ret[i] = malloc_or_free(ret, i, wl);
 		ret[i][wl] = '\0';
 		while (j < wl)
 			ret[i][j++] = *(s++);
