@@ -17,15 +17,15 @@
 #include <stdlib.h>
 #include <stdio.h> //
 
-char	*ft_strjoin(char *s1, char *s2, int read_len, int is_contain_lf);
+char	*ft_strjoin(char *s1, char *s2, int read_len, int is_contain_sep);
 void	pull_buf(int *read_len, char *buf);
 int		is_make_line(char **line, char *buf, int *read_len);
 int		get_next_line(int fd, char **line);
 
 int		ft_strlen(char *str);
-int		ft_strlen_until_lf(char *str);
+int		ft_strlen_until_sep(char *str);
 int		ft_strlen_after_lf(char *str, int read_len);
 void	*ft_memmove(void *dest, void *src, int n);
-char	*ft_strdup(char *s, int read_len, int is_contain_lf);
+char	*ft_strdup(char *s, int read_len, int is_contain_sep);
 
 #endif

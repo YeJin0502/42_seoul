@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
+char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_sep)
 {
 	char	*ret;
 	int		size;
@@ -20,11 +20,11 @@ char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
 	int		j;
 
 	if (!line)
-		return (ft_strdup(buf, read_len, is_contain_lf));
-	if (is_contain_lf == 0)
+		return (ft_strdup(buf, read_len, is_contain_sep));
+	if (is_contain_sep == 0)
 		size = ft_strlen(line) + read_len;
 	else
-		size = ft_strlen(line) + ft_strlen_until_lf(buf);
+		size = ft_strlen(line) + ft_strlen_until_sep(buf);
 	if (!(ret = (char *)malloc(size + 1)))
 	{
 		free(line);
@@ -47,9 +47,9 @@ void	pull_buf(int *read_len, char *buf)
 	int		jump_len;
 
 	jump_len = 0;
-	while (buf[jump_len] != '\n')
+	while (buf[jump_len] != '\n' && buf[jump_len] != 26)
 		jump_len++;
-	if (buf[jump_len] == '\n')
+	if (buf[jump_len] == '\n' || buf[jump_len] == 26)
 		jump_len++;
 	buf = ft_memmove(buf, buf + jump_len, ft_strlen_after_lf(buf, *read_len));
 	*read_len = *read_len - jump_len;
@@ -58,19 +58,21 @@ void	pull_buf(int *read_len, char *buf)
 
 int	is_make_line(char **line, char *buf, int *read_len)
 {
-	int is_contain_lf;
+	int is_contain_sep;
 	int i;
 
-	is_contain_lf = 0;
+	is_contain_sep = 0;
 	i = -1;
 	while (++i < *read_len)
+	{
 		if (buf[i] == '\n')
 		{
-			is_contain_lf = 1;
+			is_contain_sep = 1;
 			break;
 		}
-	*line = ft_strjoin(*line, buf, *read_len, is_contain_lf);
-	if (is_contain_lf == 1)
+	}
+	*line = ft_strjoin(*line, buf, *read_len, is_contain_sep);
+	if (is_contain_sep == 1)
 	{
 		pull_buf(read_len, buf);
 		return (1);
@@ -98,35 +100,41 @@ int	get_next_line(int fd, char **line)
 	if (read_len == 0)
 	{
 		*line = ft_strdup(buf, read_len, 0);
+		// *line = 0;
 		free(buf);
 		return (0);
 	}
 	return (-1);
 }
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	char **line;
-// 	char *tmp;
-// 	int ret;
+//////////////////
 
-// 	line = &tmp;
-// 	fd = open("empty_lines", O_RDONLY);
-// 	ret = -1;
-// 	while (1)
-// 	{
-// 		if ((ret = get_next_line(fd, line)) == 0)
-// 			break;
-// 		printf("[%s] [%d]\n", *line, ret);
-// 		free(*line);
-// 	}
-// 	ret = get_next_line(fd, line);
-// 	printf("%s [%d]\n", *line, ret);
-// 	free(*line);
-// 	ret = get_next_line(fd, line);
-// 	printf("%s [%d]\n", *line, ret);
-// 	free(*line);
-// }
+#include <stdio.h>
+#include <fcntl.h>
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+	fd = open("test_half_marge_bottom", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("[%s] [%d]\n", line, ret);
+		free(line);
+	}
+	printf("[%s] [%d]\n", line, ret);
+	free(line);
+	return (0);
+}
+
+/*
+<테스트 기록>
+test_41_char: (X)
+test_42_char: (X)
+test_43_char: (X)
+test_half_marge_bottom: 마지막 한줄 안나옴
+test_half_marge_top: 마지막 한줄(공백)이 안나오는 것 같은데..?
+huge 파일들은 넘어갔고,
+test_mix_merge1: 마지막 한줄 안나옴
+test_mix_merge2: 마지막 한줄 안나옴
+*/

@@ -156,28 +156,27 @@ int
 
 #include <stdio.h>
 #include <fcntl.h>
-int main()
+int main(void)
 {
-	int fd;
-	char **line;
-	char *tmp;
+	char *line = 0;
 	int ret;
-
-	line = &tmp;
-	fd = open("test.txt", O_RDONLY);
-	
-	ret = get_next_line(fd, line);
-	printf("[%s] %d\n", *line, ret);
-
-	ret = get_next_line(fd, line);
-	printf("[%s] %d\n", *line, ret);
-
-	ret = get_next_line(fd, line);
-	printf("[%s] %d\n", *line, ret);
-
-	ret = get_next_line(fd, line);
-	printf("[%s] %d\n", *line, ret);
-
-	ret = get_next_line(fd, line);
-	printf("[%s] %d\n", *line, ret);
+	int fd;
+	fd = open("test_al", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("[%s] [%d]\n", line, ret);
+		free(line);
+	}
+	printf("[%s] [%d]\n", line, ret);
+	free(line);
+	return (0);
 }
+
+/*
+<테스트 기록>
+test_half_marge_bottom: 마지막 한줄 안나옴
+test_half_marge_top: 마지막 한줄(공백)은 ret이 1이어야 하지 않나? 0으로 나오네?
+merge들 해보면 마지막줄이 0으로 나옴.
+alphabet나 newlines들은 0으로 안나오는데...
+왜 marge는 마지막줄이 0으로 나오는것이지?
+*/
