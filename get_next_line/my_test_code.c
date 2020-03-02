@@ -62,6 +62,7 @@ int main()
 }
 */
 
+/*
 #include <stdio.h>
 #include <fcntl.h>
 int main(void)
@@ -76,6 +77,25 @@ int main(void)
 		free(line);
 	}
 	printf("%s\n", line);
+	free(line);
+	return (0);
+}
+*/
+
+// 표준입력과 리다이렉션
+#include <stdio.h>
+#include <fcntl.h>
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+
+	while ((ret = get_next_line(0, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
 	free(line);
 	return (0);
 }

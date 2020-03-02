@@ -161,13 +161,13 @@ int main(void)
 	char *line = 0;
 	int ret;
 	int fd;
-	fd = open("test_al", O_RDONLY);
+	fd = open("43_char", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		printf("[%s] [%d]\n", line, ret);
+		printf("%s [%d]\n", line, ret);
 		free(line);
 	}
-	printf("[%s] [%d]\n", line, ret);
+	printf("%s [%d]\n", line, ret);
 	free(line);
 	return (0);
 }

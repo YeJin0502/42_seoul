@@ -59,7 +59,10 @@ int	get_next_line(int fd, char **line)
 		if (!(buf = (char *)malloc(BUFFER_SIZE)))
 			return (-1);
 	if (!(*line = (char *)malloc(1)))
+	{
+		free(buf);
 		return (-1);
+	}
 	*line[0] = '\0';
 	if (read_len > 0)
 		if (is_make_line(line, buf, &read_len) == 1)
@@ -68,9 +71,6 @@ int	get_next_line(int fd, char **line)
 		if (is_make_line(line, buf, &read_len) == 1)
 			return (1);
 	if (read_len == 0)
-	{
 		free(buf);
-		return (0);
-	}
-	return (-1);
+	return (0);
 }
