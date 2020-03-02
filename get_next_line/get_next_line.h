@@ -15,6 +15,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h> //
 
 char	*ft_strjoin(char *s1, char *s2, int read_len, int is_contain_lf);
 void	pull_buf(int *read_len, char *buf);

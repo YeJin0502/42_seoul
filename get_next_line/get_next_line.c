@@ -38,6 +38,7 @@ char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
 	while (i < size)
 		ret[i++] = *(buf++);
 	free(line);
+	line = NULL; // 추가해봤는데... 이게 문제가 아닌 것 같은데. 일단 여기 바뀜.
 	return (ret);
 }
 
@@ -102,3 +103,30 @@ int	get_next_line(int fd, char **line)
 	}
 	return (-1);
 }
+
+// #include <stdio.h>
+// #include <fcntl.h>
+// int main()
+// {
+// 	int fd;
+// 	char **line;
+// 	char *tmp;
+// 	int ret;
+
+// 	line = &tmp;
+// 	fd = open("empty_lines", O_RDONLY);
+// 	ret = -1;
+// 	while (1)
+// 	{
+// 		if ((ret = get_next_line(fd, line)) == 0)
+// 			break;
+// 		printf("[%s] [%d]\n", *line, ret);
+// 		free(*line);
+// 	}
+// 	ret = get_next_line(fd, line);
+// 	printf("%s [%d]\n", *line, ret);
+// 	free(*line);
+// 	ret = get_next_line(fd, line);
+// 	printf("%s [%d]\n", *line, ret);
+// 	free(*line);
+// }
