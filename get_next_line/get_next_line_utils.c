@@ -22,12 +22,12 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strlen_until_sep(char *str)
+int	ft_strlen_until_lf(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\n' && str[i] != 26)
+	while (str[i] != '\n')
 		i++;
 	return (i);
 }
@@ -73,24 +73,29 @@ void	*ft_memmove(void *dest, void *src, int n)
 	return (dest);
 }
 
-char	*ft_strdup(char *s, int read_len, int is_contain_sep)
+char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
 {
 	char	*ret;
 	int		size;
 	int		i;
+	int		j;
 
-	if (is_contain_sep == 0)
-		size = read_len;
+	if (is_contain_lf == 0)
+		size = ft_strlen(line) + read_len;
 	else
-		size = ft_strlen_until_sep(s);
+		size = ft_strlen(line) + ft_strlen_until_lf(buf);
 	if (!(ret = (char *)malloc(size + 1)))
-		return 0;
+	{
+		free(line);
+		return (0);
+	}
 	ret[size] = '\0';
 	i = 0;
+	j = 0;
+	while (i < ft_strlen(line))
+		ret[i++] = line[j++];
 	while (i < size)
-	{
-		ret[i] = s[i];
-		i++;
-	}
+		ret[i++] = *(buf++);
+	free(line);
 	return (ret);
 }

@@ -33,8 +33,6 @@ int main()
 }
 */
 
-//////////////////////////
-
 /*
 #include <stdio.h>
 #include <fcntl.h>
@@ -81,17 +79,3 @@ int main(void)
 	free(line);
 	return (0);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main(void)
-// {
-// 	char buf;
-// 	int ret;
-// 	int fd;
-// 	fd = open("test_half_marge_bottom", O_RDONLY);
-// 	while ((ret = read(fd, &buf, 1)) > 0)
-// 		printf("[%c: %d]\n",buf, buf);
-// 	printf("[%c: %d]\n",buf, buf);
-// 	return (0);
-// }
