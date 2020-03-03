@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   day1_ft_printf_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 07:07:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/04 07:00:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int count_spec(const char *format)
+int count_specifier(const char *format)
 {
 	int count;
 
@@ -58,6 +58,7 @@ char *make_spec(const char *format, int count_s)
 {
 	char *ret;
 	int i;
+	int j;
 
 	if(!(ret = (char *)malloc(count_s + 1)))
 		return (0);
@@ -108,10 +109,7 @@ char **make_flag(char *format, int count_s)
 			}
 			ret[i][len] = '\0';
 			while (len > 0)
-			{
-				ret[i][len - 1] = *(format + len);
-				len--;
-			}
+				ret[i][(len--) - 1] = *(format + (len--));
 			i++;
 		}
 		format++;
@@ -120,14 +118,3 @@ char **make_flag(char *format, int count_s)
 }
 // 나중에 줄이던가 하자.
 
-void	ft_putunbr(unsigned int n, int fd)
-{
-	if (n >= 10)
-	{
-		ft_putunbr(n / 10, fd);
-		ft_putunbr(n % 10, fd);
-	}
-	if (n <= 9)
-		ft_putchar_fd(n + '0', fd);
-	return ;
-} // 되나? 테스트 안해봄

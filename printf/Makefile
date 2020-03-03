@@ -3,9 +3,9 @@ NAME = libftprintf.a
 LIBFT = libft
 LIBFT_LIB = libft.a
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c ft_printf_utils.c
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
 INCS = .

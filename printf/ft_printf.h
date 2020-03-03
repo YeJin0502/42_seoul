@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 03:56:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/04 07:03:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 
 int ft_printf(const char *format, ...);
 
-int count_specifier(const char *format);
-char *make_s_set(const char *format, int count_s);
-char **make_flag_sets(char *format, int count_s);
-int is_in_spec_set(const char c);
-int is_in_flag_set(const char c);
+int count_spec(const char *format);
+int is_spec(const char c);
+int is_flag(const char c);
+char *make_spec(const char *format, int count_s);
+char **make_flag(char *format, int count_s);
+void	ft_putunbr(unsigned int n, int fd);
 
 #endif
