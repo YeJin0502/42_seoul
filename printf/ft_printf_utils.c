@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 01:28:39 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/04 04:21:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,6 @@ int count_specifier(const char *format)
 		format++;
 	}
 	return (count);
-}
-
-char *char_specifier(const char *format, int count_s)
-{
-	char *ret;
-	int i;
-	char *spec_set;
-
-	spec_set = "cspdiuxX";
-	if(!(ret = (char *)malloc(count_s + 1)))
-		return (0);
-	ret[count_s] = '\0';
-	i = 0;
-	while (i < count_s)
-	{
-		if (*format == '%' && *(format + 1) != '%')
-		{
-			format++;
-			if ()
-			
-		}
-		format++;
-	}
-	return (ret);
 }
 
 int is_in_spec_set(const char c)
@@ -77,3 +53,68 @@ int is_in_flag_set(const char c)
 	}
 	return (0);
 }
+
+char *make_s_set(const char *format, int count_s)
+{
+	char *ret;
+	int i;
+	int j;
+
+	if(!(ret = (char *)malloc(count_s + 1)))
+		return (0);
+	ret[count_s] = '\0';
+	i = 0;
+	while (i < count_s)
+	{
+		if (*format == '%' && *(format + 1) != '%')
+		{
+			format++;
+			while (is_in_flag_set(*format) == 1)
+				format++;
+			if (is_in_spec_set(*format) == 1)
+				ret[i++] = *format;
+			else
+				return 0;
+		}
+		format++; // 대충 돌아가는거 확인.
+	}
+	return (ret);
+}
+
+char **make_flag_sets(char *format, int count_s)
+{
+	char **ret;
+	int i;
+	int len;
+
+	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
+		return 0;
+	i = 0;
+	len = 0;
+	while (i < count_s)
+	{
+		format = ft_strchr(format, '%');
+		if (*(format + 1) == '%')
+			format = format + 2;
+		else
+		{
+			while (is_in_spec_set(*(format + len)) == 0)
+				len++;
+			if (!(ret[i] = (char *)malloc(len + 1)))
+			{
+				while (--i >= 0)
+					free(ret[i]);
+				free(ret);
+				return (0);
+			}
+			ret[i][len] = '\0';
+			while (len > 0)
+				ret[i][(len--) - 1] = *(format + (len--));
+			i++;
+		}
+		format++;
+	}
+	return (ret);
+}
+// 나중에 줄이던가 하자.
+

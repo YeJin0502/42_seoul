@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 01:28:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/04 04:28:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,60 @@ typedef struct	s_flag
 	int	zero;
 }				t_flag;
 
-typedef struct	s_total
+typedef struct		s_total
 {
-	int		i;
-	char	specifier;
-	char	*arg;
-	t_flag	s_flag;
-}				t_total;
+	int				i;
+	char			specifier;
+	char			arg_c;
+	char			arg_s;
+	void			*arg_p;
+	int				arg_di;
+	unsigned int	arg_uxX;
+	t_flag			flag;
+}					t_total;
 
 int ft_printf(const char *format, ...)
 {
 	va_list ap; //
 	int count_s;
-	char *char_s;
+	char *s_set;
+	char **flag_sets;
 	t_total *total;
+	int i;
 
 	if (!format)
 		return 0;
-	count_s = count_specifier(format);
-	if (count_s == 0)
+	if ((count_s = count_specifier(format)) == 0)
 	{
 		write(1, format, ft_strlen(format));
 		return (ft_strlen(format));
 	}
-	char_s = char_specifier(format, count_s);
-
+	s_set = make_s_set(format, count_s);
+	flag_sets = make_flag_sets(format, count_s);
 	va_start(ap, format);
-
-	int i = 0;
-	total = (t_total *)malloc(sizeof(t_total) * (count_s)); // +1 해줘서 널포인트 가르키게 하려고했는데 안되는듯. 연결리스트여야 가능한가봐..?
+	total = (t_total *)malloc(sizeof(t_total) * (count_s));
+	i = 0;
 	while (i < count_s)
 	{
-		total[i].i = i; // 아 구조체 malloc 해주는게 헷갈리네.
-		total[i].specifier = char_s[i];
+		total[i].i = i;
+		total[i].specifier = s_set[i];
 		if (total[i].specifier == 'c')
-			total[i].arg = va_arg(ap, char);
+			total[i].arg_c = (char)va_arg(ap, int);
+		else if (total[i].specifier == 's')
+			total[i].arg_s = ft_strdup(va_arg(ap, char *));
+		else if (total[i].specifier == 'p')
+			total[i].arg_p = va_arg(ap, void *);
+		else if (total[i].specifier == 'd')
+			total[i].arg_di = va_arg(ap, int);
+		else if (total[i].specifier == 'i')
+			total[i].arg_di = va_arg(ap, int);
+		else if (total[i].specifier == 'u')
+			total[i].arg_uxX = va_arg(ap, unsigned int);
 		else if (total[i].specifier == 'x')
-			asdfasdf;
-		total[i].s_flag = 함수;
+			total[i].arg_uxX = va_arg(ap, unsigned int);
+		else if (total[i].specifier == 'X')
+			total[i].arg_uxX = va_arg(ap, unsigned int);
+		total[i].flag = make_flag(flag_sets[i], total[i].specifier);
 		i++;
 	}
 
@@ -65,3 +81,20 @@ int ft_printf(const char *format, ...)
 	return 0;
 }
 
+t_flag make_flag(char *flag_set, char specifier)
+{
+	int i;
+	t_flag ret;
+
+	i = 0;
+	ret.left = 0;
+	ret.width = 0;
+	ret.precision = 0;
+	ret.zero = 0;
+	while (flag_set[i])
+	{
+		if (is_flag_set[i] == '0' && ret.precision = 0)
+			ret.zero = 1;
+			
+	}
+}

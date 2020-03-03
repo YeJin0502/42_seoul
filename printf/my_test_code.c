@@ -22,4 +22,6 @@ int main()
 	printf("%.10d\n", i);
 	printf("%10d\n", i);
 	printf("================\n");
+
+	
 }
