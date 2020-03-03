@@ -6,12 +6,12 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 20:52:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/27 20:52:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/03 23:45:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-# define LIBHT_H
+# define LIBFT_H
 
 #include <stdlib.h>
 #include <unistd.h>
