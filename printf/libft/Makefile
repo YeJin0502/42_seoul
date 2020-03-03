@@ -1,4 +1,6 @@
 NAME = libft.a
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -c
 
 SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
@@ -11,16 +13,15 @@ SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 		ft_lstiter.c
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
+
 INCS = .
+
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $(<:.c=.o) -I $(INCS)
 
 $(NAME): $(OBJS)
 	ar -rcs $@ $(OBJS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
 
 all: $(NAME)
 
