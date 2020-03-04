@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 05:33:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 06:37:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,15 +121,13 @@ int make_precision(char *flag)
 		i++;
 	if (i == 0)
 		return (-1);
-	printf("i:%d\n", i);
+	printf("%d\n", i);
 	tmp = (char *)malloc(i + 1);
-	// tmp[i] = '\0';
-	int tmp_size = i; // 5
-	while (--i > 0)
-	{
-		tmp[tmp_size - i] = flag[flag_len - i - 1]; // 될까..?
-		printf("%d: %c\n", i, flag[flag_len - i - 1]);
-	}
+	tmp[i] = '\0';
+	int tmp_size;
+	tmp_size = i;
+	while (--i >= 0)
+		tmp[tmp_size - i - 1] = flag[flag_len - i - 1];
 	return (ft_atoi(tmp));
 }
 

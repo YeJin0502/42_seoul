@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 07:00:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 04:50:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 06:28:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int meet_p(va_list ap, char *flag)
 	// printf("2arg:%d\n", (int *)arg 이건 공부해서 정리해야겠다.
 	// printf("3arg:%d\n", *(int *)arg 이거 아니고 위에 두개임.
 	// c_arg = char_memory(arg이게 안됨.
-	c_arg = dec_to_hex_X(*(int *)arg 임시로 컴파일만 되게한거. 수정해야함
+	c_arg = dec_to_hex_X(*(int *)arg); // 임시로 컴파일만 되게한거. 수정해야함
 	c_arg_size = ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
