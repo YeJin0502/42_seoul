@@ -3,7 +3,8 @@ NAME = libftprintf.a
 LIBFT = libft
 LIBFT_LIB = libft.a
 
-SRCS = ft_printf.c ft_printf_utils.c ft_meet.c ft_utils.c ft_dec_to_hex.c
+SRCS = ft_printf.c ft_printf_utils.c ft_meet.c ft_utils.c ft_dec_to_hex.c \
+		ft_flag.c
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 07:00:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 06:28:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 07:52:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int meet_c(va_list ap, char *flag)
 	c_arg = (char *)malloc(2);
 	c_arg[0] = arg;
 	c_arg[1] = '\0';
-	if (flag == NULL)
-		c_arg = convert_flag(arg);
-	c_arg_size = ft_strlen(c_arg);
+	if (flag != NULL)
+		c_arg = convert_flag(c_arg, flag);
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
@@ -60,14 +60,14 @@ int meet_s(va_list ap, char *flag)
 {
 	char *arg;
 	char *c_arg;
-	int *c_arg_size;
+	int c_arg_size;
 
 	arg = va_arg(ap, char *);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);
+		c_arg = convert_flag(arg, flag);
 	else
 		c_arg = arg;
-	c_arg_size = ft_strlen(c_arg);
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, arg, c_arg_size);
 	if (flag != NULL)
 		free(c_arg);
@@ -80,13 +80,15 @@ int meet_p(va_list ap, char *flag)
 	char *c_arg;
 	int c_arg_size;
 
+	if (!*flag)
+		return 0; // 임시 컴파일용
 	arg = va_arg(ap, void *);
 	// printf("1arg:%d\n", arg);
 	// printf("2arg:%d\n", (int *)arg 이건 공부해서 정리해야겠다.
 	// printf("3arg:%d\n", *(int *)arg 이거 아니고 위에 두개임.
 	// c_arg = char_memory(arg이게 안됨.
 	c_arg = dec_to_hex_X(*(int *)arg); // 임시로 컴파일만 되게한거. 수정해야함
-	c_arg_size = ft_strlen(c_arg);
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);	
@@ -101,8 +103,8 @@ int meet_d(va_list ap, char *flag)
 	arg = va_arg(ap, int);
 	c_arg = ft_itoa(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);	
-	c_arg_size = ft_strlen(c_arg);
+		c_arg = convert_flag(c_arg, flag);	
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
@@ -117,8 +119,8 @@ int meet_i(va_list ap, char *flag)
 	arg = va_arg(ap, int);
 	c_arg = ft_itoa(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);	
-	c_arg_size = ft_strlen(c_arg);
+		c_arg = convert_flag(c_arg, flag);	
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
@@ -133,8 +135,8 @@ int meet_u(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = ft_itoa_u(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);	
-	c_arg_size = ft_strlen(c_arg);
+		c_arg = convert_flag(c_arg, flag);	
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
@@ -149,8 +151,8 @@ int meet_x(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = dec_to_hex_x(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);	
-	c_arg_size = ft_strlen(c_arg);
+		c_arg = convert_flag(c_arg, flag);	
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
@@ -165,8 +167,8 @@ int meet_X(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = dec_to_hex_X(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg);	
-	c_arg_size = ft_strlen(c_arg);
+		c_arg = convert_flag(c_arg, flag);	
+	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
