@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 01:58:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 03:55:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int			meet_X(va_list ap); // , char *flag);
 void		ft_putnbr_u(unsigned int n, int fd);
 char		*ft_itoa_u(unsigned int n);
 int			ft_memlen(void *str);
+
+char *dec_to_hex_x(unsigned int dex);
+char *dec_to_hex_X(unsigned int dex);
 
 
 

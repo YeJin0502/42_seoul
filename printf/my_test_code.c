@@ -33,6 +33,7 @@ int main()
 // }
 
 // printf 테스트
+/*
 #include <stdio.h>
 int main()
 {
@@ -48,6 +49,51 @@ int main()
 	printf("%.10d\n", i);
 	printf("%10d\n", i);
 	printf("================\n");
-
-	
 }
+*/
+
+/*
+// 테스트
+int main()
+{
+	char a[10] = "hello";
+	ft_printf("%d\n%u\n%p\n%c\n", 2147483648, -1, a, "Moon"); // 이런 값들 고쳐야.
+
+	printf("%p\n", a);
+	// char **test = make_flags("moon%-d\n", 1);
+	// printf("%s\n", test[0]);
+	// free(test[0]);
+	// free(test);	
+
+
+	// char *a = "hi %s hello%s%s";
+	// ft_printf(a, "MOON", "GU", "WHA");
+
+	// ft_printf("hello %d %d %d ", 1, 2, 3);
+	// ft_printf("hello%d%d%d", 1, 2, 3);
+	// ft_printf("hello %c%c%c%c", 'm', 'o', 'o', 'n');
+
+	// ft_printf("===============\n");
+}
+*/
+
+// make_flags 테스트
+/*
+int main()
+{
+	char **test = make_flags("hi%--dhello%-0dworld%-.s", 3);
+	int i;
+	i = 0;
+	while (i < 3)
+	{
+		printf("%s\n", test[i]);
+		i++;
+	}
+	while (i > 0)
+	{
+		free(test[i - 1]);
+		i--;
+	}
+	free(test);
+}
+*/

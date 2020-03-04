@@ -6,11 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 01:54:36 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 03:58:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
 #include <stdio.h>
 
 int	count_spec(const char *format)
@@ -151,33 +153,5 @@ const char *if_same_move(const char *format, char *flag)
 		format++;
 		flag++;
 	}
-	return (format);
-}
-
-// 반환값: 이동된 format
-// arg 출력해야.
-// ret 바꿔줘야
-#include <stdio.h>
-const char *meet_percent(int *ret, const char *format, t_info info, va_list ap)
-{
-	format++; // % 다음으로 보냄
-	if (info.flag != NULL) // 맞나?
-		format = if_same_move(format, info.flag);
-	if (info.spec == 'c')
-		*ret = *ret + meet_c(ap); //, info.flag); // 이렇게 해도 될라나? 프린트하면서 출력글자수 반환.
-	else if (info.spec == 's')
-		*ret = *ret + meet_s(ap); //, info.flag);
-	else if (info.spec == 'p')
-		*ret = *ret + meet_p(ap); //, info.flag);
-	else if (info.spec == 'd')
-		*ret = *ret + meet_d(ap); //, info.flag);
-	else if (info.spec == 'i')
-		*ret = *ret + meet_i(ap); //, info.flag);
-	else if (info.spec == 'u')
-		*ret = *ret + meet_u(ap); //, info.flag);
-	else if (info.spec == 'x')
-		*ret = *ret + meet_x(ap); //, info.flag);
-	else if (info.spec == 'X')
-		*ret = *ret + meet_X(ap); //, info.flag);
 	return (format);
 }

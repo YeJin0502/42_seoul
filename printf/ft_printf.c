@@ -6,11 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 02:02:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 04:05:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
 #include <stdio.h>
 
 int ft_printf(const char *format, ...)
@@ -29,27 +31,25 @@ int ft_printf(const char *format, ...)
 		printf("[ft_strlen:%zu]\n", ft_strlen(format));
 		write(1, format, ft_strlen(format));
 		return (ft_strlen(format));
-	}
+	} // 이런거도 함수 빼버릴 수도 있겠다.
 	va_start(ap, format);
 	flags = make_flags(format, count_s);
 	specs = make_specs(format, count_s);
-	info = make_list(specs, flags);
+	info = make_list(specs, flags); // 이런건 하나의 함수로 묶을수도 있겠다. free도 마찬가지.
 	
 	i = 0;
 	while (*format)
 	{
 		if (*format == '%' && *(format + 1) != '%' && i < count_s)
-		{
-			format = meet_percent(&ret, format, *(info + i++), ap); // spec 자리로옴.
-		}
+			format = meet_percent(&ret, format, *(info + i++), ap); // 1.ret 올려주고 2.format을 spec 자리로 이동.
 		else
 		{
 			write(1, format, 1);
-			ret++;
+			ret++; // 아니면 한글자씩 출력
 		}
 		format++; // 여기서 spec 넘어감.
 	}
-	while (--i >= 0)
+	while (--i >= 0) // free
 	{
 		if (flags[i])
 			free(flags[i]);
@@ -64,39 +64,13 @@ int ft_printf(const char *format, ...)
 // 테스트
 int main()
 {
-	char a[10] = "hello";
-	ft_printf("%d\n%u\n%p\n", 2147483648, -1, a); // 이런 값들 고쳐야.
+	// ft_printf("===============\n"); //OK
 
-	printf("%p\n", a);
-	// char **test = make_flags("moon%-d\n", 1);
-	// printf("%s\n", test[0]);
-	// free(test[0]);
-	// free(test);	
-
-	// make_flags 테스트
-	/*
-	char **test = make_flags("hi%--dhello%-0dworld%-.s", 3);
-	int i;
-	i = 0;
-	while (i < 3)
-	{
-		printf("%s\n", test[i]);
-		i++;
-	}
-	while (i > 0)
-	{
-		free(test[i - 1]);
-		i--;
-	}
-	free(test);
-	*/
-
-	// char *a = "hi %s hello%s%s";
-	// ft_printf(a, "MOON", "GU", "WHA");
-
-	// ft_printf("hello %d %d %d ", 1, 2, 3);
-	// ft_printf("hello%d%d%d", 1, 2, 3);
-	// ft_printf("hello %c%c%c%c", 'm', 'o', 'o', 'n');
-
-	// ft_printf("===============\n");
+	// char *a = "hihello";
+	ft_printf("1: [%d]\n", 2147483648); // 오버, 언더플로우 관리해야.
+	ft_printf("2: [%u]\n", -1);
+	ft_printf("3: [%c]\n", 'M');
+	// ft_printf("4: [%p]\n", a);
+	// printf("4real: [%p]\n", a);
+	printf("%d\n", ft_printf("5: [%x]\n", 4294967295)); // 일단 이건 맞음.
 }
