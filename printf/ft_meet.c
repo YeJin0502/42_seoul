@@ -6,80 +6,101 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 07:00:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 07:00:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 01:50:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void meet_c(va_list ap)
+int meet_c(va_list ap) //, char *flag) // 반환값은 출력된 글자수
 {
-	char ret;
+	char arg;
 
-	ret = va_arg(ap, char);
-	write(1, &ret, 1);
-	return ;
+	arg = (char)va_arg(ap, int);
+	write(1, &arg, 1);
+	return (1);
 }
 
-char *meet_s(va_list ap)
+int meet_s(va_list ap) //, char *flag)
 {
-	char *ret;
+	char *arg;
 
-	ret = va_arg(ap, char *); // 이게 되나? 주소 줘서 될라나?
-	write(1, ret, ft_strlen(ret));
-	return ;
+	arg = va_arg(ap, char *); // 이게 되나? 주소 줘서 될라나?
+	write(1, arg, ft_strlen(arg));
+	return ((int)ft_strlen(arg));
 }
 
-void *meet_p(va_list ap)
+int meet_p(va_list ap) //, char *flag)
 {
-	void *ret;
+	void *arg;
 
-	ret = va_arg(ap, void *); // 메모리주소 어떻게하지..?
-	write(1, ret, 1); // 이게 되나...? 모르겠는데.
-	return ; 
+	arg = va_arg(ap, void *);
+	write(1, arg, ft_memlen(arg)); // 이게 되나...? 모르겠는데.
+	return ((int)ft_memlen(arg)); 
 }
 
-void meet_d(va_list ap)
+int meet_d(va_list ap) //, char *flag)
 {
-	int ret;
+	int arg;
+	char *c_arg;
+	int c_arg_size;
 
-	ret = va_arg(ap, int);
-	ft_putnbr_fd(ret, 1);
-	return (ret);
+	arg = va_arg(ap, int);
+	c_arg = ft_itoa(arg);
+	// 원래는 그전에 또! flag를 이용해 변환해주고, 프린트하고, 리턴해야함.
+	c_arg_size = ft_strlen(c_arg);
+	write(1, c_arg, c_arg_size);
+	free(c_arg);
+	return (c_arg_size);
 }
 
-int meet_i(va_list ap)
+int meet_i(va_list ap) //, char *flag)
 {
-	int ret;
+	int arg;
+	char *c_arg;
+	int c_arg_size;
 
-	ret = va_arg(ap, int);
-	ft_putnbr_fd(ret, 1);
-	return (ret);
+	arg = va_arg(ap, int);
+	c_arg = ft_itoa(arg);
+	// 원래는 그전에 또! flag를 이용해 변환해주고, 프린트하고, 리턴해야함.
+	c_arg_size = ft_strlen(c_arg);
+	write(1, c_arg, c_arg_size);
+	free(c_arg);
+	return (c_arg_size);
 }
 
-unsigned int meet_u(va_list ap)
+int meet_u(va_list ap) //, char *flag)
 {
-	unsigned int ret;
+	unsigned int arg;
+	char *c_arg;
 
-	ret = va_arg(ap, unsigned int);
-	ft_putunbr(ret, 1);
-	return (ret);
+	arg = va_arg(ap, unsigned int);
+	c_arg = ft_itoa_u(arg);
+	// 또 변환 필요
+	write(1, c_arg, ft_strlen(c_arg));
+	return (ft_strlen(c_arg));
 }
 
-unsigned int meet_x(va_list ap)
+int meet_x(va_list ap) //, char *flag)
 {
-	unsigned int ret;
+	unsigned int arg;
+	char *c_arg;
 
-	ret = va_arg(ap, unsigned int);
-	ft_putunbr(ret, 1);
-	return (ret);
+	arg = va_arg(ap, unsigned int);
+	c_arg = ft_itoa_u(arg);
+	// 또 변환 필요
+	write(1, c_arg, ft_strlen(c_arg));
+	return (ft_strlen(c_arg));
 }
 
-unsigned int meet_X(va_list ap)
+int meet_X(va_list ap) //, char *flag)
 {
-	unsigned int ret;
+	unsigned int arg;
+	char *c_arg;
 
-	ret = va_arg(ap, unsigned int);
-	ft_putunbr(ret, 1);
-	return (ret);
+	arg = va_arg(ap, unsigned int);
+	c_arg = ft_itoa_u(arg);
+	// 또 변환 필요
+	write(1, c_arg, ft_strlen(c_arg));
+	return (ft_strlen(c_arg));
 }

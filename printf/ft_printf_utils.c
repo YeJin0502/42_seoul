@@ -6,15 +6,16 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/04 07:07:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 01:54:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int count_spec(const char *format)
+int	count_spec(const char *format)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (*format)
@@ -26,9 +27,9 @@ int count_spec(const char *format)
 	return (count);
 }
 
-int is_spec(const char c)
+int	is_spec(const char c)
 {
-	char *spec_set;
+	char	*spec_set;
 
 	spec_set = "cspdiuxX";
 	while (*spec_set)
@@ -40,11 +41,11 @@ int is_spec(const char c)
 	return (0);
 }
 
-int is_flag(const char c)
+int	is_flag(const char c)
 {
-	char *flag_set;
+	char	*flag_set;
 
-	flag_set = "-.0*";
+	flag_set = "-.0123456789"; // 수정)숫자 추가해줌
 	while (*flag_set)
 	{
 		if (*flag_set == c)
@@ -54,10 +55,10 @@ int is_flag(const char c)
 	return (0);
 }
 
-char *make_spec(const char *format, int count_s)
+char	*make_specs(const char *format, int count_s)
 {
-	char *ret;
-	int i;
+	char	*ret;
+	int		i;
 
 	if(!(ret = (char *)malloc(count_s + 1)))
 		return (0);
@@ -65,9 +66,8 @@ char *make_spec(const char *format, int count_s)
 	i = 0;
 	while (i < count_s)
 	{
-		if (*format == '%' && *(format + 1) != '%')
+		if (*(format - 1) == '%' && *format != '%')
 		{
-			format++;
 			while (is_flag(*format) == 1)
 				format++;
 			if (is_spec(*format) == 1)
@@ -80,7 +80,7 @@ char *make_spec(const char *format, int count_s)
 	return (ret);
 }
 
-char **make_flag(char *format, int count_s)
+char	**make_flags(const char *format, int count_s)
 {
 	char **ret;
 	int i;
@@ -89,15 +89,16 @@ char **make_flag(char *format, int count_s)
 	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
 		return 0;
 	i = 0;
-	len = 0;
 	while (i < count_s)
 	{
+		len = 0;
 		format = ft_strchr(format, '%');
 		if (*(format + 1) == '%')
 			format = format + 2;
 		else
 		{
-			while (is_spec(*(format + len)) == 0)
+			format++; //flag 가르킴
+			while (is_flag(*(format + len)) == 1)
 				len++;
 			if (!(ret[i] = (char *)malloc(len + 1)))
 			{
@@ -107,12 +108,10 @@ char **make_flag(char *format, int count_s)
 				return (0);
 			}
 			ret[i][len] = '\0';
-			while (len > 0)
-			{
-				ret[i][len - 1] = *(format + len);
-				len--;
-			}
+			while (--len >= 0)
+				ret[i][len] = *(format + len);
 			i++;
+			// printf("i:%d, len:%d, now:%c ret[i]:%s\n", i, len, *format, ret[i]);
 		}
 		format++;
 	}
@@ -120,14 +119,65 @@ char **make_flag(char *format, int count_s)
 }
 // 나중에 줄이던가 하자.
 
-void	ft_putunbr(unsigned int n, int fd)
+t_info	*make_list(char *specs, char **flags)
 {
-	if (n >= 10)
+	int		i;
+	int		size;
+	t_info	*ret;
+
+	i = 0;
+	size = ft_strlen(specs);
+	ret = (t_info *)malloc(sizeof(t_info) * size);
+	while (i < size)
 	{
-		ft_putunbr(n / 10, fd);
-		ft_putunbr(n % 10, fd);
+		ret[i].i = i;
+		ret[i].spec = specs[i];
+		ret[i].flag = (char *)malloc(ft_strlen(flags[i]) + 1);
+		ret[i].flag[ft_strlen(flags[i])] = '\0';
+		// ret[i].flag = flags[i]; // 이거 바로 넣을 수 있나..? 주소 넣는거나, 복사하는게 헷갈리네.
+		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));
+		i++;
 	}
-	if (n <= 9)
-		ft_putchar_fd(n + '0', fd);
-	return ;
-} // 되나? 테스트 안해봄
+	return (ret);
+} // 될라나..? 테스트도 어렵네.
+
+////////////////
+
+//
+const char *if_same_move(const char *format, char *flag)
+{
+	while (*format == *flag)
+	{
+		format++;
+		flag++;
+	}
+	return (format);
+}
+
+// 반환값: 이동된 format
+// arg 출력해야.
+// ret 바꿔줘야
+#include <stdio.h>
+const char *meet_percent(int *ret, const char *format, t_info info, va_list ap)
+{
+	format++; // % 다음으로 보냄
+	if (info.flag != NULL) // 맞나?
+		format = if_same_move(format, info.flag);
+	if (info.spec == 'c')
+		*ret = *ret + meet_c(ap); //, info.flag); // 이렇게 해도 될라나? 프린트하면서 출력글자수 반환.
+	else if (info.spec == 's')
+		*ret = *ret + meet_s(ap); //, info.flag);
+	else if (info.spec == 'p')
+		*ret = *ret + meet_p(ap); //, info.flag);
+	else if (info.spec == 'd')
+		*ret = *ret + meet_d(ap); //, info.flag);
+	else if (info.spec == 'i')
+		*ret = *ret + meet_i(ap); //, info.flag);
+	else if (info.spec == 'u')
+		*ret = *ret + meet_u(ap); //, info.flag);
+	else if (info.spec == 'x')
+		*ret = *ret + meet_x(ap); //, info.flag);
+	else if (info.spec == 'X')
+		*ret = *ret + meet_X(ap); //, info.flag);
+	return (format);
+}

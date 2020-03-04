@@ -3,7 +3,7 @@ NAME = libftprintf.a
 LIBFT = libft
 LIBFT_LIB = libft.a
 
-SRCS = ft_printf.c ft_printf_utils.c
+SRCS = ft_printf.c ft_printf_utils.c ft_meet.c ft_utils.c
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
