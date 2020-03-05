@@ -3,16 +3,9 @@ a.out
 *.o
 *.a
 
-
 # libft
 libft/*.txt
 
-
 # get_next_line
-get_next_line/test_*
 get_next_line/*.txt
-
-get_next_line/42TESTERS-GNL/
-get_next_line/GNL_lover
-get_next_line/gnl_tester
-get_next_line/gnlkiller/
+get_next_line/*/
