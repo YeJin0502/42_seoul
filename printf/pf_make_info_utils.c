@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   pf_make_info_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 07:53:58 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/06 07:47:39 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/06 07:47:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf.h" // 필요한가?
 
-int ft_printf(const char *format, ...)
+int	is_spec(const char c)
 {
-	int count_s;
-	t_info *info;
-	va_list ap;
-	int ret;
+	char	*spec_set;
 
-	if (!(count_s = count_spec(format)))
+	spec_set = "cspdiuxX";
+	while (*spec_set)
 	{
-		write(1, format, ft_strlen(format));
-		return (ft_strlen(format));
+		if (*spec_set == c)
+			return (1);
+		spec_set++;
 	}
-	info = make_info_and_free(format, count_s);
-	va_start(ap, format);
-	ret = print_and_count(format, count_s, info, ap);
-	free(info);
-	return (ret);
+	return (0);
+}
+
+int	is_flag(const char c)
+{
+	char	*flag_set;
+
+	flag_set = "-.0123456789";
+	while (*flag_set)
+	{
+		if (*flag_set == c)
+			return (1);
+		flag_set++;
+	}
+	return (0);
 }

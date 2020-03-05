@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   pf_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 01:55:18 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 07:38:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putnbr_u(unsigned int n, int fd)
 	if (n <= 9)
 		ft_putchar_fd(n + '0', fd);
 	return ;
-} // 되나? 테스트 안해봄
+}
 
 static unsigned int	n_size_u(unsigned int n)
 {
@@ -53,9 +53,9 @@ char		*ft_itoa_u(unsigned int n)
 		n = n / 10;
 	}
 	return (ret);
-} // 되나?
+}
 
-int	ft_memlen(void *str)
+int	ft_memlen(void *str) // 쓰이나?
 {
 	char	*s;
 	int		i;

@@ -3,9 +3,12 @@ NAME = libftprintf.a
 LIBFT = libft
 LIBFT_LIB = libft.a
 
-SRCS = ft_printf.c ft_printf_utils.c ft_meet.c ft_utils.c ft_dec_to_hex.c \
-		ft_flag.c
-
+SRCS = ft_printf.c \
+		pf_convert_flag.c \
+		pf_utils.c \
+		ft_flag.c \
+		ft_meet.c \
+		ft_dec_to_hex.c 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
