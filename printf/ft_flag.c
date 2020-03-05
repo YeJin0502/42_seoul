@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 07:27:11 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 10:18:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 05:10:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-int make_precision(char *flag) // 없으면 -1 리턴.
+int make_precision(char *flag)
 {
 	char *tmp;
 	int flag_len;
@@ -40,7 +40,7 @@ int make_precision(char *flag) // 없으면 -1 리턴.
 	return (ret);
 }
 
-int make_width(char *flag) // width 없으면 -1 리턴. 0으로 바꿀까?
+int make_width(char *flag)
 {
 	int start;
 	int i;
@@ -122,7 +122,85 @@ int ft_max(int n1, int n2)
 		return (n2);
 }
 
-char *convert_flag(char *c_arg, char *flag)
+char *convert_flag(char *c_arg, char *flag, char spec)
+{
+	char *ret;
+	int c_arg_size;
+	t_f_info f_info;
+	int ret_size;
+	int i;
+	int j;
+
+	c_arg_size = ft_strlen(c_arg);
+	f_info = make_f_info(flag);
+	if (spec == 's')
+		f_info.precision = 0;
+	if ((int)ft_strlen(c_arg) >= f_info.width && (int)ft_strlen(c_arg) >= f_info.precision)
+		return (c_arg);
+	ret_size = ft_max(f_info.width, f_info.precision);
+	ret = (char *)malloc(ret_size + 1);
+	ret[ret_size] = '\0';
+	// printf("!%d, %d, %d, %d!\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	i = 0;
+	j = 0;
+	if (f_info.width <= f_info.precision) // 폭 < 정밀도
+	{
+		while (i < (ret_size - c_arg_size))
+			ret[i++] = '0';
+		while (j < c_arg_size)
+			ret[i++] = c_arg[j++];
+		return (ret);
+	}
+	else if (f_info.width > f_info.precision && f_info.precision) // 정밀도 있고, 폭>정밀도
+	{
+		if (f_info.minus == 0)
+		{
+			while (i < (ret_size - f_info.precision))
+				ret[i++] = ' ';
+			while (i < (ret_size - c_arg_size))
+				ret[i++] = '0';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+		else if (f_info.minus == 1)
+		{
+			while (i < f_info.precision - c_arg_size)
+				ret[i++] = '0';
+			while (j < c_arg_size)
+				ret[i++] = c_arg[j++];
+			while (i < f_info.width)
+				ret[i++] = ' ';
+		}
+	}
+	else if (f_info.width) // 폭이 있을 때
+	{
+		if (f_info.minus == 1 && f_info.zero == 0) // 수정할수있을수도
+		{
+			while (i < c_arg_size)
+				ret[i++] = c_arg[j++];
+			while (i < f_info.width)
+				ret[i++] = ' ';
+		}
+		else if (f_info.minus == 0 && f_info.zero == 1)
+		{
+			while (i < f_info.width - c_arg_size)
+				ret[i++] = '0';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+		else if (f_info.minus == 0 && f_info.zero == 0)
+		{
+			while (i < f_info.width - c_arg_size)
+				ret[i++] = ' ';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+	}
+	return (ret);	
+}
+
+/*
+char *convert_flag_s(char *c_arg, char *flag)
 {
 	char *ret;
 	t_f_info f_info;
@@ -130,7 +208,7 @@ char *convert_flag(char *c_arg, char *flag)
 
 	c_arg_size = ft_strlen(c_arg);
 	f_info = make_f_info(flag);
-	// printf("%d, %d, %d, %d\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	// printf("!%d, %d, %d, %d!\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	if ((int)ft_strlen(c_arg) >= f_info.width && (int)ft_strlen(c_arg) >= f_info.precision)
 		return (c_arg);
 	int ret_size;
@@ -172,14 +250,14 @@ char *convert_flag(char *c_arg, char *flag)
 	}
 	else if (f_info.width) // 폭이 있을 때
 	{
-		if (f_info.minus == 1)
+		if (f_info.minus == 1 && f_info.zero == 0)
 		{
 			while (i < c_arg_size)
 				ret[i++] = c_arg[j++];
 			while (i < f_info.width)
 				ret[i++] = ' ';
 		}
-		else if (f_info.zero == 1)
+		else if (f_info.minus == 0 && f_info.zero == 1)
 		{
 			while (i < f_info.width - c_arg_size)
 				ret[i++] = '0';
@@ -196,3 +274,4 @@ char *convert_flag(char *c_arg, char *flag)
 	}
 	return (ret);	
 }
+*/

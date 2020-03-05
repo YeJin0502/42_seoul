@@ -101,7 +101,6 @@ int main(void)
 }
 */
 
-/*
 // EOF 도달안했을때 다른 파일 전환 테스트
 #include <stdio.h>
 #include <fcntl.h>
@@ -110,7 +109,8 @@ int main(void)
 	char *line = 0;
 	int ret;
 	int fd;
-	fd = open("tests/simple", O_RDONLY);
+
+	fd = open("files/alphabet", O_RDONLY);
 	ret = get_next_line(fd, &line);
 	printf("%s\n", line);
 	free(line);
@@ -118,14 +118,18 @@ int main(void)
 	printf("%s\n", line);
 	free(line);
 
-	fd = open("tests/multi_in_one", O_RDONLY);
+	fd = open("files/empty_lines", O_RDONLY);
 	ret = get_next_line(fd, &line);
 	printf("%s\n", line);
 	free(line);
-	return (0);
+
+	fd = open("files/alphabet", O_RDONLY);
+	ret = get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
 }
-*/
 
+/*
 // no FD일때 -1 테스트 이렇게 하는게 아닌가? 잘 나오는데 왜 42TESTERS-GNL은 안되지?
 // 그 이유는 42TESTERS-GNL에서는 그냥 임의의 존재하지 않는 fd(ex. 180)을 주었기 때문이다.
 // ret = get_next_line(180, &line); 과 같은 식.
@@ -143,3 +147,4 @@ int main(void)
 	printf("%s\n", line);
 	free(line);
 }
+*/

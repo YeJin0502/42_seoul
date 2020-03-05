@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 07:00:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 07:52:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 05:25:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ const char *meet_percent(int *ret, const char *format, t_info info, va_list ap)
 	if (info.flag != NULL)
 		format = if_same_move(format, info.flag);
 	if (info.spec == 'c')
-		*ret = *ret + meet_c(ap, info.flag);
+		*ret = *ret + meet_c(ap, info.flag, info.spec);
 	else if (info.spec == 's')
-		*ret = *ret + meet_s(ap, info.flag);
+		*ret = *ret + meet_s(ap, info.flag, info.spec);
 	else if (info.spec == 'p')
-		*ret = *ret + meet_p(ap, info.flag);
+		*ret = *ret + meet_p(ap, info.flag, info.spec);
 	else if (info.spec == 'd')
-		*ret = *ret + meet_d(ap, info.flag);
+		*ret = *ret + meet_d(ap, info.flag, info.spec);
 	else if (info.spec == 'i')
-		*ret = *ret + meet_i(ap, info.flag);
+		*ret = *ret + meet_i(ap, info.flag, info.spec);
 	else if (info.spec == 'u')
-		*ret = *ret + meet_u(ap, info.flag);
+		*ret = *ret + meet_u(ap, info.flag, info.spec);
 	else if (info.spec == 'x')
-		*ret = *ret + meet_x(ap, info.flag);
+		*ret = *ret + meet_x(ap, info.flag, info.spec);
 	else if (info.spec == 'X')
-		*ret = *ret + meet_X(ap, info.flag);
+		*ret = *ret + meet_X(ap, info.flag, info.spec);
 	return (format);
 }
 
-int meet_c(va_list ap, char *flag)
+int meet_c(va_list ap, char *flag, char spec)
 {
 	char arg;
 	char *c_arg;
@@ -49,14 +49,16 @@ int meet_c(va_list ap, char *flag)
 	c_arg[0] = arg;
 	c_arg[1] = '\0';
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);
+		c_arg = convert_flag(c_arg, flag, spec);
+	if (c_arg == NULL)
+		return 0;
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
 }
 
-int meet_s(va_list ap, char *flag)
+int meet_s(va_list ap, char *flag, char spec)
 {
 	char *arg;
 	char *c_arg;
@@ -64,17 +66,15 @@ int meet_s(va_list ap, char *flag)
 
 	arg = va_arg(ap, char *);
 	if (flag != NULL)
-		c_arg = convert_flag(arg, flag);
+		c_arg = convert_flag(arg, flag, spec);
 	else
 		c_arg = arg;
 	c_arg_size = (int)ft_strlen(c_arg);
-	write(1, arg, c_arg_size);
-	if (flag != NULL)
-		free(c_arg);
+	write(1, c_arg, c_arg_size);
 	return (c_arg_size);
 }
 
-int meet_p(va_list ap, char *flag)
+int meet_p(va_list ap, char *flag, char spec)
 {
 	void *arg;
 	char *c_arg;
@@ -87,6 +87,8 @@ int meet_p(va_list ap, char *flag)
 	// printf("2arg:%d\n", (int *)arg 이건 공부해서 정리해야겠다.
 	// printf("3arg:%d\n", *(int *)arg 이거 아니고 위에 두개임.
 	// c_arg = char_memory(arg이게 안됨.
+	if (spec == 'A')
+		return 0;
 	c_arg = dec_to_hex_X(*(int *)arg); // 임시로 컴파일만 되게한거. 수정해야함
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
@@ -94,7 +96,7 @@ int meet_p(va_list ap, char *flag)
 	return (c_arg_size);	
 }
 
-int meet_d(va_list ap, char *flag)
+int meet_d(va_list ap, char *flag, char spec)
 {
 	int arg;
 	char *c_arg;
@@ -103,14 +105,14 @@ int meet_d(va_list ap, char *flag)
 	arg = va_arg(ap, int);
 	c_arg = ft_itoa(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);	
+		c_arg = convert_flag(c_arg, flag, spec);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
 }
 
-int meet_i(va_list ap, char *flag)
+int meet_i(va_list ap, char *flag, char spec)
 {
 	int arg;
 	char *c_arg;
@@ -119,14 +121,14 @@ int meet_i(va_list ap, char *flag)
 	arg = va_arg(ap, int);
 	c_arg = ft_itoa(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);	
+		c_arg = convert_flag(c_arg, flag, spec);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
 }
 
-int meet_u(va_list ap, char *flag)
+int meet_u(va_list ap, char *flag, char spec)
 {
 	unsigned int arg;
 	char *c_arg;
@@ -135,14 +137,14 @@ int meet_u(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = ft_itoa_u(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);	
+		c_arg = convert_flag(c_arg, flag, spec);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
 }
 
-int meet_x(va_list ap, char *flag)
+int meet_x(va_list ap, char *flag, char spec)
 {
 	unsigned int arg;
 	char *c_arg;
@@ -151,14 +153,14 @@ int meet_x(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = dec_to_hex_x(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);	
+		c_arg = convert_flag(c_arg, flag, spec);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
 	return (c_arg_size);
 }
 
-int meet_X(va_list ap, char *flag)
+int meet_X(va_list ap, char *flag, char spec)
 {
 	unsigned int arg;
 	char *c_arg;
@@ -167,7 +169,7 @@ int meet_X(va_list ap, char *flag)
 	arg = va_arg(ap, unsigned int);
 	c_arg = dec_to_hex_X(arg);
 	if (flag != NULL)
-		c_arg = convert_flag(c_arg, flag);	
+		c_arg = convert_flag(c_arg, flag, spec);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
