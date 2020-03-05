@@ -1,3 +1,5 @@
+#include "get_next_line.h"
+
 /*
 #include <stdio.h>
 #include <fcntl.h>
@@ -53,10 +55,6 @@ int main()
 		printf("%s [%d]\n", *line, ret);
 		free(*line);
 	}
-	ret = get_next_line(fd, line);
-	printf("%s [%d]\n", *line, ret);
-	free(*line);
-	ret = get_next_line(fd, line);
 	printf("%s [%d]\n", *line, ret);
 	free(*line);
 }
@@ -82,6 +80,7 @@ int main(void)
 }
 */
 
+/*
 // 표준입력과 리다이렉션
 #include <stdio.h>
 #include <fcntl.h>
@@ -99,4 +98,48 @@ int main(void)
 	printf("%s\n", line);
 	free(line);
 	return (0);
+}
+*/
+
+/*
+// EOF 도달안했을때 다른 파일 전환 테스트
+#include <stdio.h>
+#include <fcntl.h>
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+	fd = open("tests/simple", O_RDONLY);
+	ret = get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	ret = get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+
+	fd = open("tests/multi_in_one", O_RDONLY);
+	ret = get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
+	return (0);
+}
+*/
+
+// no FD일때 -1 테스트 이렇게 하는게 아닌가? 잘 나오는데 왜 42TESTERS-GNL은 안되지?
+// 그 이유는 42TESTERS-GNL에서는 그냥 임의의 존재하지 않는 fd(ex. 180)을 주었기 때문이다.
+// ret = get_next_line(180, &line); 과 같은 식.
+// 따라서 이 때, ret은 -1을 반환하게 해주어 오류 해결.
+#include <stdio.h>
+#include <fcntl.h>
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+	fd = open("null", O_RDONLY);
+	printf("%d\n", fd);
+	ret = get_next_line(fd, &line);
+	printf("%s\n", line);
+	free(line);
 }

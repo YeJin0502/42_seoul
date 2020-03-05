@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/01 06:03:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/01 06:03:52 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 19:40:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
 	if (!(ret = (char *)malloc(size + 1)))
 	{
 		free(line);
+		line = 0;
 		return (0);
 	}
 	ret[size] = '\0';
@@ -97,5 +98,6 @@ char	*ft_strjoin(char *line, char *buf, int read_len, int is_contain_lf)
 	while (i < size)
 		ret[i++] = *(buf++);
 	free(line);
+	line = 0;
 	return (ret);
 }

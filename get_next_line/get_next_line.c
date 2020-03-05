@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 18:31:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/29 18:31:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 20:42:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int	is_make_line(char **line, char *buf, int *read_len)
 	return (0);
 }
 
+void free_and_null(char **buf)
+{
+	free(*buf);
+	*buf = 0;
+	return ;
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*buf;
@@ -60,7 +67,7 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 	if (!(*line = (char *)malloc(1)))
 	{
-		free(buf);
+		free_and_null(&buf);
 		return (-1);
 	}
 	*line[0] = '\0';
@@ -71,6 +78,6 @@ int	get_next_line(int fd, char **line)
 		if (is_make_line(line, buf, &read_len) == 1)
 			return (1);
 	if (read_len == 0)
-		free(buf);
-	return (0);
+		free_and_null(&buf);
+	return (read_len);
 }

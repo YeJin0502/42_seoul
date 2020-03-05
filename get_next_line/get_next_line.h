@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 04:50:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/28 04:50:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 20:41:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	pull_buf(int *read_len, char *buf);
 int		is_make_line(char **line, char *buf, int *read_len);
+void 	free_and_null(char **buf);
 int		get_next_line(int fd, char **line);
 
 int		ft_strlen(char *str);
