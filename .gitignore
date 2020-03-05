@@ -5,7 +5,7 @@ a.out
 
 # libft를 제외한 하위 디렉토리 무시. 이렇게 하는거 맞나?
 !/*/libft
-/*/
+/*/*/
 
 # libft
 libft/*.txt
