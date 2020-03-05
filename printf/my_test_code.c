@@ -149,3 +149,35 @@ int main()
 	// printf("[%4.5d]\n", 123); // [00123] 중요!
 	// printf("[%5.4d]\n", 123); // [ 0123] 중요! 이 두개가 가장 핵심!!
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	// char *a = convert_flag("123", "4.6");
+	// printf("[%s]\n", a);
+	// printf("[%4.6d]\n", 123);
+
+	// char *b = convert_flag("123", "6.4");
+	// printf("[%s]\n", b);
+	// printf("[%6.4d]\n", 123);
+
+	// char *c = convert_flag("123", "-6.4");
+	// printf("[%s]\n", c);
+	// printf("[%-6.4d]\n", 123);
+
+	// char *d = convert_flag("123", "06.4");
+	// printf("[%s]\n", d);
+	// printf("[%06.4d]\n", 123);
+
+	// char *a = convert_flag("123", "-4");
+	
+	printf("[%-4d]\n", 123); // [123 ]
+	printf("[%04d]\n", 123); // [0123]
+	printf("[%4d]\n", 123); // [ 123]
+	ft_printf("[%4d]\n", 123);
+
+	// printf("[%-10.6d]\n", 123); // [000123   ]
+	// printf("[%10.6d]\n", 123); // [   000123]
+}
+*/

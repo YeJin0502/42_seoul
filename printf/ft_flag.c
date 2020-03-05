@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 07:27:11 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 08:37:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/05 10:18:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int make_precision(char *flag) // 없으면 -1 리턴.
 	int i;
 	int ret_size;
 	int ret;
-
+	
+	if (flag == NULL || ft_strchr(flag, '.') == NULL)
+		return 0;
 	flag_len = ft_strlen(flag);
 	i = 0;
-	while (flag[flag_len - i - 1] != '.')
+	while (flag[flag_len - i - 1] != '.' && flag[flag_len - i - 1])
 		i++;
 	if (i == 0)
 		return (0);
@@ -49,9 +51,9 @@ int make_width(char *flag) // width 없으면 -1 리턴. 0으로 바꿀까?
 	start = -1;
 	i = 0;
 	count = 0;
-	if (flag == NULL)
-		return 0; // 없으면 아예 안보낼거같기도 한데..
-	while (flag[i] != '.')
+	if (flag == NULL) // 아마 여기 수정해야 오류가 덜날듯?
+		return 0;
+	while (flag[i] != '.' && flag[i])
 	{
 		if (start == -1 && ('1' <= flag[i] && flag[i] <= '9'))
 			start = i;
@@ -64,7 +66,7 @@ int make_width(char *flag) // width 없으면 -1 리턴. 0으로 바꿀까?
 	tmp = (char *)malloc(count + 1);
 	tmp[count] = '\0';
 	i = start;
-	while (flag[i] != '.')
+	while (flag[i] != '.' && flag[i])
 	{
 		tmp[i - start] = flag[i];
 		i++;
@@ -74,12 +76,12 @@ int make_width(char *flag) // width 없으면 -1 리턴. 0으로 바꿀까?
 	return (ret);
 }
 
-
-
 t_f_info make_f_info(char *flag)
 {
 	t_f_info ret;
 
+	ret.minus = 0;
+	ret.zero = 0;
 	ret.width = make_width(flag);
 	ret.precision = make_precision(flag);
 	if (ret.width == 0 && ret.precision == 0) // %-0d 폭x 정밀도x
@@ -110,7 +112,7 @@ t_f_info make_f_info(char *flag)
 			flag++;
 		}
 	return (ret);
-} // 될라나.. 테스트 안해봄
+}
 
 int ft_max(int n1, int n2)
 {
@@ -128,6 +130,7 @@ char *convert_flag(char *c_arg, char *flag)
 
 	c_arg_size = ft_strlen(c_arg);
 	f_info = make_f_info(flag);
+	// printf("%d, %d, %d, %d\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	if ((int)ft_strlen(c_arg) >= f_info.width && (int)ft_strlen(c_arg) >= f_info.precision)
 		return (c_arg);
 	int ret_size;
@@ -138,7 +141,7 @@ char *convert_flag(char *c_arg, char *flag)
 	i = 0;
 	int j;
 	j = 0;
-	if (f_info.width <= f_info.precision)
+	if (f_info.width <= f_info.precision) // 폭 < 정밀도
 	{
 		while (i < (ret_size - c_arg_size))
 			ret[i++] = '0';
@@ -146,32 +149,50 @@ char *convert_flag(char *c_arg, char *flag)
 			ret[i++] = c_arg[j++];
 		return (ret);
 	}
-	// else
-	// {
-	// 	while (i < (ret_size - f_info.precision))
-	// 		ret[i++] = ' ';
-	// 	while (i < (ret_size - c_arg_size)) // 맞을까..?
-	// 		ret[i++] = '0';
-	// 	while (i < f_info.width)
-	// 		ret[i++] = c_arg[j++];
-	// }
+	else if (f_info.width > f_info.precision && f_info.precision) // 정밀도 있고, 폭>정밀도
+	{
+		if (f_info.minus == 0)
+		{
+			while (i < (ret_size - f_info.precision))
+				ret[i++] = ' ';
+			while (i < (ret_size - c_arg_size))
+				ret[i++] = '0';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+		else if (f_info.minus == 1)
+		{
+			while (i < f_info.precision - c_arg_size)
+				ret[i++] = '0';
+			while (j < c_arg_size)
+				ret[i++] = c_arg[j++];
+			while (i < f_info.width)
+				ret[i++] = ' ';
+		}
+	}
+	else if (f_info.width) // 폭이 있을 때
+	{
+		if (f_info.minus == 1)
+		{
+			while (i < c_arg_size)
+				ret[i++] = c_arg[j++];
+			while (i < f_info.width)
+				ret[i++] = ' ';
+		}
+		else if (f_info.zero == 1)
+		{
+			while (i < f_info.width - c_arg_size)
+				ret[i++] = '0';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+		else if (f_info.minus == 0 && f_info.zero == 0)
+		{
+			while (i < f_info.width - c_arg_size)
+				ret[i++] = ' ';
+			while (i < f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+	}
 	return (ret);	
-} // 경우의수 따져서 내일 해결해보자..
-
-#include <stdio.h>
-int main()
-{
-	char *a = convert_flag("123", "4.6");
-	ft_printf("%s\n", a);
-
-	// printf("%d\n", make_width("4.6"));
 }
-
-
-
-// #include <stdio.h>
-// int main()
-// {
-// 	printf("[%4.2d]\n", 123); // [ 123]
-// 	printf("[%5.6d]\n", 123); // [000123]
-// }
