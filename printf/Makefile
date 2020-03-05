@@ -4,11 +4,15 @@ LIBFT = libft
 LIBFT_LIB = libft.a
 
 SRCS = ft_printf.c \
-		pf_convert_flag.c \
-		pf_utils.c \
-		ft_flag.c \
-		ft_meet.c \
-		ft_dec_to_hex.c 
+		pf_apply_flag_utils.c \
+		pf_apply_flag.c \
+		pf_dec_to_hex.c \
+		pf_make_f_info.c \
+		pf_make_info_utils.c \
+		pf_make_info.c \
+		pf_meet.c \
+		pf_printf_process.c \
+		pf_utils.c 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
