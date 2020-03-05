@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 02:43:10 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 04:02:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 06:53:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,10 @@ char *dec_to_hex_X(unsigned int dec)
 	return (hex);
 }
 
-/*
-int main()
+// 보이드 포인터를 숫자로 바꾸는게 필요한건가?
+int pt_memory(void *arg) // 이름 바꿔야함...
 {
-	int dec = 300;
-	int hex_len;
-	// int rest;
-	// int tmp;
-
-	hex_len = 0;
-	while (dec)
-	{
-		dec = dec / 16;
-		hex_len++;
-	}
-	printf("%d\n", hex_len);
+	int ret;
+	ret = (int)arg; // 이게 안돼서 문제아닌가..ㅠㅠ
+	return (ret);
 }
-*/
-
-
-// int main()
-// {
-// 	printf("%s\n", dec_to_hex_X(4294967295));
-// }
-
-
-// char *char_memory(void *arg)
-// {
-	
-// }
-
-

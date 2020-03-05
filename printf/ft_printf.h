@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 05:01:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 07:08:12 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			ft_memlen(void *str);
 // ft_dec_to_hex.c
 char		*dec_to_hex_x(unsigned int dex);
 char		*dec_to_hex_X(unsigned int dex);
+int pt_memory(void *arg); // 이름 바꿔야함...
 
 // ft_flag.c
 int			make_precision(char *flag);

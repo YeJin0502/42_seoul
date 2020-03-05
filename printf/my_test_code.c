@@ -233,25 +233,36 @@ int main()
 	// printf("8. [%-5.3u]\n", 4294967295); // 에러가 뜨네..? u의 용도는 뭐냐..
 	
 	// x 테스트 - 대충 완료
-	printf("%d\n", ft_printf("1. [%x]\n", 1358));
-	printf("%d\n", printf("1. [%x]\n", 1358));
-	printf("%d\n", ft_printf("2. [%5x]\n", 1358));
-	printf("%d\n", printf("2. [%5x]\n", 1358));
-	printf("%d\n", ft_printf("3. [%05x]\n", 1358));
-	printf("%d\n", printf("3. [%05x]\n", 1358));
-	printf("%d\n", ft_printf("4. [%-5x]\n", 1358));
-	printf("%d\n", printf("4. [%-5x]\n", 1358));
-	printf("%d\n", ft_printf("5. [%5.3x]\n", 1358));
-	printf("%d\n", printf("5. [%5.3x]\n", 1358));
-	printf("%d\n", ft_printf("6. [%05.3x]\n", 1358));
-	printf("%d\n", printf("6. [%05.3x]\n", 1358));
-	printf("%d\n", ft_printf("7. [%-5.3x]\n", 1358));
-	printf("%d\n", printf("7. [%-5.3x]\n", 1358));
-	printf("%d\n", ft_printf("8. [%-5.3x]\n", -1));
-	printf("%d\n", printf("8. [%-5.3x]\n", -1)); // 오버플로우되고 에러 안뜸. 결과 일치.
-	// ft_printf("8. [%-5.3x]\n", 4294967295);
-	// printf("8. [%-5.3x]\n", 4294967295); // 에러가 뜨네..? u의 용도는 뭐냐..
+	// printf("%d\n", ft_printf("1. [%x]\n", 1358));
+	// printf("%d\n", printf("1. [%x]\n", 1358));
+	// printf("%d\n", ft_printf("2. [%5x]\n", 1358));
+	// printf("%d\n", printf("2. [%5x]\n", 1358));
+	// printf("%d\n", ft_printf("3. [%05x]\n", 1358));
+	// printf("%d\n", printf("3. [%05x]\n", 1358));
+	// printf("%d\n", ft_printf("4. [%-5x]\n", 1358));
+	// printf("%d\n", printf("4. [%-5x]\n", 1358));
+	// printf("%d\n", ft_printf("5. [%5.3x]\n", 1358));
+	// printf("%d\n", printf("5. [%5.3x]\n", 1358));
+	// printf("%d\n", ft_printf("6. [%05.3x]\n", 1358));
+	// printf("%d\n", printf("6. [%05.3x]\n", 1358));
+	// printf("%d\n", ft_printf("7. [%-5.3x]\n", 1358));
+	// printf("%d\n", printf("7. [%-5.3x]\n", 1358));
+	// printf("%d\n", ft_printf("8. [%-5.3x]\n", -1));
+	// printf("%d\n", printf("8. [%-5.3x]\n", -1)); // 오버플로우되고 에러 안뜸. 결과 일치.
 
 	// 확인 후, x만 리턴값 확인해봄. 앞은 귀찮아서.. 일단 대충 돌아가니,
 	// 메모리 구현 후, 코드 정리 들어가자.
+
+	// p 테스트
+	char *a = "hello";
+	ft_printf("1. [%p]\n", a);
+	printf("1. [%p]\n", a);
+	ft_printf("2. [%15p]\n", a);
+	printf("2. [%15p]\n", a);
+	ft_printf("3. [%15.10p]\n", a);
+	// printf("3. [%15.10p]\n", a); // p에선 정밀도 에러
+	ft_printf("4. [%015p]\n", a);
+	// printf("4. [%015p]\n", a); // p에선 0 에러
+	ft_printf("5. [%-15p]\n", a);
+	printf("5. [%-15p]\n", a);
 }

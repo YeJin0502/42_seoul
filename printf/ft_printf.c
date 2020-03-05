@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 07:27:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 06:59:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int ft_printf(const char *format, ...)
 	ret = 0;
 	if (!(count_s = count_spec(format)))
 	{
-		printf("[ft_strlen:%zu]\n", ft_strlen(format));
 		write(1, format, ft_strlen(format));
 		return (ft_strlen(format));
 	} // 이런거도 함수 빼버릴 수도 있겠다.
