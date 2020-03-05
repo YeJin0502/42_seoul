@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-// va함수 test
 /*
+// va함수 test
 int sum(int count, ...)
 {
 	int res = 0;
@@ -50,8 +50,8 @@ int main()
 }
 */
 
-// make_flags 테스트
 /*
+// make_flags 테스트
 int main()
 {
 	char **test = make_flags("hi%--dhello%-0dworld%-.s", 3);
@@ -68,64 +68,6 @@ int main()
 		i--;
 	}
 	free(test);
-}
-*/
-
-/*
-// ft_printf 여러종류 테스트
-int main()
-{
-	// ft_printf("===============\n"); //OK
-
-	// char *a = "hihello";
-	ft_printf("1: [%d]\n", 2147483648); // 오버, 언더플로우 관리해야.
-	ft_printf("2: [%u]\n", -1);
-	ft_printf("3: [%c]\n", 'M');
-	// ft_printf("4: [%p]\n", a);
-	// printf("4real: [%p]\n", a);
-	printf("%d\n", ft_printf("5: [%x]\n", 4294967295)); // 일단 이건 맞음.
-}
-*/
-
-/*
-// printf %c 테스트
-int main()
-{
-	printf("[%8c]\n", 'M'); // c: 폭 가능
-	// printf("%.8c\n", 'M'); // c: 정밀도는 불가능
-	printf("[%08c]\n", 'M'); // c: 0 불가능
-	// printf()
-}
-*/
-
-/*
-// printf 테스트
-int main()
-{
-	printf("[%-05d]\n", 123);
-	-와 0은 같이 못있음.
-	
-	printf("[%5d]\n", 123); // [  123]
-	printf("[%05d]\n", 123); // [00123]
-	printf("[%.5d]\n", 123); // [00123]
-	// d에선 0과 .이 같은 역할?
-
-	printf("[%5d]\n", 123); // [123  ]
-	printf("[%.5d]\n", 123); // [00123]
-	printf("[%5.5d]\n", 123); // [00123]
-	printf("[%-5.5d]\n", 123); // [00123]
-	printf("[%05.5d]\n", 123); // [00123]
-	// 우선순위: .5 > - > 5 ?
-
-	printf("[%0d]\n", 123); // [123]
-	printf("[%-d]\n", 123); // [123]
-	// -와 0은 폭이 없으면 무용지물
-	printf("[%0.5d]\n", 123); // [123]
-	printf("[%-.5d]\n", 123); // [123]
-	// -와 0은 폭이 없으면 무용지물. 정밀도는 우선순위가 1위라... 정밀도 있으면 - 소용없음.
-
-	printf("[%4.5d]\n", 123); // [00123] 중요!
-	printf("[%5.4d]\n", 123); // [ 0123] 중요! 이 두개가 가장 핵심!!
 }
 */
 
