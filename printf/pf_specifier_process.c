@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 21:48:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 01:02:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,22 @@ int	c_process(va_list ap, char *flag, char spec)
 
 int	s_process(va_list ap, char *flag, char spec)
 {
-	int			is_wc_width;
-	int			is_wc_precision;
+	int			is_width_wc;
+	int			is_precision_wc;
 	t_f_info	f_info;
-	char		*arg;
 	char		*c_arg;
 	int			c_arg_size;
 
-	is_wc_width = 0;
-	is_wc_precision = 0;
-	f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
-	arg = va_arg(ap, char *);
-	if (is_wc_width == 1 || is_wc_precision == 1)
-		f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
-	if (flag != NULL)
-		c_arg = apply_flag(arg, spec, f_info);
-	else
-		c_arg = arg;
+	is_width_wc = 0;
+	is_precision_wc = 0;
+	f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
+	c_arg = va_arg(ap, char *);
+	if (is_width_wc == 1 || is_precision_wc == 1)
+		f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
+	if (flag != NULL && *flag != '\0')
+		c_arg = apply_flag(c_arg, spec, f_info);
+	if (ft_isascii((int)c_arg) == 1)
+		return (0);
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size); // 아 free 귀찮담...
 	return (c_arg_size);
@@ -73,18 +72,18 @@ int	p_process(va_list ap, char *flag, char spec)
 	char	*c_arg;
 	int		c_arg_size;
 	t_f_info f_info;
-	int is_wc_width;
-	int is_wc_precision;
+	int is_width_wc;
+	int is_precision_wc;
 
-	is_wc_width = 0;
-	is_wc_precision = 0;
-	f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	is_width_wc = 0;
+	is_precision_wc = 0;
+	f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, void *);
-	if (is_wc_width == 1 || is_wc_precision == 1)
-		f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	if (is_width_wc == 1 || is_precision_wc == 1)
+		f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	c_arg_tmp = dec_to_hex((unsigned int)arg, spec);
 	c_arg = ft_strjoin("0x", c_arg_tmp);
-	if (*flag != '\0') // 왜 얘만 이렇게 검사하게될까..? 그걸 모르겠네. 다른애들은 그냥 flag != NULL 검사했는데.
+	if (*flag != '\0')
 		c_arg = apply_flag(c_arg, spec, f_info);
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
@@ -98,17 +97,17 @@ int	di_process(va_list ap, char *flag, char spec)
 	char	*c_arg;
 	int		c_arg_size;
 	t_f_info f_info;
-	int is_wc_width;
-	int is_wc_precision;
+	int is_width_wc;
+	int is_precision_wc;
 
-	is_wc_width = 0;
-	is_wc_precision = 0;
-	f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	is_width_wc = 0;
+	is_precision_wc = 0;
+	f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, int);
-	if (is_wc_width == 1 || is_wc_precision == 1)
-		f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	if (is_width_wc == 1 || is_precision_wc == 1)
+		f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	c_arg = ft_itoa(arg);
-	if (flag != NULL)
+	if (*flag != '\0') // 이걸로 다 바꿔야할듯?
 		c_arg = apply_flag(c_arg, spec, f_info);	
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
@@ -122,15 +121,15 @@ int	uxX_process(va_list ap, char *flag, char spec)
 	char			*c_arg;
 	int				c_arg_size;
 	t_f_info f_info;
-	int is_wc_width;
-	int is_wc_precision;
+	int is_width_wc;
+	int is_precision_wc;
 
-	is_wc_width = 0;
-	is_wc_precision = 0;
-	f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	is_width_wc = 0;
+	is_precision_wc = 0;
+	f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, unsigned int);
-	if (is_wc_width == 1 || is_wc_precision == 1)
-		f_info = make_f_info(flag, ap, &is_wc_width, &is_wc_precision);
+	if (is_width_wc == 1 || is_precision_wc == 1)
+		f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
 	if (spec == 'u')
 		c_arg = ft_itoa_u(arg);
 	else

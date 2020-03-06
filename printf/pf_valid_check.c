@@ -1,42 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_make_info_utils.c                               :+:      :+:    :+:   */
+/*   pf_valid_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 09:49:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 00:01:03 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/07 00:31:49 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/07 00:35:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "ft_printf.h"
-
-int	is_spec(const char c)
-{
-	char	*spec_set;
-
-	spec_set = "cspdiuxX";
-	while (*spec_set)
-	{
-		if (*spec_set == c)
-			return (1);
-		spec_set++;
-	}
-	return (0);
-}
-
-int	is_flag(const char c)
-{
-	char	*flag_set;
-
-	flag_set = "-.0123456789*";
-	while (*flag_set)
-	{
-		if (*flag_set == c)
-			return (1);
-		flag_set++;
-	}
-	return (0);
-}
 

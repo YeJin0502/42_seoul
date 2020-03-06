@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 21:20:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 23:33:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ char		*apply_flag(char *c_arg, char spec, t_f_info f_info);
 /*
 **	pf_make_f_info.c
 */
+t_f_info w0_p0(t_f_info ret, char *flag);
+t_f_info w0_p1(t_f_info ret, char *flag);
+t_f_info w1(t_f_info ret, char *flag);
+t_f_info wc_process1(t_f_info *ret, va_list ap, int **is_wc_width);
+t_f_info wc_process2(t_f_info *ret, va_list ap, int **is_wc_precision);
 t_f_info	make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precision);
 
 /*

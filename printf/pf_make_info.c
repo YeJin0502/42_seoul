@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 19:34:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 01:18:45 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*make_specs(const char *format, int count_s)
 		return (0);
 	ret[count_s] = '\0';
 	i = 0;
-	while (i < count_s)
+	while (i < count_s && *format)
 	{
 		if (*(format - 1) == '%' && *format != '%')
 		{
@@ -32,16 +32,21 @@ char	*make_specs(const char *format, int count_s)
 			if (is_spec(*format) == 1)
 				ret[i++] = *format;
 			else
+			{
+				printf("zz\n");
 				return 0;
+			}
 		}
 		format++;
 	}
+	if (i != count_s)
+		return (0);
 	return (ret);
 }
 
 static char	**make_flags_sub(char **ret, const char **format, int *i, int *len)
 {
-	(*format)++; //flag 가르킴
+	(*format)++;
 	while (is_flag(*(*format + *len)) == 1)
 		(*len)++;
 	if (!(ret[*i] = (char *)malloc(*len + 1)))
@@ -67,7 +72,7 @@ char	**make_flags(const char *format, int count_s)
 	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
 		return (0);
 	i = 0;
-	while (i < count_s)
+	while (i < count_s && *format)
 	{
 		len = 0;
 		format = ft_strchr(format, '%');
@@ -78,6 +83,8 @@ char	**make_flags(const char *format, int count_s)
 				return (0);
 		format++;
 	}
+	if (i != count_s)
+		return 0;
 	return (ret);
 }
 
@@ -89,12 +96,18 @@ t_info	*make_info(char *specs, char **flags)
 
 	i = 0;
 	size = ft_strlen(specs);
-	ret = (t_info *)malloc(sizeof(t_info) * size);
+	if (!(ret = (t_info *)malloc(sizeof(t_info) * size)))
+		return (0);
 	while (i < size)
 	{
 		ret[i].i = i;
 		ret[i].spec = specs[i];
-		ret[i].flag = (char *)malloc(ft_strlen(flags[i]) + 1);
+		if (!(ret[i].flag = (char *)malloc(ft_strlen(flags[i]) + 1)))
+		{
+			while (--i >= 0)
+				free(ret[i].flag);
+			free(ret);
+		}
 		ret[i].flag[ft_strlen(flags[i])] = '\0';
 		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));
 		i++;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_make_f_info_subprocess.c                        :+:      :+:    :+:   */
+/*   pf_make_f_info_sub.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 21:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 21:38:41 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 23:42:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ t_f_info w1(t_f_info ret, char *flag)
 	return (ret);
 }
 
-t_f_info wc_process1(t_f_info *ret, va_list ap, int *is_wc_width)
+t_f_info wc_process1(t_f_info *ret, va_list ap, int **is_wc_width)
 {
 	(*ret).width = va_arg(ap, int);
-	*is_wc_width = 1;
+	**is_wc_width = 1;
 	return (*ret);
 }
 
-t_f_info wc_process2(t_f_info *ret, va_list ap, int *is_wc_precision)
+t_f_info wc_process2(t_f_info *ret, va_list ap, int **is_wc_precision)
 {
 	(*ret).precision = va_arg(ap, int);
-	*is_wc_precision = 1;
+	**is_wc_precision = 1;
 	return (*ret);
 }
