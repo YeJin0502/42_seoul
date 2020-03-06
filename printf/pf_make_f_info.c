@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 07:59:35 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 11:18:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int make_precision(char *flag)
+static int make_precision(char *flag)
 {
 	char *tmp;
 	int flag_len;
@@ -38,30 +38,40 @@ int make_precision(char *flag)
 	return (ret);
 }
 
-int make_width(char *flag)
+static int width_digit_count(char *flag, int *i, int *start)
 {
-	int start;
+	int count;
+	
+	count = 0;
+	while (flag[*i] != '.' && flag[*i])
+	{
+		if (*start == -1 && ('1' <= flag[*i] && flag[*i] <= '9'))
+			*start = *i;
+		if (*start > -1)
+			(count)++;
+		(*i)++;
+	}
+	(*i) = *start;
+	return (count);
+} // 이렇게 함수 나눠도 되나..? 함수 개수는 많아지지만 줄수는 무조건 줄이는거 가능인데..?
+
+static int make_width(char *flag)
+{
 	int i;
+	int start;
 	int count;
 	char *tmp;
 	int ret;
 
-	start = -1;
+	if (flag == NULL)
+		return (0);
 	i = 0;
-	count = 0;
-	if (flag == NULL) // 아마 여기 수정해야 오류가 덜날듯?
-		return 0;
-	while (flag[i] != '.' && flag[i])
-	{
-		if (start == -1 && ('1' <= flag[i] && flag[i] <= '9'))
-			start = i;
-		if (start > -1)
-			count++;
-		i++;
-	}
+	start = -1;
+	count = width_digit_count(flag, &i, &start);
 	if (count == 0)
 		return (0);
-	tmp = (char *)malloc(count + 1);
+	if (!(tmp = (char *)malloc(count + 1)))
+		return (0);
 	tmp[count] = '\0';
 	i = start;
 	while (flag[i] != '.' && flag[i])

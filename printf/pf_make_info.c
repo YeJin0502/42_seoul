@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 07:59:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 11:00:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,25 @@ char	*make_specs(const char *format, int count_s)
 	return (ret);
 }
 
+static char	**make_flags_sub(char **ret, const char **format, int *i, int *len)
+{
+	(*format)++; //flag 가르킴
+	while (is_flag(*(*format + *len)) == 1)
+		(*len)++;
+	if (!(ret[*i] = (char *)malloc(*len + 1)))
+	{
+		while (--(*i) >= 0)
+			free(ret[*i]);
+		free(ret);
+		return (0);
+	}
+	ret[*i][*len] = '\0';
+	while (--(*len) >= 0)
+		ret[*i][*len] = *(*format + *len);
+	(*i)++;
+	return (ret);
+}
+
 char	**make_flags(const char *format, int count_s)
 {
 	char **ret;
@@ -44,7 +63,7 @@ char	**make_flags(const char *format, int count_s)
 	int len;
 
 	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
-		return 0;
+		return (0);
 	i = 0;
 	while (i < count_s)
 	{
@@ -53,22 +72,8 @@ char	**make_flags(const char *format, int count_s)
 		if (*(format + 1) == '%')
 			format = format + 2;
 		else
-		{
-			format++; //flag 가르킴
-			while (is_flag(*(format + len)) == 1)
-				len++;
-			if (!(ret[i] = (char *)malloc(len + 1)))
-			{
-				while (--i >= 0)
-					free(ret[i]);
-				free(ret);
+			if (make_flags_sub(ret, &format, &i, &len) == NULL)
 				return (0);
-			}
-			ret[i][len] = '\0';
-			while (--len >= 0)
-				ret[i][len] = *(format + len);
-			i++;
-		}
 		format++;
 	}
 	return (ret);
@@ -91,29 +96,6 @@ t_info	*make_info(char *specs, char **flags)
 		ret[i].flag[ft_strlen(flags[i])] = '\0';
 		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));
 		i++;
-	}
-	return (ret);
-}
-
-t_info *make_info_and_free(const char *format, int count_s)
-{
-	t_info *ret;
-	char *specs;
-	char **flags;
-
-	if (!(specs = make_specs(format, count_s)))
-		return (0);
-	if (!(flags = make_flags(format, count_s)))
-	{
-		free(specs);
-		return (0);
-	}
-	if (!(ret = make_info(specs, flags)))
-	{
-		free(specs);
-		while (*flags)
-			free(flags++);
-		return (0);
 	}
 	return (ret);
 }

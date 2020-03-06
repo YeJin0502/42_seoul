@@ -1,48 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_dec_to_hex.c                                    :+:      :+:    :+:   */
+/*   pf_specifier_process_utils.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/05 02:43:10 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 07:59:38 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/06 10:33:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *dec_to_hex_x(unsigned int dec)
+static unsigned int	n_size_u(unsigned int n)
 {
-	int hex_len;
-	unsigned int tmp;
-	char *hex;
-
-	tmp = dec;
-	hex_len = 0;
-	while (tmp)
+	int	size;
+	
+	size = 0;
+	while (n != 0)
 	{
-		tmp = tmp / 16;
-		hex_len++;
+		n = n / 10;
+		size++;
 	}
-	hex = (char *)malloc(hex_len + 1);
-	hex[hex_len] = '\0';
-	while (--hex_len >= 0)
-	{
-		if (0 <= dec % 16 && dec % 16 <= 9)
-			hex[hex_len] = dec % 16 + '0';
-		else
-			hex[hex_len] = dec % 16 + 'a' - 10;
-		dec = dec / 16;
-	}
-	return (hex);
+	return (size);
 }
 
-char *dec_to_hex_X(unsigned int dec)
+char	*ft_itoa_u(unsigned int n)
 {
-	int hex_len;
-	unsigned int tmp;
-	char *hex;
+	int		size;
+	char	*ret;
+
+	size = n_size_u(n);
+	if (!(ret = (char *)malloc(size + 1)))
+		return 0;
+	ret[size] = '\0';
+	while (size > 0)
+	{
+		ret[(size--) - 1] = n % 10 + '0';
+		n = n / 10;
+	}
+	return (ret);
+}
+
+char	*dec_to_hex(unsigned int dec, char spec)
+{
+	int				hex_len;
+	unsigned int	tmp;
+	char			*hex;
 
 	tmp = dec;
 	hex_len = 0;
@@ -51,13 +55,16 @@ char *dec_to_hex_X(unsigned int dec)
 		tmp = tmp / 16;
 		hex_len++;
 	}
-	hex = (char *)malloc(hex_len + 1);
+	if (!(hex = (char *)malloc(hex_len + 1)))
+		return (0);
 	hex[hex_len] = '\0';
 	while (--hex_len >= 0)
 	{
-		if (0 <= dec % 16 && dec % 16 <= 9)
+		if (dec % 16 <= 9)
 			hex[hex_len] = dec % 16 + '0';
-		else
+		else if (spec == 'x' || spec == 'p')
+			hex[hex_len] = dec % 16 + 'a' - 10;
+		else if (spec == 'X')
 			hex[hex_len] = dec % 16 + 'A' - 10;
 		dec = dec / 16;
 	}
