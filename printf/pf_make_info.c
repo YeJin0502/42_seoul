@@ -6,11 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 11:00:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 19:34:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+#include <stdio.h>
 
 char	*make_specs(const char *format, int count_s)
 {

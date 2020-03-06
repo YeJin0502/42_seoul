@@ -6,13 +6,15 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 10:30:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 20:29:09 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_spec(const char *format)
+#include <stdio.h>
+
+int	count_arg(const char *format, int *count_s)
 {
 	int	count;
 
@@ -20,6 +22,11 @@ int	count_spec(const char *format)
 	while (*format)
 	{
 		if (*format == '%' && *(format - 1) != '%')
+		{
+			count++;
+			(*count_s)++;
+		}
+		else if (*format == '*')
 			count++;
 		format++;
 	}
@@ -31,7 +38,6 @@ t_info	*make_info_and_free(const char *format, int count_s)
 	t_info	*ret;
 	char	*specs;
 	char	**flags;
-
 	if (!(specs = make_specs(format, count_s)))
 		return (0);
 	if (!(flags = make_flags(format, count_s)))

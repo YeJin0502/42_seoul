@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_convert_flag.c                                  :+:      :+:    :+:   */
+/*   pf_apply_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 08:01:35 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 19:53:41 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *apply_flag(char *c_arg, char *flag, char spec)
+char *apply_flag(char *c_arg, char spec, t_f_info f_info)
 {
 	char *ret;
 	int c_arg_size;
-	t_f_info f_info;
 	int ret_size;
 	int i;
 	int j;
 
 	c_arg_size = ft_strlen(c_arg);
-	f_info = make_f_info(flag);
 	if (spec == 's')
 		f_info.precision = 0;
 	if ((int)ft_strlen(c_arg) >= f_info.width && (int)ft_strlen(c_arg) >= f_info.precision)

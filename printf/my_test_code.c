@@ -196,15 +196,19 @@ int main()
 	// 메모리 구현 후, 코드 정리 들어가자.
 
 	// p 테스트 - 대충 완료
-	char *a = "hello";
-	ft_printf("1. [%p]\n", a);
-	printf("1. [%p]\n", a);
-	ft_printf("2. [%15p]\n", a);
-	printf("2. [%15p]\n", a);
-	ft_printf("3. [%15.10p]\n", a);
-	// printf("3. [%15.10p]\n", a); // p에선 정밀도 에러
-	ft_printf("4. [%015p]\n", a);
-	// printf("4. [%015p]\n", a); // p에선 0 에러
-	ft_printf("5. [%-15p]\n", a);
-	printf("5. [%-15p]\n", a);
+	// char *a = "hello";
+	// ft_printf("1. [%p]\n", a);
+	// printf("1. [%p]\n", a);
+	// ft_printf("2. [%15p]\n", a);
+	// printf("2. [%15p]\n", a);
+	// ft_printf("3. [%15.10p]\n", a);
+	// // printf("3. [%15.10p]\n", a); // p에선 정밀도 에러
+	// ft_printf("4. [%015p]\n", a);
+	// // printf("4. [%015p]\n", a); // p에선 0 에러
+	// ft_printf("5. [%-15p]\n", a);
+	// printf("5. [%-15p]\n", a);
+
+	// * 테스트 - 있는지 모르고 구현 안했다가 나중에 엄청 지저분하게 추가함. ㅠㅠ
+	printf("r:[%*.5d]\n", 10, 123);
+	ft_printf("m:[%*.5d]\n", 10, 123);
 }

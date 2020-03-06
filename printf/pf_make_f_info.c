@@ -6,11 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 11:18:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 20:50:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+#include <stdio.h>
 
 static int make_precision(char *flag)
 {
@@ -28,6 +30,8 @@ static int make_precision(char *flag)
 		i++;
 	if (i == 0)
 		return (0);
+	if (i == 1 && flag[flag_len - 1] == '*') //
+		return (-1);
 	tmp = (char *)malloc(i + 1);
 	tmp[i] = '\0';
 	ret_size = i;
@@ -49,6 +53,8 @@ static int width_digit_count(char *flag, int *i, int *start)
 			*start = *i;
 		if (*start > -1)
 			(count)++;
+		if (flag[*i] == '*')
+			return (-1);
 		(*i)++;
 	}
 	(*i) = *start;
@@ -62,14 +68,13 @@ static int make_width(char *flag)
 	int count;
 	char *tmp;
 	int ret;
-
 	if (flag == NULL)
 		return (0);
 	i = 0;
 	start = -1;
 	count = width_digit_count(flag, &i, &start);
-	if (count == 0)
-		return (0);
+	if (count == 0 || count == -1)
+		return (count);
 	if (!(tmp = (char *)malloc(count + 1)))
 		return (0);
 	tmp[count] = '\0';
@@ -84,14 +89,28 @@ static int make_width(char *flag)
 	return (ret);
 }
 
-t_f_info make_f_info(char *flag)
+t_f_info make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precision)
 {
-	t_f_info ret;
+	static t_f_info ret;
 
 	ret.minus = 0;
 	ret.zero = 0;
-	ret.width = make_width(flag);
-	ret.precision = make_precision(flag);
+
+	if (*is_wc_width == 0 && *is_wc_precision == 0)
+	{
+		if ((ret.width = make_width(flag)) == -1)
+		{
+			ret.width = va_arg(ap, int);
+			*is_wc_width = 1;
+		}
+		if ((ret.precision = make_precision(flag)) == -1)
+		{
+			ret.precision = va_arg(ap, int);
+			*is_wc_precision = 1;
+		}
+		return (ret);
+	}
+	// printf("width:%d, precision:%d, wc:%d\n",ret.width, ret.precision, *is_wildcard);
 	if (ret.width == 0 && ret.precision == 0) // %-0d 폭x 정밀도x
 		while (*flag)
 		{
@@ -111,7 +130,8 @@ t_f_info make_f_info(char *flag)
 			flag++;
 		}
 	else if (ret.width != 0) // %-01d 폭o
-		while (!('1' <= *flag && *flag <= '9'))
+	{
+		while (!(('1' <= *flag && *flag <= '9') || *flag == '*'))
 		{
 			if (*flag == '-')
 				ret.minus = 1;
@@ -119,5 +139,6 @@ t_f_info make_f_info(char *flag)
 				ret.zero = 1;
 			flag++;
 		}
+	}
 	return (ret);
 }

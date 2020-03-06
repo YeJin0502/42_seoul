@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 10:36:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 20:41:41 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int			ft_max(int n1, int n2);
 /*
 **	pf_apply_flag.c
 */
-char		*apply_flag(char *c_arg, char *flag, char spec);
+char		*apply_flag(char *c_arg, char spec, t_f_info f_info);
 
 /*
 **	pf_make_f_info.c
 */
-t_f_info	make_f_info(char *flag);
+t_f_info	make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precision);
 
 /*
 **	pf_make_info_utils.c
@@ -66,7 +66,7 @@ t_info		*make_info(char *specs, char **flags);
 /*
 **	pf_printf_process.c
 */
-int			count_spec(const char *format);
+int			count_arg(const char *format, int *count_s);
 int			print_and_count(const char *format, int count_s, t_info *info, va_list ap);
 t_info		*make_info_and_free(const char *format, int count_s);
 const char *meet_specifier(int *ret, const char *format, t_info info, va_list ap);
