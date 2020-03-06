@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 20:41:41 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 21:20:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,18 @@ t_f_info	make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precis
 /*
 **	pf_make_info_utils.c
 */
+int make_precision(char *flag);
+int make_width(char *flag);
 int	is_spec(const char c);
 int	is_flag(const char c);
+
+char		*make_specs(const char *format, int count_s);
+char		**make_flags(const char *format, int count_s);
 
 /*
 **	pf_make_info.c
 */
-char		*make_specs(const char *format, int count_s);
-char		**make_flags(const char *format, int count_s);
+
 t_info		*make_info(char *specs, char **flags);
 
 /*

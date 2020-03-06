@@ -6,9 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:49:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 18:58:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/06 21:42:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	is_spec(const char c)
 {
@@ -37,3 +39,4 @@ int	is_flag(const char c)
 	}
 	return (0);
 }
+
