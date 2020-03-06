@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 23:33:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 01:42:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,8 @@ int			s_process(va_list ap , char *flag, char spec);
 int			p_process(va_list ap , char *flag, char spec);
 int			di_process(va_list ap , char *flag, char spec);
 int			uxX_process(va_list ap , char *flag, char spec);
+
+void free_and_null(char *str);
+
 
 #endif

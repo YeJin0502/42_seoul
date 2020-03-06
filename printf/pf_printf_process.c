@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 01:08:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 02:47:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ int	count_arg(const char *format, int *count_s)
 	return (count);
 }
 
+void free_and_null(char *str)
+{
+	free(str);
+	str = 0;
+}
+
 t_info	*make_info_and_free(const char *format, int count_s)
 {
 	t_info	*ret;
@@ -49,9 +55,18 @@ t_info	*make_info_and_free(const char *format, int count_s)
 	{
 		free(specs);
 		while (*flags)
-			free(flags++);
+			free(*(flags++));
 		return (0);
 	}
+	free(specs);
+	int i;
+	i = 0;
+	while (i < count_s)
+	{
+		free(flags[i]);
+		i++;
+	}
+	free(flags);
 	return (ret);
 }
 

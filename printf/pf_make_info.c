@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 01:18:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 02:10:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,17 @@ char	**make_flags(const char *format, int count_s)
 		if (*(format + 1) == '%')
 			format = format + 2;
 		else
-			if (make_flags_sub(ret, &format, &i, &len) == NULL)
+			if ((make_flags_sub(ret, &format, &i, &len)) == NULL)
 				return (0);
 		format++;
 	}
 	if (i != count_s)
-		return 0;
+	{
+		while (i >= 0)
+			free(ret[i]);
+		free(ret);
+		return (0);
+	}
 	return (ret);
 }
 
@@ -107,6 +112,7 @@ t_info	*make_info(char *specs, char **flags)
 			while (--i >= 0)
 				free(ret[i].flag);
 			free(ret);
+			return (0);
 		}
 		ret[i].flag[ft_strlen(flags[i])] = '\0';
 		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));

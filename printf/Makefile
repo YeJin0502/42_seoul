@@ -15,7 +15,7 @@ SRCS = ft_printf.c \
 		pf_specifier_process.c \
 		
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)
 INCS = .
 

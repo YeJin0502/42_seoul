@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 21:55:12 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 21:55:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 01:53:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ char		*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	size = n_size(n);
-	ret = (char *)malloc(size + 1);
-	if (!ret)
-		return 0;
+	if (!(ret = (char *)malloc(size + 1)))
+		return (0);
 	ret[size] = '\0';
 	flag = 0;
 	if (n < 0)
