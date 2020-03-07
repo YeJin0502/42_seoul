@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 02:10:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 13:30:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ char	*make_specs(const char *format, int count_s)
 			if (is_spec(*format) == 1)
 				ret[i++] = *format;
 			else
-			{
-				printf("zz\n");
 				return 0;
-			}
 		}
 		format++;
 	}

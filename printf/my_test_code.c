@@ -211,5 +211,12 @@ int main()
 	// ft_printf("m:[%0*d]\n", 10, 123);
 	// printf("r:[%10.*d]\n", 5, 123);
 	// ft_printf("m:[%10.*d]\n", 5, 123);
+	ft_printf("%%\n");
+	printf("%5.06d\n", 123);
 }
 
+// count_spec 테스트
+int main()
+{
+	printf("%d\n", count_spec("assd%% %-0.*d %d d%-.-d"));
+}

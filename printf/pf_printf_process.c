@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 02:47:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 14:00:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,57 @@
 
 #include <stdio.h>
 
-int	count_arg(const char *format, int *count_s)
+t_list	*count_spec(const char *fmt) // 이거 대폭 수정 필요!
 {
+	t_list *ret;
+	t_check check;
 	int	count;
 
+	ret = ft_lstnew(0);
+	ft_memset(&check, 0, sizeof(t_check)); // 맞나?
 	count = 0;
-	while (*format)
+	while (*fmt)
 	{
-		if (*format == '%' && *(format - 1) != '%')
+		if (*fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1))
 		{
-			count++;
-			(*count_s)++;
+			fmt++;
+			while (*fmt && (is_spec(*fmt) == 0)) // flag 유효성 검사
+			{
+				if (is_valid(*fmt, &check) == 0)
+					break;
+				fmt++;
+			}
+			if (is_spec(*fmt) == 1 && check.wrong == 0 && count++)
+			{
+				ft_lstadd_back(&ret, ft_lstnew(fmt));
+				count++;
+				
+			}
+			ft_memset(&check, 0, sizeof(t_check));
 		}
-		else if (*format == '*')
-			count++;
-		format++;
+		fmt++;
 	}
-	return (count);
+	return (ret);
 }
 
-void free_and_null(char *str)
+int is_valid(const char c, t_check *check)
 {
-	free(str);
-	str = 0;
+	if ('1' <= c && c <= '9' && (*check).num == 0)
+		(*check).num = 1;
+	else if (c == '*' && (*check).wc == 0)
+		(*check).wc = 1;
+	else if (c == '.' && (*check).dot == 0)
+		(*check).dot = 1;
+	else if (c == '-' && ((*check).num == 1	|| (*check).wc == 1 || (*check).dot == 1)
+			&& (*check).wrong++)
+		return (0);
+	else if (c == '.' && (*check).dot == 1 && (*check).wrong++)
+		return (0);
+	else if (c == '*' && (*check).dot == 0 && (*check).wc == 1 && (*check).wrong++)
+		return (0);
+	else if (is_flag(c) == 0)
+		return (0);
+	return (1);
 }
 
 t_info	*make_info_and_free(const char *format, int count_s)
@@ -80,7 +108,9 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	while (*format)
 	{
 		if (*format == '%' && *(format + 1) != '%' && i < count_s)
+		{
 			format = meet_specifier(&ret, format, *(info + i++), ap); // 1.ret 올려주고 2.format을 spec 자리로 이동.
+		}
 		else
 		{
 			write(1, format, 1);
