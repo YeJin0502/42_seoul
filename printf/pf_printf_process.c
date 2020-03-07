@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:02:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 05:29:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,28 @@ int is_valid(const char c, t_check *check)
 {
 	if ('1' <= c && c <= '9' && (*check).num == 0)
 		(*check).num = 1;
-	else if (c == '*' && (*check).wc == 0)
-		(*check).wc = 1;
+	else if (c == '*' && (*check).dot == 0 && (*check).w_wc == 0)
+		(*check).w_wc = 1;
 	else if (c == '.' && (*check).dot == 0)
 		(*check).dot = 1;
-	else if (c == '-' && ((*check).num == 1	|| (*check).wc == 1 || (*check).dot == 1)
-			&& (*check).wrong++)
+	else if (c == '*' && (*check).dot == 1 && (*check).p_wc == 0)
+		(*check).p_wc = 1;
+	else if ('1' <= c && c <= '9' && (*check).w_wc == 1 && (*check).wrong++)
+		return (0);
+	else if ('1' <= c && c <= '9' && (*check).p_wc == 1 && (*check).wrong++)
+		return (0);
+	else if (c == '-' && ((*check).num == 1	|| (*check).w_wc == 1 || (*check).dot == 1
+			|| (*check).p_wc == 1) && (*check).wrong++)
 		return (0);
 	else if (c == '.' && (*check).dot == 1 && (*check).wrong++)
 		return (0);
-	else if (c == '*' && (*check).dot == 0 && (*check).wc == 1 && (*check).wrong++)
+	else if (c == '*' && ((*check).num == 1 || (*check).w_wc == 1 || (*check).p_wc == 1)
+			&& (*check).wrong++)
 		return (0);
 	else if (is_flag(c) == 0)
 		return (0);
 	return (1);
-}
+} // 계속 여기에 추가될듯... 길어지면 위에 체크로 바꾸는거 분리하면 될듯.
 
 int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 {
@@ -97,7 +104,7 @@ static const char	*skip_flag(const char *format, char *flag)
 		flag++;
 	}
 	return (format);
-}
+} // 이거 libft에 비슷한 함수 있지 않나?
 
 const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap)
 {

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:21:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 05:21:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 typedef struct	s_check
 {
 	int	num;
-	int	wc;
+	int	w_wc;
+	int p_wc;
 	int	dot;
 	int	wrong;
 }				t_check;

@@ -276,22 +276,17 @@ int main()
 	// 문자열 테스트
 	// ft_printf("[%.s]\n", "hello");
 	// printf("[%.s]\n", "hello");
-	// ft_printf("[%s]\n", "hello");
-	// printf("[%s]\n", "hello");
-	// ft_printf("[%.d]\n", 123);
-	// printf("[%.d]\n", 123);
-	
+	// ft_printf("my:[%2.0s]\n", "hello"); // precision과 width 입력하는 부분을 수정해야 할듯.
+	// printf("real:[%2.0s]\n", "hello"); // 바로 spec 나오면 0으로 처리하는 식으로?
 
-	char *a = "hello";
-	ft_printf("1. [%p]\n", a);
-	printf("1. [%p]\n", a);
-	ft_printf("2. [%15p]\n", a);
-	printf("2. [%15p]\n", a);
-	ft_printf("3. [%15.10p]\n", a);
-	// printf("3. [%15.10p]\n", a); // p에선 정밀도 에러
-	ft_printf("4. [%015p]\n", a);
-	// printf("4. [%015p]\n", a); // p에선 0 에러
-	ft_printf("5. [%-15p]\n", a);
-	printf("5. [%-15p]\n", a);
+	// char *a = "010";
+	// printf("precision test: %d\n", make_precision(a));
+	// printf("width test: %d\n", make_width(a));
+
+	ft_printf("[%3.1s]\n", NULL);
+	printf("[%3.1s]\n", NULL);
+
+	ft_printf("[%-3.1s]\n", NULL);
+	printf("[%-3.1s]\n", NULL);
 }
 

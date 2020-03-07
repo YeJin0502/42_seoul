@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:04:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 05:42:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int make_precision(char *flag)
 	while (flag[flag_len - i - 1] != '.' && flag[flag_len - i - 1])
 		i++;
 	if (i == 0)
-		return (0);
-	if (i == 1 && flag[flag_len - 1] == '*') //
+		return (-2); // 이렇게 하면 되나? 바로 점 만나니까?
+	if (i == 1 && flag[flag_len - 1] == '*') // wc를 -1로 했었네. 내용 없을때를 -2로 해야할듯..?
 		return (-1);
 	tmp = (char *)malloc(i + 1);
 	tmp[i] = '\0';
@@ -39,6 +39,8 @@ int make_precision(char *flag)
 	while (--i >= 0)
 		tmp[ret_size - i - 1] = flag[flag_len - i - 1];
 	ret = ft_atoi(tmp);
+	if (ret == 0)
+		return (-2); // 이걸 0으로 하고, 아예 없을때를 음수로 했어야하는데... 고치기 귀찮으니 어쩔수없다 ㅠㅠ
 	free(tmp);
 	return (ret);
 }

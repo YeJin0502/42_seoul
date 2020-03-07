@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:26:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 05:55:06 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	s_process(va_list ap, t_info info)
 	info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, char *);
 	if (arg == 0)
-		return (0);
+		arg = "(null)"; // null 개념 약해서 문자열로 줘버리는거 오반데..ㅠㅠ 일단은..나중에고치자
 	if (is_width_wc == 1 || is_precision_wc == 1)
 		info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	c_arg = ft_strdup(arg);

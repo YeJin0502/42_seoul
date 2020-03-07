@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:25:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 06:16:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,10 @@ char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 
 	i = 0;
 	j = 0;
-	if (f_info.minus == 0)
+	if (f_info.precision == -2)
+		while(i < f_info.width)
+			ret[i++] = ' ';
+	else if (f_info.minus == 0)
 	{
 		while (i < (f_info.width - f_info.precision))
 			ret[i++] = ' ';
@@ -157,17 +160,9 @@ char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 	}
 	else if (f_info.minus == 1)
 	{
+		// printf("w:%d, c:%d\n", f_info.width, pf_min(c_arg_size, f_info.precision));
 		while (i < pf_min(c_arg_size, f_info.precision))
 			ret[i++] = (*c_arg)[j++];
-		// if (f_info.precision)
-		// {
-		// 	printf("%d\n", f_info.precision);
-		// 	while (j < f_info.precision)
-		// 		ret[i++] = (*c_arg)[j++];
-		// }
-		// else
-		// 	while (j < c_arg_size)
-		// 		ret[i++] = (*c_arg)[j++];
 		while (i < f_info.width)
 			ret[i++] = ' ';
 	}
@@ -192,11 +187,15 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	int c_arg_size;
 	int ret_size;
 
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
-	c_arg_size = ft_strlen(c_arg);
 	f_info.zero = 0;
+	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && f_info.precision && f_info.precision < 6)
+		c_arg = ft_strdup("");
 	if (is_contain(info.flag, '.') == 1 && f_info.width == 0 && f_info.precision == 0)
 		return (0);
+	if (f_info.precision == -2)
+		c_arg = ft_strdup(""); // 아마 메모리 누수 발생할듯..? 문자열 교체하는 함수 없나?
+	c_arg_size = ft_strlen(c_arg);
 	if (f_info.precision && !f_info.width && c_arg_size <= f_info.precision)
 		return (c_arg);
 	else if (f_info.precision && !f_info.width && c_arg_size > f_info.precision)
@@ -216,4 +215,5 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	free(c_arg);
 	return (ret);
 }
+// 테스트 돌리니까 예외가 자꾸 느네. 또 나중에 한번에 정리해야지..ㅠㅠ
 
