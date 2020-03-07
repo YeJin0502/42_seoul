@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 16:40:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 16:59:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,20 @@ int ft_printf(const char *format, ...)
 	count_s = ft_lstsize(spec_adr);
 	if (!count_s)
 	{
-		write(1, format, ft_strlen(format));
-		return (ft_strlen(format));
+		ret = 0;
+		while (*format)
+		{
+			if (*format == '%')
+			{
+				format++;
+				while (*format != '%' && *format)
+					format++;
+			}
+			write(1, format, 1);
+			ret++;
+			format++;
+		}
+		return (ret);
 	}
 	va_start(ap, format);
 	if ((info = make_info_and_free(spec_adr, count_s)) == 0)

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 16:40:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 17:34:45 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			ft_max(int n1, int n2);
 **	pf_apply_flag.c
 */
 char		*apply_flag(char *c_arg, char spec, t_f_info f_info);
+char *apply_flag_s(char *c_arg, t_f_info f_info);
 
 /*
 **	pf_make_f_info.c

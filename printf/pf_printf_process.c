@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 16:37:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 17:07:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-t_list	*count_spec(const char *fmt) // 이거 대폭 수정 필요!
+t_list	*count_spec(const char *fmt)
 {
 	t_list *ret;
 	t_check check;
@@ -75,10 +75,8 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	i = 0;
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '%' && i < count_s)
-		{
+		if (*format == '%' && *(format + 1) != '%' && i < count_s) // 아마 %% 때문에 수정해야 할듯
 			format = meet_specifier(&ret, format, *(info + i++), ap); // 1.ret 올려주고 2.format을 spec 자리로 이동.
-		}
 		else
 		{
 			write(1, format, 1);

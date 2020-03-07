@@ -270,3 +270,15 @@ int main()
 // 		i++;
 // 	}
 // }
+
+int main()
+{
+	ft_printf("%3s\n", "hello");
+	printf("%3s\n", "hello"); // [hello] 
+	printf("%.3s\n", "hello"); // [hel] 문자열하고 d는 이런곳에서 차이가 난다.
+
+	printf("%3d\n", 12345); // [12345]
+	printf("%.3d\n", 12345); // [12345] 
+	
+
+}

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 02:52:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 17:37:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	s_process(va_list ap, char *flag, char spec)
 	char		*c_arg;
 	int			c_arg_size;
 
+	if (spec == 0)
+		return 0; // 컴파일용.
 	is_width_wc = 0;
 	is_precision_wc = 0;
 	f_info = make_f_info(flag, ap, &is_width_wc, &is_precision_wc);
@@ -61,7 +63,7 @@ int	s_process(va_list ap, char *flag, char spec)
 	// if (ft_isascii((int)c_arg) == 1)
 	// 	return (0);
 	if (*flag != '\0')
-		c_arg = apply_flag(c_arg, spec, f_info);
+		c_arg = apply_flag_s(c_arg, f_info);
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size); // 아 free 귀찮담...
 	free(c_arg);
