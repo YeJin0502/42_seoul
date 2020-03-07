@@ -12,3 +12,6 @@ libft/*.txt
 
 # get_next_line
 get_next_line/*.txt
+
+# printf
+prinft/*.txt
