@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 17:36:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 03:25:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,17 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 }
 
 #include <stdio.h>
-char *apply_flag(char *c_arg, char spec, t_f_info f_info)
+char *apply_flag(char *c_arg, t_f_info f_info)
 {
 	char *ret;
 	int c_arg_size;
 	int ret_size;
 
-	if (spec == 0)
-		return (0); // 컴파일용
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	c_arg_size = ft_strlen(c_arg);
-	if ((int)ft_strlen(c_arg) >= ft_max(f_info.width, f_info.precision))
+	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
 		return (c_arg);
-	ret_size = ft_max(f_info.width, f_info.precision);
+	ret_size = pf_max(f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';
@@ -115,7 +113,80 @@ char *apply_flag(char *c_arg, char spec, t_f_info f_info)
 	return (ret);
 }
 
-char *apply_flag_s(char *c_arg, t_f_info f_info) // 따로 만드는게 나을수도
+
+char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (f_info.minus == 0)
+	{
+		while (i < (f_info.width - c_arg_size))
+			ret[i++] = ' ';
+		while (j < pf_min(c_arg_size, f_info.precision))
+			ret[i++] = (*c_arg)[j++];
+	}
+	else if (f_info.minus == 1)
+	{
+		while (i < f_info.width - c_arg_size)
+			ret[i++] = ' ';
+		while (j < pf_min(c_arg_size, f_info.precision))
+			ret[i++] = (*c_arg)[j++];
+	}
+	free(*c_arg);
+	return (ret);
+}
+
+char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (f_info.minus == 0)
+	{
+		while (i < (f_info.width - f_info.precision))
+			ret[i++] = ' ';
+		while (i < (f_info.width - c_arg_size))
+			ret[i++] = ' ';
+		while (i < f_info.width)
+			ret[i++] = (*c_arg)[j++];
+	}
+	else if (f_info.minus == 1)
+	{
+		while (i < pf_min(c_arg_size, f_info.precision))
+			ret[i++] = (*c_arg)[j++];
+		// if (f_info.precision)
+		// {
+		// 	printf("%d\n", f_info.precision);
+		// 	while (j < f_info.precision)
+		// 		ret[i++] = (*c_arg)[j++];
+		// }
+		// else
+		// 	while (j < c_arg_size)
+		// 		ret[i++] = (*c_arg)[j++];
+		while (i < f_info.width)
+			ret[i++] = ' ';
+	}
+	free(*c_arg);
+	return (ret);
+}
+
+int is_contain(char *str, char c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
 { // 따로 만들면 spec 필요 없을수도 있겠다. 숫자들도 다 똑같으면... 거기도 spec 뺄수있음.
 	char *ret;
 	int c_arg_size;
@@ -123,22 +194,26 @@ char *apply_flag_s(char *c_arg, t_f_info f_info) // 따로 만드는게 나을�
 
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	c_arg_size = ft_strlen(c_arg);
-	if (c_arg_size < f_info.precision)
+	f_info.zero = 0;
+	if (is_contain(info.flag, '.') == 1 && f_info.width == 0 && f_info.precision == 0)
+		return (0);
+	if (f_info.precision && !f_info.width && c_arg_size <= f_info.precision)
 		return (c_arg);
-	else if (c_arg_size > f_info.width)
+	else if (f_info.precision && !f_info.width && c_arg_size > f_info.precision)
+		return (ft_substr(c_arg, 0, f_info.precision));
+	else if (f_info.width && !f_info.precision && c_arg_size > f_info.width)
 		return (c_arg);
-	if ((int)ft_strlen(c_arg) >= ft_max(f_info.width, f_info.precision)) //이런곳도
-		return (c_arg);
-	ret_size = ft_max(f_info.width, f_info.precision);
+	ret_size = pf_max(f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';
 	if (f_info.width <= f_info.precision)
-		return (p_bigger_then_w(ret, &c_arg, f_info, c_arg_size)); // 이런거 다 문자열에 맞게 고쳐야
+		return (p_bigger_then_w_s(ret, &c_arg, f_info, c_arg_size));
 	else if (f_info.width > f_info.precision && f_info.precision)
-		return (w_bigger_then_p(ret, &c_arg, f_info, c_arg_size));
+		return (w_bigger_then_p_s(ret, &c_arg, f_info, c_arg_size));
 	else if (f_info.width)
 		return (w_exist(ret, &c_arg, f_info, c_arg_size));
 	free(c_arg);
 	return (ret);
 }
+

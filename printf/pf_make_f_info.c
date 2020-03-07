@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 00:22:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 03:04:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int make_width(char *flag)
 	return (ret);
 }
 
-t_f_info make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precision)
+t_f_info make_f_info(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision)
 {
 	static t_f_info ret;
 
@@ -97,18 +97,18 @@ t_f_info make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precis
 
 	if (*is_wc_width == 0 && *is_wc_precision == 0)
 	{
-		if ((ret.width = make_width(flag)) == -1)
+		if ((ret.width = make_width(info.flag)) == -1)
 			wc_process1(&ret, ap, &is_wc_width);
-		else if ((ret.precision = make_precision(flag)) == -1)
+		else if ((ret.precision = make_precision(info.flag)) == -1)
 			wc_process2(&ret, ap, &is_wc_precision);
 		if (*is_wc_width == 1 || *is_wc_width == 1)
 			return (ret);
 	}
 	if (ret.width == 0 && ret.precision == 0) // %-0d 폭x 정밀도x
-		ret = w0_p0(ret, flag);
+		ret = w0_p0(ret, info.flag);
 	else if (ret.width == 0 && ret.precision != 0) // %-0.5d 폭x 정밀도o
-		ret= w0_p1(ret, flag);
+		ret= w0_p1(ret, info.flag);
 	else if (ret.width != 0) // %-01d 폭o
-		ret = w1(ret, flag);
+		ret = w1(ret, info.flag);
 	return (ret);
 }

@@ -273,12 +273,25 @@ int main()
 
 int main()
 {
-	ft_printf("%3s\n", "hello");
-	printf("%3s\n", "hello"); // [hello] 
-	printf("%.3s\n", "hello"); // [hel] 문자열하고 d는 이런곳에서 차이가 난다.
-
-	printf("%3d\n", 12345); // [12345]
-	printf("%.3d\n", 12345); // [12345] 
+	// 문자열 테스트
+	// ft_printf("[%.s]\n", "hello");
+	// printf("[%.s]\n", "hello");
+	// ft_printf("[%s]\n", "hello");
+	// printf("[%s]\n", "hello");
+	// ft_printf("[%.d]\n", 123);
+	// printf("[%.d]\n", 123);
 	
 
+	char *a = "hello";
+	ft_printf("1. [%p]\n", a);
+	printf("1. [%p]\n", a);
+	ft_printf("2. [%15p]\n", a);
+	printf("2. [%15p]\n", a);
+	ft_printf("3. [%15.10p]\n", a);
+	// printf("3. [%15.10p]\n", a); // p에선 정밀도 에러
+	ft_printf("4. [%015p]\n", a);
+	// printf("4. [%015p]\n", a); // p에선 0 에러
+	ft_printf("5. [%-15p]\n", a);
+	printf("5. [%-15p]\n", a);
 }
+

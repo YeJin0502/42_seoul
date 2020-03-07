@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 17:07:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 03:02:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,15 @@ const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap
 	format++;
 	format = skip_flag(format, info.flag);
 	if (info.spec == 'c')
-		*ret = *ret + c_process(ap, info.flag, info.spec);
+		*ret = *ret + c_process(ap, info);
 	else if (info.spec == 's')
-		*ret = *ret + s_process(ap, info.flag, info.spec);
+		*ret = *ret + s_process(ap, info);
 	else if (info.spec == 'p')
-		*ret = *ret + p_process(ap, info.flag, info.spec);
+		*ret = *ret + p_process(ap, info);
 	else if (info.spec == 'd' || info.spec == 'i')
-		*ret = *ret + di_process(ap, info.flag, info.spec);
+		*ret = *ret + di_process(ap, info);
 	else if (info.spec == 'u' || info.spec == 'x' || info.spec == 'X')
-		*ret = *ret + uxX_process(ap, info.flag, info.spec);
+		*ret = *ret + uxX_process(ap, info);
 	else
 		return 0;
 	return (format);

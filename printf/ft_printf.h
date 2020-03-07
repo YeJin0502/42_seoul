@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 17:34:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 03:21:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ typedef struct	s_check
 	int	wrong;
 }				t_check;
 
-typedef struct	s_info
-{
-	int i;
-	char *spec_adr;
-	char spec;
-	char *flag;
-}				t_info;
-
 typedef struct s_f_info
 {
 	int minus;
@@ -42,18 +34,28 @@ typedef struct s_f_info
 	int precision;
 }	t_f_info;
 
+typedef struct	s_info
+{
+	int i;
+	char *spec_adr;
+	char spec;
+	char *flag;
+	t_f_info f_info;
+}				t_info;
+
+
 int			ft_printf(const char *format, ...);
 
 /*
 **	pf_apply_flag_utils.c
 */
-int			ft_max(int n1, int n2);
+int			pf_max(int n1, int n2);
 
 /*
 **	pf_apply_flag.c
 */
-char		*apply_flag(char *c_arg, char spec, t_f_info f_info);
-char *apply_flag_s(char *c_arg, t_f_info f_info);
+char		*apply_flag(char *c_arg, t_f_info f_info);
+char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info);
 
 /*
 **	pf_make_f_info.c
@@ -63,7 +65,7 @@ t_f_info w0_p1(t_f_info ret, char *flag);
 t_f_info w1(t_f_info ret, char *flag);
 t_f_info wc_process1(t_f_info *ret, va_list ap, int **is_wc_width);
 t_f_info wc_process2(t_f_info *ret, va_list ap, int **is_wc_precision);
-t_f_info	make_f_info(char *flag, va_list ap, int *is_wc_width, int *is_wc_precision);
+t_f_info make_f_info(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
 
 /*
 **	pf_make_info_utils.c
@@ -101,15 +103,17 @@ char		*dec_to_hex(unsigned int dex, char spec);
 /*
 **	pf_specifier_process.c
 */
-int			c_process(va_list ap , char *flag, char spec);
-int			s_process(va_list ap , char *flag, char spec);
-int			p_process(va_list ap , char *flag, char spec);
-int			di_process(va_list ap , char *flag, char spec);
-int			uxX_process(va_list ap , char *flag, char spec);
+int			c_process(va_list ap , t_info info);
+int			s_process(va_list ap , t_info info);
+int			p_process(va_list ap , t_info info);
+int			di_process(va_list ap , t_info info);
+int			uxX_process(va_list ap , t_info info);
 
 void free_and_null(char *str);
 void make_check_null(t_check *check);
-
-
+char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size);
+int pf_min(int n1, int n2);
+char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size);
+t_f_info make_f_info_s(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
 
 #endif
