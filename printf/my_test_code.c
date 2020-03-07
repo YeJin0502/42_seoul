@@ -220,3 +220,9 @@ int main()
 {
 	printf("%d\n", count_spec("assd%% %-0.*d %d d%-.-d"));
 }
+
+// 연결리스트 테스트
+int main()
+{
+	printf("%d\n", ft_lstsize(count_spec("assd%0.8d% %-0.*d %d d%-.-d")));
+}

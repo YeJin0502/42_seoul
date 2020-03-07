@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 14:00:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 14:06:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,15 @@ t_list	*count_spec(const char *fmt) // 이거 대폭 수정 필요!
 				fmt++;
 			}
 			if (is_spec(*fmt) == 1 && check.wrong == 0 && count++)
-			{
-				ft_lstadd_back(&ret, ft_lstnew(fmt));
-				count++;
-				
-			}
+				ft_lstadd_back(&ret, ft_lstnew((void *)fmt)); // 와 이게 한번에 된다고?
 			ft_memset(&check, 0, sizeof(t_check));
 		}
 		fmt++;
 	}
 	return (ret);
 }
+
+
 
 int is_valid(const char c, t_check *check)
 {

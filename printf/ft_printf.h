@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 13:57:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 14:04:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ typedef struct	s_info
 	char spec;
 	char *flag;
 }				t_info;
-
-typedef struct s_list
-{
-	t_list	*next;
-	void	*content;
-}				t_list;
-
 
 typedef struct s_f_info
 {
@@ -92,7 +85,7 @@ t_info		*make_info(char *specs, char **flags);
 /*
 **	pf_printf_process.c
 */
-int	count_spec(const char *fmt); // 이거 대폭 수정 필요!
+t_list	*count_spec(const char *fmt); // 이거 대폭 수정 필요!
 int is_valid(const char c, t_check *check);
 
 int			print_and_count(const char *format, int count_s, t_info *info, va_list ap);
