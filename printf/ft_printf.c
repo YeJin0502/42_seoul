@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 14:07:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 16:40:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int ft_printf(const char *format, ...)
 		return (ft_strlen(format));
 	}
 	va_start(ap, format);
-	if ((info = make_info_and_free(format, count_s)) == 0)
+	if ((info = make_info_and_free(spec_adr, count_s)) == 0)
 		return (-1);	
 	ret = print_and_count(format, count_s, info, ap);
 	

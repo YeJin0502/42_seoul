@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 14:04:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/07 16:40:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 typedef struct	s_check
 {
-	int head;
 	int	num;
 	int	wc;
 	int	dot;
@@ -73,8 +72,8 @@ int make_width(char *flag);
 int	is_spec(const char c);
 int	is_flag(const char c);
 
-char		*make_specs(const char *format, int count_s);
-char		**make_flags(const char *format, int count_s);
+char *make_specs(t_list *spec_adr, int count_s);
+char		**make_flags(t_list *spec_adr, int count_s);
 
 /*
 **	pf_make_info.c
@@ -89,7 +88,7 @@ t_list	*count_spec(const char *fmt); // 이거 대폭 수정 필요!
 int is_valid(const char c, t_check *check);
 
 int			print_and_count(const char *format, int count_s, t_info *info, va_list ap);
-t_info		*make_info_and_free(const char *format, int count_s);
+t_info		*make_info_and_free(t_list *spec_adr, int count_s);
 const char *meet_specifier(int *ret, const char *format, t_info info, va_list ap);
 
 /*
@@ -108,6 +107,8 @@ int			di_process(va_list ap , char *flag, char spec);
 int			uxX_process(va_list ap , char *flag, char spec);
 
 void free_and_null(char *str);
+void make_check_null(t_check *check);
+
 
 
 #endif

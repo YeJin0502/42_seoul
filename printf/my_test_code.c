@@ -103,7 +103,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
 	// // d 테스트 - 누수 체크함
@@ -126,18 +126,18 @@ int main()
 	
 	// c 테스트 - 누수 체크함
 	// 에러가 떠도, 중단만 안되면 되는듯? 결과 안보는거같기도..
-	// ft_printf("1. [%c]\n", 'a');
-	// printf("1. [%c]\n", 'a');
-	// ft_printf("2. [%5c]\n", 'a');
-	// printf("2. [%5c]\n", 'a');
-	// ft_printf("3. [%05c]\n", 'a');
-	// // printf("3. [%05c]\n", 'a'); // 에러: c에서는 0 안쓰임.
-	// ft_printf("4. [%-5c]\n", 'a');
-	// printf("4. [%-5c]\n", 'a');
-	// ft_printf("5. [%5.3c]\n", 'a');
-	// // printf("5. [%5.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
-	// ft_printf("6. [%05.3c]\n", 'a');
-	// // printf("6. [%05.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
+	ft_printf("1. [%c]\n", 'a');
+	printf("1. [%c]\n", 'a');
+	ft_printf("2. [%5c]\n", 'a');
+	printf("2. [%5c]\n", 'a');
+	ft_printf("3. [%05c]\n", 'a');
+	// printf("3. [%05c]\n", 'a'); // 에러: c에서는 0 안쓰임.
+	ft_printf("4. [%-5c]\n", 'a');
+	printf("4. [%-5c]\n", 'a');
+	ft_printf("5. [%5.3c]\n", 'a');
+	// printf("5. [%5.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
+	ft_printf("6. [%05.3c]\n", 'a');
+	// printf("6. [%05.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
 
 	// s 테스트 - 대충 완료
 	// ft_printf("1. [%s]\n", "hello");
@@ -211,18 +211,62 @@ int main()
 	// ft_printf("m:[%0*d]\n", 10, 123);
 	// printf("r:[%10.*d]\n", 5, 123);
 	// ft_printf("m:[%10.*d]\n", 5, 123);
-	ft_printf("%%\n");
-	printf("%5.06d\n", 123);
+	// ft_printf("%%\n");
+	// printf("%5.06d\n", 123);
 }
+*/
 
 // count_spec 테스트
-int main()
-{
-	printf("%d\n", count_spec("assd%% %-0.*d %d d%-.-d"));
-}
+// int main()
+// {
+// 	printf("%d\n", count_spec("assd%% %-0.*d %d d%-.-d"));
+// }
 
 // 연결리스트 테스트
-int main()
-{
-	printf("%d\n", ft_lstsize(count_spec("assd%0.8d% %-0.*d %d d%-.-d")));
-}
+// int main()
+// {
+// 	printf("%d\n", ft_lstsize(count_spec("assd%0.8d% %-0.*d %d d%-.-d")));
+
+// 	printf("%s\n", count_spec("assd%0.8d% %-0.*d %d d%-.-d")[1].content);
+// }
+
+// 연결리스트 테스트
+// int main()
+// {
+// 	t_list *ret;
+// 	ret = count_spec("assd%0.8d% %-0.*d %d d%-.-d");
+// 	printf("[%d]\n", ft_lstsize(ret));
+	
+	
+// 	printf("%s\n", ret->content);
+// 	ret = ret->next; // 아 이렇게 쓰는거구나!!!
+// 	printf("%s\n", ret->content);
+// }
+
+// make_specs 테스트
+// int main()
+// {
+// 	t_list *ret;
+// 	ret = count_spec("assd%0.8d% %-0.*d %d d%-.-d");
+// 	printf("[%d]\n", ft_lstsize(ret));
+
+// 	printf("%s\n", make_specs("assd%0.8d% %-0.*d %d d%-.-d", ret, 3));
+// }
+
+// make_flags 테스트
+// int main()
+// {
+// 	t_list *ret;
+// 	ret = count_spec("assd%0.8d% %-0.*d %d d%-.-d");
+// 	printf("[%d]\n", ft_lstsize(ret));
+
+// 	char **test;
+// 	test = make_flags("assd%0.8d% %-0.*d %d d%-.-d", ret, ft_lstsize(ret));
+// 	int i;
+// 	i = 0;
+// 	while (i < 5)
+// 	{
+// 		printf("%s\n", test[i]);
+// 		i++;
+// 	}
+// }
