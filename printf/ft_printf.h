@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 05:21:31 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 08:55:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_f_info
 	int zero;
 	int width;
 	int precision;
+	int negative;
 }	t_f_info;
 
 typedef struct	s_info

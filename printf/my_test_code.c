@@ -283,10 +283,24 @@ int main()
 	// printf("precision test: %d\n", make_precision(a));
 	// printf("width test: %d\n", make_width(a));
 
-	ft_printf("[%3.1s]\n", NULL);
-	printf("[%3.1s]\n", NULL);
+	// ft_printf("[%3.1s]\n", NULL);
+	// printf("[%3.1s]\n", NULL);
 
-	ft_printf("[%-3.1s]\n", NULL);
-	printf("[%-3.1s]\n", NULL);
+	// ft_printf("[%-3.1s]\n", NULL);
+	// printf("[%-3.1s]\n", NULL);
+
+	// ft_printf("[%00s]", "hello");
+	// printf("[%00s]", "hello"); // 오류뜨는데? 뭐 컴파일러가 다른가..? 이런거 테스트를 하나?
+	// ft_printf("[%00d]\n", 123);
+	// printf("[%00d]\n", 123);
+
+	// ft_printf("%8.3d\n", 8375); // s는 짤려서 나와야하는데, 숫자는 보존되어야 하는듯.
+	// printf("%8.3d", 8375);
+
+	ft_printf("[%08.5i]\n", -34);
+	printf("[%08.5i]\n", -34);
+
+	ft_printf("[%08.3i]\n", 8375);
+	printf("[%08.3i]\n", 8375);
 }
 

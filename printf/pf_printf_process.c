@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 05:29:16 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 08:18:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_list	*count_spec(const char *fmt)
 			{
 				if (is_valid(*fmt, &check) == 0)
 					break;
+				// if (*fmt == '0' && *(fmt + 1) == '0') // 
+				// 	break;
 				fmt++;
 			}
 			if (is_spec(*fmt) == 1 && check.wrong == 0)
