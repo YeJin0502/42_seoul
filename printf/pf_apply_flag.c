@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 04:48:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 06:14:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	return (ret);
 }
 
-char *apply_flag(char *c_arg, t_f_info f_info)
+char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 {
 	char *ret;
 	int c_arg_size;
@@ -121,11 +121,9 @@ char *apply_flag(char *c_arg, t_f_info f_info)
 	if (f_info.precision > 0)
 		f_info.zero = 0;
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
-	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == -2)
-	{
-		// printf("zz\n");
+	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == 0 &&
+		is_contain(info.flag, '.') == 1)
 		c_arg = ft_strdup("");
-	}
 	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
 		return (c_arg);
 	if (c_arg[0] == '-')
@@ -216,16 +214,6 @@ char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 	return (ret);
 }
 
-int is_contain(char *str, char c)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (1);
-		str++;
-	}
-	return (0);
-}
 
 char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
 { // 따로 만들면 spec 필요 없을수도 있겠다. 숫자들도 다 똑같으면... 거기도 spec 뺄수있음.
@@ -233,18 +221,19 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	int c_arg_size;
 	int ret_size;
 
+	// printf("!%s!\n", c_arg);
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	f_info.zero = 0;
 	if (c_arg == 0 || c_arg[0] == '\0') // 오른쪽 추가해서 113 해결함
 		c_arg = ft_strdup("");
-	if (f_info.width == 0 && f_info.precision == 0)
-		return (c_arg); // 이거는 여기 들어오기전에 검사해도 될듯. 그냥 f_info == 0은 안되겠지?
-	if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && f_info.precision && f_info.precision < 6)
+	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)
 		c_arg = ft_strdup("");
-	if (is_contain(info.flag, '.') == 1 && f_info.width == 0 && f_info.precision == 0)
-		return (0);
-	if (f_info.precision == -2)
-		c_arg = ft_strdup(""); // 아마 메모리 누수 발생할듯..? 문자열 교체하는 함수 없나?
+	else if (is_contain(info.flag, '.') == 1 && !f_info.width)
+		return(c_arg = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
+	else if (is_contain(info.flag, '.') == 1)
+		c_arg = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg)));
+	else if (f_info.width == 0 && f_info.precision == 0)
+		return (c_arg); // 이거는 여기 들어오기전에 검사해도 될듯. 그냥 f_info == 0은 안되겠지?
 	c_arg_size = ft_strlen(c_arg);
 	if (f_info.precision && !f_info.width && c_arg_size <= f_info.precision)
 		return (c_arg);
@@ -265,5 +254,4 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	free(c_arg);
 	return (ret);
 }
-// 테스트 돌리니까 예외가 자꾸 느네. 또 나중에 한번에 정리해야지..ㅠㅠ
 

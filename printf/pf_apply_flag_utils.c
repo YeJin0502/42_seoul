@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:56:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 06:16:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 06:09:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,15 @@ int pf_min(int n1, int n2)
 		return (n2);
 	else
 		return (n1);
+}
+
+int is_contain(char *str, char c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
 }

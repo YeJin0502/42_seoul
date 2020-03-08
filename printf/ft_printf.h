@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 20:27:25 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 06:09:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_info
 	char *spec_adr;
 	char spec;
 	char *flag;
+	int width_star;
+	int prec_star;
 	t_f_info f_info;
 }				t_info;
 
@@ -56,7 +58,7 @@ int			pf_max(int n1, int n2);
 /*
 **	pf_apply_flag.c
 */
-char		*apply_flag(char *c_arg, t_f_info f_info);
+char		*apply_flag(char *c_arg, t_f_info f_info, t_info info);
 char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info);
 
 /*
@@ -67,13 +69,13 @@ t_f_info w0_p1(t_f_info ret, char *flag);
 t_f_info w1(t_f_info ret, char *flag);
 t_f_info wc_process1(t_f_info *ret, va_list ap, int **is_wc_width);
 t_f_info wc_process2(t_f_info *ret, va_list ap, int **is_wc_precision);
-t_f_info make_f_info(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
+t_f_info make_f_info(t_info info, va_list ap); //, int *is_wc_width, int *is_wc_precision);
 
 /*
 **	pf_make_info_utils.c
 */
-int make_precision(char *flag);
-int make_width(char *flag);
+int make_precision(t_info *info);
+int make_width(t_info *info);
 int	is_spec(const char c);
 int	is_flag(const char c);
 
@@ -118,5 +120,6 @@ int pf_min(int n1, int n2);
 char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size);
 t_f_info make_f_info_s(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
 char	*dec_to_hex_p(size_t dec, char spec);
+int is_contain(char *str, char c);
 
 #endif

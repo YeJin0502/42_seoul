@@ -323,6 +323,7 @@ int main()
 	// ft_printf("%p\n", NULL);
 	// printf("%p\n", NULL);
 	// ft_printf("%d%0d%d%d%d%d\n",a01,a02,a03,a04,a05,a06);
+	// ft_printf("%d%d%d", a01,a02,a03);
 	// printf("%d\n", ft_printf("%3.6s", "\0aa"));
 	// printf("%d\n",printf("%3.6s", "\0aa"));
 
@@ -340,6 +341,38 @@ int main()
 	// printf("%d", printf("%3.6s", "\0aaaa"));
 
 	// 722
-	ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
-	printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+	// ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+	// printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+
+	// 32 코드 구조 수정해서 처음부터 오류잡는다.. ㅠㅠ
+	// ft_printf("[%.s]", "hello");
+	// printf("(%.s)", "hello");
+
+	// 30
+	// ft_printf("%.7s", "hello");
+	// printf("%.7s\n", "hello");
+
+	// 31
+	// ft_printf("%.3s", "hello");
+	// printf("%.3s\n", "hello");
+
+	// 33
+	// ft_printf("%.0s", "hello");
+	// printf("%.0s\n", "hello");
+
+	// 39
+	// ft_printf("[%7.5s]\n", "bombastic");
+	// printf("[%7.5s]\n", "bombastic");
+
+	// 79
+	// ft_printf("%.03s", NULL);
+	// printf("%.03s", NULL);
+	
+	// 85
+	// ft_printf("[%3.s]", "hi low");
+	// printf("[%3.s]", "hi low");
+
+	// 208
+	// ft_printf("[%.0i]", 0);
+	// printf("[%.0i]", 0);
 }
