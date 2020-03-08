@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 20:14:17 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 20:27:25 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 int pf_min(int n1, int n2);
 char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size);
 t_f_info make_f_info_s(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
-// char	*dec_to_hex_p(size_t dec, char spec);
+char	*dec_to_hex_p(size_t dec, char spec);
 
 #endif

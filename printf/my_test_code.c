@@ -305,6 +305,26 @@ int main()
 	// ft_printf("[%.6i]\n", -3);
 	// printf("[%.6i]\n", -3); // 와 이 두개가 달라... 진짜 문제 지옥이다
 
-	ft_printf("[this %x number]", 0);
-	printf("[this %x number]", 0);
+	int a01 = 123;
+	int a02 = 23;
+	int a03 = 1;
+	int a04 = 13543;
+	int a05 = 11254;
+	int a06 = 2345;
+	int a07 = 765;
+	int a08 = 786;
+	int a09 = 78;
+	int a10 = 134;
+	int a11 = 534;
+	int a12 = 1232;
+
+	// char *str = "hi \0 asdfasdf";
+	// printf("")
+	// ft_printf("%p\n", NULL);
+	// printf("%p\n", NULL);
+	// ft_printf("%d%0d%d%d%d%d\n",a01,a02,a03,a04,a05,a06);
+	ft_printf("%s%s%s", "1", "2", "3's a charm");
+	printf("%s%s%s", "1", "2", "3's a charm");
+	// ft_printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
+	// printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 }

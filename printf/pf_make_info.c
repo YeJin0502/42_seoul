@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 03:17:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 23:27:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char **make_flags(t_list *spec_adr, int count_s)
 	char **ret;
 	int i;
 
-	if (!(ret = (char **)malloc(count_s)))
+	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
 		return 0;
 	i = 0;
 	int len;
@@ -99,6 +99,7 @@ t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 	t_info	*ret;
 	char	*specs;
 	char	**flags;
+	
 	if (!(specs = make_specs(spec_adr, count_s)))
 		return (0);
 	if (!(flags = make_flags(spec_adr, count_s)))

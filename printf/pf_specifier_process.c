@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 20:17:08 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 22:35:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ int	p_process(va_list ap, t_info info)
 	is_precision_wc = 0;
 	info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, void *);
-	if (is_width_wc == 1 || is_precision_wc == 1)
+	if (is_width_wc == 1 || is_precision_wc == 1) // 이 지저분한 부분은... 나중에 고칠수 있지 않을까?
 		info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	if (arg == 0)
 		c_arg = ft_strdup("(nil)");
 	else
-		c_arg = ft_strjoin("0x", dec_to_hex((unsigned int)arg, info.spec)); // 이런거 수정하면 줄일수있을듯
+		c_arg = ft_strjoin("0x", dec_to_hex_p((size_t)arg, info.spec)); // 이런거 수정하면 줄일수있을듯
 	if (*(info.flag) != '\0')
 		c_arg = apply_flag(c_arg, info.f_info);
 	c_arg_size = (int)ft_strlen(c_arg);

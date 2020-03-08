@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 18:59:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 22:36:32 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int ft_printf(const char *format, ...)
 
 	spec_adr = count_spec(format);
 	count_s = ft_lstsize(spec_adr);
+
 	if (!count_s)
 	{
 		ret = 0;
