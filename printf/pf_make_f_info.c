@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 06:28:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 06:49:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ t_f_info make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 
 	ret.minus = 0;
 	ret.zero = 0;
-
+	ret.prec_nega = 0;
+	ret.width_nega = 0;
 	// if (*is_wc_width == 0 && *is_wc_precision == 0)
 	// {
 	// 	if ((ret.width = make_width(&info)) == -1)
@@ -125,12 +126,14 @@ t_f_info make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 		ret.precision = va_arg(ap, int); // 바로 될까?
 	if (ret.width < 0)
 	{
-		ret.minus = 1; // 이거...있어야하지않을까? 일단 해놓음.
+		ret.minus = 1;
+		ret.width_nega = 1; // 이거...있어야하지않을까? 일단 해놓음.
 		ret.width = ret.width * -1;
 	}
 	if (ret.precision < 0)
 	{
-		ret.minus = 1; // 이거...있어야하지않을까? 일단 해놓음.
+		ret.minus = 1; // 이거는 확인해봐야
+		ret.prec_nega = 1; // 이거...있어야하지않을까? 일단 해놓음.
 		ret.precision = ret.precision * -1;
 	}
 	if (ret.width == 0 && ret.precision == 0) // %-0d 폭x 정밀도x

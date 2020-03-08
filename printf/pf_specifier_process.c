@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 06:27:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 06:35:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	c_process(va_list ap, t_info info)
 	// if (is_width_wc == 1 || is_precision_wc == 1)
 		// info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	c_arg = (char *)malloc(2);
-	c_arg[0] = arg;
+	if (arg != 0) // 이렇게해볼까
+		c_arg[0] = arg; // 457~459은 어떻게하냐
 	c_arg[1] = '\0';
-	if (c_arg[0] == 0) // 457~459 때문에 넣었는데, 어떻게 고쳐야하지?
-		c_arg = "";
 	if (*(info.flag) != '\0')
 		c_arg = apply_flag(c_arg, info.f_info, info);
 	if (c_arg == NULL) // 아마 다 추가하고, free도 해야할 듯.

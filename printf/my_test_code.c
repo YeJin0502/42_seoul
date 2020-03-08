@@ -375,4 +375,11 @@ int main()
 	// 208
 	// ft_printf("[%.0i]", 0);
 	// printf("[%.0i]", 0);
+
+	// 739
+	// ft_printf("[%.*s]", -3, "hello");
+	// printf("[%.*s]", -3, "hello");
+
+	// 코드 고치고 오류
+	ft_printf("%0*i", -7, -54);
 }

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 06:14:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 07:00:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,13 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 	int c_arg_size;
 	int ret_size; // 와 음수 0옵션 고려하려면 또 고쳐야하네.
 
-	if (f_info.precision > 0)
+
+	if (f_info.precision != 0 || f_info.minus == 1)
 		f_info.zero = 0;
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	if (f_info.prec_nega == 1)
+		f_info.precision = 0;
 	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == 0 &&
-		is_contain(info.flag, '.') == 1)
+		is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0)
 		c_arg = ft_strdup("");
 	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
 		return (c_arg);
@@ -132,7 +134,7 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
 	}
 	else
-		f_info.negative = 0; // 안하면 쓰레기값 있나?	
+		f_info.negative = 0; // 안하면 쓰레기값 있나?
 	c_arg_size = ft_strlen(c_arg);
 	if (f_info.width < f_info.precision && f_info.negative == 1)
 		f_info.precision++;
@@ -144,6 +146,7 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';
+	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	// printf("(%d)\n", ret_size);
 	if (f_info.width <= f_info.precision) // && f_info.width)
 		return (p_bigger_then_w(ret, &c_arg, f_info, c_arg_size));
@@ -223,14 +226,16 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 
 	// printf("!%s!\n", c_arg);
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	if (f_info.prec_nega == 1)
+		f_info.precision = 0;
 	f_info.zero = 0;
 	if (c_arg == 0 || c_arg[0] == '\0') // 오른쪽 추가해서 113 해결함
 		c_arg = ft_strdup("");
 	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)
 		c_arg = ft_strdup("");
-	else if (is_contain(info.flag, '.') == 1 && !f_info.width)
+	else if (is_contain(info.flag, '.') == 1 && !f_info.width && f_info.prec_nega == 0)
 		return(c_arg = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
-	else if (is_contain(info.flag, '.') == 1)
+	else if (is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0) // 와 지옥이다.. 정리 필요
 		c_arg = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg)));
 	else if (f_info.width == 0 && f_info.precision == 0)
 		return (c_arg); // 이거는 여기 들어오기전에 검사해도 될듯. 그냥 f_info == 0은 안되겠지?
