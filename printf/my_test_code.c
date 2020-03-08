@@ -305,6 +305,6 @@ int main()
 	// ft_printf("[%.6i]\n", -3);
 	// printf("[%.6i]\n", -3); // 와 이 두개가 달라... 진짜 문제 지옥이다
 
-	ft_printf("%3.7i", -2375);
-	printf("%3.7i", -2375);
+	ft_printf("[this %x number]", 0);
+	printf("[this %x number]", 0);
 }
