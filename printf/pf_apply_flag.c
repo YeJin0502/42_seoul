@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 20:08:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 04:48:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	f_info.zero = 0;
-	if (c_arg == 0) // 이걸까..?
+	if (c_arg == 0 || c_arg[0] == '\0') // 오른쪽 추가해서 113 해결함
 		c_arg = ft_strdup("");
 	if (f_info.width == 0 && f_info.precision == 0)
 		return (c_arg); // 이거는 여기 들어오기전에 검사해도 될듯. 그냥 f_info == 0은 안되겠지?
@@ -252,7 +252,6 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 		return (ft_substr(c_arg, 0, f_info.precision));
 	else if (f_info.width && !f_info.precision && c_arg_size > f_info.width)
 		return (c_arg);
-	// else if 
 	ret_size = pf_max(f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);

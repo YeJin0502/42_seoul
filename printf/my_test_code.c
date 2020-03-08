@@ -323,8 +323,23 @@ int main()
 	// ft_printf("%p\n", NULL);
 	// printf("%p\n", NULL);
 	// ft_printf("%d%0d%d%d%d%d\n",a01,a02,a03,a04,a05,a06);
-	ft_printf("%%d 0000042 == |%d|\n", 0000042);
-	printf("%%d 0000042 == |%d|\n", 0000042);
+	// printf("%d\n", ft_printf("%3.6s", "\0aa"));
+	// printf("%d\n",printf("%3.6s", "\0aa"));
+
+	// ft_printf("hello, %s.", NULL);
+	// printf("hello, %s.", NULL);
+
+	// printf("%d\n", ft_printf("%-5c", '\0'));
+	// printf("%d\n", printf("%-5c", '\0'));
+	
 	// ft_printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 	// printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
+
+	// 113
+	// printf("%d", ft_printf("%3.6s", "\0aaaa"));
+	// printf("%d", printf("%3.6s", "\0aaaa"));
+
+	// 722
+	ft_printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
+	printf("%%-*.3s LYDI == |%-*.3s|\n", 5, "LYDI");
 }

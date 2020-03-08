@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 05:42:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 04:47:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_f_info make_f_info(t_info info, va_list ap, int *is_wc_width, int *is_wc_preci
 	{
 		if ((ret.width = make_width(info.flag)) == -1)
 			wc_process1(&ret, ap, &is_wc_width);
-		else if ((ret.precision = make_precision(info.flag)) == -1)
+		if ((ret.precision = make_precision(info.flag)) == -1) //
 			wc_process2(&ret, ap, &is_wc_precision);
 		if (*is_wc_width == 1 || *is_wc_width == 1)
 			return (ret);

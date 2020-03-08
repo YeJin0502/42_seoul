@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 04:01:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 04:41:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*count_spec(const char *fmt)
 	ret = 0;
 	while (*fmt)
 	{
-		if (*fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1))
+		if (*(fmt - 1) != '%' && *fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1))
 		{
 			fmt++;
 			while (*fmt && (is_spec(*fmt) == 0)) // flag 유효성 검사

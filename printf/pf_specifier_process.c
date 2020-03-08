@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 22:35:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 04:29:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	c_process(va_list ap, t_info info)
 	if (is_width_wc == 1 || is_precision_wc == 1)
 		info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	c_arg = (char *)malloc(2);
+	// if (arg != 0) // 457~459 때문에 넣었는데, 어떻게 고쳐야하지?
 	c_arg[0] = arg;
 	c_arg[1] = '\0';
 	if (*(info.flag) != '\0')
@@ -38,6 +39,8 @@ int	c_process(va_list ap, t_info info)
 	c_arg_size = (int)ft_strlen(c_arg);
 	write(1, c_arg, c_arg_size);
 	free(c_arg);
+	// if (c_arg[0] == 0)
+		// c_arg_size++; // 
 	return (c_arg_size);
 }
 ///
@@ -56,10 +59,13 @@ int	s_process(va_list ap, t_info info)
 	info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
 	arg = va_arg(ap, char *);
 	if (arg == 0)
-		arg = "(null)"; // null 개념 약해서 문자열로 줘버리는거 오반데..ㅠㅠ 일단은..나중에고치자
+		c_arg = ft_strdup("(null)"); // null 개념 약해서 문자열로 줘버리는거 오반데..ㅠㅠ 일단은..나중에고치자
+	else if (arg[0] == '\0')// && *(arg + 1) != '\0') // 여기 수정중...
+		c_arg = ft_strdup("\0");
+	else
+		c_arg = ft_strdup(arg); // 여기 수정해봣음... 113번 고쳐볼라고..
 	if (is_width_wc == 1 || is_precision_wc == 1)
 		info.f_info = make_f_info(info, ap, &is_width_wc, &is_precision_wc);
-	c_arg = ft_strdup(arg);
 	// if (ft_isascii((int)c_arg) == 1)
 	// 	return (0);
 	if (*(info.flag) != '\0')
