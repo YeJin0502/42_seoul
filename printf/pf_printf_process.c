@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 19:28:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 04:01:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	i = 0;
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) != '%' && i < count_s) // 아마 %% 때문에 수정해야 할듯
+		if (*(format - 1) != '%' && *format == '%' && *(format + 1) != '%' && i < count_s) // 아마 %% 때문에 수정해야 할듯?
 			format = meet_specifier(&ret, format, *(info + i++), ap); // 1.ret 올려주고 2.format을 spec 자리로 이동.
-		else
+		else if (!(*(format - 1) != '%' && *format == '%')) // 맞나..?
 		{
 			write(1, format, 1);
 			ret++;

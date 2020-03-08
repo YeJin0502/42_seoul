@@ -323,8 +323,8 @@ int main()
 	// ft_printf("%p\n", NULL);
 	// printf("%p\n", NULL);
 	// ft_printf("%d%0d%d%d%d%d\n",a01,a02,a03,a04,a05,a06);
-	ft_printf("%s%s%s", "1", "2", "3's a charm");
-	printf("%s%s%s", "1", "2", "3's a charm");
+	ft_printf("%%d 0000042 == |%d|\n", 0000042);
+	printf("%%d 0000042 == |%d|\n", 0000042);
 	// ft_printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 	// printf("%p%p%p%p%p%p%p%p%p%p%p%p\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 }
