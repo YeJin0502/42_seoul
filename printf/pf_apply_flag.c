@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 10:06:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 19:50:56 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 		while (i < (f_info.width - f_info.precision))
 			ret[i++] = ' ';
 		if (f_info.negative == 1) //
+		{
 			ret[--i] = '-';
-		while (++i < (f_info.width - c_arg_size))
-			ret[i] = '0'; // 이거 갑자기 왜안되냐?
+			i++;
+		}
+		while (i < (f_info.width - c_arg_size))
+			ret[i++] = '0'; // 이거 갑자기 왜안되냐?
 		while (i < f_info.width)
 			ret[i++] = (*c_arg)[j++];
 	}
@@ -55,7 +58,7 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 	{
 		if (f_info.negative == 1)
 			ret[i++] = '-';
-		while (i < f_info.precision - c_arg_size)
+		while (i < f_info.precision - c_arg_size + f_info.negative) // 맞나?
 			ret[i++] = '0';
 		while (j < c_arg_size)
 			ret[i++] = (*c_arg)[j++];
@@ -117,6 +120,12 @@ char *apply_flag(char *c_arg, t_f_info f_info)
 
 	if (f_info.precision > 0)
 		f_info.zero = 0;
+	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
+	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == -2)
+	{
+		// printf("zz\n");
+		c_arg = ft_strdup("");
+	}
 	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
 		return (c_arg);
 	if (c_arg[0] == '-')
@@ -124,6 +133,8 @@ char *apply_flag(char *c_arg, t_f_info f_info)
 		f_info.negative = 1; // 초기화 안하고 여기서 처음 쓰는건데 잘 될까?
 		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
 	}
+	else
+		f_info.negative = 0; // 안하면 쓰레기값 있나?	
 	c_arg_size = ft_strlen(c_arg);
 	if (f_info.width < f_info.precision && f_info.negative == 1)
 		f_info.precision++;
@@ -132,7 +143,6 @@ char *apply_flag(char *c_arg, t_f_info f_info)
 		f_info.width = 0;
 	else if (c_arg_size > f_info.precision)
 		f_info.precision = 0;
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';

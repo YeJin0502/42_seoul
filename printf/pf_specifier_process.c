@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 05:55:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 19:52:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int	uxX_process(va_list ap, t_info info)
 		c_arg = ft_itoa_u(arg);
 	else
 		c_arg = dec_to_hex(arg, info.spec);
+	// printf("!%s!\n", c_arg);
 	if (*(info.flag) != '\0')
 		c_arg = apply_flag(c_arg, info.f_info);	
 	c_arg_size = (int)ft_strlen(c_arg);

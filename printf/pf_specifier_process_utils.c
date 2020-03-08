@@ -6,17 +6,21 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 10:33:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 19:53:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+#include <stdio.h>
 
 static unsigned int	n_size_u(unsigned int n)
 {
 	int	size;
 	
 	size = 0;
+	if (n == 0)
+		return (1); // 추가
 	while (n != 0)
 	{
 		n = n / 10;
@@ -31,6 +35,7 @@ char	*ft_itoa_u(unsigned int n)
 	char	*ret;
 
 	size = n_size_u(n);
+	// printf("!%d!\n", n_size_u(n));
 	if (!(ret = (char *)malloc(size + 1)))
 		return 0;
 	ret[size] = '\0';
