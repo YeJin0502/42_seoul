@@ -381,5 +381,8 @@ int main()
 	// printf("[%.*s]", -3, "hello");
 
 	// 코드 고치고 오류
-	ft_printf("%0*i", -7, -54);
+	//ft_printf("%0*i", -7, -54);
+	
+	ft_printf("[%*s]", -32, "abc");
+	printf("[%*s]", -32, "abc");
 }

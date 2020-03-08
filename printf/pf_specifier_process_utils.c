@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 20:27:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:37:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_itoa_u(unsigned int n)
 	char	*ret;
 
 	size = n_size_u(n);
-	// printf("!%d!\n", n_size_u(n));
 	if (!(ret = (char *)malloc(size + 1)))
 		return 0;
 	ret[size] = '\0';
@@ -47,41 +46,11 @@ char	*ft_itoa_u(unsigned int n)
 	return (ret);
 }
 
-char	*dec_to_hex(unsigned int dec, char spec)
+char	*dec_to_hex(size_t dec, char spec)
 {
-	int				hex_len;
-	unsigned int	tmp;
-	char			*hex;
-
-	tmp = dec;
-	hex_len = 0;
-	while (tmp)
-	{
-		tmp = tmp / 16;
-		hex_len++;
-	}
-	if (!(hex = (char *)malloc(hex_len + 1)))
-		return (0);
-	hex[hex_len] = '\0';
-	while (--hex_len >= 0)
-	{
-		if (dec % 16 <= 9)
-			hex[hex_len] = dec % 16 + '0';
-		else if (spec == 'x' || spec == 'p')
-			hex[hex_len] = dec % 16 + 'a' - 10;
-		else if (spec == 'X')
-			hex[hex_len] = dec % 16 + 'A' - 10;
-		dec = dec / 16;
-	}
-	return (hex);
-}
-
-
-char	*dec_to_hex_p(size_t dec, char spec)
-{
-	int				hex_len;
+	int		hex_len;
 	size_t	tmp;
-	char			*hex;
+	char	*hex;
 
 	tmp = dec;
 	hex_len = 0;

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 06:42:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:30:08 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ typedef struct s_f_info
 	int zero;
 	int width;
 	int precision;
-	int negative;
+	int c_arg_nega;
 	int width_nega;
 	int prec_nega;
 }	t_f_info;
 
 typedef struct	s_info
 {
-	int i;
 	char *spec_adr;
 	char spec;
 	char *flag;
@@ -93,7 +92,7 @@ t_info		*make_info(char *specs, char **flags);
 /*
 **	pf_printf_process.c
 */
-t_list	*count_spec(const char *fmt); // 이거 대폭 수정 필요!
+t_list	*find_spec_adr(const char *fmt); // 이거 대폭 수정 필요!
 int is_valid(const char c, t_check *check);
 
 int			print_and_count(const char *format, int count_s, t_info *info, va_list ap);
@@ -104,7 +103,7 @@ const char *meet_specifier(int *ret, const char *format, t_info info, va_list ap
 **	pf_specifier_process_utils.c
 */
 char		*ft_itoa_u(unsigned int n);
-char		*dec_to_hex(unsigned int dex, char spec);
+char		*dec_to_hex(size_t dex, char spec);
 
 /*
 **	pf_specifier_process.c
@@ -123,5 +122,7 @@ char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 t_f_info make_f_info_s(t_info info, va_list ap, int *is_wc_width, int *is_wc_precision);
 char	*dec_to_hex_p(size_t dec, char spec);
 int is_contain(char *str, char c);
+int no_spec_print(const char *format);
+int	width_digit_count(char *flag, int *i, int *start);
 
 #endif

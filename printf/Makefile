@@ -13,6 +13,7 @@ SRCS = ft_printf.c \
 		pf_printf_process.c \
 		pf_specifier_process_utils.c \
 		pf_specifier_process.c \
+		pf_find_spec_adr.c
 		
 CC = clang
 CFLAGS = -g3 -Wall -Wextra -Werror

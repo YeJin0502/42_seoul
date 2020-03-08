@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 07:00:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:37:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char *p_bigger_then_w(char *ret, char **c_arg, t_f_info f_info, int c_arg
 
 	i = 0;
 	j = 0;
-	if (f_info.negative == 1)
+	if (f_info.c_arg_nega == 1)
 		ret[i++] = '-';
 	while (i < (f_info.precision - c_arg_size))
 		ret[i++] = '0';
@@ -44,7 +44,7 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 		// printf("(%d,%d,%d)\n", i, f_info.precision, c_arg_size);
 		while (i < (f_info.width - f_info.precision))
 			ret[i++] = ' ';
-		if (f_info.negative == 1) //
+		if (f_info.c_arg_nega == 1) //
 		{
 			ret[--i] = '-';
 			i++;
@@ -56,9 +56,9 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 	}
 	else if (f_info.minus == 1)
 	{
-		if (f_info.negative == 1)
+		if (f_info.c_arg_nega == 1)
 			ret[i++] = '-';
-		while (i < f_info.precision - c_arg_size + f_info.negative) // 맞나?
+		while (i < f_info.precision - c_arg_size + f_info.c_arg_nega) // 맞나?
 			ret[i++] = '0';
 		while (j < c_arg_size)
 			ret[i++] = (*c_arg)[j++];
@@ -78,7 +78,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	j = 0;
 	if (f_info.minus == 1 && f_info.zero == 0) // 수정할수있을수도
 	{
-		if (f_info.negative == 1)
+		if (f_info.c_arg_nega == 1)
 			ret[i++] = '-';
 		while (j < c_arg_size)
 			ret[i++] = (*c_arg)[j++];
@@ -87,7 +87,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	}
 	else if (f_info.minus == 0 && f_info.zero == 1)
 	{
-		if (f_info.negative == 1)
+		if (f_info.c_arg_nega == 1)
 			ret[i++] = '-';
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = '0';
@@ -99,7 +99,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 		// printf("(%d,%d)\n", f_info.width, c_arg_size);
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = ' ';
-		if (f_info.negative == 1)
+		if (f_info.c_arg_nega == 1)
 		{
 			// --i; // 얘는 왜 안써줘도 되지..? 뭔차이야
 			ret[--i] ='-';
@@ -130,13 +130,13 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 		return (c_arg);
 	if (c_arg[0] == '-')
 	{
-		f_info.negative = 1; // 초기화 안하고 여기서 처음 쓰는건데 잘 될까?
+		f_info.c_arg_nega = 1; // 초기화 안하고 여기서 처음 쓰는건데 잘 될까?
 		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
 	}
 	else
-		f_info.negative = 0; // 안하면 쓰레기값 있나?
+		f_info.c_arg_nega = 0; // 안하면 쓰레기값 있나?
 	c_arg_size = ft_strlen(c_arg);
-	if (f_info.width < f_info.precision && f_info.negative == 1)
+	if (f_info.width < f_info.precision && f_info.c_arg_nega == 1)
 		f_info.precision++;
 	ret_size = pf_max(f_info.width, f_info.precision);
 	if (c_arg_size > f_info.width)
@@ -225,10 +225,10 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	int ret_size;
 
 	// printf("!%s!\n", c_arg);
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	if (f_info.prec_nega == 1)
 		f_info.precision = 0;
 	f_info.zero = 0;
+	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	if (c_arg == 0 || c_arg[0] == '\0') // 오른쪽 추가해서 113 해결함
 		c_arg = ft_strdup("");
 	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)

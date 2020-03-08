@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 04:41:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 07:50:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,25 @@
 
 #include <stdio.h>
 
-t_list	*count_spec(const char *fmt)
+int no_spec_print(const char *format)
 {
-	t_list *ret;
-	t_check check;
-	int	count;
+	int ret;
 
-	ft_memset(&check, 0, sizeof(t_check));
-	count = 0;
 	ret = 0;
-	while (*fmt)
+	while (*format)
 	{
-		if (*(fmt - 1) != '%' && *fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1))
+		if (*format == '%')
 		{
-			fmt++;
-			while (*fmt && (is_spec(*fmt) == 0)) // flag 유효성 검사
-			{
-				if (is_valid(*fmt, &check) == 0)
-					break;
-				// if (*fmt == '0' && *(fmt + 1) == '0') // 
-				// 	break;
-				fmt++;
-			}
-			if (is_spec(*fmt) == 1 && check.wrong == 0)
-			{
-				ft_lstadd_back(&ret, ft_lstnew((void *)fmt));
-				count++;
-			}
-		ft_memset(&check, 0, sizeof(t_check));
+			format++;
+			while (*format != '%' && *format)
+				format++;
 		}
-		fmt++;
+		write(1, format, 1);
+		ret++;
+		format++;
 	}
 	return (ret);
 }
-
-int is_valid(const char c, t_check *check)
-{
-	if ('1' <= c && c <= '9' && (*check).num == 0)
-		(*check).num = 1;
-	else if (c == '*' && (*check).dot == 0 && (*check).w_wc == 0)
-		(*check).w_wc = 1;
-	else if (c == '.' && (*check).dot == 0)
-		(*check).dot = 1;
-	else if (c == '*' && (*check).dot == 1 && (*check).p_wc == 0)
-		(*check).p_wc = 1;
-	else if ('1' <= c && c <= '9' && (*check).w_wc == 1 && (*check).wrong++)
-		return (0);
-	else if ('1' <= c && c <= '9' && (*check).p_wc == 1 && (*check).wrong++)
-		return (0);
-	else if (c == '-' && ((*check).num == 1	|| (*check).w_wc == 1 || (*check).dot == 1
-			|| (*check).p_wc == 1) && (*check).wrong++)
-		return (0);
-	else if (c == '.' && (*check).dot == 1 && (*check).wrong++)
-		return (0);
-	else if (c == '*' && ((*check).num == 1 || (*check).w_wc == 1 || (*check).p_wc == 1)
-			&& (*check).wrong++)
-		return (0);
-	else if (is_flag(c) == 0)
-		return (0);
-	return (1);
-} // 계속 여기에 추가될듯... 길어지면 위에 체크로 바꾸는거 분리하면 될듯.
 
 int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 {
@@ -84,9 +43,9 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	i = 0;
 	while (*format)
 	{
-		if (*(format - 1) != '%' && *format == '%' && *(format + 1) != '%' && i < count_s) // 아마 %% 때문에 수정해야 할듯?
-			format = meet_specifier(&ret, format, *(info + i++), ap); // 1.ret 올려주고 2.format을 spec 자리로 이동.
-		else if (!(*(format - 1) != '%' && *format == '%')) // 맞나..?
+		if (*(format - 1) != '%' && *format == '%' && *(format + 1) != '%' && i < count_s)
+			format = meet_specifier(&ret, format, *(info + i++), ap);
+		else if (!(*(format - 1) != '%' && *format == '%'))
 		{
 			write(1, format, 1);
 			ret++;
@@ -106,7 +65,7 @@ static const char	*skip_flag(const char *format, char *flag)
 		flag++;
 	}
 	return (format);
-} // 이거 libft에 비슷한 함수 있지 않나?
+} // 이건 분리할 필요가 없어보이는데...
 
 const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap)
 {
@@ -123,6 +82,6 @@ const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap
 	else if (info.spec == 'u' || info.spec == 'x' || info.spec == 'X')
 		*ret = *ret + uxX_process(ap, info);
 	else
-		return 0;
+		return (0);
 	return (format);
 }
