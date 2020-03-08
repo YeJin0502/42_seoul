@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/08 09:29:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/08 09:43:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 	j = 0;
 	if (f_info.minus == 0)
 	{
+		// printf("(%d,%d,%d)\n", i, f_info.precision, c_arg_size);
 		while (i < (f_info.width - f_info.precision))
 			ret[i++] = ' ';
 		if (f_info.negative == 1) //
@@ -53,7 +54,7 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 	else if (f_info.minus == 1)
 	{
 		if (f_info.negative == 1)
-			ret[i] = '-';
+			ret[i++] = '-';
 		while (i < f_info.precision - c_arg_size)
 			ret[i++] = '0';
 		while (j < c_arg_size)
@@ -74,6 +75,8 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	j = 0;
 	if (f_info.minus == 1 && f_info.zero == 0) // 수정할수있을수도
 	{
+		if (f_info.negative == 1)
+			ret[i++] = '-';
 		while (i < c_arg_size)
 			ret[i++] = (*c_arg)[j++];
 		while (i < f_info.width)
@@ -81,8 +84,8 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	}
 	else if (f_info.minus == 0 && f_info.zero == 1)
 	{
-		// if (f_info.negative == 1) // 
-		// 	ret[i] = '-';
+		if (f_info.negative == 1)
+			ret[i++] = '-';
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = '0';
 		while (i < f_info.width)
@@ -92,6 +95,10 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 	{
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = ' ';
+		--i;
+		if (f_info.negative == 1)
+			ret[i] ='-';
+		i++;
 		while (i < f_info.width)
 			ret[i++] = (*c_arg)[j++];
 	}
@@ -105,16 +112,16 @@ char *apply_flag(char *c_arg, t_f_info f_info)
 	int c_arg_size;
 	int ret_size; // 와 음수 0옵션 고려하려면 또 고쳐야하네.
 
+	if (f_info.precision > 0)
+		f_info.zero = 0;
+	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
+		return (c_arg);
 	if (c_arg[0] == '-')
 	{
 		f_info.negative = 1; // 초기화 안하고 여기서 처음 쓰는건데 잘 될까?
 		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
 	}
-	if (f_info.precision > 0)
-		f_info.zero = 0;
 	c_arg_size = ft_strlen(c_arg);
-	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
-		return (c_arg);
 	ret_size = pf_max(f_info.width, f_info.precision);
 	if (c_arg_size > f_info.width)
 		f_info.width = 0;

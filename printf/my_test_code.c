@@ -300,7 +300,7 @@ int main()
 	ft_printf("[%08.5i]\n", -34);
 	printf("[%08.5i]\n", -34);
 
-	ft_printf("[%08.3i]\n", 8375);
-	printf("[%08.3i]\n", 8375);
+	ft_printf("[%4i]\n", -8375);
+	printf("[%04i]\n", -8375);
 }
 
