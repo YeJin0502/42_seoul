@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 09:03:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 09:53:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,46 +116,32 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 {
 	char *ret;
 	int c_arg_size;
-	int ret_size; // 와 음수 0옵션 고려하려면 또 고쳐야하네.
+	int ret_size;
 
-
-	if (f_info.precision != 0 || f_info.minus == 1)
-		f_info.zero = 0;
-	if (f_info.prec_nega == 1)
-		f_info.precision = 0;
 	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == 0 &&
 		is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0)
 		c_arg = ft_strdup("");
 	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
 		return (c_arg);
-	if (c_arg[0] == '-')
-	{
-		f_info.c_arg_nega = 1; // 초기화 안하고 여기서 처음 쓰는건데 잘 될까?
+	if (c_arg[0] == '-' && ++f_info.c_arg_nega)
 		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
-	}
-	else
-		f_info.c_arg_nega = 0; // 안하면 쓰레기값 있나?
 	c_arg_size = ft_strlen(c_arg);
 	if (f_info.width < f_info.precision && f_info.c_arg_nega == 1)
 		f_info.precision++;
 	ret_size = pf_max(f_info.width, f_info.precision);
-	if (c_arg_size > f_info.width)
-		f_info.width = 0;
-	else if (c_arg_size > f_info.precision)
-		f_info.precision = 0;
+	f_info.width = (c_arg_size > f_info.width) ? 0 : f_info.width;
+	f_info.precision = (c_arg_size > f_info.precision) ? 0 : f_info.precision;
+	if (f_info.width == 0 && f_info.precision == 0)
+		return (c_arg);
 	if (!(ret = (char *)malloc(ret_size + 1)))
-		return (0);
+		return (0); // 이런건 삼항으로 못줄이나? else가 없어서?
 	ret[ret_size] = '\0';
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
-	// printf("(%d)\n", ret_size);
-	if (f_info.width <= f_info.precision) // && f_info.width)
+	if (f_info.width <= f_info.precision)
 		return (p_bigger_then_w(ret, &c_arg, f_info, c_arg_size));
 	else if (f_info.width > f_info.precision && f_info.precision)
 		return (w_bigger_then_p(ret, &c_arg, f_info, c_arg_size));
 	else if (f_info.width)
 		return (w_exist(ret, &c_arg, f_info, c_arg_size));
-	if (f_info.width == 0 && f_info.precision == 0)
-		return (c_arg); //
 	free(c_arg);
 	return (ret);
 }
@@ -218,18 +204,15 @@ static char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_a
 }
 
 char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
-{ // 따로 만들면 spec 필요 없을수도 있겠다. 숫자들도 다 똑같으면... 거기도 spec 뺄수있음.
+{
 	char *ret;
 	int c_arg_size;
 	int ret_size;
 
-	// printf("!%s!\n", c_arg);
-	if (f_info.prec_nega == 1)
-		f_info.precision = 0;
 	f_info.zero = 0;
 	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
-	if (c_arg == 0 || c_arg[0] == '\0') // 오른쪽 추가해서 113 해결함
-		c_arg = ft_strdup("");
+	if (c_arg == 0 || c_arg[0] == '\0') // 삼항연산자 쓸수있지만 free해줘야해서...
+		c_arg = ft_strdup(""); // 일단 함수포인터 이용한 함수 짜기 전까진 놔둠.
 	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)
 		c_arg = ft_strdup("");
 	else if (is_contain(info.flag, '.') == 1 && !f_info.width && f_info.prec_nega == 0)
@@ -255,7 +238,7 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 		return (w_bigger_then_p_s(ret, &c_arg, f_info, c_arg_size));
 	else if (f_info.width)
 		return (w_exist(ret, &c_arg, f_info, c_arg_size));
-	free(c_arg);
+	free(c_arg); // 와 이건 못줄이겠는데.. 분리밖에 답이 없겠다.
 	return (ret);
 }
 

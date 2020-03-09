@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:52:35 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 09:28:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,8 @@ t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 	ft_memset(&ret, 0, sizeof(t_f_info)); // 이거 맞나?
 	ret.width = make_width(&info);
 	ret.precision = make_precision(&info);
-	if (info.width_star == 1)
-		ret.width = va_arg(ap, int);
-	if (info.prec_star == 1)
-		ret.precision = va_arg(ap, int);
+	ret.width = (info.width_star == 1) ? va_arg(ap, int) : ret.width;
+	ret.precision = (info.prec_star == 1) ? va_arg(ap, int) : ret.precision;
 	if (ret.width < 0 && ++ret.minus && ++ret.width_nega)
 		ret.width = ret.width * -1;
 	if (ret.precision < 0 && ++ret.minus && ++ret.prec_nega) // 여기에 minus++은 생각해봐야.
@@ -93,5 +91,7 @@ t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 		ret= w0_p1(ret, info.flag);
 	else if (ret.width != 0)
 		ret = w1(ret, info.flag);
+	ret.precision = (ret.prec_nega == 1) ? 0 : ret.precision;
+	ret.zero = (ret.precision != 0 || ret.minus == 1) ? 0 : ret.zero;
 	return (ret);
 }
