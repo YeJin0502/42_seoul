@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 09:44:25 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 02:17:09 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap);
 
 /*
-**	pf_specifier_process.c - 완료지만 여지 있음.
+**	pf_specifier_process.c - 완료
 */
 int			c_process(va_list ap , t_info info);
 int			s_process(va_list ap , t_info info);

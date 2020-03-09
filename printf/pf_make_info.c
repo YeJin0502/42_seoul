@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:50:10 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 01:58:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,23 @@ static t_info	*make_info(char *specs, char **flags)
 		ret[i].flag[ft_strlen(flags[i])] = '\0';
 		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));
 		ret[i].width_star = 0;
-		ret[i].prec_star = 0; // 여기서 해주는게 순서 맞겠지?
+		ret[i].prec_star = 0;
 		i++;
 	}
 	return (ret);
+}
+
+static void	lst_free(t_list **lst)
+{
+	t_list *tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		// del((*lst)->content);
+		free(*lst);
+		*lst = tmp;
+	}
 }
 
 t_info	*make_info_and_free(t_list *spec_adr, int count_s)
@@ -113,6 +126,9 @@ t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 			free(*(flags++));
 		return (0);
 	}
+	// ft_lstclear(&spec_adr, free); // 어떻게 쓰는거지..? 이렇게..?
+	// ft_lstiter(spec_adr, free); // 아 spec_adr 어떻게 프리해주냐.
+	lst_free(&spec_adr);
 	free(specs);
 	i = 0;
 	while (i < count_s)
@@ -120,3 +136,4 @@ t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 	free(flags);
 	return (ret);
 }
+

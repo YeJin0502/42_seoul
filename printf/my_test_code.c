@@ -103,7 +103,7 @@ int main()
 }
 */
 
-/*
+
 int main()
 {
 	// // d 테스트 - 누수 체크함
@@ -122,38 +122,38 @@ int main()
 	// ft_printf("7. [%-5.3d]\n", 13); // [013  ]
 	// printf("7. [%-5.3d]\n", 13); // [013  ]
 	// ft_printf("8. [%-5.3d]\n", 2147483648); // 오버플로우되고, 중단은 안되니 ok
-	// printf("8. [%-5.3d]\n", 2147483648); // 에러
+	// // printf("8. [%-5.3d]\n", 2147483648); // 에러
 	
 	// c 테스트 - 누수 체크함
 	// 에러가 떠도, 중단만 안되면 되는듯? 결과 안보는거같기도..
-	ft_printf("1. [%c]\n", 'a');
-	printf("1. [%c]\n", 'a');
-	ft_printf("2. [%5c]\n", 'a');
-	printf("2. [%5c]\n", 'a');
-	ft_printf("3. [%05c]\n", 'a');
-	// printf("3. [%05c]\n", 'a'); // 에러: c에서는 0 안쓰임.
-	ft_printf("4. [%-5c]\n", 'a');
-	printf("4. [%-5c]\n", 'a');
-	ft_printf("5. [%5.3c]\n", 'a');
-	// printf("5. [%5.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
-	ft_printf("6. [%05.3c]\n", 'a');
-	// printf("6. [%05.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
+	// ft_printf("1. [%c]\n", 'a');
+	// printf("1. [%c]\n", 'a');
+	// ft_printf("2. [%5c]\n", 'a');
+	// printf("2. [%5c]\n", 'a');
+	// ft_printf("3. [%05c]\n", 'a');
+	// // printf("3. [%05c]\n", 'a'); // 에러: c에서는 0 안쓰임.
+	// ft_printf("4. [%-5c]\n", 'a');
+	// printf("4. [%-5c]\n", 'a');
+	// ft_printf("5. [%5.3c]\n", 'a');
+	// // printf("5. [%5.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
+	// ft_printf("6. [%05.3c]\n", 'a');
+	// // printf("6. [%05.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
 
 	// s 테스트 - 대충 완료
-	// ft_printf("1. [%s]\n", "hello");
-	// printf("1. [%s]\n", "hello");
-	// ft_printf("2. [%10s]\n", "hello");
-	// printf("2. [%10s]\n", "hello");
-	// ft_printf("3. [%010s]\n", "hello");
-	// // printf("3. [%010s]\n", "hello"); // 에러: s에서는 0 안쓰임.
-	// ft_printf("4. [%-10s]\n", "hello");
-	// printf("4. [%-10s]\n", "hello");
-	// ft_printf("5. [%10.7s]\n", "hello"); // 수정 필요 -> 완료
-	// printf("5. [%10.7s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 0 출력 안함.
-	// ft_printf("6. [%7.10s]\n", "hello"); // 수정 필요 -> 완료
-	// printf("6. [%7.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
-	// ft_printf("7. [%.10s]\n", "hello"); // 수정 필요 -> 완료
-	// printf("7. [%.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
+	ft_printf("1. [%s]\n", "hello");
+	printf("1. [%s]\n", "hello");
+	ft_printf("2. [%10s]\n", "hello");
+	printf("2. [%10s]\n", "hello");
+	ft_printf("3. [%010s]\n", "hello");
+	// printf("3. [%010s]\n", "hello"); // 에러: s에서는 0 안쓰임.
+	ft_printf("4. [%-10s]\n", "hello");
+	printf("4. [%-10s]\n", "hello");
+	ft_printf("5. [%10.7s]\n", "hello"); // 수정 필요 -> 완료
+	printf("5. [%10.7s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 0 출력 안함.
+	ft_printf("6. [%7.10s]\n", "hello"); // 수정 필요 -> 완료
+	printf("6. [%7.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
+	ft_printf("7. [%.10s]\n", "hello"); // 수정 필요 -> 완료
+	printf("7. [%.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
 
 	// // u 테스트 - 대충 완료
 	// ft_printf("1. [%u]\n", 13);
@@ -214,7 +214,7 @@ int main()
 	// ft_printf("%%\n");
 	// printf("%5.06d\n", 123);
 }
-*/
+
 
 // count_spec 테스트
 // int main()
@@ -271,6 +271,7 @@ int main()
 // 	}
 // }
 
+/*
 int main()
 {
 	// 문자열 테스트
@@ -386,3 +387,4 @@ int main()
 	ft_printf("[%*s]", -32, "abc");
 	printf("[%*s]", -32, "abc");
 }
+*/
