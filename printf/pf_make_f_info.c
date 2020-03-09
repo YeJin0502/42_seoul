@@ -6,14 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:48:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:08:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
-
 
 static int	make_precision(t_info *info)
 {
@@ -37,7 +34,7 @@ static int	make_precision(t_info *info)
 	return (ret);
 }
 
-static int	make_width(t_info *info)
+static int	make_width(t_info *info) // 이것도 위처럼 수정 여지 있지 않나? 대폭 줄일수 있을듯.
 {
 	int		i;
 	int		start;
@@ -61,11 +58,11 @@ static int	make_width(t_info *info)
 	return (ret);
 }
 
-t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_precision)
+t_f_info	make_f_info(t_info info, va_list ap)
 {
 	t_f_info	ret;
 
-	ft_memset(&ret, 0, sizeof(t_f_info)); // 이거 맞나?
+	ft_memset(&ret, 0, sizeof(t_f_info));
 	ret.width = make_width(&info);
 	ret.precision = make_precision(&info);
 	ret.width = (info.width_star == 1) ? va_arg(ap, int) : ret.width;

@@ -6,14 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 06:19:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:07:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-#include <stdio.h>
 
 static void	p_bigger_then_w(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {

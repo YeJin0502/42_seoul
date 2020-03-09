@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:04:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:07:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "libft/libft.h"
+
+#include <stdio.h>////// 나중에 빼야
 
 typedef struct	s_check
 {

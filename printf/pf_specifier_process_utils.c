@@ -6,13 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 06:51:18 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:08:56 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 static unsigned int	n_size_u(unsigned int n)
 {

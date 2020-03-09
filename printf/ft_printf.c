@@ -6,15 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:03:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:06:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-#include <stdio.h>
-
 
 int ft_printf(const char *format, ...)
 {

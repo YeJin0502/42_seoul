@@ -6,13 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:08:37 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:09:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 int	c_process(va_list ap, t_info info)
 {

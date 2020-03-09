@@ -6,13 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:02:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:08:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 int	no_spec_print(const char *format)
 {

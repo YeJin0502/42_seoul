@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:56:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:58:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:07:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	pf_max(int n1, int n2)
 {
-	// if (n1 && !n2)
-	// 	return (n1);
-	// if (!n1 && n2)
-	// 	return (n2); // 필요 없나? max에선 필요없고 min에선 필요하겟다
 	if (n1 >= n2)
 		return (n1);
 	else
@@ -26,10 +22,6 @@ int	pf_max(int n1, int n2)
 
 int	pf_min(int n1, int n2)
 {
-	// if (n1 && !n2)
-		// return (n1);
-	// if (!n1 && n2)
-		// return (n2);
 	if (n1 >= n2)
 		return (n2);
 	else

@@ -6,13 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:34:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:08:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 static char	*make_specs(t_list *spec_adr, int count_s)
 {
