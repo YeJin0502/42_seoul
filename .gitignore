@@ -15,3 +15,4 @@ get_next_line/*.txt
 
 # printf
 printf/*.txt
+!printf/results.txt
