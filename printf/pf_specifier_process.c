@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 02:25:16 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 02:54:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	s_process(va_list ap, t_info info)
 		c_arg_ret = apply_flag_s(c_arg, info.f_info, info);
 	else
 		c_arg_ret = ft_strdup(c_arg);
-	if (c_arg == 0)
+	if (c_arg_ret == 0)
 		return (0);
 	c_arg_size = (int)ft_strlen(c_arg_ret);
 	write(1, c_arg_ret, c_arg_size);

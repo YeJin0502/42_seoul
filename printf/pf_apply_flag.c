@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 02:17:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 02:57:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,39 +209,39 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	char *ret;
 	int c_arg_size;
 	int ret_size;
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 
+	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	f_info.zero = 0;
-	if (c_arg == 0 || c_arg[0] == '\0') // 삼항연산자 쓸수있지만 free해줘야해서...
-		c_arg_dup = ft_strdup(""); // 일단 함수포인터 이용한 함수 짜기 전까진 놔둠.
+	if (c_arg == 0 || c_arg[0] == '\0')
+		c_arg_dup = ft_strdup("");
 	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)
 		c_arg_dup = ft_strdup("");
 	else if (is_contain(info.flag, '.') == 1 && !f_info.width && f_info.prec_nega == 0)
-		return(ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
-	else if (is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0) // 와 지옥이다.. 정리 필요
+		return (ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
+	else if (is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0)
 		c_arg_dup = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg)));
 	else if (f_info.width == 0 && f_info.precision == 0)
-		return (c_arg_dup); // 이거는 여기 들어오기전에 검사해도 될듯. 그냥 f_info == 0은 안되겠지?
+		return (ft_strdup(c_arg));
 	else
-		c_arg_dup = ft_strdup(c_arg); // 하... 여긴 구조적으로 다 고쳐봐야...
+		c_arg_dup = ft_strdup(c_arg);
 	c_arg_size = ft_strlen(c_arg_dup);
 	if (f_info.precision && !f_info.width && c_arg_size <= f_info.precision)
-		return (c_arg);
+		return (c_arg_dup);
 	else if (f_info.precision && !f_info.width && c_arg_size > f_info.precision)
-		return (ft_substr(c_arg, 0, f_info.precision));
+		return (ft_substr(c_arg_dup, 0, f_info.precision));
 	else if (f_info.width && !f_info.precision && c_arg_size > f_info.width)
-		return (c_arg);
+		return (c_arg_dup);
 	ret_size = pf_max(f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';
-	if (f_info.width <= f_info.precision && f_info.width) //
-		return (p_bigger_then_w_s(ret, &c_arg, f_info, c_arg_size));
+	if (f_info.width <= f_info.precision && f_info.width)
+		return (p_bigger_then_w_s(ret, &c_arg_dup, f_info, c_arg_size));
 	else if (f_info.width > f_info.precision && f_info.precision)
-		return (w_bigger_then_p_s(ret, &c_arg, f_info, c_arg_size));
+		return (w_bigger_then_p_s(ret, &c_arg_dup, f_info, c_arg_size));
 	else if (f_info.width)
-		return (w_exist(ret, &c_arg, f_info, c_arg_size));
-	free(c_arg); // 와 이건 못줄이겠는데.. 분리밖에 답이 없겠다.
+		return (w_exist(ret, &c_arg_dup, f_info, c_arg_size));
+	free(c_arg_dup);
 	return (ret);
 }
 
