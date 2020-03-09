@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 07:50:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:47:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #include <stdio.h>
 
-int no_spec_print(const char *format)
+int	no_spec_print(const char *format)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (*format)
@@ -65,7 +65,7 @@ static const char	*skip_flag(const char *format, char *flag)
 		flag++;
 	}
 	return (format);
-} // 이건 분리할 필요가 없어보이는데...
+} // 이건 분리할 필요가 없어보이는데... 아니 합치면 자꾸 에러남. 뭔가 문법을 잘못 쓰는듯.
 
 const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap)
 {

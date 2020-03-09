@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:05:41 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:50:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-char	*make_specs(t_list *spec_adr, int count_s)
+static char	*make_specs(t_list *spec_adr, int count_s)
 {
 	char	*ret;
 	int		i;
@@ -32,7 +32,7 @@ char	*make_specs(t_list *spec_adr, int count_s)
 	return (ret);
 }
 
-char	**make_flags(t_list *spec_adr, int count_s)
+static char	**make_flags(t_list *spec_adr, int count_s)
 {
 	char	**ret;
 	char	*tmp;
@@ -63,7 +63,7 @@ char	**make_flags(t_list *spec_adr, int count_s)
 	return ret;
 }
 
-t_info	*make_info(char *specs, char **flags)
+static t_info	*make_info(char *specs, char **flags)
 {
 	int		size;
 	t_info	*ret;

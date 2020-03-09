@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:37:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:52:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 
-int	make_precision(t_info *info)
+static int	make_precision(t_info *info)
 {
 	char	*tmp;
 	int		flag_len;
@@ -43,7 +43,7 @@ int	make_precision(t_info *info)
 	return (ret);
 }
 
-int	make_width(t_info *info)
+static int	make_width(t_info *info)
 {
 	int		i;
 	int		start;

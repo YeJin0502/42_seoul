@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:37:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 08:59:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char	*ft_itoa_u(unsigned int n)
 
 char	*dec_to_hex(size_t dec, char spec)
 {
-	int		hex_len;
-	size_t	tmp;
-	char	*hex;
+	long long	hex_len;
+	size_t		tmp;
+	char		*hex;
 
 	tmp = dec;
 	hex_len = 0;

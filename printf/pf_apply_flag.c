@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:37:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/09 09:03:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
 }
 
 
-char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
@@ -186,7 +186,7 @@ char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 	return (ret);
 }
 
-char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
@@ -216,7 +216,6 @@ char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size
 	free(*c_arg);
 	return (ret);
 }
-
 
 char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
 { // 따로 만들면 spec 필요 없을수도 있겠다. 숫자들도 다 똑같으면... 거기도 spec 뺄수있음.
