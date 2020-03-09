@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 06:55:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:02:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 			return (-1);
 		format++;
 	}
+	while (--i >= 0)
+		free(info[i].flag);
+	free(info);
 	return (ret);
 }
 

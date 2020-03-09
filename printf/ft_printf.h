@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 08:09:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:58:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 08:04:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			pf_min(int n1, int n2);
 int			is_contain(char *str, char c);
 
 /*
-**	find_spec_adr.c -OK
+**	find_spec_adr.c
 */
 t_list		*find_spec_adr(const char *fmt);
 
