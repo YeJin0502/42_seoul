@@ -103,7 +103,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
 	// // d 테스트 - 누수 체크함
@@ -140,20 +140,20 @@ int main()
 	// // printf("6. [%05.3c]\n", 'a'); // 에러: c에서는 정밀도 안쓰임.
 
 	// s 테스트 - 대충 완료
-	ft_printf("1. [%s]\n", "hello");
-	printf("1. [%s]\n", "hello");
-	ft_printf("2. [%10s]\n", "hello");
-	printf("2. [%10s]\n", "hello");
-	ft_printf("3. [%010s]\n", "hello");
-	// printf("3. [%010s]\n", "hello"); // 에러: s에서는 0 안쓰임.
-	ft_printf("4. [%-10s]\n", "hello");
-	printf("4. [%-10s]\n", "hello");
-	ft_printf("5. [%10.7s]\n", "hello"); // 수정 필요 -> 완료
-	printf("5. [%10.7s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 0 출력 안함.
-	ft_printf("6. [%7.10s]\n", "hello"); // 수정 필요 -> 완료
-	printf("6. [%7.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
-	ft_printf("7. [%.10s]\n", "hello"); // 수정 필요 -> 완료
-	printf("7. [%.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
+	// ft_printf("1. [%s]\n", "hello");
+	// printf("1. [%s]\n", "hello");
+	// ft_printf("2. [%10s]\n", "hello");
+	// printf("2. [%10s]\n", "hello");
+	// ft_printf("3. [%010s]\n", "hello");
+	// // printf("3. [%010s]\n", "hello"); // 에러: s에서는 0 안쓰임.
+	// ft_printf("4. [%-10s]\n", "hello");
+	// printf("4. [%-10s]\n", "hello");
+	// ft_printf("5. [%10.7s]\n", "hello"); // 수정 필요 -> 완료
+	// printf("5. [%10.7s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 0 출력 안함.
+	// ft_printf("6. [%7.10s]\n", "hello"); // 수정 필요 -> 완료
+	// printf("6. [%7.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
+	// ft_printf("7. [%.10s]\n", "hello"); // 수정 필요 -> 완료
+	// printf("7. [%.10s]\n", "hello"); // s에서는 정밀도 에러 안뜨는 대신, 아예 고려 안하는듯.
 
 	// // u 테스트 - 대충 완료
 	// ft_printf("1. [%u]\n", 13);
@@ -214,7 +214,7 @@ int main()
 	// ft_printf("%%\n");
 	// printf("%5.06d\n", 123);
 }
-
+*/
 
 // count_spec 테스트
 // int main()
@@ -388,3 +388,15 @@ int main()
 	printf("[%*s]", -32, "abc");
 }
 */
+
+int main()
+{
+	// ft_printf("[%7d]", 33);
+	// printf("[%7d]", 33);
+
+	// ft_printf("[%.7d]", 0); // 285
+	// printf("[%.7d]", 0);
+
+	// ft_printf("[%3d%d%d%d]", -2464, 123, 12, 45);
+	ft_printf("[%-*.*s]", -7, -3, "yolo");
+}

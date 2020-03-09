@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 03:43:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 06:19:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include <stdio.h>
 
-static char *p_bigger_then_w(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static void	p_bigger_then_w(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -27,12 +27,10 @@ static char *p_bigger_then_w(char *ret, char **c_arg, t_f_info f_info, int c_arg
 	while (i < (f_info.precision - c_arg_size))
 		ret[i++] = '0';
 	while (i < f_info.precision)
-		ret[i++] = (*c_arg)[j++];
-	free(*c_arg);
-	return (ret);
+		ret[i++] = c_arg[j++];
 }
 
-static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static void	w_bigger_then_p(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
@@ -52,7 +50,7 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 		while (i < (f_info.width - c_arg_size))
 			ret[i++] = '0'; // 이거 갑자기 왜안되냐?
 		while (i < f_info.width)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
 	else if (f_info.minus == 1)
 	{
@@ -61,15 +59,13 @@ static char *w_bigger_then_p(char *ret, char **c_arg, t_f_info f_info, int c_arg
 		while (i < f_info.precision - c_arg_size + f_info.c_arg_nega) // 맞나?
 			ret[i++] = '0';
 		while (j < c_arg_size)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 		while (i < f_info.width)
 			ret[i++] = ' ';
 	}
-	free(*c_arg);
-	return (ret);
 }
 
-static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static void w_exist(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
@@ -81,7 +77,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 		if (f_info.c_arg_nega == 1)
 			ret[i++] = '-';
 		while (j < c_arg_size)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 		while (i < f_info.width)
 			ret[i++] = ' ';
 	}
@@ -92,7 +88,7 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = '0';
 		while (i < f_info.width)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
 	else if (f_info.minus == 0 && f_info.zero == 0)
 	{
@@ -106,48 +102,49 @@ static char *w_exist(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
 			i++; // 아.. s함수에서도 이걸 같이 써서.. 줄이면 오류가 난다.
 		}
 		while (i < f_info.width)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
-	free(*c_arg);
-	return (ret);
+	return ;
 }
 
-char *apply_flag(char *c_arg, t_f_info f_info, t_info info)
+char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 {
-	char *ret;
-	int c_arg_size;
-	int ret_size;
+	char	*c_arg_dup;
+	char	*ret;
+	int		c_arg_size;
+	int		ret_size;
 
-	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && f_info.precision == 0 &&
-		is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0)
-		c_arg = ft_strdup("");
-	if ((int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
-		return (c_arg);
-	if (c_arg[0] == '-' && ++f_info.c_arg_nega)
-		c_arg = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
-	c_arg_size = ft_strlen(c_arg);
+	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) != 0 &&
+		(int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
+		return (ft_strdup(c_arg));
+	else if (ft_strncmp(c_arg, "0", sizeof(c_arg)) == 0 && !f_info.precision &&
+		is_contain(info.flag, '.') == 1) // 224, 231, 285, 286
+		c_arg_dup = ft_strdup("");
+	else if (c_arg[0] == '-' && ++f_info.c_arg_nega)
+		c_arg_dup = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
+	else
+		c_arg_dup = ft_strdup(c_arg);
 	if (f_info.width < f_info.precision && f_info.c_arg_nega == 1)
 		f_info.precision++;
-	ret_size = pf_max(f_info.width, f_info.precision);
+	c_arg_size = ft_strlen(c_arg_dup);
 	f_info.width = (c_arg_size > f_info.width) ? 0 : f_info.width;
 	f_info.precision = (c_arg_size > f_info.precision) ? 0 : f_info.precision;
-	if (f_info.width == 0 && f_info.precision == 0)
-		return (c_arg);
+	ret_size = pf_max(f_info.width, f_info.precision);
 	if (!(ret = (char *)malloc(ret_size + 1)))
-		return (0); // 이런건 삼항으로 못줄이나? else가 없어서?
+		return (0);
 	ret[ret_size] = '\0';
 	if (f_info.width <= f_info.precision)
-		return (p_bigger_then_w(ret, &c_arg, f_info, c_arg_size));
+		p_bigger_then_w(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width > f_info.precision && f_info.precision)
-		return (w_bigger_then_p(ret, &c_arg, f_info, c_arg_size));
+		w_bigger_then_p(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width)
-		return (w_exist(ret, &c_arg, f_info, c_arg_size));
-	free(c_arg);
+		w_exist(ret, c_arg_dup, f_info, c_arg_size);
+	free(c_arg_dup);
 	return (ret);
 }
 
 
-static char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static void p_bigger_then_w_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
@@ -159,27 +156,25 @@ static char *p_bigger_then_w_s(char *ret, char **c_arg, t_f_info f_info, int c_a
 		while (i < (f_info.width - c_arg_size))
 			ret[i++] = ' ';
 		while (j < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
 	else if (f_info.minus == 1)
 	{
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = ' ';
 		while (j < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
-	free(*c_arg);
-	return (ret);
 }
 
-static char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_arg_size)
+static void w_bigger_then_p_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	if (f_info.precision == -2)
+	if (f_info.precision == -2) // 수정 필요
 		while(i < f_info.width)
 			ret[i++] = ' ';
 	else if (f_info.minus == 0)
@@ -189,18 +184,16 @@ static char *w_bigger_then_p_s(char *ret, char **c_arg, t_f_info f_info, int c_a
 		while (i < (f_info.width - c_arg_size))
 			ret[i++] = ' ';
 		while (i < f_info.width)
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 	}
 	else if (f_info.minus == 1)
 	{
 		// printf("w:%d, c:%d\n", f_info.width, pf_min(c_arg_size, f_info.precision));
 		while (i < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = (*c_arg)[j++];
+			ret[i++] = c_arg[j++];
 		while (i < f_info.width)
 			ret[i++] = ' ';
 	}
-	free(*c_arg);
-	return (ret);
 }
 
 char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
@@ -212,10 +205,10 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 
 	f_info.zero = 0;
 	if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && f_info.precision && f_info.precision < 6)
-		c_arg_dup = ft_strdup(""); // f_info.precision보다 is_contain(info.flag, '.') == 1이 정확하지 않나?
-	else if (is_contain(info.flag, '.') == 1 && !f_info.width)
+		c_arg_dup = ft_strdup("");
+	else if (is_contain(info.flag, '.') == 1 && !f_info.width && f_info.prec_nega == 0)
 		return (ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
-	else if (is_contain(info.flag, '.') == 1)
+	else if (is_contain(info.flag, '.') == 1 && f_info.width && f_info.prec_nega == 0) // 739
 		c_arg_dup = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg)));
 	else if (!f_info.precision && (int)ft_strlen(c_arg) > f_info.width)
 		return (ft_strdup(c_arg));
@@ -227,11 +220,11 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 		return (0);
 	ret[ret_size] = '\0';
 	if (f_info.width <= f_info.precision && f_info.width)
-		return (p_bigger_then_w_s(ret, &c_arg_dup, f_info, c_arg_size));
+		p_bigger_then_w_s(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width > f_info.precision && f_info.precision)
-		return (w_bigger_then_p_s(ret, &c_arg_dup, f_info, c_arg_size));
+		w_bigger_then_p_s(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width)
-		return (w_exist(ret, &c_arg_dup, f_info, c_arg_size));
+		w_exist(ret, c_arg_dup, f_info, c_arg_size);
 	free(c_arg_dup);
 	return (ret);
 }
