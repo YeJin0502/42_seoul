@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:56:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 09:44:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 07:58:06 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int pf_max(int n1, int n2)
+int	pf_max(int n1, int n2)
 {
 	// if (n1 && !n2)
 	// 	return (n1);
@@ -24,7 +24,7 @@ int pf_max(int n1, int n2)
 		return (n2);
 }
 
-int pf_min(int n1, int n2)
+int	pf_min(int n1, int n2)
 {
 	// if (n1 && !n2)
 		// return (n1);
@@ -36,7 +36,7 @@ int pf_min(int n1, int n2)
 		return (n1);
 }
 
-int is_contain(char *str, char c)
+int	is_contain(char *str, char c)
 {
 	while (*str)
 	{

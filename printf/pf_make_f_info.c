@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 03:02:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 07:48:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 
 static int	make_precision(t_info *info)
 {
-	char	*tmp;
 	int		flag_len;
 	int		i;
-	int		ret_size;
-	int		ret; // 변수 많을땐 구조체 이용해서 줄수 줄일 수 있을..듯
+	int		ret;
 	
 	if ((*info).flag == NULL || ft_strchr((*info).flag, '.') == NULL)
 		return (0);
@@ -31,15 +29,11 @@ static int	make_precision(t_info *info)
 		i++;
 	if (i == 0)
 		return (0);
-	else if (i == 1 && (*info).flag[flag_len - 1] == '*' && (*info).prec_star++) // 이 조건 약간 수정될수도
+	else if (i == 1 && (*info).flag[flag_len - 1] == '*' && (*info).prec_star++)
 		return (0);
-	tmp = (char *)malloc(i + 1);
-	tmp[i] = '\0';
-	ret_size = i;
-	while (--i >= 0) // 배열 안만들고 바로 숫자로 계산할 수도 있을듯?
-		tmp[ret_size - i - 1] = (*info).flag[flag_len - i - 1];
-	ret = ft_atoi(tmp);
-	free(tmp);
+	ret = 0;
+	while (--i >= 0)
+		ret = ret * 10 + ((*info).flag[flag_len - i - 1] - '0');
 	return (ret);
 }
 
@@ -48,7 +42,6 @@ static int	make_width(t_info *info)
 	int		i;
 	int		start;
 	int		count;
-	char	*tmp;
 	int		ret;
 
 	if ((*info).flag == NULL)
@@ -60,15 +53,11 @@ static int	make_width(t_info *info)
 	if (count == 0)
 		return (0);
 	else if (count == -1 && (*info).width_star++)
-		return (0); // 더 포함시켜서 함수 줄이면 될듯..
-	if (!(tmp = (char *)malloc(count + 1)))
 		return (0);
-	tmp[count] = '\0';
 	i = start - 1;
-	while ((*info).flag[++i] != '.' && (*info).flag[i]) // 이거도 배열 안만들고 바로 숫자 셀수있는지 확인
-		tmp[i - start] = (*info).flag[i];
-	ret = ft_atoi(tmp);
-	free(tmp);
+	ret = 0;
+	while ((*info).flag[++i] != '.' && (*info).flag[i])
+		ret = ret * 10 + ((*info).flag[i] - '0');
 	return (ret);
 }
 
@@ -84,7 +73,6 @@ t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 	if (ret.width < 0 && ++ret.minus && ++ret.width_nega)
 		ret.width = ret.width * -1;
 	if (ret.precision < 0 && ++ret.minus && ++ret.prec_nega) // 여기에 minus++은 생각해봐야.
-		// ret.precision = ret.precision * -1;
 		ret.precision = 0;
 	if (ret.width == 0 && ret.precision == 0)
 		ret = w0_p0(ret, info.flag);
@@ -92,7 +80,6 @@ t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 		ret= w0_p1(ret, info.flag);
 	else if (ret.width != 0)
 		ret = w1(ret, info.flag);
-	// ret.precision = (ret.prec_nega == 1) ? 0 : ret.precision;
 	ret.zero = (ret.precision != 0 || ret.minus == 1) ? 0 : ret.zero;
 	return (ret);
 }

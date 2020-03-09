@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:49:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/07 00:01:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 07:35:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,20 @@ int	is_flag(const char c)
 	return (0);
 }
 
+void	all_free(t_list **lst, char **specs, char ***flags, int count_s)
+{
+	t_list	*tmp;
+	int		i;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	free(*specs);
+	i = 0;
+	while (i < count_s)
+		free((*flags)[i++]); // (*flag) 괄호 안해주면 에러.
+	free(*flags);
+}

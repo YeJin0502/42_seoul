@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 07:47:47 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 03:33:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 07:56:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,24 @@ t_list	*find_spec_adr(const char *fmt)
 	t_check	check;
 	int		count;
 
-	ret = 0;
+	ret = 0; // 없으면 오류남.
 	ft_memset(&check, 0, sizeof(t_check));
 	count = 0;
 	while (*fmt)
 	{
-		if (*(fmt - 1) != '%' && *fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1))
+		if (*(fmt - 1) != '%' && *fmt == '%' && *(fmt + 1) != '%' && *(fmt + 1) && ++fmt)
 		{
-			fmt++;
-			while (*fmt && (is_spec(*fmt) == 0)) // flag 유효성 검사
+			while (*fmt && (is_spec(*fmt) == 0))
 			{
 				if (is_valid(*fmt, &check) == 0)
 					break;
 				fmt++;
 			}
-			if (is_spec(*fmt) == 1 && check.wrong == 0)
-			{
+			if (is_spec(*fmt) == 1 && check.wrong == 0 && ++count) // count++ 하면 이상하게 되네.
 				ft_lstadd_back(&ret, ft_lstnew((void *)fmt));
-				count++;
-			}
 			ft_memset(&check, 0, sizeof(t_check));
 		}
-		fmt++;
+		fmt++; // 이거도 줄이고 싶었는데... 이건 잘 안되네.
 	}
 	return (ret);
-} // 와 이거 못줄이나... 안줄여지네. 분리시켜야만 하나...
+}

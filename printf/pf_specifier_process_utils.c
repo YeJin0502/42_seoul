@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 08:59:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 06:51:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static unsigned int	n_size_u(unsigned int n)
 	
 	size = 0;
 	if (n == 0)
-		return (1); // 추가
+		return (1);
 	while (n != 0)
 	{
 		n = n / 10;
