@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 02:57:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 03:43:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,28 +210,19 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	int c_arg_size;
 	int ret_size;
 
-	// printf("(%d, %d, %d, %d)\n", f_info.minus, f_info.zero, f_info.width, f_info.precision);
 	f_info.zero = 0;
-	if (c_arg == 0 || c_arg[0] == '\0')
-		c_arg_dup = ft_strdup("");
-	else if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && 0 < f_info.precision && f_info.precision < 6)
-		c_arg_dup = ft_strdup("");
-	else if (is_contain(info.flag, '.') == 1 && !f_info.width && f_info.prec_nega == 0)
+	if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && f_info.precision && f_info.precision < 6)
+		c_arg_dup = ft_strdup(""); // f_info.precision보다 is_contain(info.flag, '.') == 1이 정확하지 않나?
+	else if (is_contain(info.flag, '.') == 1 && !f_info.width)
 		return (ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg))));
-	else if (is_contain(info.flag, '.') == 1 && f_info.prec_nega == 0)
+	else if (is_contain(info.flag, '.') == 1)
 		c_arg_dup = ft_substr(c_arg, 0, pf_min(f_info.precision, (int)ft_strlen(c_arg)));
-	else if (f_info.width == 0 && f_info.precision == 0)
+	else if (!f_info.precision && (int)ft_strlen(c_arg) > f_info.width)
 		return (ft_strdup(c_arg));
 	else
 		c_arg_dup = ft_strdup(c_arg);
 	c_arg_size = ft_strlen(c_arg_dup);
-	if (f_info.precision && !f_info.width && c_arg_size <= f_info.precision)
-		return (c_arg_dup);
-	else if (f_info.precision && !f_info.width && c_arg_size > f_info.precision)
-		return (ft_substr(c_arg_dup, 0, f_info.precision));
-	else if (f_info.width && !f_info.precision && c_arg_size > f_info.width)
-		return (c_arg_dup);
-	ret_size = pf_max(f_info.width, f_info.precision);
+	ret_size = pf_max(f_info.width, pf_min(c_arg_size, f_info.precision));
 	if (!(ret = (char *)malloc(ret_size + 1)))
 		return (0);
 	ret[ret_size] = '\0';

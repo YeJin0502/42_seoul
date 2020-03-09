@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/09 09:28:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 03:02:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ t_f_info	make_f_info(t_info info, va_list ap) //, int *is_wc_width, int *is_wc_p
 	if (ret.width < 0 && ++ret.minus && ++ret.width_nega)
 		ret.width = ret.width * -1;
 	if (ret.precision < 0 && ++ret.minus && ++ret.prec_nega) // 여기에 minus++은 생각해봐야.
-		ret.precision = ret.precision * -1;
+		// ret.precision = ret.precision * -1;
+		ret.precision = 0;
 	if (ret.width == 0 && ret.precision == 0)
 		ret = w0_p0(ret, info.flag);
 	else if (ret.width == 0 && ret.precision != 0)
 		ret= w0_p1(ret, info.flag);
 	else if (ret.width != 0)
 		ret = w1(ret, info.flag);
-	ret.precision = (ret.prec_nega == 1) ? 0 : ret.precision;
+	// ret.precision = (ret.prec_nega == 1) ? 0 : ret.precision;
 	ret.zero = (ret.precision != 0 || ret.minus == 1) ? 0 : ret.zero;
 	return (ret);
 }

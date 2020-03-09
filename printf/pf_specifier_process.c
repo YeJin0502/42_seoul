@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 02:54:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 03:27:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	s_process(va_list ap, t_info info)
 	if (arg == 0)
 		c_arg = ft_strdup("(null)");
 	else if (arg[0] == '\0')
-		c_arg = ft_strdup("\0");
+		c_arg = ft_strdup("");
 	else
 		c_arg = ft_strdup(arg);
 	if (*(info.flag) != '\0')
