@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 13:20:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 13:41:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*convert_to_str(va_list ap, t_info info)
 		return (convert_uxX(ap, info.spec));
 }
 
-static int	get_va_arg(va_list ap, t_info info)
+static int	print_and_count_va(va_list ap, t_info info)
 {
 	char	*c_arg;
 	char	*c_arg_ret;
@@ -64,7 +64,7 @@ static int	get_va_arg(va_list ap, t_info info)
 	return (ret_size);
 }
 
-static const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap)
+static const char	*va_arg_process(int *ret, const char *format, t_info info, va_list ap)
 {
 	int i;
 
@@ -73,7 +73,7 @@ static const char	*meet_specifier(int *ret, const char *format, t_info info, va_
 	while (*(format + i) == *(info.flag + i))
 		i++;
 	if (is_spec(info.spec) == 1)
-		*ret = *ret + get_va_arg(ap, info);
+		*ret = *ret + print_and_count_va(ap, info);
 	else
 		return (0);
 	return (format + i);
@@ -89,7 +89,7 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	while (*format)
 	{
 		if (*(format - 1) != '%' && *format == '%' && *(format + 1) != '%' && i < count_s)
-			format = meet_specifier(&ret, format, *(info + i++), ap);
+			format = va_arg_process(&ret, format, *(info + i++), ap);
 		else if (!(*(format - 1) != '%' && *format == '%') && ++ret)
 			write(1, format, 1);
 		if (format == 0)

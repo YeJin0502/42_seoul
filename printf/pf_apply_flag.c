@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 13:41:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ static void w_exist(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 	}
 	return ;
 }
+
+// char	*make_c_arg_dup(char *c_arg, t_f_info f_info, t_info info)
+// {
+
+// }
 
 char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 {
