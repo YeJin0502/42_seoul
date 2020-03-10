@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 07:47:47 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:56:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 09:15:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*find_spec_adr(const char *fmt)
 	t_check	check;
 	int		count;
 
-	ret = 0; // 없으면 오류남.
+	ret = 0;
 	ft_memset(&check, 0, sizeof(t_check));
 	count = 0;
 	while (*fmt)

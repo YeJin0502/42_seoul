@@ -6,134 +6,73 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:09:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 09:46:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	c_process(va_list ap, t_info info)
+char *get_va_arg_c(va_list ap)
 {
-	char	arg;
-	char	*c_arg;
-	char	*c_arg_ret;
-	int		ret_size;
+	char arg;
+	char *c_arg;
 
-	info.f_info = make_f_info(info, ap);
 	arg = (char)va_arg(ap, int);
 	c_arg = (char *)malloc(2);
 	if (arg != 0)
 		c_arg[0] = arg; // 457~459은 어떻게하냐
 	c_arg[1] = '\0';
-	if (*(info.flag) != '\0')
-		c_arg_ret = apply_flag(c_arg, info.f_info, info);
-	else
-		c_arg_ret = ft_strdup(c_arg);
-	ret_size = (int)ft_strlen(c_arg_ret);
-	write(1, c_arg_ret, ret_size);
-	free(c_arg);
-	free(c_arg_ret);
-	return (ret_size);
+	return (c_arg);
 }
 
-int	s_process(va_list ap, t_info info)
+char *get_va_arg_s(va_list ap)
 {
-	char	*arg;
-	char	*c_arg;
-	char	*c_arg_ret;
-	int		ret_size;
+	char *arg;
 
-	info.f_info = make_f_info(info, ap);
 	arg = va_arg(ap, char *);
 	if (arg == 0)
-		c_arg = ft_strdup("(null)");
+		return (ft_strdup("(null)"));
 	else if (arg[0] == '\0')
-		c_arg = ft_strdup("");
+		return (ft_strdup(""));
 	else
-		c_arg = ft_strdup(arg);
-	if (*(info.flag) != '\0')
-		c_arg_ret = apply_flag_s(c_arg, info.f_info, info);
-	else
-		c_arg_ret = ft_strdup(c_arg);
-	ret_size = (int)ft_strlen(c_arg_ret);
-	write(1, c_arg_ret, ret_size);
-	free(c_arg);
-	free(c_arg_ret);
-	return (ret_size);
+		return (ft_strdup(arg));
 }
 
-int	p_process(va_list ap, t_info info)
+char *get_va_arg_p(va_list ap, char spec)
 {
-	void	*arg;
-	char	*tmp;
-	char	*c_arg;
-	char	*c_arg_ret;
-	int		ret_size;
+	void *arg;
+	char *tmp;
+	char *c_arg;
 
-	info.f_info = make_f_info(info, ap);
 	arg = va_arg(ap, void *);
 	if (arg == 0)
 		c_arg = ft_strdup("(nil)");
 	else
 	{
-		tmp = dec_to_hex((size_t)arg, info.spec);
+		tmp = dec_to_hex((size_t)arg, spec);
 		c_arg = ft_strjoin("0x", tmp);
 		free(tmp);
 	}
-	if (*(info.flag) != '\0')
-		c_arg_ret = apply_flag(c_arg, info.f_info, info);
-	else
-		c_arg_ret = ft_strdup(c_arg);
-	ret_size = (int)ft_strlen(c_arg_ret);
-	write(1, c_arg_ret, ret_size);
-	free(c_arg);
-	free(c_arg_ret);
-	return (ret_size);
+	return (c_arg);
 }
 
-int	di_process(va_list ap, t_info info)
+char *get_va_arg_di(va_list ap)
 {
-	int		arg;
-	char	*c_arg;
-	char	*c_arg_ret;
-	int		ret_size;
+	int arg;
 
-	info.f_info = make_f_info(info, ap);
 	arg = va_arg(ap, int);
-	c_arg = ft_itoa(arg);
-	if (*(info.flag) != '\0')
-		c_arg_ret = apply_flag(c_arg, info.f_info, info);
-	else
-		c_arg_ret = ft_strdup(c_arg);
-	ret_size = (int)ft_strlen(c_arg_ret);
-	write(1, c_arg_ret, ret_size);
-	free(c_arg);
-	free(c_arg_ret);
-	return (ret_size);
+	return (ft_itoa(arg));
 }
 
-int	uxX_process(va_list ap, t_info info)
+char *get_va_arg_uxX(va_list ap, char spec)
 {
-	unsigned int	arg;
-	char			*c_arg;
-	char			*c_arg_ret;
-	int				ret_size;
+	unsigned int arg;
 
-	info.f_info = make_f_info(info, ap);
 	arg = va_arg(ap, unsigned int);
 	if (arg == 0)
-		c_arg = ft_strdup("0");
-	else if (info.spec == 'u')
-		c_arg = ft_itoa_u(arg);
+		return (ft_strdup("0"));
+	else if (spec == 'u')
+		return (ft_itoa_u(arg));
 	else
-		c_arg = dec_to_hex((size_t)arg, info.spec);
-	if (*(info.flag) != '\0')
-		c_arg_ret = apply_flag(c_arg, info.f_info, info);
-	else
-		c_arg_ret = ft_strdup(c_arg);
-	ret_size = (int)ft_strlen(c_arg_ret);
-	write(1, c_arg_ret, ret_size);
-	free(c_arg);
-	free(c_arg_ret);
-	return (ret_size);
+		return (dec_to_hex((size_t)arg, spec));
 }

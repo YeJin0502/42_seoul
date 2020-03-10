@@ -6,7 +6,6 @@ LIBFT_LIB = libft.a
 SRCS = ft_printf.c \
 		pf_apply_flag_utils.c \
 		pf_apply_flag.c \
-		pf_make_f_info_sub.c \
 		pf_make_f_info.c \
 		pf_make_info_utils.c \
 		pf_make_info.c \

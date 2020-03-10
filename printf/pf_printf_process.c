@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:08:51 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 09:59:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	{
 		if (*(format - 1) != '%' && *format == '%' && *(format + 1) != '%' && i < count_s)
 			format = meet_specifier(&ret, format, *(info + i++), ap);
-		else if (!(*(format - 1) != '%' && *format == '%'))
+		else if (!(*(format - 1) != '%' && *format == '%')) // && ++ret)
 		{
 			write(1, format, 1);
 			ret++;
@@ -58,31 +58,47 @@ int	print_and_count(const char *format, int count_s, t_info *info, va_list ap)
 	return (ret);
 }
 
-static const char	*skip_flag(const char *format, char *flag)
-{
-	while (*format == *flag)
-	{
-		format++;
-		flag++;
-	}
-	return (format);
-} // 이건 분리할 필요가 없어보이는데... 아니 합치면 자꾸 에러남. 뭔가 문법을 잘못 쓰는듯.
-
 const char	*meet_specifier(int *ret, const char *format, t_info info, va_list ap)
 {
+	int i;
+
+	i = 0;
 	format++;
-	format = skip_flag(format, info.flag);
-	if (info.spec == 'c')
-		*ret = *ret + c_process(ap, info);
-	else if (info.spec == 's')
-		*ret = *ret + s_process(ap, info);
-	else if (info.spec == 'p')
-		*ret = *ret + p_process(ap, info);
-	else if (info.spec == 'd' || info.spec == 'i')
-		*ret = *ret + di_process(ap, info);
-	else if (info.spec == 'u' || info.spec == 'x' || info.spec == 'X')
-		*ret = *ret + uxX_process(ap, info);
+	while (*(format + i) == *(info.flag + i))
+		i++;
+	if (is_spec(info.spec) == 1)
+		*ret = *ret + get_va_arg(ap, info);
 	else
 		return (0);
-	return (format);
+	return (format + i);
+}
+
+int	get_va_arg(va_list ap, t_info info)
+{
+	char	*c_arg;
+	char	*c_arg_ret;
+	int		ret_size;
+
+	info.f_info = make_f_info(info, ap);
+	if (info.spec == 'c')
+		c_arg = get_va_arg_c(ap);
+	else if (info.spec =='s')
+		c_arg = get_va_arg_s(ap);
+	else if (info.spec == 'p')
+		c_arg = get_va_arg_p(ap, info.spec);
+	else if (info.spec == 'd' || info.spec =='i')
+		c_arg = get_va_arg_di(ap);
+	else
+		c_arg = get_va_arg_uxX(ap, info.spec);
+	if (*(info.flag) != '\0' && info.spec != 's')
+		c_arg_ret = apply_flag(c_arg, info.f_info, info);
+	else if (*(info.flag) != '\0' && info.spec == 's')
+		c_arg_ret = apply_flag_s(c_arg, info.f_info, info);
+	else
+		c_arg_ret = ft_strdup(c_arg);
+	ret_size = (int)ft_strlen(c_arg_ret);
+	write(1, c_arg_ret, ret_size);
+	free(c_arg);
+	free(c_arg_ret);
+	return (ret_size);
 }
