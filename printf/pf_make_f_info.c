@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 13:21:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 14:18:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	make_precision(t_info info, va_list ap)
 {
 	int	flag_len;
 	int	prec_len;
-	int	ret;
+	int	prec;
 
 	if (info.flag == 0 || is_contain(info.flag, '.') == 0)
 		return (0);
@@ -28,17 +28,17 @@ static int	make_precision(t_info info, va_list ap)
 		return (0);
 	else if (prec_len == 1 && info.flag[flag_len - 1] == '*')
 		return (va_arg(ap, int));
-	ret = 0;
+	prec = 0;
 	while (--prec_len >= 0)
-		ret = ret * 10 + (info.flag[flag_len - prec_len - 1] - '0');
-	return (ret);
+		prec = prec * 10 + (info.flag[flag_len - prec_len - 1] - '0');
+	return (prec);
 }
 
 static int	make_width(t_info info, va_list ap)
 {
 	int	width_len;
 	int	i;
-	int	ret;
+	int	width;
 
 	if (info.flag == 0)
 		return (0);
@@ -52,10 +52,10 @@ static int	make_width(t_info info, va_list ap)
 	else if (width_len == 1 && info.flag[0] == '*')
 		return (va_arg(ap, int));
 	i = 0;
-	ret = 0;
+	width = 0;
 	while (i < width_len)
-		ret = ret * 10 + (info.flag[i++] - '0');
-	return (ret);
+		width = width * 10 + (info.flag[i++] - '0');
+	return (width);
 }
 
 t_f_info	make_f_info(t_info info, va_list ap)

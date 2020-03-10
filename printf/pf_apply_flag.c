@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 13:41:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 14:45:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,29 @@ static void	p_bigger_then_w(char *ret, char *c_arg, t_f_info f_info, int c_arg_s
 		ret[i++] = c_arg[j++];
 }
 
+static void p_bigger_then_w_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (f_info.minus == 0)
+	{
+		while (i < (f_info.width - c_arg_size))
+			ret[i++] = ' ';
+		while (j < pf_min(c_arg_size, f_info.precision))
+			ret[i++] = c_arg[j++];
+	}
+	else if (f_info.minus == 1)
+	{
+		while (i < f_info.width - c_arg_size)
+			ret[i++] = ' ';
+		while (j < pf_min(c_arg_size, f_info.precision))
+			ret[i++] = c_arg[j++];
+	}
+}
+
 static void	w_bigger_then_p(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
@@ -36,16 +59,12 @@ static void	w_bigger_then_p(char *ret, char *c_arg, t_f_info f_info, int c_arg_s
 	j = 0;
 	if (f_info.minus == 0)
 	{
-		// printf("(%d,%d,%d)\n", i, f_info.precision, c_arg_size);
 		while (i < (f_info.width - f_info.precision))
 			ret[i++] = ' ';
-		if (f_info.c_arg_nega == 1) //
-		{
-			ret[--i] = '-';
-			i++;
-		}
+		if (f_info.c_arg_nega == 1 && --i)
+			ret[i++] = '-';
 		while (i < (f_info.width - c_arg_size))
-			ret[i++] = '0'; // 이거 갑자기 왜안되냐?
+			ret[i++] = '0';
 		while (i < f_info.width)
 			ret[i++] = c_arg[j++];
 	}
@@ -53,9 +72,34 @@ static void	w_bigger_then_p(char *ret, char *c_arg, t_f_info f_info, int c_arg_s
 	{
 		if (f_info.c_arg_nega == 1)
 			ret[i++] = '-';
-		while (i < f_info.precision - c_arg_size + f_info.c_arg_nega) // 맞나?
+		while (i < f_info.precision - c_arg_size + f_info.c_arg_nega)
 			ret[i++] = '0';
 		while (j < c_arg_size)
+			ret[i++] = c_arg[j++];
+		while (i < f_info.width)
+			ret[i++] = ' '; // s경우랑 합치고 minus 두개를 분리하는게 나을것같음.
+	}
+}
+
+static void w_bigger_then_p_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (f_info.minus == 0)
+	{
+		while (i < (f_info.width - f_info.precision))
+			ret[i++] = ' ';
+		while (i < (f_info.width - c_arg_size))
+			ret[i++] = ' ';
+		while (i < f_info.width)
+			ret[i++] = c_arg[j++];
+	}
+	else if (f_info.minus == 1)
+	{
+		while (i < pf_min(c_arg_size, f_info.precision))
 			ret[i++] = c_arg[j++];
 		while (i < f_info.width)
 			ret[i++] = ' ';
@@ -89,32 +133,46 @@ static void w_exist(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 	}
 	else if (f_info.minus == 0 && f_info.zero == 0)
 	{
-		// printf("(%d,%d)\n", f_info.width, c_arg_size);
 		while (i < f_info.width - c_arg_size)
 			ret[i++] = ' ';
-		if (f_info.c_arg_nega == 1)
-		{
-			// --i; // 얘는 왜 안써줘도 되지..? 뭔차이야
-			ret[--i] ='-';
-			i++; // 아.. s함수에서도 이걸 같이 써서.. 줄이면 오류가 난다.
-		}
+		if (f_info.c_arg_nega == 1 && --i)
+			ret[i++] = '-' ;
 		while (i < f_info.width)
 			ret[i++] = c_arg[j++];
 	}
 	return ;
 }
 
-// char	*make_c_arg_dup(char *c_arg, t_f_info f_info, t_info info)
-// {
+static char	*make_ret(char *c_arg_dup, t_f_info f_info, t_info info, int c_arg_size)
+{
+	int		ret_size;
+	char	*ret;
 
-// }
+	if (info.spec != 's')
+		ret_size = pf_max(f_info.width, f_info.precision);
+	else
+		ret_size = pf_max(f_info.width, pf_min(c_arg_size, f_info.precision));
+	if (!(ret = (char *)malloc(ret_size + 1)))
+		return (0);
+	ret[ret_size] = '\0';
+	if (f_info.width <= f_info.precision && info.spec != 's')
+		p_bigger_then_w(ret, c_arg_dup, f_info, c_arg_size);
+	else if (f_info.width <= f_info.precision && info.spec == 's')
+		p_bigger_then_w_s(ret, c_arg_dup, f_info, c_arg_size);
+	else if (f_info.width > f_info.precision && f_info.precision && info.spec != 's')
+		w_bigger_then_p(ret, c_arg_dup, f_info, c_arg_size);
+	else if (f_info.width > f_info.precision && f_info.precision && info.spec == 's')
+		w_bigger_then_p_s(ret, c_arg_dup, f_info, c_arg_size);
+	else if (f_info.width)
+		w_exist(ret, c_arg_dup, f_info, c_arg_size);
+	return (ret);
+}
 
 char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 {
 	char	*c_arg_dup;
 	char	*ret;
 	int		c_arg_size;
-	int		ret_size;
 
 	if (ft_strncmp(c_arg, "0", sizeof(c_arg)) != 0 &&
 		(int)ft_strlen(c_arg) >= pf_max(f_info.width, f_info.precision))
@@ -131,79 +189,16 @@ char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 	c_arg_size = ft_strlen(c_arg_dup);
 	f_info.width = (c_arg_size > f_info.width) ? 0 : f_info.width;
 	f_info.precision = (c_arg_size > f_info.precision) ? 0 : f_info.precision;
-	ret_size = pf_max(f_info.width, f_info.precision);
-	if (!(ret = (char *)malloc(ret_size + 1)))
-		return (0);
-	ret[ret_size] = '\0';
-	if (f_info.width <= f_info.precision)
-		p_bigger_then_w(ret, c_arg_dup, f_info, c_arg_size);
-	else if (f_info.width > f_info.precision && f_info.precision)
-		w_bigger_then_p(ret, c_arg_dup, f_info, c_arg_size);
-	else if (f_info.width)
-		w_exist(ret, c_arg_dup, f_info, c_arg_size);
+	ret = make_ret(c_arg_dup, f_info, info, c_arg_size);
 	free(c_arg_dup);
 	return (ret);
 }
 
-
-static void p_bigger_then_w_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	if (f_info.minus == 0)
-	{
-		while (i < (f_info.width - c_arg_size))
-			ret[i++] = ' ';
-		while (j < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = c_arg[j++];
-	}
-	else if (f_info.minus == 1)
-	{
-		while (i < f_info.width - c_arg_size)
-			ret[i++] = ' ';
-		while (j < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = c_arg[j++];
-	}
-}
-
-static void w_bigger_then_p_s(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	if (f_info.precision == -2) // 수정 필요
-		while(i < f_info.width)
-			ret[i++] = ' ';
-	else if (f_info.minus == 0)
-	{
-		while (i < (f_info.width - f_info.precision))
-			ret[i++] = ' ';
-		while (i < (f_info.width - c_arg_size))
-			ret[i++] = ' ';
-		while (i < f_info.width)
-			ret[i++] = c_arg[j++];
-	}
-	else if (f_info.minus == 1)
-	{
-		// printf("w:%d, c:%d\n", f_info.width, pf_min(c_arg_size, f_info.precision));
-		while (i < pf_min(c_arg_size, f_info.precision))
-			ret[i++] = c_arg[j++];
-		while (i < f_info.width)
-			ret[i++] = ' ';
-	}
-}
-
-char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드는게 나을수도
+char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info)
 {
 	char *c_arg_dup;
 	char *ret;
 	int c_arg_size;
-	int ret_size;
 
 	f_info.zero = 0;
 	if (ft_strncmp(c_arg, "(null)", sizeof(c_arg)) == 0 && f_info.precision && f_info.precision < 6)
@@ -217,17 +212,7 @@ char *apply_flag_s(char *c_arg, t_f_info f_info, t_info info) // 따로 만드�
 	else
 		c_arg_dup = ft_strdup(c_arg);
 	c_arg_size = ft_strlen(c_arg_dup);
-	ret_size = pf_max(f_info.width, pf_min(c_arg_size, f_info.precision));
-	if (!(ret = (char *)malloc(ret_size + 1)))
-		return (0);
-	ret[ret_size] = '\0';
-	if (f_info.width <= f_info.precision && f_info.width)
-		p_bigger_then_w_s(ret, c_arg_dup, f_info, c_arg_size);
-	else if (f_info.width > f_info.precision && f_info.precision)
-		w_bigger_then_p_s(ret, c_arg_dup, f_info, c_arg_size);
-	else if (f_info.width)
-		w_exist(ret, c_arg_dup, f_info, c_arg_size);
+	ret = make_ret(c_arg_dup, f_info, info, c_arg_size);
 	free(c_arg_dup);
 	return (ret);
 }
-
