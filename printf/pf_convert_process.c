@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_specifier_process.c                             :+:      :+:    :+:   */
+/*   pf_convert_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:26:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 09:46:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 10:18:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *get_va_arg_c(va_list ap)
+char *convert_c(va_list ap)
 {
 	char arg;
 	char *c_arg;
@@ -25,7 +25,7 @@ char *get_va_arg_c(va_list ap)
 	return (c_arg);
 }
 
-char *get_va_arg_s(va_list ap)
+char *convert_s(va_list ap)
 {
 	char *arg;
 
@@ -38,7 +38,7 @@ char *get_va_arg_s(va_list ap)
 		return (ft_strdup(arg));
 }
 
-char *get_va_arg_p(va_list ap, char spec)
+char *convert_p(va_list ap, char spec)
 {
 	void *arg;
 	char *tmp;
@@ -56,7 +56,7 @@ char *get_va_arg_p(va_list ap, char spec)
 	return (c_arg);
 }
 
-char *get_va_arg_di(va_list ap)
+char *convert_di(va_list ap)
 {
 	int arg;
 
@@ -64,7 +64,7 @@ char *get_va_arg_di(va_list ap)
 	return (ft_itoa(arg));
 }
 
-char *get_va_arg_uxX(va_list ap, char spec)
+char *convert_uxX(va_list ap, char spec)
 {
 	unsigned int arg;
 

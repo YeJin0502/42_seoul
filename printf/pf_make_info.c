@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:08:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 10:37:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*make_specs(t_list *spec_adr, int count_s)
 	int		i;
 	
 	if (!(ret = (char *)malloc(count_s + 1)))
-		return 0;
+		return (0);
 	ret[count_s] = '\0';
 	i = 0;
 	while (i < count_s)
@@ -47,7 +47,8 @@ static char	**make_flags(t_list *spec_adr, int count_s)
 		tmp = (char *)spec_adr->content;
 		while (*(tmp - len - 1) != '%')
 			len++;
-		ret[i] = (char *)malloc(len + 1);
+		if (!(ret[i] = (char *)malloc(len + 1)))
+			return (flags_free(&ret, i));
 		ret[i][len++] = '\0';
 		j = len - 1;
 		while (--len > 0)

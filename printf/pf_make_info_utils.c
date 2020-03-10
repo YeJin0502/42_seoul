@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 09:49:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 07:35:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 10:37:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ int	is_flag(const char c)
 			return (1);
 		flag_set++;
 	}
+	return (0);
+}
+
+char **flags_free(char ***flag, int i)
+{
+	while (--i >= 0)
+		free(flag[i]);
+	free(flag);
 	return (0);
 }
 
