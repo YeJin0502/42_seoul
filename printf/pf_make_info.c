@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 00:15:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 10:37:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 13:21:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,83 +14,81 @@
 
 static char	*make_specs(t_list *spec_adr, int count_s)
 {
-	char	*ret;
+	char	*specs;
 	int		i;
 	
-	if (!(ret = (char *)malloc(count_s + 1)))
+	if (!(specs = (char *)malloc(count_s + 1)))
 		return (0);
-	ret[count_s] = '\0';
-	i = 0;
-	while (i < count_s)
+	specs[count_s] = '\0';
+	i = -1;
+	while (++i < count_s)
 	{
-		ret[i] = *((char *)spec_adr->content);
+		specs[i] = *((char *)spec_adr->content);
 		spec_adr = spec_adr->next;
-		i++;
 	}
-	return (ret);
+	return (specs);
 }
 
 static char	**make_flags(t_list *spec_adr, int count_s)
 {
-	char	**ret;
-	char	*tmp;
+	char	**flags;
+	char	*s_a;
 	int		len;
 	int		i;
-	int		j;
+	int		len_save;
 
-	if (!(ret = (char **)malloc(sizeof(char *) * count_s)))
+	if (!(flags = (char **)malloc(sizeof(char *) * count_s)))
 		return (0);
-	i = 0;
-	while (i < count_s)
+	i = -1;
+	while (++i < count_s)
 	{
 		len = 0;
-		tmp = (char *)spec_adr->content;
-		while (*(tmp - len - 1) != '%')
+		s_a = (char *)spec_adr->content;
+		while (*(s_a - len - 1) != '%')
 			len++;
-		if (!(ret[i] = (char *)malloc(len + 1)))
-			return (flags_free(&ret, i));
-		ret[i][len++] = '\0';
-		j = len - 1;
+		if (!(flags[i] = (char *)malloc(len + 1)))
+			return (flags_free(&flags, i));
+		flags[i][len++] = '\0';
+		len_save = len - 1;
 		while (--len > 0)
-			ret[i][j - len] = *(tmp - len);
-		i++;
+			flags[i][len_save - len] = *(s_a - len);
 		spec_adr = spec_adr->next;
 	}
-	return (ret);
+	return (flags);
 }
 
 static t_info	*make_info(char *specs, char **flags)
 {
-	int		size;
-	t_info	*ret;
+	int		info_size;
+	t_info	*info;
 	int		i;
 
-	size = ft_strlen(specs);
-	if (!(ret = (t_info *)malloc(sizeof(t_info) * size)))
+	info_size = ft_strlen(specs);
+	if (!(info = (t_info *)malloc(sizeof(t_info) * info_size)))
 		return (0);
-	ft_memset(ret, 0, sizeof(ret));
+	ft_memset(info, 0, sizeof(info));
 	i = -1;
-	while (++i < size)
+	while (++i < info_size)
 	{
-		ret[i].spec = specs[i];
-		if (!(ret[i].flag = (char *)malloc(ft_strlen(flags[i]) + 1)))
+		info[i].spec = specs[i];
+		if (!(info[i].flag = (char *)malloc(ft_strlen(flags[i]) + 1)))
 		{
 			while (--i >= 0)
-				free(ret[i].flag);
-			free(ret);
+				free(info[i].flag);
+			free(info);
 			return (0);
 		}
-		ret[i].flag[ft_strlen(flags[i])] = '\0';
-		ret[i].flag = ft_memmove(ret[i].flag, flags[i], ft_strlen(flags[i]));
+		info[i].flag[ft_strlen(flags[i])] = '\0';
+		info[i].flag = ft_memmove(info[i].flag, flags[i], ft_strlen(flags[i]));
 	}
-	return (ret);
+	return (info);
 }
 
 t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 {
 	char	*specs;
 	char	**flags;
-	t_info	*ret;
+	t_info	*info;
 	
 	if (!(specs = make_specs(spec_adr, count_s)))
 		return (0);
@@ -99,7 +97,7 @@ t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 		free(specs);
 		return (0);
 	}
-	if (!(ret = make_info(specs, flags)))
+	if (!(info = make_info(specs, flags)))
 	{
 		free(specs);
 		while (*flags)
@@ -107,5 +105,5 @@ t_info	*make_info_and_free(t_list *spec_adr, int count_s)
 		return (0);
 	}
 	all_free(&spec_adr, &specs, &flags, count_s);
-	return (ret);
+	return (info);
 }

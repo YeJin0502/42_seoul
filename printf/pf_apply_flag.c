@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:07:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/10 13:31:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 		is_contain(info.flag, '.') == 1) // 224, 231, 285, 286
 		c_arg_dup = ft_strdup("");
 	else if (c_arg[0] == '-' && ++f_info.c_arg_nega)
-		c_arg_dup = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1); // 맞나?
+		c_arg_dup = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1);
 	else
 		c_arg_dup = ft_strdup(c_arg);
 	if (f_info.width < f_info.precision && f_info.c_arg_nega == 1)
