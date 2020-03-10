@@ -103,7 +103,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
 	// // d 테스트 - 누수 체크함
@@ -214,7 +214,7 @@ int main()
 	// ft_printf("%%\n");
 	// printf("%5.06d\n", 123);
 }
-
+*/
 
 // count_spec 테스트
 // int main()
@@ -389,7 +389,7 @@ int main()
 }
 */
 
-/*
+
 int main()
 {
 	// ft_printf("[%7d]", 33);
@@ -405,7 +405,9 @@ int main()
 	// ft_printf("[%-32s]", "abc");
 	// printf("[%-32s]", "abc");
 
-	ft_printf("%.6i", -3);
-	printf("%.6i", -3);
+	// ft_printf("%.6i", -3);
+	// printf("%.6i", -3);
+
+	ft_printf("[%-10.5i]", -216);
+	printf("[%-10.5i]", -216);
 }
-*/

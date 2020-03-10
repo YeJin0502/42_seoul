@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:55:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 14:45:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/11 03:48:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,60 @@ static void p_bigger_then_w_s(char *ret, char *c_arg, t_f_info f_info, int c_arg
 			ret[i++] = c_arg[j++];
 	}
 }
+
+/*
+static void	w_bigger_then_p(char *ret, char *c_arg, t_info info, int c_arg_size)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (info.f_info.minus == 0)
+	{
+		if (info.spec != 's')
+		{
+			while (i < (info.f_info.width - info.f_info.precision))
+				ret[i++] = ' ';
+			if (info.f_info.c_arg_nega == 1 && --i)
+				ret[i++] = '-';
+			while (i < (info.f_info.width - c_arg_size))
+				ret[i++] = '0';
+			while (i < info.f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+		else
+		{
+			while (i < (info.f_info.width - info.f_info.precision))
+				ret[i++] = ' ';
+			while (i < (info.f_info.width - c_arg_size))
+				ret[i++] = ' ';
+			while (i < info.f_info.width)
+				ret[i++] = c_arg[j++];
+		}
+	}
+	else if (info.f_info.minus == 1)
+	{
+		if (info.spec != 's')
+		{
+			if (info.f_info.c_arg_nega == 1)
+				ret[i++] = '-';
+			while (i < info.f_info.precision - c_arg_size + info.f_info.c_arg_nega)
+				ret[i++] = '0';
+			while (j < c_arg_size)
+				ret[i++] = c_arg[j++];
+		}
+		else
+		{
+			while (i < pf_min(c_arg_size, info.f_info.precision))
+				ret[i++] = c_arg[j++];
+			while (i < info.f_info.width)
+				ret[i++] = ' ';
+		}
+	}
+}
+*/
+
 
 static void	w_bigger_then_p(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
@@ -106,6 +160,7 @@ static void w_bigger_then_p_s(char *ret, char *c_arg, t_f_info f_info, int c_arg
 	}
 }
 
+
 static void w_exist(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 {
 	int i;
@@ -140,7 +195,6 @@ static void w_exist(char *ret, char *c_arg, t_f_info f_info, int c_arg_size)
 		while (i < f_info.width)
 			ret[i++] = c_arg[j++];
 	}
-	return ;
 }
 
 static char	*make_ret(char *c_arg_dup, t_f_info f_info, t_info info, int c_arg_size)
@@ -159,7 +213,7 @@ static char	*make_ret(char *c_arg_dup, t_f_info f_info, t_info info, int c_arg_s
 		p_bigger_then_w(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width <= f_info.precision && info.spec == 's')
 		p_bigger_then_w_s(ret, c_arg_dup, f_info, c_arg_size);
-	else if (f_info.width > f_info.precision && f_info.precision && info.spec != 's')
+	else if (f_info.width > f_info.precision && f_info.precision)
 		w_bigger_then_p(ret, c_arg_dup, f_info, c_arg_size);
 	else if (f_info.width > f_info.precision && f_info.precision && info.spec == 's')
 		w_bigger_then_p_s(ret, c_arg_dup, f_info, c_arg_size);
@@ -184,6 +238,7 @@ char	*apply_flag(char *c_arg, t_f_info f_info, t_info info)
 		c_arg_dup = ft_substr(c_arg, 1, ft_strlen(c_arg) - 1);
 	else
 		c_arg_dup = ft_strdup(c_arg);
+	// printf("(%d,%d,%d)", f_info.precision, f_info.c_arg_nega,f_info.width);
 	if (f_info.width < f_info.precision && f_info.c_arg_nega == 1)
 		f_info.precision++;
 	c_arg_size = ft_strlen(c_arg_dup);
