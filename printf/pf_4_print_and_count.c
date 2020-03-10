@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_printf_process.c                                :+:      :+:    :+:   */
+/*   pf_print_and_count.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 07:53:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 13:41:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/11 04:36:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	no_spec_print(const char *format)
-{
-	int	ret;
-
-	ret = 0;
-	while (*format)
-	{
-		if (*format == '%' && ++format)
-			while (*format != '%' && *format)
-				format++;
-		write(1, format, 1);
-		ret++;
-		format++;
-	}
-	return (ret);
-}
 
 static char	*convert_to_str(va_list ap, t_info info)
 {
