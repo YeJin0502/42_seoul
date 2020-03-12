@@ -3,6 +3,7 @@
 #include <string.h>
 #include <mlx.h>
 #include <unistd.h>
+#include <math.h>
 
 /*
 typedef struct    data_s
@@ -117,8 +118,8 @@ int main()
 }
 */
 
-#include <math.h>
-
+/*
+// 삼각형은 삼각형인데... y축이 반대다보니... 뒤집어진 정삼각형임.
 int main()
 {
 	void *mlx;
@@ -140,12 +141,13 @@ int main()
 		dy = -200;
 		while (dy <= 200)
 		{
-			if ((dy - 2*dx <= 100 && dy >= 0 && dx <= 0))
+			if ((dy - 2*dx <= 100 && dy >= 0 && dx <= 0) ||
+				(dy + 2*dx <= 100 && dy >= 0 && dx >= 0))
 				mlx_pixel_put(mlx, win, o + dx, o + dy, 0xff0000);
 			dy++;
 		}
 		dx++;
 	}
 	mlx_loop(mlx); // 없으면 바로 창 꺼짐
-
 }
+*/
