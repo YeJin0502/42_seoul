@@ -16,3 +16,6 @@ get_next_line/*.txt
 # printf
 printf/*.txt
 !printf/results.txt
+
+#cub3d
+!cub3d/minilibx_linux
