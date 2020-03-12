@@ -63,3 +63,89 @@ int main()
     mlx_loop(mlx_ptr);
 }
 */
+
+/*
+// 정사각형
+int main()
+{
+	void *mlx;
+	void *win;
+	int x;
+	int y;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 500, 500, "moongua");
+	x = 100;
+	y = 100;
+	while (x < 200)
+	{
+		y = 100;
+		while (y < 200)
+			mlx_pixel_put(mlx, win, x, y++, 0xff0000);
+		x++;
+	}
+	
+}
+*/
+
+/*
+// 원
+int main()
+{
+	void *mlx;
+	void *win;
+	int x;
+	int y;
+	int o;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 500, 500, "moongua");
+	o = 200;
+	x = 0;
+	while (x <= 400)
+	{
+		y = 0;
+		while (y <= 400)
+		{
+			if ((x - o)*(x - o) + (y - o)*(y - o) <= 10000)
+				mlx_pixel_put(mlx, win, x, y, 0xff0000);
+			y++;
+		}
+		x++;
+	}
+    mlx_loop(mlx); // 없으면 바로 창 꺼짐
+}
+*/
+
+#include <math.h>
+
+int main()
+{
+	void *mlx;
+	void *win;
+	
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 500, 500, "dmdkr");
+
+	int dx;
+	int dy;
+	int o;
+	int x = o + dx;
+	int y = o + dy;
+
+	o = 200;
+	dx = -200;
+	while (dx <= 200)
+	{
+		dy = -200;
+		while (dy <= 200)
+		{
+			if ((dy - 2*dx <= 100 && dy >= 0 && dx <= 0))
+				mlx_pixel_put(mlx, win, o + dx, o + dy, 0xff0000);
+			dy++;
+		}
+		dx++;
+	}
+	mlx_loop(mlx); // 없으면 바로 창 꺼짐
+
+}
