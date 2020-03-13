@@ -3,19 +3,12 @@ a.out
 *.o
 *.a
 
-# libft를 제외한 하위 디렉토리 무시
-/*/*/
-!/*/libft/
+# # libft를 제외한 하위 디렉토리 무시
+# /*/*/
+# !/*/libft/
 
 # libft
 libft/*.txt
 
-# get_next_line
-get_next_line/*.txt
-
-# printf
-printf/*.txt
-!printf/results.txt
-
-#cub3d
-!cub3d/minilibx_linux
+# ft_server
+ft_server/study*/
