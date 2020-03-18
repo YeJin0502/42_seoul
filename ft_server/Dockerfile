@@ -1,20 +1,46 @@
-FROM debian:latest
+FROM debian:buster
 MAINTAINER gmoon <gmoon@student.42seoul.kr>
 
-RUN apt-get update
-RUN apt-get install -y nginx \
-    apache2 php5 php5-mysql mysql-client wget
+# install
+WORKDIR /tmp
+RUN apt update
+RUN apt install -y nginx mariadb-server php-fpm php-mysql; \
+	apt install -y curl php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip; \
+	apt install -y wget php-json php-mbstring php-zip php-gd
+RUN curl -LO https://wordpress.org/latest.tar.gz
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+RUN apt install -y libnss3-tools
+RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
 
-RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
-RUN chown -R www-data:www-data /var/lib/nginx
+# wordpress
+RUN tar xzvf latest.tar.gz; \
+	mv wordpress /var/www/html
+ADD srcs/wp-config.php /var/www/html/wp-config.php
+RUN service mysql start; \
+	echo "CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" | mysql; \
+	echo "GRANT ALL ON wordpress.* TO 'wordpress_user'@'localhost' IDENTIFIED BY 'password';" | mysql; \
+	echo "FLUSH PRIVILEGES;" | mysql
 
-VOLUME ["/data", "/etc/nginx/site-enabled", "/var/log/nginx"]
+# phpmyadmin
+RUN tar xzvf phpMyAdmin-4.9.0.1-all-languages.tar.gz; \
+	mv phpMyAdmin-4.9.0.1-all-languages /usr/share/phpmyadmin
+ADD srcs/config.inc.php /usr/share/phpmyadmin/config.inc.php
+RUN mkdir /usr/share/phpmyadmin/tmp; \
+	chmod 777 /usr/share/phpmyadmin/tmp; \
+	chmod 644 /usr/share/phpmyadmin/config.inc.php
+RUN ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 
-WORKDIR /etc/nginx
+# ssl
+RUN mv mkcert-v1.1.2-linux-amd64 mkcert; \
+	chmod +x mkcert; \
+	./mkcert -install; \
+	./mkcert localhost
 
-CMD ["nginx"]
+# nginx
+ADD srcs/default /etc/nginx/sites-available/default
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
 
-# 아 몰겠어ㅓㅓㅓ
+CMD service mysql start; \
+	service php7.3-fpm start; \
+	nginx -g 'daemon off;'
