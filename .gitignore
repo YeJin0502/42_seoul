@@ -12,3 +12,9 @@ libft/*.txt
 
 # ft_server
 ft_server/study*/
+
+# printf
+printf/pft_2019
+
+# ft_server
+ft_server/backup*
