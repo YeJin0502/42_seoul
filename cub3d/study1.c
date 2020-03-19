@@ -85,7 +85,7 @@ int main()
 			mlx_pixel_put(mlx, win, x, y++, 0xff0000);
 		x++;
 	}
-	
+    mlx_loop(mlx);
 }
 */
 
@@ -118,7 +118,6 @@ int main()
 }
 */
 
-/*
 // 삼각형은 삼각형인데... y축이 반대다보니... 뒤집어진 정삼각형임.
 int main()
 {
@@ -150,4 +149,3 @@ int main()
 	}
 	mlx_loop(mlx); // 없으면 바로 창 꺼짐
 }
-*/
