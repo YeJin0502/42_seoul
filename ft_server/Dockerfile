@@ -1,15 +1,15 @@
 FROM debian:buster
-MAINTAINER gmoon <gmoon@student.42seoul.kr>
+LABEL maintainer="gmoon@student.42seoul.kr"
 
 # install
-WORKDIR /tmp
 RUN apt update
-RUN apt install -y nginx mariadb-server php-fpm php-mysql; \
-	apt install -y curl php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip; \
-	apt install -y wget php-json php-mbstring php-zip php-gd
+RUN apt install -y nginx mariadb-server php-fpm php-mysql
+RUN apt install -y curl php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
+RUN apt install -y wget php-json php-mbstring
+RUN apt install -y libnss3-tools
+WORKDIR /tmp
 RUN curl -LO https://wordpress.org/latest.tar.gz
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
-RUN apt install -y libnss3-tools
 RUN wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
 
 # wordpress
