@@ -2,17 +2,6 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define w 640
-#define h 480
-
-int map[6][6] = {{ 1, 1, 1, 1, 1, 1 },
-                 { 1, 0, 0, 0, 0, 1 },
-                 { 1, 0, 0, 0, 0, 1 },
-                 { 1, 0, 0, 0, 0, 1 },
-                 { 1, 0, 0, 0, 0, 1 },
-                 { 1, 1, 1, 1, 1, 1 }};
-
-#include <stdio.h>
 int main()
 {
     void *mlx;
