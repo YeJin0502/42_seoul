@@ -38,6 +38,15 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+// int worldMap[6][6]=
+// {
+// 	{1,1,1,1,1,1},
+// 	{1,0,0,1,0,1},
+// 	{1,0,2,0,0,1},
+// 	{1,1,0,0,0,1},
+// 	{1,1,1,1,1,1}
+// };
+
 int main()
 {
 	void *mlx;
@@ -46,9 +55,9 @@ int main()
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, w, h, "test");
 	
-	double posX = 22, posY = 12;
-	double dirX = -1, dirY = 0;
-	double planeX = 0, planeY = 0.66;
+	double posX = 22, posY = 12; // 플레이어 위치
+	double dirX = -1, dirY = 0; // 플레이어 방향?
+	double planeX = 0, planeY = 0.66; // 이건 뭐지?
 	double time = 0, oldTime = 0;
 
 	for (int x = 0; x < w; x++)
@@ -115,9 +124,12 @@ int main()
 		int drawEnd = lineHeight / 2 + h / 2;
 		if (drawEnd >= h) drawEnd = h - 1;
 
-		int color = 0xFFFFFF;
+		// for (int tmp_y = 0; tmp_y < drawStart; tmp_y++)
+		// 	mlx_pixel_put(mlx, win, x, tmp_y, 0x6E8DED);
 		for (int tmp_y = drawStart; tmp_y < drawEnd; tmp_y++)
-			mlx_pixel_put(mlx, win, x, tmp_y, color);
+			mlx_pixel_put(mlx, win, x, tmp_y, 0xFFFFFF);
+		// for (int tmp_y = drawEnd; tmp_y < h; tmp_y++)
+		// 	mlx_pixel_put(mlx, win, x, tmp_y, 0xF86363);
 	}
 	mlx_loop(mlx);
 }
