@@ -14,16 +14,16 @@ int main()
     int x1 = 400, y1 = 300;
     int dx = x1 - x0;
     int dy = y1 - y0;
-    int Steps;
+    int steps;
     if (abs(dx) > abs(dy))
-        Steps = abs(dx);
+        steps = abs(dx);
     else
-        Steps = abs(dy);
-    float Xi = (float)dx / (float)Steps;
-    float Yi = (float)dy / (float)Steps; // float 안붙여주면 증가 안함
+        steps = abs(dy);
+    float Xi = (float)dx / (float)steps;
+    float Yi = (float)dy / (float)steps; // float 안붙여주면 증가 안함
     
     float x = (float)x0, y = (float)y0;
-    for (int v = 0; v < Steps; v++)
+    for (int v = 0; v < steps; v++)
     {
         x = x + Xi;
         y = y + Yi;

@@ -5,8 +5,10 @@
 #include <string.h>
 #include <math.h>
 
-#define w 640
-#define h 480
+// #define w 640
+// #define h 480
+#define w 800
+#define h 400
 #define mapWidth 24
 #define mapHeight 24
 
@@ -55,30 +57,30 @@ int main()
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, w, h, "test");
 	
-	double posX = 22, posY = 12; // 플레이어 위치
-	double dirX = -1, dirY = 0; // 플레이어 방향?
-	double planeX = 0, planeY = 0.66; // 이건 뭐지?
+	double posX = 22, posY = 12;
+	double dirX = -1, dirY = 0;
+	double planeX = 0, planeY = 0.66;
 	double time = 0, oldTime = 0;
 
 	for (int x = 0; x < w; x++)
 	{
 		double cameraX = 2 * x / (double)w - 1;
-		double rayDirX = dirX + planeX * cameraX;
+		double rayDirX = dirX + planeX * cameraX; // 광선이 가르키는 방향
 		double rayDirY = dirY + planeY * cameraX;
 
-		int mapX = (int)posX;
+		int mapX = (int)posX; // 블록(격자) 좌표
 		int mapY = (int)posY;
-		double sideDistX;
-		double sideDistY;
-		double deltaDistX = abs(1 / rayDirX);
-		double deltaDistY = abs(1 / rayDirY);
+		double sideDistX; // 첫 x 격자에 도달할 때 까지의 거리
+		double sideDistY; // 첫 y 격자에 도달할 때 까지의 거리
+		double deltaDistX = (rayDirY == 0) ? 0 : abs(1 / rayDirX);
+		// 광선이 첫 x격자에서 다음 x 격자까지 이동하는 거리
+		double deltaDistY = (rayDirX == 0) ? 0 : abs(1 / rayDirY);
+		// deltaDistX,Y 사이의 비율만 따지면 되므로, abs(v/rayDirX,Y)에서 v가 1로 대체
 		double perpWallDist;
 		int stepX;
 		int stepY;
 		int hit = 0;
 		int side;
-		// double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : abs(1 / rayDirX));
-		// double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : abs(1 / rayDirY));
 
 		if (rayDirX < 0)
 		{
@@ -88,7 +90,7 @@ int main()
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - posX) * deltaDistX; // 닮음비 이용해서 구함
 		}
 		if (rayDirY < 0)
 		{
@@ -116,8 +118,10 @@ int main()
 			}
 			if (worldMap[mapX][mapY] > 0) hit = 1;
 		}
-		if (side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
-		else perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
+		if (side == 0)
+			perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
+		else
+			perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 		int lineHeight = (int)(h / perpWallDist);
 		int drawStart = -lineHeight / 2 + h / 2;
 		if (drawStart < 0) drawStart = 0;
