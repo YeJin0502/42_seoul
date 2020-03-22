@@ -122,11 +122,14 @@ int main()
 			perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
 		else
 			perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
-		int lineHeight = (int)(h / perpWallDist);
+
+		int lineHeight = (int)(h / perpWallDist); // 모르겠음
 		int drawStart = -lineHeight / 2 + h / 2;
-		if (drawStart < 0) drawStart = 0;
+		if (drawStart < 0)
+			drawStart = 0;
 		int drawEnd = lineHeight / 2 + h / 2;
-		if (drawEnd >= h) drawEnd = h - 1;
+		if (drawEnd >= h)
+			drawEnd = h - 1;
 
 		// for (int tmp_y = 0; tmp_y < drawStart; tmp_y++)
 		// 	mlx_pixel_put(mlx, win, x, tmp_y, 0x6E8DED);
