@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/24 01:43:29 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/23 21:22:55 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/23 21:24:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,8 @@
 #include <mlx.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <stdio.h>
-
-#define w 640
-#define h 480
-#define mapWidth 24
-#define mapHeight 24
-
-typedef struct s_info
-{
-	int **worldMap;
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	double frameTime;
-	int key_flag;
-}				t_info;
-
-int key_hook(int keycode, void *param);
+#include <stdio.h> // 지워도 되나?
 
 #endif
