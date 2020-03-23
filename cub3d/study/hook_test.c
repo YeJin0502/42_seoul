@@ -6,6 +6,9 @@ typedef struct s_point
 	int y;
 }				t_point;
 
+void *mlx;
+void *win;
+
 int deal_key(int key, void *param)
 {
 	t_point *p;
@@ -14,16 +17,14 @@ int deal_key(int key, void *param)
 	// printf("%d\n", key);
 	if (key == 65362)
 	{
-		(*p).y += 1;
+		(*p).y -= 1;
 	}
+	mlx_string_put(mlx, win, p->x, p->y, 0xFF00FF, "hello");
 	printf("%d\n", (*p).y);
 }
 
 int main()
 {
-	void *mlx;
-	void *win;
-
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 300, 300, "test");
 
@@ -33,9 +34,12 @@ int main()
 	p->x = 150;
 	p->y = 150;
 
-	mlx_string_put(mlx, win, p->x, p->y, 0xFFFFFF, "hi");	
-	mlx_key_hook(win, deal_key, p);
-	if (p->y != 150)
-		mlx_string_put(mlx, win, p->x, p->y, 0xFF00FF, "hi");
-	mlx_loop(mlx);
+	while (1)
+	{
+		mlx_string_put(mlx, win, p->x, p->y, 0xFFFFFF, "hi");	
+		mlx_key_hook(win, deal_key, p);
+		if (p->y != 150)
+			mlx_string_put(mlx, win, p->x, p->y, 0xFF00FF, "hi");
+		mlx_loop(mlx);
+	}
 }
