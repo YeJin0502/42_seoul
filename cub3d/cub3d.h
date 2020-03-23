@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/24 01:43:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/24 02:34:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <stdio.h>
+#include "libft/libft.h"
+#include <stdio.h> //
 
 #define w 640
 #define h 480
@@ -28,7 +29,7 @@
 
 typedef struct s_info
 {
-	int **worldMap;
+	int (*worldMap)[mapHeight];
 	double posX;
 	double posY;
 	double dirX;

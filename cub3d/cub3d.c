@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:09:51 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/24 01:45:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/24 02:28:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main()
 
 	t_info *info;
 	info = (t_info *)malloc(sizeof(t_info));
-	info->worldMap = (int **)Map;
+	info->worldMap = Map;
 	info->posX = 3;
 	info->posY = 3;
 	info->dirX = -1;
