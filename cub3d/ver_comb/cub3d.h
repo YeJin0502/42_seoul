@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 01:04:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 03:53:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 #define TILE_SIZE 64
 #define MAP_NUM_ROWS 11
 #define MAP_NUM_COLS 15
-#define WINDOW_WIDTH MAP_NUM_ROWS * TILE_SIZE
-#define WINDOW_HEIGHT MAP_NUM_COLS * TILE_SIZE
+#define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
+#define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
 #define FOV_ANGLE 60 * PI / 180
 #define WALL_STRIP_WIDTH 1
 #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
@@ -45,6 +45,10 @@ typedef struct	s_info
 	double moveSpeed;
 	double rotationSpeed;
 }				t_info;
+
+double norm_Angle(double angle);
+int hasWallAt(double x, double y, t_info *info);
+double point_distance(int x1, int y1, int x2, int y2);
 
 int key_hook(int keycode, void *param);
 
