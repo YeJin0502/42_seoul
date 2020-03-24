@@ -292,7 +292,7 @@ function render3DProjectedWalls() {
 
         // projected wall height
         var wallStripHeight = (TILE_SIZE / correctWallDistance) * distanceProjectionPlane;
-        
+
         // compute the transparency based on the wall distance
         var alpha = 170 / correctWallDistance; // 거리에 따라 색깔 다르게
 
