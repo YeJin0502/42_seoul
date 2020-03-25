@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 04:22:47 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 04:53:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 # define PI 3.141592
 # define FOV 60.0 * PI / 180.0
+# define ROTATION_SPEED 2.0 * PI / 180.0
+# define MOVE_SPEED 2.0 // 그냥 2하면 왠지 오류날 것 같은... 되나?
+
 # define KEY_W 119
 # define KEY_S 115
 # define KEY_A 97 // 반대?
@@ -59,7 +62,13 @@ typedef struct	s_info
 
 typedef struct s_raycasting
 {
-	
+	int keycode;
+	int move_dir;
+	int rotation_dir;
+	double ray_angle;
+	double rotation_speed;
+	double move_speed;
+	double move_dist;
 }				t_rc;
 
 void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
@@ -67,5 +76,6 @@ void make_2d_map(t_info *info);
 void make_first_scene(t_info *info);
 void draw_line(t_pair p1, t_pair p2, t_info *info); // 구조체, 구조체의 포인터 장단점을 모르겠다.
 int key_hook(int keycode, void *param);
+void ray_casting(t_info *info, t_rc *rc);
 
 #endif
