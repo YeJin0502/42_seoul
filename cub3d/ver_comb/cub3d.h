@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 16:15:53 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 18:27:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <stdio.h> //
 
 
-#define PI 3.141591
+#define PI 3.141592
 #define TILE_SIZE 64
 #define MAP_NUM_ROWS 11
 #define MAP_NUM_COLS 15
