@@ -6,14 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:01:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 16:52:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 20:40:08 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
-
 
 int key_hook(int keycode, void *param)
 {

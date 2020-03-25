@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:01:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 19:04:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 22:10:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,18 @@ int key_hook(int keycode, void *param)
 	printf("%f, %f\n", rayAngle, FOV_ANGLE / 2);
 
 	// 테스트용 2d 맵
-	// for (int a = 0; a < MAP_NUM_ROWS; a++)
-	// {
-	// 	for (int b = 0; b < MAP_NUM_COLS; b++)
-	// 	{
-	// 		int tileX = b * TILE_SIZE;
-	// 		int tileY = a * TILE_SIZE;
-	// 		int color = (info->grid[a][b] == 1) ? 0xFFFFFF : 0x000000;
-	// 		for (int c = 0; c < TILE_SIZE; c++)
-	// 			for (int d = 0; d < TILE_SIZE; d++)
-	// 				mlx_pixel_put(info->mlx, info->win, tileX+c, tileY+d, color);
-	// 	}
-	// }
+	for (int a = 0; a < MAP_NUM_ROWS; a++)
+	{
+		for (int b = 0; b < MAP_NUM_COLS; b++)
+		{
+			int tileX = b * TILE_SIZE;
+			int tileY = a * TILE_SIZE;
+			int color = (info->grid[a][b] == 1) ? 0xFFFFFF : 0x000000;
+			for (int c = 0; c < TILE_SIZE; c++)
+				for (int d = 0; d < TILE_SIZE; d++)
+					mlx_pixel_put(info->mlx, info->win, tileX+c, tileY+d, color);
+		}
+	}
 
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
@@ -193,21 +193,21 @@ int key_hook(int keycode, void *param)
 		distance = (horzHitDistance < vertHitDistance) ? horzHitDistance : vertHitDistance;
 		wasHitVertical = (horzHitDistance < vertHitDistance) ? 0 : 1;
 
-		// 레이캐스팅 렌더링
-		double correctWallDistance = distance * cos(rayAngle - info->rotationAngle);
-		double distancePlane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
-		double wallStripeHeight = (TILE_SIZE / correctWallDistance) * distancePlane;
+		// // 레이캐스팅 렌더링
+		// double correctWallDistance = distance * cos(rayAngle - info->rotationAngle);
+		// double distancePlane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+		// double wallStripeHeight = (TILE_SIZE / correctWallDistance) * distancePlane;
 
-		double wallStart = (WINDOW_HEIGHT / 2) - (wallStripeHeight / 2);
-		double wallEnd = (WINDOW_HEIGHT / 2) + (wallStripeHeight / 2);
+		// double wallStart = (WINDOW_HEIGHT / 2) - (wallStripeHeight / 2);
+		// double wallEnd = (WINDOW_HEIGHT / 2) + (wallStripeHeight / 2);
 
-		int j = wallStart - 1;
-		while (++j < wallEnd)
-			mlx_pixel_put(info->mlx, info->win, i, j, 0xFFFFFF);
+		// int j = wallStart - 1;
+		// while (++j < wallEnd)
+		// 	mlx_pixel_put(info->mlx, info->win, i, j, 0xFFFFFF);
 
 
 		// rayAngle += FOV_ANGLE / NUM_RAYS;
-		// draw_line(info->x, info->y, wallHitX, wallHitY, info);
+		draw_line(info->x, info->y, wallHitX, wallHitY, info);
 		rayAngle += 0.001090; // 수정해야함
 	}
 

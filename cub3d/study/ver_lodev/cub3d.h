@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 16:51:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 20:51:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 // #include "libft/libft.h"
 #include <stdio.h> //
 
-#define w 640
-#define h 480
+#define w 320
+#define h 200
 #define mapWidth 24
 #define mapHeight 24
 
