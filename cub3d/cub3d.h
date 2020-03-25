@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 00:58:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 01:48:08 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 # include <mlx.h>
 # include <math.h>
-# include <stdio.h> // 
+# include <stdio.h> //
+# include <stdlib.h>
 
 # define PI 3.141592
 # define FOV (60 * 180 / PI) // 괄호 써도 되나?
 
 typedef struct	s_info
 {
-	int R_width;
-	int R_height; // x,y 쌍을 다 구조체로 만들까?
+	double R_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
+	double R_height; // x,y 쌍을 다 구조체로 만들까?
 	// char *NO;
 	// char *SO;
 	// char *WE;
@@ -34,13 +35,16 @@ typedef struct	s_info
 	// 아닌가..? 만들 수 있나? // 괄호 안해주면 안됨
 	int map_width;
 	int map_height;
-	int tile_width;
-	int tile_height;
+	double tile_width;
+	double tile_height;
 	int x;
 	int y;
 	double dir;
 	void *mlx;
 	void *win;
 }				t_info;
+
+void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
+void make_2d_map(t_info *info);
 
 #endif

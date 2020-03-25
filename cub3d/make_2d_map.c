@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   make_2d_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 01:49:09 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/26 01:41:58 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/26 01:42:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main()
+void make_2d_map(t_info *info)
 {
-	t_info *info;
-	info = make_info(); // 아마 argc, argv를 매개변수로.
+	int i;
+	int j;
+	int a;
+	int b;
 
-	make_2d_map(info);
-
-		
-
-	// mlx_key_hook(info->win, key_hook, (void *)info); // 아마 나중에 mlx_hook으로 바꿔야 할 듯?
-	mlx_loop(info->mlx);
+	i = -1;
+	while (++i < info->map_width)
+	{
+		j = -1;
+		while (++j < info->map_height)
+		{
+			if (info->map[j][i] != 0)
+			{
+				a = -1;
+				while (++a < info->tile_height)
+				{
+					b = -1;
+					while (++b < info->tile_width)
+						mlx_pixel_put(info->mlx, info->win, i * info->tile_width + b,
+									j * info->tile_height + a, 0xFFFFFF);
+				}
+			}
+		}
+	}
 }

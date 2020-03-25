@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 00:49:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 01:06:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void *make_info() // 아마 매개변수로 argc, argv 받지않을까?
 	info->x = h / 2;
 	info->y = w / 2;
 	mlx_value = mlx_init();
-	win_value = mlx_new_window(mlx_value, info->R_height, info->R_width, "moon");
+	win_value = mlx_new_window(mlx_value, info->R_width, info->R_height, "moon");
 	info->mlx = mlx_value;
 	info->win = win_value;
 	return (info);
