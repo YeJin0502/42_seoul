@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   norm_angle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 04:57:49 by gmoon            ###   ########.fr       */
+/*   Created: 2020/03/26 05:25:40 by gmoon             #+#    #+#             */
+/*   Updated: 2020/03/26 05:26:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main()
+double norm_angle(double angle)
 {
-	t_info *info;
-	info = make_info(); // 아마 argc, argv를 매개변수로.
-
-	make_first_scene(info); // 이런식으로 짜는게 맞을까? 왜 첫번째 화면은 느리게 뜰까..?
-
-	mlx_key_hook(info->win, key_hook, (void *)info); // 아마 나중에 mlx_hook으로 바꿔야 할 듯?
-	mlx_loop(info->mlx);
+	if (angle < 0)
+		angle = angle + 2 * PI;
+	if (angle < 2 * PI)
+		angle = remainder(angle, 2 * PI); // 이거 다른 함수들 살펴봐야.
+	return (angle); // 맞나?
 }
