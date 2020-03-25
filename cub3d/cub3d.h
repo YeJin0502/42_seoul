@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 19:10:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 19:27:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ typedef struct	s_info
 	double moveSpeed;
 	double rotationSpeed;
 }				t_info;
+
+typedef struct s_cal
+{
+	double moveStep;
+	double rayAngle;
+	double wallHitX;
+	double wallHitY;
+	double distance;
+	int wasHitVertical;
+	int isRayFacingDown;
+	int isRayFacingUp;
+	int isRayFacingRight;
+	int isRayFacingLeft;
+	double xintercept;
+	double yintercept;
+	double xstep;
+	double ystep;
+}				t_cal;
+
+typedef struct s_line
+{
+	int foundWallHit;
+	double WallHitX;
+	double WallHitY;
+}				t_line;
 
 double norm_Angle(double angle);
 int hasWallAt(double x, double y, t_info *info);
