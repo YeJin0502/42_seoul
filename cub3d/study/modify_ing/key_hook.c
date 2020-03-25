@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:01:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 22:25:39 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 22:43:41 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ int key_hook(int keycode, void *param)
 					mlx_pixel_put(info->mlx, info->win, tileX+c, tileY+d, color);
 		}
 	}
+	t_line *horz;
+	horz = (t_line *)malloc(sizeof(t_line));
+
+	t_line *vert;
+	vert = (t_line *)malloc(sizeof(t_line));
 
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
@@ -104,8 +109,6 @@ int key_hook(int keycode, void *param)
 		//////////////////////////////
 		// horizontal
 		//////////////////////////////
-		t_line *horz;
-		horz = (t_line *)malloc(sizeof(t_line));
 
 		horz->foundWallHit = 0;
 		horz->WallHitX = 0;
@@ -148,8 +151,6 @@ int key_hook(int keycode, void *param)
 		//////////////////////////////
 		// vertical
 		//////////////////////////////
-		t_line *vert;
-		vert = (t_line *)malloc(sizeof(t_line));
 		vert->foundWallHit = 0;
 		vert->WallHitX = 0;
 		vert->WallHitY = 0;
@@ -215,10 +216,12 @@ int key_hook(int keycode, void *param)
 		// 	mlx_pixel_put(info->mlx, info->win, i, j, 0xFFFFFF);
 
 		draw_line(info->x, info->y, cal->wallHitX, cal->wallHitY, info);
-		// cal->rayAngle += (FOV_ANGLE) / (NUM_RAYS);
-		cal->rayAngle += 0.001090; // 수정해야함
-
+		cal->rayAngle += (FOV_ANGLE) / (NUM_RAYS);
 	}
+
+	free(cal);
+	free(horz);
+	free(vert);
 
 	if (keycode == 65362)
 	{
