@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 03:53:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 16:15:53 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 // #include "libft/libft.h"
 #include <stdio.h> //
 
+
 #define PI 3.141591
 #define TILE_SIZE 64
 #define MAP_NUM_ROWS 11
 #define MAP_NUM_COLS 15
 #define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
 #define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
-#define FOV_ANGLE 60 * PI / 180
+#define FOV_ANGLE 60.0 * PI / 180.0
 #define WALL_STRIP_WIDTH 1
 #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 

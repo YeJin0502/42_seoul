@@ -6,115 +6,124 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:01:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/24 03:32:11 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 16:52:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+
+
+
 int key_hook(int keycode, void *param)
 {
 	t_info *info;
-	info = (t_info *)param;
+	t_cal *cal;
 
+	info = (t_info *)param;
+	cal = (t_cal *)malloc(sizeof(t_cal));
 	mlx_clear_window(info->mlx, info->win);
+
 	for (int x = 0; x < w; x++)
 	{
-		info->key_flag = 0;
-		double cameraX = 2 * x / (double)w - 1;
-		double rayDirX = info->dirX + info->planeX * cameraX; // 광선이 가르키는 방향
-		double rayDirY = info->dirY + info->planeY * cameraX;
-		int mapX = (int)info->posX; // 블록(격자) 좌표
-		int mapY = (int)info->posY;
-		double sideDistX; // 첫 x 격자에 도달할 때 까지의 거리 // 여기부터 dda
-		double sideDistY; // 첫 y 격자에 도달할 때 까지의 거리
-		double deltaDistX; // 광선이 첫 x,y격자에서 다음 x,y 격자까지 이동하는 거리
-		double deltaDistY; // deltaDistX,Y 사이의 비율만 따지면 되므로, abs(v/rayDirX,Y)에서 v가 1로 대체
-		if (rayDirY == 0)
-			deltaDistX = 0;
-		else if (rayDirX == 0)
-			deltaDistX = 1;
+		cal->cameraX = 2 * x / (double)w - 1;
+		cal->rayDirX = info->dirX + info->planeX * cal->cameraX; 
+		cal->rayDirY = info->dirY + info->planeY * cal->cameraX;
+		cal->mapX = (int)info->posX;
+		cal->mapY = (int)info->posY;
+
+		if (cal->rayDirY == 0)
+			cal->deltaDistX = 0;
+		else if (cal->rayDirX == 0)
+			cal->deltaDistX = 1;
 		else
-			deltaDistX = abs(1/rayDirX);
-		if (rayDirX == 0)
-			deltaDistY = 0;
-		else if (rayDirY == 0)
-			deltaDistY = 1;
+			cal->deltaDistX = abs(1 / cal->rayDirX);
+		if (cal->rayDirX == 0)
+			cal->deltaDistY = 0;
+		else if (cal->rayDirY == 0)
+			cal->deltaDistY = 1;
 		else
-			deltaDistY = abs(1/rayDirY);
-		double perpWallDist;
-		int stepX;
-		int stepY;
-		int hit = 0;
-		int side;
-		if (rayDirX < 0)
+			cal->deltaDistY = abs(1 / cal->rayDirY);
+
+		if (cal->rayDirX < 0)
 		{
-			stepX = -1;
-			sideDistX = (info->posX - mapX) * deltaDistX;
+			cal->stepX = -1;
+			cal->sideDistX = (info->posX - cal->mapX) * cal->deltaDistX;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - info->posX) * deltaDistX; // 닮음비 이용해서 구함
+			cal->stepX = 1;
+			cal->sideDistX = (cal->mapX + 1.0 - info->posX) * cal->deltaDistX; // 닮음비 이용해서 구함
 		}
-		if (rayDirY < 0)
+		if (cal->rayDirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (info->posY - mapY) * deltaDistY;
+			cal->stepY = -1;
+			cal->sideDistY = (info->posY - cal->mapY) * cal->deltaDistY;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
+			cal->stepY = 1;
+			cal->sideDistY = (cal->mapY + 1.0 - info->posY) * cal->deltaDistY;
 		}
+		
 		// dda 알고리즘
-		while (hit == 0)
+		cal->hit = 0;
+		while (cal->hit == 0)
 		{
-			if (sideDistX < sideDistY)
+			if (cal->sideDistX < cal->sideDistY)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				cal->sideDistX += cal->deltaDistX;
+				cal->mapX += cal->stepX;
+				cal->side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				cal->sideDistY += cal->deltaDistY;
+				cal->mapY += cal->stepY;
+				cal->side = 1;
 			}
-			if (info->worldMap[mapX][mapY] > 0) hit = 1;
+			if (info->worldMap[cal->mapX][cal->mapY] > 0)
+				cal->hit = 1;
 		}
-		if (side == 0)
-			perpWallDist = (mapX - info->posX + (1 - stepX) / 2) / rayDirX;
+
+		// 레이캐스팅 높이 계산
+		if (cal->side == 0)
+			cal->perpWallDist = (cal->mapX - info->posX + (1 - cal->stepX) / 2) / cal->rayDirX;
 		else
-			perpWallDist = (mapY - info->posY + (1 - stepY) / 2) / rayDirY; // 여기까지 dda
-		int lineHeight = (int)(h / perpWallDist); // 모르겠음
-		int drawStart = -lineHeight / 2 + h / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + h / 2;
-		if (drawEnd >= h)
-			drawEnd = h - 1;
-		int color;
-		if (info->worldMap[mapX][mapY] == 1)
-			color = 0xFF3333;
-		else if (info->worldMap[mapX][mapY] == 2)
-			color = 0x66CC66;
-		else if (info->worldMap[mapX][mapY] == 3)
-			color = 0x6666FF;
-		else if (info->worldMap[mapX][mapY] == 4)
-			color = 0xCCCCFF;
+			cal->perpWallDist = (cal->mapY - info->posY + (1 - cal->stepY) / 2) / cal->rayDirY; // 여기까지 dda
+		cal->lineHeight = (int)(h / cal->perpWallDist); // 모르겠음
+		cal->drawStart = -(cal->lineHeight / 2) + h / 2;
+		if (cal->drawStart < 0)
+			cal->drawStart = 0;
+		cal->drawEnd = (cal->lineHeight / 2) + h / 2;
+		if (cal->drawEnd >= h)
+			cal->drawEnd = h - 1;
+
+		// 색 결정
+		if (info->worldMap[cal->mapX][cal->mapY] == 1)
+			cal->color = 0xFF3333;
+		else if (info->worldMap[cal->mapX][cal->mapY] == 2)
+			cal->color = 0x66CC66;
+		else if (info->worldMap[cal->mapX][cal->mapY] == 3)
+			cal->color = 0x6666FF;
+		else if (info->worldMap[cal->mapX][cal->mapY] == 4)
+			cal->color = 0xCCCCFF;
 		else
-			color = 0xFFFF66;
-		for (int tmp_y = 0; tmp_y < drawStart; tmp_y++)
+			cal->color = 0xFFFF66;
+
+		// 레이캐스팅 렌더링
+		for (int tmp_y = 0; tmp_y < cal->drawStart; tmp_y++)
 			mlx_pixel_put(info->mlx, info->win, x, tmp_y, 0x6E8DED);
-		for (int tmp_y = drawStart; tmp_y < drawEnd; tmp_y++)
-			mlx_pixel_put(info->mlx, info->win, x, tmp_y, color);
-		for (int tmp_y = drawEnd; tmp_y < h; tmp_y++)
+		for (int tmp_y = cal->drawStart; tmp_y < cal->drawEnd; tmp_y++)
+			mlx_pixel_put(info->mlx, info->win, x, tmp_y, cal->color);
+		for (int tmp_y = cal->drawEnd; tmp_y < h; tmp_y++)
 			mlx_pixel_put(info->mlx, info->win, x, tmp_y, 0xFFFFFF);
 	}
+	// image_pointer = mlx_new_image(info->mlx, w, h);
 	double moveSpeed = info->frameTime * 5.0;
 	double rotSpeed = info->frameTime * 3.0;
+	double oldDirX = info->dirX;
+	double oldPlaneX = info->planeX;
 	if (keycode == 65362)
 	{
 		if (info->worldMap[(int)(info->posX + info->dirX * moveSpeed)][(int)(info->posY)] == 0)
@@ -129,8 +138,6 @@ int key_hook(int keycode, void *param)
 		if (info->worldMap[(int)(info->posX)][(int)(info->posY - info->dirY * moveSpeed)] == 0)
 			info->posY -= info->dirY * moveSpeed;
 	}
-	double oldDirX = info->dirX;
-	double oldPlaneX = info->planeX;
 	if (keycode == 65363)
 	{
 		info->dirX = info->dirX * cos(-rotSpeed) - info->dirY * sin(-rotSpeed);

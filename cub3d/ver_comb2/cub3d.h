@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 21:59:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 16:51:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 17:45:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define h 480
 #define mapWidth 24
 #define mapHeight 24
+#define PI 3.141592
 
 typedef struct s_info
 {
@@ -34,19 +35,21 @@ typedef struct s_info
 	int (*worldMap)[mapHeight];
 	double posX; // 내가 생각하는 x,y축이랑 맵에서의 x,y축이 다르지 않나?
 	double posY;
-	double dirX;
-	double dirY;
-	double planeX; // 이거 초기값 도대체 어떻게 계산하지? 변수 fov 입력하면 자동으로 계산하고 싶은데
-	double planeY;
+	// double dirX;
+	// double dirY;
+	// double planeX; // 이거 초기값 도대체 어떻게 계산하지? 변수 fov 입력하면 자동으로 계산하고 싶은데
+	// double planeY;
+	double fov;
+	double dir;
 	double frameTime;
 	// int key_flag;
 }				t_info;
 
 typedef struct	s_cal
 {
-	double cameraX;
-	double rayDirX; // 광선이 가르키는 방향
-	double rayDirY;
+	// double cameraX;
+	// double rayDirX; // 광선이 가르키는 방향
+	// double rayDirY;
 	int mapX; // 블록(격자) 좌표
 	int mapY;
 	double sideDistX; // 첫 x 격자에 도달할 때 까지의 거리 // 여기부터 dda

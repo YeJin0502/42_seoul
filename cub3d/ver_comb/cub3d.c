@@ -6,11 +6,21 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:09:51 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 04:17:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 16:19:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// #define PI 3.141591
+// #define TILE_SIZE 64
+// #define MAP_NUM_ROWS 11
+// #define MAP_NUM_COLS 15
+// #define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
+// #define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
+// #define FOV_ANGLE 60 * PI / 180
+// #define WALL_STRIP_WIDTH 1
+// #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
 int Map[MAP_NUM_ROWS][MAP_NUM_COLS] =
 {
@@ -69,19 +79,20 @@ int main()
 	info->rotationSpeed = 2 * (PI / 180);
 
 	// 2d 맵 렌더링
-	for (int a = 0; a < MAP_NUM_ROWS; a++)
-	{
-		for (int b = 0; b < MAP_NUM_COLS; b++)
-		{
-			int tileX = b * TILE_SIZE;
-			int tileY = a * TILE_SIZE;
-			int color = (info->grid[a][b] == 1) ? 0xFFFFFF : 0x000000;
-			for (int c = 0; c < TILE_SIZE; c++)
-				for (int d = 0; d < TILE_SIZE; d++)
-					mlx_pixel_put(info->mlx, info->win, tileX+c, tileY+d, color);
-		}
-	}	
+	// for (int a = 0; a < MAP_NUM_ROWS; a++)
+	// {
+	// 	for (int b = 0; b < MAP_NUM_COLS; b++)
+	// 	{
+	// 		int tileX = b * TILE_SIZE;
+	// 		int tileY = a * TILE_SIZE;
+	// 		int color = (info->grid[a][b] == 1) ? 0xFFFFFF : 0x000000;
+	// 		for (int c = 0; c < TILE_SIZE; c++)
+	// 			for (int d = 0; d < TILE_SIZE; d++)
+	// 				mlx_pixel_put(info->mlx, info->win, tileX+c, tileY+d, color);
+	// 	}
+	// }	
 
+	// double FOV_ANGLE = 60 * PI / 180;
 ////////////////////
 	info->rotationAngle += info->turnDirection * info->rotationSpeed;
 	double moveStep = info->walkDirection * info->moveSpeed;
@@ -89,10 +100,16 @@ int main()
 	info->y += sin(info->rotationAngle) * moveStep;
 
 	double rayAngle = info->rotationAngle - (FOV_ANGLE / 2);
+	// draw_line(info->x, info->y, info->x + cos(info->rotationAngle)*30, info->y + sin(info->rotationAngle)*30, info);
+	// draw_line(info->x, info->y, info->x + cos(info->rotationAngle)*30, info->y + sin(info->rotationAngle)*30, info);
+	printf("(%f, %f, %f)\n", FOV_ANGLE, (double)NUM_RAYS, FOV_ANGLE / (double)NUM_RAYS);
+	// draw_line(info->x, info->y, info->x + cos(rayAngle + FOV_ANGLE / NUM_RAYS) * 30, info->y + sin(rayAngle + FOV_ANGLE / NUM_RAYS) * 30, info);
+	// draw_line(info->x, info->y, info->x + cos(info->rotationAngle + (FOV_ANGLE / 2))*30, info->y + sin(info->rotationAngle+ (FOV_ANGLE / 2))*30, info);
+
 
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
-		// rayAngle = norm_Angle(rayAngle);
+		rayAngle = norm_Angle(rayAngle);
 		double wallHitX = 0;
 		double wallHitY = 0;
 		double distance = 0; 
@@ -201,7 +218,9 @@ int main()
 		///////////////////
 
 		draw_line(info->x, info->y, wallHitX, wallHitY, info);
-printf("(%d / %f / %f)\n", wasHitVertical, horzHitDistance, vertHitDistance);
+	// printf("(%f, %f)\n", rayAngle, FOV_ANGLE / NUM_RAYS);
+
+// printf("(%d / %f / %f)\n", wasHitVertical, horzHitDistance, vertHitDistance);
 
 		// // 레이캐스팅 렌더링
 		// double rayDistance = distance;
@@ -215,7 +234,7 @@ printf("(%d / %f / %f)\n", wasHitVertical, horzHitDistance, vertHitDistance);
 		// while (++j < wallEnd)
 		// 	mlx_pixel_put(info->mlx, info->win, i, j, 0xFFFFFF);
 
-		rayAngle += FOV_ANGLE / NUM_RAYS;
+		rayAngle += FOV_ANGLE / (double)NUM_RAYS;
 	}
 ////////////////////
 

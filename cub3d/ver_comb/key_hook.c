@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:01:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/25 03:24:25 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 16:19:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double norm_Angle(double angle)
 {
-	while (angle < 0)
+	if (angle < 0)
 		angle = angle + 2 * PI;
-	while (angle >= 2 * PI)
-		angle = angle - 2 * PI;
+	if (angle < 2 * PI)
+		angle = remainder(angle, 2 * PI);
 	return (angle); // 맞나?
 }
 
@@ -49,6 +49,8 @@ int key_hook(int keycode, void *param)
 	double moveStep = info->walkDirection * info->moveSpeed;
 	info->x += cos(info->rotationAngle) * moveStep;
 	info->y += sin(info->rotationAngle) * moveStep;
+
+	// double FOV_ANGLE = 60 * PI / 180; // 수정 필요
 
 	double rayAngle = info->rotationAngle - (FOV_ANGLE / 2);
 

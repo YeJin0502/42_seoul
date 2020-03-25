@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/23 22:09:51 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/24 03:29:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/25 17:37:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int main()
 	info->mlx = mlx_value;
 	info->win = win_value;
 	info->worldMap = Map;
-	info->posX = 22;
-	info->posY = 12;
+	info->posX = mapWidth / 2;
+	info->posY = mapHeight / 2;
 	info->dirX = -1;
 	info->dirY = 0;
 	info->planeX = 0;
