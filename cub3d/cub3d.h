@@ -6,20 +6,33 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 01:48:08 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 04:22:47 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdio.h> // 허용함수 아니면 나중에 삭제
+
 # include <mlx.h>
 # include <math.h>
-# include <stdio.h> //
 # include <stdlib.h>
 
 # define PI 3.141592
-# define FOV (60 * 180 / PI) // 괄호 써도 되나?
+# define FOV 60.0 * PI / 180.0
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97 // 반대?
+# define KEY_D 100
+# define KEY_LEFT 65361 // 반댄가?
+# define KEY_RIGHT 65363
+
+typedef struct	s_pair
+{
+	int x;
+	int y; // int? double?
+}				t_pair;
 
 typedef struct	s_info
 {
@@ -37,14 +50,22 @@ typedef struct	s_info
 	int map_height;
 	double tile_width;
 	double tile_height;
-	int x;
-	int y;
-	double dir;
+	double x; // int로 했더니 더하는 값들이 double이니까 계산이 이상하게 되더라.
+	double y;
+	double view_angle;
 	void *mlx;
 	void *win;
 }				t_info;
 
+typedef struct s_raycasting
+{
+	
+}				t_rc;
+
 void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void make_2d_map(t_info *info);
+void make_first_scene(t_info *info);
+void draw_line(t_pair p1, t_pair p2, t_info *info); // 구조체, 구조체의 포인터 장단점을 모르겠다.
+int key_hook(int keycode, void *param);
 
 #endif

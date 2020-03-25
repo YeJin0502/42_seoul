@@ -1,5 +1,6 @@
 #include <mlx.h>
 #include <unistd.h>
+#include <stdio.h>
 
 void ft_putchar(char c)
 {
@@ -8,7 +9,7 @@ void ft_putchar(char c)
 
 int deal_key(int key, void *param)
 {
-	ft_putchar('X');
+	printf("%d\n", key);
 }
 
 int main()
