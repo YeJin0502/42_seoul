@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 20:20:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 20:59:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ typedef struct s_raycasting
 	int is_ray_down;
 	int is_ray_right;
 	int is_ray_left;
+	double intersection_x;
+	double intersection_y;
+	double ray_dist;
 }				t_rc;
 
-typedef struct s_find_hit_point
+typedef struct s_find_hit_point // 아 작명 마음에 안드는데
 {
 	double intersection_x;
 	double intersection_y;
