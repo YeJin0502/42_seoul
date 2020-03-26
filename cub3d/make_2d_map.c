@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:41:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 01:42:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 21:16:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void make_2d_map(t_info *info)
 	{
 		j = -1;
 		while (++j < info->map_height)
-		{
 			if (info->map[j][i] != 0)
 			{
 				a = -1;
@@ -36,6 +35,5 @@ void make_2d_map(t_info *info)
 									j * info->tile_height + a, 0xFFFFFF);
 				}
 			}
-		}
 	}
 }

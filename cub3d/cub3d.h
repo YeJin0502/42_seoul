@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 20:59:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 22:32:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 # define CUB3D_H
 
 # include <stdio.h> // 허용함수 아니면 나중에 삭제
-
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
 
-# define PI 3.141592
+# define PI 3.1415926535
 # define FOV 60.0 * PI / 180.0
 # define ROTATION_SPEED 2.0 * PI / 180.0
 # define MOVE_SPEED 2.0 // 그냥 2하면 왠지 오류날 것 같은... 되나?
 
 # define KEY_W 119
 # define KEY_S 115
-# define KEY_A 97 // 반대?
+# define KEY_A 97
 # define KEY_D 100
-# define KEY_LEFT 65361 // 반댄가?
+# define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
 typedef struct	s_pair
@@ -76,7 +75,7 @@ typedef struct s_raycasting
 	double ray_dist;
 }				t_rc;
 
-typedef struct s_find_hit_point // 아 작명 마음에 안드는데
+typedef struct s_find_dist // 아 작명 마음에 안드는데
 {
 	double intersection_x;
 	double intersection_y;
@@ -84,7 +83,9 @@ typedef struct s_find_hit_point // 아 작명 마음에 안드는데
 	double dy;
 	int is_wall_hit;
 	double ray_dist;
-}				t_fh;
+}				t_fd;
+// 반복문에서 계속 지역변수로 만들었다, 없어졌다 하는게 나을까
+// 아니면 한번 malloc 하고 반복문 끝나면 지우는게 나을까
 
 void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void make_2d_map(t_info *info);
@@ -93,5 +94,7 @@ void draw_line(t_pair p1, t_pair p2, t_info *info); // 구조체, 구조체의 �
 int key_hook(int keycode, void *param);
 void ray_casting(t_info *info, t_rc *rc);
 double norm_angle(double angle);
+double distance(double x1, double y1, double x2, double y2);
+int is_wall(double intersection_x, double intersection_y, t_info *info);
 
 #endif
