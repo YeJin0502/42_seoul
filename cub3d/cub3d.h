@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 06:18:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/26 20:20:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,21 @@ typedef struct s_raycasting
 	int rotation_dir;
 	double move_dist;
 	double ray_angle;
+	int is_ray_up;
+	int is_ray_down;
+	int is_ray_right;
+	int is_ray_left;
 }				t_rc;
 
-typedef struct s_intersection
+typedef struct s_find_hit_point
 {
+	double intersection_x;
+	double intersection_y;
+	double dx;
+	double dy;
 	int is_wall_hit;
-	double hit_point_x;
-	double hit_point_y;
-	double next_touch_x; // 이런거 이해하고 이름 바꿔야?
-	double next_touch_y;
-}				t_intersection;
+	double ray_dist;
+}				t_fh;
 
 void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void make_2d_map(t_info *info);
