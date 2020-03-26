@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 22:46:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 04:35:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int key_hook(int keycode, void *param)
 	mlx_clear_window(info->mlx, info->win);
 
 	// 2d 렌더링 (테스트 용)
-	make_2d_map(info);
+	// make_2d_map(info);
 
 	ray_casting(info, rc);
 	return (0);

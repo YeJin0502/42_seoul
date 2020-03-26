@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 22:32:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 04:54:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ typedef struct s_raycasting
 	double intersection_x;
 	double intersection_y;
 	double ray_dist;
+	double corrected_ray_dist;
+	double projection_dist;
+	double projection_height;
+	double projection_start;
+	double projection_end;
 }				t_rc;
 
 typedef struct s_find_dist // 아 작명 마음에 안드는데
@@ -96,5 +101,7 @@ void ray_casting(t_info *info, t_rc *rc);
 double norm_angle(double angle);
 double distance(double x1, double y1, double x2, double y2);
 int is_wall(double intersection_x, double intersection_y, t_info *info);
+void find_ray_dist(t_info *info, t_rc *rc);
+void rendering(t_info *info, t_rc *rc, int i);
 
 #endif
