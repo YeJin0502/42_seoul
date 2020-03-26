@@ -6,11 +6,26 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 04:56:24 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/26 22:57:18 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 04:05:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void find_intersection(t_info *info, t_fd *horz)
+{
+	while (horz->intersection_x >= 0 && horz->intersection_x <= info->R_width &&
+			horz->intersection_y >= 0 && horz->intersection_y <= info->R_height)
+	{
+		if (is_wall(horz->intersection_x, horz->intersection_y, info))
+		{
+			horz->is_wall_hit = 1;
+			break;
+		}
+		horz->intersection_x += horz->dx;
+		horz->intersection_y += horz->dy;
+	}
+}
 
 t_fd *find_horz_dist(t_info *info, t_rc *rc)
 {
@@ -26,17 +41,7 @@ t_fd *find_horz_dist(t_info *info, t_rc *rc)
 	if ((rc->is_ray_left && horz->dx > 0) || (rc->is_ray_right && horz->dx < 0))
 		horz->dx *= -1;
 	horz->intersection_y += (rc->is_ray_up) ? -1 : 0;
-	while (horz->intersection_x >= 0 && horz->intersection_x <= info->R_width &&
-			horz->intersection_y >= 0 && horz->intersection_y <= info->R_height)
-	{
-		if (is_wall(horz->intersection_x, horz->intersection_y, info)) // 이렇게 해야하는듯. 왜냐하면 평행해서 안만나는 경우 있어서!!!
-		{
-			horz->is_wall_hit = 1;
-			break;
-		}
-		horz->intersection_x += horz->dx;
-		horz->intersection_y += horz->dy;
-	}
+	find_intersection(info, horz);
 	if (horz->is_wall_hit)
 		horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
 	else
@@ -57,21 +62,34 @@ t_fd *find_vert_dist(t_info *info, t_rc *rc)
 	if ((rc->is_ray_down && vert->dy < 0) || (rc->is_ray_up && vert->dy > 0))
 		vert->dy *= -1;
 	vert->intersection_x += (rc->is_ray_left) ? -1 : 0;
-	while (vert->intersection_x >= 0 && vert->intersection_x <= info->R_width &&
-			vert->intersection_y >= 0 && vert->intersection_y <= info->R_height)
-	{
-		if (is_wall(vert->intersection_x, vert->intersection_y, info) != 0)
-		{
-			vert->is_wall_hit = 1;
-			break;
-		}
-		vert->intersection_x += vert->dx;
-		vert->intersection_y += vert->dy;
-	}
+	find_intersection(info, vert);
 	if (vert->is_wall_hit)
 		vert->ray_dist = distance(info->x, info->y, vert->intersection_x, vert->intersection_y);
 	else
 		vert->ray_dist = 100000000;
+}
+
+void find_ray_dist(t_info *info, t_rc *rc)
+{
+	t_fd *horz;
+	t_fd *vert;
+
+	horz = find_horz_dist(info, rc);
+	vert = find_vert_dist(info, rc);
+	if (vert->ray_dist < horz->ray_dist)
+	{
+		rc->intersection_x = vert->intersection_x;
+		rc->intersection_y = vert->intersection_y;
+		rc->ray_dist = vert->ray_dist;
+	}
+	else
+	{
+		rc->intersection_x = horz->intersection_x;
+		rc->intersection_y = horz->intersection_y;
+		rc->ray_dist = horz->ray_dist;
+	}
+	free(horz);
+	free(vert); // 되나?
 }
 
 void ray_casting(t_info *info, t_rc *rc)
@@ -97,24 +115,9 @@ void ray_casting(t_info *info, t_rc *rc)
 		rc->is_ray_left = (0.5 * PI < rc->ray_angle && rc->ray_angle < 1.5 * PI);
 		rc->is_ray_right = !(rc->is_ray_left);
 
-		t_fd *horz;
-		t_fd *vert;
-		horz = find_horz_dist(info, rc);
-		vert = find_vert_dist(info, rc);
-		if (vert->ray_dist < horz->ray_dist)
-		{
-			rc->intersection_x = vert->intersection_x;
-			rc->intersection_y = vert->intersection_y;
-			rc->ray_dist = vert->ray_dist;
-		}
-		else
-		{
-			rc->intersection_x = horz->intersection_x;
-			rc->intersection_y = horz->intersection_y;
-			rc->ray_dist = horz->ray_dist;
-		}
-		free(horz);
-		free(vert); // 되나?
+		find_ray_dist(info, rc);
+
+		
 
 		// 2D 렌더링 (테스트 용)
 		// p2.x = info->x + cos(rc->ray_angle) * 30;
