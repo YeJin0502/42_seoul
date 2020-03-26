@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 04:54:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 07:26:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,17 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-typedef struct	s_pair
-{
-	int x;
-	int y; // int? double?
-}				t_pair;
-
 typedef struct	s_info
 {
-	double R_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
-	double R_height; // x,y 쌍을 다 구조체로 만들까?
-	// char *NO;
-	// char *SO;
-	// char *WE;
-	// char *EA;
-	// int *F[3];
-	// int *C[3]; // 나중에 추가 필요
-	int (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까.
-	// 아닌가..? 만들 수 있나? // 괄호 안해주면 안됨
+	double win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
+	double win_height;
+	// char *no;
+	// char *so;
+	// char *we;
+	// char *ea;
+	// int *f[3];
+	// int *c[3]; // 나중에 추가 필요
+	int (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
 	int map_width;
 	int map_height;
 	double tile_width;
@@ -80,7 +73,7 @@ typedef struct s_raycasting
 	double projection_end;
 }				t_rc;
 
-typedef struct s_find_dist // 아 작명 마음에 안드는데
+typedef struct s_find_dist // 작명이...
 {
 	double intersection_x;
 	double intersection_y;
@@ -89,19 +82,13 @@ typedef struct s_find_dist // 아 작명 마음에 안드는데
 	int is_wall_hit;
 	double ray_dist;
 }				t_fd;
-// 반복문에서 계속 지역변수로 만들었다, 없어졌다 하는게 나을까
-// 아니면 한번 malloc 하고 반복문 끝나면 지우는게 나을까
 
-void *make_info(); // 아마 매개변수로 argc, argv 받지않을까?
-void make_2d_map(t_info *info);
-void make_first_scene(t_info *info);
-void draw_line(t_pair p1, t_pair p2, t_info *info); // 구조체, 구조체의 포인터 장단점을 모르겠다.
+void *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
+void render_first_scene(t_info *info);
 int key_hook(int keycode, void *param);
-void ray_casting(t_info *info, t_rc *rc);
-double norm_angle(double angle);
+void raycast(t_info *info, t_rc *rc);
 double distance(double x1, double y1, double x2, double y2);
 int is_wall(double intersection_x, double intersection_y, t_info *info);
 void find_ray_dist(t_info *info, t_rc *rc);
-void rendering(t_info *info, t_rc *rc, int i);
 
 #endif

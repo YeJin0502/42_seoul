@@ -14,8 +14,8 @@
 
 static void find_intersection(t_info *info, t_fd *horz)
 {
-	while (horz->intersection_x >= 0 && horz->intersection_x <= info->R_width &&
-			horz->intersection_y >= 0 && horz->intersection_y <= info->R_height)
+	while (horz->intersection_x >= 0 && horz->intersection_x <= info->win_width &&
+			horz->intersection_y >= 0 && horz->intersection_y <= info->win_height)
 	{
 		if (is_wall(horz->intersection_x, horz->intersection_y, info))
 		{
