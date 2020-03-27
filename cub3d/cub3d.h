@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 07:26:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 19:29:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct	s_info
 	void *win;
 }				t_info;
 
-typedef struct s_raycasting
+typedef struct s_raycast
 {
 	int keycode;
 	int move_dir;
@@ -66,6 +66,9 @@ typedef struct s_raycasting
 	double intersection_x;
 	double intersection_y;
 	double ray_dist;
+	double tile_x;
+	int is_vert_hit;
+	int is_horz_hit;
 	double corrected_ray_dist;
 	double projection_dist;
 	double projection_height;
@@ -81,6 +84,7 @@ typedef struct s_find_dist // 작명이...
 	double dy;
 	int is_wall_hit;
 	double ray_dist;
+	double tile_x;
 }				t_fd;
 
 void *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
