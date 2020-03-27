@@ -44,7 +44,7 @@ int main()
     mlx = mlx_init();
     win = mlx_new_window(mlx, 640, 480, "test");
     img = mlx_xpm_file_to_image(mlx, "test.xpm", &img_w, &img_h); // mlx_new_image 랑 똑같은걸 반환하는건가?
-    unsigned char *image_data;    
+    unsigned char *image_data;
     int bpp, size_line, endian;
     image_data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
 

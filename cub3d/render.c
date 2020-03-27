@@ -38,7 +38,7 @@ void render(t_info *info, t_rc *rc, int i) // 분리할수도
         {
             color = pixel_color(info->no, (int)image_x, (int)image_y);
             mlx_pixel_put(info->mlx, info->win, i, j, color);
-            image_y += (info->no->height / rc->projection_height) + 0.000001;
+            image_y += (info->no->height / (double)rc->projection_height) + 0.000001;
         }
     }
     else if (rc->tile_hit_dir == 2)
@@ -47,8 +47,8 @@ void render(t_info *info, t_rc *rc, int i) // 분리할수도
         double image_y;
         int color;
 
-        image_y = 0;
         image_x = rc->tile_x * info->no->width / info->tile_height + 0.000001; 
+        image_y = 0;
         j = rc->projection_start - 1;
         while (++j < rc->projection_end)
         {
@@ -59,12 +59,12 @@ void render(t_info *info, t_rc *rc, int i) // 분리할수도
     }
     else if (rc->tile_hit_dir == 3)
     {
-        double image_y;
         double image_x;
+        double image_y;
         int color;
 
-        image_y = 0;
         image_x = rc->tile_x * info->no->width / info->tile_width + 0.000001; 
+        image_y = 0;
         j = rc->projection_start - 1;
         while (++j < rc->projection_end)
         {
@@ -76,12 +76,12 @@ void render(t_info *info, t_rc *rc, int i) // 분리할수도
     }
     else
     {
-        double image_y;
         double image_x;
+        double image_y;
         int color;
 
-        image_y = 0;
         image_x = rc->tile_x * info->no->width / info->tile_height + 0.000001; 
+        image_y = 0;
         j = rc->projection_start - 1;
         while (++j < rc->projection_end)
         {

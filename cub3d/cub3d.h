@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 05:12:41 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 05:26:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,8 @@ typedef struct s_img
 
 typedef struct	s_info
 {
-	double win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
-	double win_height;
-	t_img *no;
-	t_img *so;
-	t_img *we;
-	t_img *ea;
+	int win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
+	int win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
 	// int *f[3];
 	// int *c[3]; // 나중에 추가 필요
 	int (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
@@ -61,6 +57,10 @@ typedef struct	s_info
 	double view_angle;
 	void *mlx;
 	void *win;
+	t_img *no;
+	t_img *so;
+	t_img *we;
+	t_img *ea;
 }				t_info;
 
 typedef struct s_raycast
@@ -81,10 +81,12 @@ typedef struct s_raycast
 	int tile_hit_dir;
 	double corrected_ray_dist;
 	double projection_dist;
-	double projection_height;
-	// int projection_height;
-	double projection_start;
-	double projection_end;
+	// double projection_height;
+	// double projection_start;
+	// double projection_end;
+	int projection_height;
+	int projection_start;
+	int projection_end;
 }				t_rc;
 
 typedef struct s_find_dist // 작명이...
