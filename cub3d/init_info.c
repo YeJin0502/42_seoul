@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 05:17:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/27 17:10:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ void *init_info() // 아마 매개변수로 argc, argv 받지않을까?
 	info->win_height = h;
 	/* 이 사이에 NO~C 까지... 만들어야함 */
 	info->view_angle = d;
-	// printf("%f\n", d);
 	info->map = Map;
 	info->map_width = 15;
 	info->map_height = 11;
 	info->tile_width = info->win_width / info->map_width; // 맵이 화면보다 더 큰경우 있어서 또 예외처리 해줘야됨.
-	info->tile_height = info->win_height / info->map_height; // 이부분 헷갈릴수 있음. 확인 필요.
+	info->tile_height = info->win_height / info->map_height;
 	info->x = w / 2;
 	info->y = 280;
 	mlx_value = mlx_init();
