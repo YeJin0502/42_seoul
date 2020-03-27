@@ -12,16 +12,18 @@
 
 #include "cub3d.h"
 
-int pixel_color(unsigned char *image, int x, int y, int size_line)
+int pixel_color(t_img *img, int x, int y)
 {
     int b_i;
     int g_i;
     int r_i;
 	int color;
 
-    b_i = (int)image[x * 4 + size_line * y ];
-    g_i = (int)image[x * 4 + size_line * y + 1];
-    r_i = (int)image[x * 4 + size_line * y + 2];
+    if (x < 0 || x >= img->width || y < 0 || y >= img->height)
+        return (0);
+    b_i = (int)(img->image_data[x * 4 + img->size_line * y ]);
+    g_i = (int)img->image_data[x * 4 + img->size_line * y + 1]; // 괄호 안해줘도 되려나?
+    r_i = (int)img->image_data[x * 4 + img->size_line * y + 2];
 	color = 0x000000;
 	color += b_i;
 	color += 16 * 16 * g_i;

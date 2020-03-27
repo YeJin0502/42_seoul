@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 02:10:11 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 05:12:41 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_raycast
 	double corrected_ray_dist;
 	double projection_dist;
 	double projection_height;
+	// int projection_height;
 	double projection_start;
 	double projection_end;
 }				t_rc;
@@ -105,7 +106,7 @@ void raycast(t_info *info, t_rc *rc);
 double distance(double x1, double y1, double x2, double y2);
 int is_wall(double intersection_x, double intersection_y, t_info *info);
 void find_ray_dist(t_info *info, t_rc *rc);
-int pixel_color(unsigned char *image, int x, int y, int size_line);
+int pixel_color(t_img *img, int x, int y);
 void render(t_info *info, t_rc *rc, int i); // 분리할수도
 
 #endif
