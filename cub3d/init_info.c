@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 05:25:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 06:23:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void init_info_img(t_info *info)
 	char *we;
 	char *ea;
 
-	no = "redbrick.xpm"; // 나중엔 직접 찾아야함.
-	so = "redbrick.xpm"; // 나중엔 직접 찾아야함.
-	we = "redbrick.xpm"; // 나중엔 직접 찾아야함.
-	ea = "redbrick.xpm"; // 나중엔 직접 찾아야함.
+	no = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
+	so = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
+	we = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
+	ea = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
 
 	info->no = make_img(no, info);
 	info->so = make_img(so, info);

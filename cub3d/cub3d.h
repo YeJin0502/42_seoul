@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 05:26:39 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 06:25:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 
 typedef struct s_img
 {
-	int width; // 포인터로 해도되나?
+	int width;
 	int height;
 	void *image;
 	int bpp;
 	int size_line;
-	int endian; // 필요할까..?
+	int endian;
 	char *image_data;
 }			t_img;
 
@@ -81,12 +81,11 @@ typedef struct s_raycast
 	int tile_hit_dir;
 	double corrected_ray_dist;
 	double projection_dist;
-	// double projection_height;
-	// double projection_start;
-	// double projection_end;
-	int projection_height;
-	int projection_start;
-	int projection_end;
+	int bar_height;
+	int bar_start;
+	int bar_end;
+	double image_x;
+	double image_y;
 }				t_rc;
 
 typedef struct s_find_dist // 작명이...
@@ -105,10 +104,11 @@ t_info *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void render_first_scene(t_info *info);
 int key_hook(int keycode, void *param);
 void raycast(t_info *info, t_rc *rc);
-double distance(double x1, double y1, double x2, double y2);
 int is_wall(double intersection_x, double intersection_y, t_info *info);
 void find_ray_dist(t_info *info, t_rc *rc);
-int pixel_color(t_img *img, int x, int y);
-void render(t_info *info, t_rc *rc, int i); // 분리할수도
+void render(t_info *info, t_rc *rc, int i);
+void init_horz(t_info *info, t_rc *rc, t_fd *horz);
+void init_vert(t_info *info, t_rc *rc, t_fd *vert);
+void init_rc_ray_dist(t_rc *rc, t_fd *fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 01:27:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 06:15:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@ static double norm_angle(double angle)
 	while (angle < 0)
 		angle = angle + 2 * PI;
 	if (angle > 2 * PI)
-		angle = fmod(angle, 2 * PI); // 이거 다른 함수들 살펴봐야.
-	return (angle); // 맞나?
+		angle = fmod(angle, 2 * PI);
+	return (angle);
+}
+
+static void init_rc_ray(t_rc *rc)
+{
+	rc->ray_angle = norm_angle(rc->ray_angle);
+	rc->is_ray_down = (0 < rc->ray_angle && rc->ray_angle < PI);
+	rc->is_ray_up = !(rc->is_ray_down);
+	rc->is_ray_left = (0.5 * PI < rc->ray_angle && rc->ray_angle < 1.5 * PI);
+	rc->is_ray_right = !(rc->is_ray_left);	
 }
 
 void raycast(t_info *info, t_rc *rc)
@@ -29,11 +38,7 @@ void raycast(t_info *info, t_rc *rc)
 	i = -1;
 	while (++i < info->win_width)
 	{
-		rc->ray_angle = norm_angle(rc->ray_angle);
-		rc->is_ray_down = (0 < rc->ray_angle && rc->ray_angle < PI);
-		rc->is_ray_up = !(rc->is_ray_down);
-		rc->is_ray_left = (0.5 * PI < rc->ray_angle && rc->ray_angle < 1.5 * PI);
-		rc->is_ray_right = !(rc->is_ray_left);
+		init_rc_ray(rc);
 		find_ray_dist(info, rc);
 		render(info, rc, i);
 		rc->ray_angle += FOV / info->win_width;
