@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 19:29:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 02:10:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,25 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
+typedef struct s_img
+{
+	int width; // 포인터로 해도되나?
+	int height;
+	void *image;
+	int bpp;
+	int size_line;
+	int endian; // 필요할까..?
+	char *image_data;
+}			t_img;
+
 typedef struct	s_info
 {
 	double win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
 	double win_height;
-	// char *no;
-	// char *so;
-	// char *we;
-	// char *ea;
+	t_img *no;
+	t_img *so;
+	t_img *we;
+	t_img *ea;
 	// int *f[3];
 	// int *c[3]; // 나중에 추가 필요
 	int (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
@@ -67,8 +78,7 @@ typedef struct s_raycast
 	double intersection_y;
 	double ray_dist;
 	double tile_x;
-	int is_vert_hit;
-	int is_horz_hit;
+	int tile_hit_dir;
 	double corrected_ray_dist;
 	double projection_dist;
 	double projection_height;
@@ -85,14 +95,17 @@ typedef struct s_find_dist // 작명이...
 	int is_wall_hit;
 	double ray_dist;
 	double tile_x;
+	int tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
 }				t_fd;
 
-void *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
+t_info *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void render_first_scene(t_info *info);
 int key_hook(int keycode, void *param);
 void raycast(t_info *info, t_rc *rc);
 double distance(double x1, double y1, double x2, double y2);
 int is_wall(double intersection_x, double intersection_y, t_info *info);
 void find_ray_dist(t_info *info, t_rc *rc);
+int pixel_color(unsigned char *image, int x, int y, int size_line);
+void render(t_info *info, t_rc *rc, int i); // 분리할수도
 
 #endif

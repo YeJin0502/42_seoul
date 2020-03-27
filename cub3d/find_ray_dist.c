@@ -47,9 +47,15 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
 	else
 		horz->ray_dist = 100000000; // 선택되지 않기 위해 큰 값. max 값으로 교체해야 할듯... 몇인지 몰라.
 	if (rc->is_ray_up)
+	{
+		horz->tile_hit_dir = 3;
 		horz->tile_x = fmod(horz->intersection_x, info->tile_width); // 맞을까?
+	}
 	else
+	{
+		horz->tile_hit_dir = 1;
 		horz->tile_x = info->tile_width - fmod(horz->intersection_x, info->tile_width);
+	}
 }
 
 static t_fd *find_vert_dist(t_info *info, t_rc *rc)
@@ -72,9 +78,15 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
 	else
 		vert->ray_dist = 100000000;
 	if (rc->is_ray_right)
+	{
 		vert->tile_x = fmod(vert->intersection_y, info->tile_height); // 맞을까?
+		vert->tile_hit_dir = 4;
+	}
 	else
+	{
 		vert->tile_x = info->tile_height - fmod(vert->intersection_y, info->tile_height);
+		vert->tile_hit_dir = 2;
+	}
 }
 
 void find_ray_dist(t_info *info, t_rc *rc)
@@ -90,6 +102,7 @@ void find_ray_dist(t_info *info, t_rc *rc)
 		rc->intersection_y = vert->intersection_y;
 		rc->ray_dist = vert->ray_dist;
 		rc->tile_x = vert->tile_x;
+		rc->tile_hit_dir = vert->tile_hit_dir;
 	}
 	else
 	{
@@ -97,6 +110,7 @@ void find_ray_dist(t_info *info, t_rc *rc)
 		rc->intersection_y = horz->intersection_y;
 		rc->ray_dist = horz->ray_dist;
 		rc->tile_x = horz->tile_x;
+		rc->tile_hit_dir = horz->tile_hit_dir;
 	}
 	free(horz);
 	free(vert); // 되나?

@@ -20,14 +20,14 @@
 
 int pixel_color(unsigned char *image, int x, int y, int size_line)
 {
-    int r_i;
-    int g_i;
     int b_i;
+    int g_i;
+    int r_i;
 	int color;
 
-    r_i = (int)image[x * 4 + size_line * y + 2];
-    g_i = (int)image[x * 4 + size_line * y + 1];
     b_i = (int)image[x * 4 + size_line * y ];
+    g_i = (int)image[x * 4 + size_line * y + 1];
+    r_i = (int)image[x * 4 + size_line * y + 2];
 	color = 0x000000;
 	color += b_i;
 	color += 16 * 16 * g_i;
@@ -58,6 +58,5 @@ int main()
     while (++i < img_h)
         mlx_pixel_put(mlx, win, tile_x, i, pixel_color(image_data, tile_x, i, size_line));
 
-	// mlx_string_put(mlx, win, 300, 300, pixel_color(image_data, 0, 0, size_line), "test");
     mlx_loop(mlx);
 }

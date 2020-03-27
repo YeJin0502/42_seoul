@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 07:23:16 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 03:48:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int key_hook(int keycode, void *param)
 	mlx_clear_window(info->mlx, info->win);
 	move_and_rotate(info, rc);
 	raycast(info, rc);
+	free(rc);
 	return (0);
 }

@@ -12,29 +12,19 @@
 
 #include "cub3d.h"
 
-char	*dec_to_hex(int dec)
+int pixel_color(unsigned char *image, int x, int y, int size_line)
 {
-	long long	hex_len;
-	int 		tmp;
-	char		*hex;
+    int b_i;
+    int g_i;
+    int r_i;
+	int color;
 
-	tmp = dec;
-	hex_len = 0;
-	while (tmp)
-	{
-		tmp = tmp / 16;
-		hex_len++;
-	}
-	if (!(hex = (char *)malloc(hex_len + 1)))
-		return (0);
-	hex[hex_len] = '\0';
-	while (--hex_len >= 0)
-	{
-		if (dec % 16 <= 9)
-			hex[hex_len] = dec % 16 + '0';
-		else
-			hex[hex_len] = dec % 16 + 'A' - 10;
-		dec = dec / 16;
-	}
-	return (hex);
+    b_i = (int)image[x * 4 + size_line * y ];
+    g_i = (int)image[x * 4 + size_line * y + 1];
+    r_i = (int)image[x * 4 + size_line * y + 2];
+	color = 0x000000;
+	color += b_i;
+	color += 16 * 16 * g_i;
+	color += 16 * 16 * 16 * 16 * r_i;
+	return (color);
 }
