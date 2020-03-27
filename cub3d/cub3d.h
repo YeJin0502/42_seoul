@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 06:25:35 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 07:08:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,85 +30,85 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-typedef struct s_img
+typedef struct  s_img
 {
-	int width;
-	int height;
-	void *image;
-	int bpp;
-	int size_line;
-	int endian;
-	char *image_data;
-}			t_img;
+    int     width;
+    int     height;
+    void    *image;
+    int     bpp;
+    int     size_line;
+    int     endian;
+    char    *image_data;
+}               t_img;
 
-typedef struct	s_info
+typedef struct  s_info
 {
-	int win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
-	int win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
-	// int *f[3];
-	// int *c[3]; // 나중에 추가 필요
-	int (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
-	int map_width;
-	int map_height;
-	double tile_width;
-	double tile_height;
-	double x; // int로 했더니 더하는 값들이 double이니까 계산이 이상하게 되더라.
-	double y;
-	double view_angle;
-	void *mlx;
-	void *win;
-	t_img *no;
-	t_img *so;
-	t_img *we;
-	t_img *ea;
-}				t_info;
+    int     win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
+    int     win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
+    // int *f[3];
+    // int *c[3]; // 나중에 추가 필요
+    int     (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
+    int     map_width;
+    int     map_height;
+    double  tile_width;
+    double  tile_height;
+    double  x; // int로 했더니 더하는 값들이 double이니까 계산이 이상하게 되더라.
+    double  y;
+    double  view_angle;
+    void    *mlx;
+    void    *win;
+    t_img   *no;
+    t_img   *so;
+    t_img   *we;
+    t_img   *ea;
+}               t_info;
 
-typedef struct s_raycast
+typedef struct  s_raycast
 {
-	int keycode;
-	int move_dir;
-	int rotation_dir;
-	double move_dist;
-	double ray_angle;
-	int is_ray_up;
-	int is_ray_down;
-	int is_ray_right;
-	int is_ray_left;
-	double intersection_x;
-	double intersection_y;
-	double ray_dist;
-	double tile_x;
-	int tile_hit_dir;
-	double corrected_ray_dist;
-	double projection_dist;
-	int bar_height;
-	int bar_start;
-	int bar_end;
-	double image_x;
-	double image_y;
-}				t_rc;
+    int     keycode;
+    int     move_dir;
+    int     rotation_dir;
+    double  move_dist;
+    double  ray_angle;
+    int     is_ray_up;
+    int     is_ray_down;
+    int     is_ray_right;
+    int     is_ray_left;
+    double  intersection_x;
+    double  intersection_y;
+    double  ray_dist;
+    double  tile_x;
+    int     tile_hit_dir;
+    double  corrected_ray_dist;
+    double  projection_dist;
+    int     bar_height;
+    int     bar_start;
+    int     bar_end;
+    double  image_x;
+    double  image_y;
+}               t_rc;
 
-typedef struct s_find_dist // 작명이...
+typedef struct  s_find_dist // 작명이...
 {
-	double intersection_x;
-	double intersection_y;
-	double dx;
-	double dy;
-	int is_wall_hit;
-	double ray_dist;
-	double tile_x;
-	int tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
-}				t_fd;
+    double  intersection_x;
+    double  intersection_y;
+    double  dx;
+    double  dy;
+    int     is_wall_hit;
+    double  ray_dist;
+    double  tile_x;
+    int     tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
+}               t_fd;
 
-t_info *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
-void render_first_scene(t_info *info);
-int key_hook(int keycode, void *param);
-void raycast(t_info *info, t_rc *rc);
-int is_wall(double intersection_x, double intersection_y, t_info *info);
-void find_ray_dist(t_info *info, t_rc *rc);
-void render(t_info *info, t_rc *rc, int i);
-void init_horz(t_info *info, t_rc *rc, t_fd *horz);
-void init_vert(t_info *info, t_rc *rc, t_fd *vert);
-void init_rc_ray_dist(t_rc *rc, t_fd *fd);
+t_info  *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
+void    render_first_scene(t_info *info);
+int     key_hook(int keycode, void *param);
+void    raycast(t_info *info, t_rc *rc);
+int     is_wall(double intersection_x, double intersection_y, t_info *info);
+void    find_ray_dist(t_info *info, t_rc *rc);
+void    render(t_info *info, t_rc *rc, int i);
+void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
+void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
+void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
 
 #endif

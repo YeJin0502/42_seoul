@@ -14,13 +14,14 @@
 
 static void calculate_bar(t_info *info, t_rc *rc)
 {
-	rc->corrected_ray_dist = rc->ray_dist * cos(info->view_angle - rc->ray_angle);
-	rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
-	rc->bar_height = (info->tile_height + info->tile_width) / 2 * rc->projection_dist / rc->corrected_ray_dist; // 임시로 tile 높이 사용. 뭐 써야할라나..? // int로 하면 빨라지지 않을까?
+    rc->corrected_ray_dist = rc->ray_dist * cos(info->view_angle - rc->ray_angle);
+    rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
+    rc->bar_height = (info->tile_height + info->tile_width) / 2
+                    * rc->projection_dist / rc->corrected_ray_dist; // 임시로 tile 높이 사용. 뭐 써야할라나..? // int로 하면 빨라지지 않을까?
     rc->bar_start = (info->win_height / 2) - (rc->bar_height / 2);
     if (rc->bar_start < 0)
         rc->bar_start = 0;
-	rc->bar_end = (info->win_height / 2) + (rc->bar_height / 2);
+    rc->bar_end = (info->win_height / 2) + (rc->bar_height / 2);
     if (rc->bar_end < 0)
         rc->bar_end = info->win_height - 1;
 }
@@ -45,29 +46,29 @@ static int pixel_color(t_img *img, int x, int y)
     int b_i;
     int g_i;
     int r_i;
-	int color;
+    int color;
 
     if (x < 0 || x >= img->width || y < 0 || y >= img->height)
         return (0);
     b_i = (int)img->image_data[x * 4 + img->size_line * y];
-    g_i = (int)img->image_data[x * 4 + img->size_line * y + 1]; // 괄호 안해줘도 되려나?
+    g_i = (int)img->image_data[x * 4 + img->size_line * y + 1];
     r_i = (int)img->image_data[x * 4 + img->size_line * y + 2];
-	color = 0x000000;
-	color += b_i;
-	color += 16 * 16 * g_i;
-	color += 16 * 16 * 16 * 16 * r_i;
-	return (color);
+    color = 0x000000;
+    color += b_i;
+    color += 16 * 16 * g_i;
+    color += 16 * 16 * 16 * 16 * r_i;
+    return (color);
 }
 
 void render(t_info *info, t_rc *rc, int i)
 {
     t_img *img;
-	int j;
+    int j;
     int color;
 
-	calculate_bar(info, rc);
+    calculate_bar(info, rc);
     img = select_img(info, rc);
-    if (rc->tile_hit_dir == (1 || 3))
+    if (rc->tile_hit_dir == (1 || 3)) // 되나?
         rc->image_x = rc->tile_x * img->width / info->tile_width + 0.000001;
     else
         rc->image_x = rc->tile_x * img->width / info->tile_height + 0.000001;
