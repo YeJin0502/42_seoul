@@ -48,7 +48,10 @@ int main()
     int bpp, size_line, endian;
     image_data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
 
-    // mlx_put_image_to_window(mlx, win, img, 0, 0);
+    // int test;
+    // test = mlx_get_color_value(mlx, 16733491);
+    // printf("%u\n", test);
+
 
     // int tile_x;
     // int i;
@@ -56,15 +59,13 @@ int main()
     // i = -1;
     // while (++i < img_h)
         // mlx_pixet_put(mlx, win, tile_x, i, pixel_color(image_data, 0, 0, size_line));
-    int color;
-    color = pixel_color(image_data, 63, 63, size_line);
-    printf("%d\n", color);
-    for (int i = 100; i < 200; i++)
-        mlx_pixel_put(mlx, win, i, 100, color);
 
-    mlx_string_put(mlx, win, 300, 300, pixel_color(image_data, 0, 63, size_line), "test");
-    mlx_string_put(mlx, win, 350, 300, pixel_color(image_data, 64, 63, size_line), "test");
-    
+    image_data[10 * 4 + size_line * 10] = 255;
+    image_data[10 * 4 + size_line * 10 + 1] = 255;
+    image_data[10 * 4 + size_line * 10 + 2] = 255;
+
+    mlx_put_image_to_window(mlx, win, img, 0, 0);
+
 
     mlx_loop(mlx);
 }

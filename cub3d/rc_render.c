@@ -39,26 +39,38 @@ static t_img *select_img(t_info *info, t_rc *rc)
 
 static int get_color(t_img *img, int x, int y)
 {
-    int b_i;
-    int g_i;
-    int r_i;
+    int b;
+    int g;
+    int r;
     int color;
 
     if (x < 0 || x >= img->width || y < 0 || y >= img->height)
         return (0);
-    b_i = (int)img->image_data[x * 4 + img->size_line * y];
-    g_i = (int)img->image_data[x * 4 + img->size_line * y + 1];
-    r_i = (int)img->image_data[x * 4 + img->size_line * y + 2];
+    b = (int)img->image_data[x * 4 + img->size_line * y];
+    g = (int)img->image_data[x * 4 + img->size_line * y + 1];
+    r = (int)img->image_data[x * 4 + img->size_line * y + 2];
     color = 0x000000;
-    color += b_i;
-    color += 16 * 16 * g_i;
-    color += 16 * 16 * 16 * 16 * r_i;
+    color += b;
+    color += 16 * 16 * g;
+    color += 16 * 16 * 16 * 16 * r;
     return (color);
 }
 
-void change_color(t_img *img, int x, int y, int color)
+void change_color(t_img *img, int x, int y, int color) // void로 해도 바뀔라나?
 {
+    int r;
+    int g;
+    int b;
 
+    r = (int)((double)color / (16 * 16 * 16 * 16)); // 맞나..?
+    color = color % (16 * 16 * 16 * 16);
+    g = (int)((double)color / (16 * 16));
+    b = color % (16 * 16); // 맞아..?
+
+    // printf("(%d,%d,%d) <%d,%d,%d>\n", r, g, b, x * 4 + img->size_line * y, x * 4 + img->size_line * y + 1, x * 4 + img->size_line * y + 2);
+    img->image_data[x * 4 + img->size_line * y] = b; // 되나? 바뀌나??
+    img->image_data[x * 4 + img->size_line * y + 1] = g;
+    img->image_data[x * 4 + img->size_line * y + 2] = r;
 }
 
 void render(t_info *info, t_rc *rc, int i)
@@ -78,10 +90,14 @@ void render(t_info *info, t_rc *rc, int i)
     j = rc->bar_start - 1;
     while (++j < rc->bar_end)
     {
-        if ((int)rc->image_y >= 0 && (int)rc->image_y <= wall_img->height - 1)
+        if ((int)rc->image_y >= 0 && (int)rc->image_y <= wall_img->height - 1 &&
+            0 <= j && j <= info->win_height)
         {
             color = get_color(wall_img, (int)rc->image_x, (int)rc->image_y);
-            mlx_pixel_put(info->mlx, info->win, i, j, color);
+            change_color(info->scene, i, j, color);
+            // printf("color:%d, i:%d, j:%d\n", color,i ,j);
+            // break;
+            // mlx_pixel_put(info->mlx, info->win, i, j, color);
         }
         rc->image_y += (double)wall_img->height / rc->bar_height + 0.000001;
     }

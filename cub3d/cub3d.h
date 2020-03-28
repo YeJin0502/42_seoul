@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 17:31:36 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 19:25:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@
 
 typedef struct  s_img
 {
-    int     width;
-    int     height;
-    void    *image;
-    int     bpp;
-    int     size_line;
-    int     endian;
-    char    *image_data;
+    int             width;
+    int             height;
+    void            *image;
+    int             bpp;
+    int             size_line;
+    int             endian;
+    unsigned char   *image_data;
 }               t_img;
 
 typedef struct  s_info
