@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 03:13:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 07:37:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,48 +77,43 @@ static void move_and_rotate(t_info *info, t_rc *rc)
         rc->is_move = 0;
 }
 
+
+
+void free_all(t_info *info, t_rc *rc)
+{
+    // free(info->f); // 전역변수가 아니면 malloc 하지않을까...? 헷갈리네. 애초에 *f가 아니라 f[3]? malloc 안써도 방법이 있나?
+    // free(info->c); // 지역변수를 너무 안쓰다보니...
+    mlx_destroy_image(info->mlx, info->no->image); // 이게 무슨 기능이지..? free의 기능인건가? image_data는 free를 안해도 되나?
+    mlx_destroy_image(info->mlx, info->so->image); // free를 따로 해줘야하는것인가..? free의 기능이 없다면
+    mlx_destroy_image(info->mlx, info->we->image); // destroy window는 창을 끄는거라고 쳐도, destroy image는 도대체 뭐여?
+    mlx_destroy_image(info->mlx, info->ea->image);
+    mlx_destroy_image(info->mlx, info->scene->image);
+    // free(info->f);
+    // free(info->c);
+    // int i;
+    // i = -1;
+    // while (++i < info->map_height) // 아 이거 항상 헷갈리네
+    //     free(info->map[i]);
+    // free(info->map);
+    mlx_destroy_window(info->mlx, info->win);
+    free(info->win);
+    free(info->mlx);
+}
+
 int key_hook(int keycode, void *param) // 작명을 나중에 mainloop같은 걸로 바꾸면 되지 않을까? 키만 받는거도 아니고.
 {
     t_info  *info;
     t_rc    *rc;
 
     info = (t_info *)param;
-    if (keycode == KEY_ESC)
+    rc = (t_rc *)malloc(sizeof(t_rc));
+    ft_memset(rc, 0, sizeof(rc)); // 널포인터는 프리해줄수 있나? 있으면 rc 위로 올리면 되지 않나?
+    if (keycode == KEY_ESC) // 0
     {
-        // free(info->no->image); // 맞나?
-        // free(info->no->image_data);
-        // free(info->no); // 너무 많은데...
-        // free(info); // 함수 만들어줘야 할듯.
-        // mlx_destroy_window(info->mlx, info->win);
-        // 으악 free들은 내일하자
+        free_all(info, rc);
         exit(1);
     }
-    rc = (t_rc *)malloc(sizeof(t_rc));
     init_rc_key(rc, keycode);
-
-    // 테스트용
-	// int i;
-	// int j;
-	// int a;
-	// int b;
-	// i = -1;
-	// while (++i < info->map_width)
-	// {
-	// 	j = -1;
-	// 	while (++j < info->map_height)
-	// 		if (info->map[j][i] != 0)
-	// 		{
-	// 			a = -1;
-	// 			while (++a < info->tile_height)
-	// 			{
-	// 				b = -1;
-	// 				while (++b < info->tile_width)
-	// 					mlx_pixel_put(info->mlx, info->win, i * info->tile_width + b,
-	// 								j * info->tile_height + a, 0xFFFFFF);
-	// 			}
-	// 		}
-	// }
-
     move_and_rotate(info, rc);
     if (rc->is_move == 1 || rc->rotation_dir != 0)
     {

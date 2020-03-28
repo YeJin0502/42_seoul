@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 02:39:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 08:22:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
+# include "libft/libft.h"
 
 # define PI 3.1415926535
 # define FOV 60.0 * PI / 180.0
@@ -44,10 +45,12 @@ typedef struct  s_img
 
 typedef struct  s_info
 {
+    // t_rc    *rc; // 필요 없나? 혹시 필요하면...
     int     win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
     int     win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
-    int     *f;
+    int     *f; // 아 포인터만 써서 배열을 오히려 모르겠네...
     int     *c;
+    // int     **map;
     int     (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
     int     map_width;
     int     map_height;
