@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 19:25:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 20:13:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct  s_info
 {
     int     win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
     int     win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
-    // int *f[3];
-    // int *c[3]; // 나중에 추가 필요
+    int     *f;
+    int     *c;
     int     (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
     int     map_width;
     int     map_height;

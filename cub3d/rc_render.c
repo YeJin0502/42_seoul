@@ -37,6 +37,17 @@ static t_img *select_img(t_info *info, t_rc *rc)
     return (wall_img);
 }
 
+int make_color(int r, int g, int b)
+{
+    int color;
+
+    color = 0x000000;
+    color += b;
+    color += 16 * 16 * g;
+    color += 16 * 16 * 16 * 16 * r;
+    return (color);
+}
+
 static int get_color(t_img *img, int x, int y)
 {
     int b;
@@ -87,6 +98,15 @@ void render(t_info *info, t_rc *rc, int i)
     else
         rc->image_x = rc->tile_x * wall_img->width / info->tile_height + 0.000001;
     rc->image_y = 0;
+    if (rc->bar_start > 0)
+    {
+        j = -1;
+        while (++j < rc->bar_start)
+        {
+            color = make_color(info->c[0], info->c[1], info->c[2]);
+            change_color(info->scene, i, j, color);
+        }
+    }
     j = rc->bar_start - 1;
     while (++j < rc->bar_end)
     {
@@ -95,10 +115,13 @@ void render(t_info *info, t_rc *rc, int i)
         {
             color = get_color(wall_img, (int)rc->image_x, (int)rc->image_y);
             change_color(info->scene, i, j, color);
-            // printf("color:%d, i:%d, j:%d\n", color,i ,j);
-            // break;
-            // mlx_pixel_put(info->mlx, info->win, i, j, color);
         }
         rc->image_y += (double)wall_img->height / rc->bar_height + 0.000001;
     }
+    if (rc->bar_end < info->win_height)
+        while (++j < info->win_height)
+        {
+            color = make_color(info->f[0], info->f[1], info->f[2]);
+            change_color(info->scene, i, j, color);
+        }
 }

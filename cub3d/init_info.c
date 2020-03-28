@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 07:09:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 20:29:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int w = 700; // 전역변수는 나중에 맵에서 읽어야할 정보들.
 int h = 700; // 지금은 임시로 전역변수로.
 double d = 0.0; // (1 / 2 * PI) 로 계산하면 0 나옴. 앞의 계산이 정수 나눗셈으로 0이 되어버려서.
+int F[3] = {20, 20, 20};
+int C[3] = {200, 200, 200};
 int Map[11][15] =
 {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -48,9 +50,9 @@ static void init_info_img(t_info *info)
     char *ea;
 
     no = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
-    so = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
-    we = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
-    ea = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
+    so = "./texture/test.xpm"; // 나중엔 직접 찾아야함.
+    we = "./texture/we.xpm"; // 나중엔 직접 찾아야함.
+    ea = "./texture/ea.xpm"; // 나중엔 직접 찾아야함.
 
     info->no = make_img(no, info);
     info->so = make_img(so, info);
@@ -67,6 +69,8 @@ t_info *init_info() // 아마 매개변수로 argc, argv 받지않을까?
     info = (t_info *)malloc(sizeof(t_info));
     info->win_width = w;
     info->win_height = h;
+    info->f = F;
+    info->c = C;
     info->map = Map;
     info->map_width = 15;
     info->map_height = 11;
