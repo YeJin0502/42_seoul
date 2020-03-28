@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 07:09:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 16:41:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,30 @@ int key_hook(int keycode, void *param)
     rc = (t_rc *)malloc(sizeof(t_rc));
     init_rc_key(rc, keycode);
     mlx_clear_window(info->mlx, info->win);
+
+    // 테스트용
+	// int i;
+	// int j;
+	// int a;
+	// int b;
+	// i = -1;
+	// while (++i < info->map_width)
+	// {
+	// 	j = -1;
+	// 	while (++j < info->map_height)
+	// 		if (info->map[j][i] != 0)
+	// 		{
+	// 			a = -1;
+	// 			while (++a < info->tile_height)
+	// 			{
+	// 				b = -1;
+	// 				while (++b < info->tile_width)
+	// 					mlx_pixel_put(info->mlx, info->win, i * info->tile_width + b,
+	// 								j * info->tile_height + a, 0xFFFFFF);
+	// 			}
+	// 		}
+	// }
+
     move_and_rotate(info, rc);
     raycast(info, rc);
     free(rc);

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 07:08:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 17:31:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct  s_info
     t_img   *so;
     t_img   *we;
     t_img   *ea;
+    t_img   *scene;
 }               t_info;
 
 typedef struct  s_raycast
@@ -101,7 +102,7 @@ typedef struct  s_find_dist // 작명이...
 }               t_fd;
 
 t_info  *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
-void    render_first_scene(t_info *info);
+void    make_first_scene(t_info *info);
 int     key_hook(int keycode, void *param);
 void    raycast(t_info *info, t_rc *rc);
 int     is_wall(double intersection_x, double intersection_y, t_info *info);
