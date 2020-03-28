@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 16:41:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 23:06:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void move_and_rotate(t_info *info, t_rc *rc)
 {
     double  new_x;
     double  new_y;
-    int     map_new_x;
-    int     map_new_y;
 
     rc->move_dist = rc->move_dir * MOVE_SPEED;
     info->view_angle += rc->rotation_dir * ROTATION_SPEED;
@@ -54,10 +52,13 @@ static void move_and_rotate(t_info *info, t_rc *rc)
     {
         info->x = new_x;
         info->y = new_y;
+        rc->is_move = 1;
     }
+    else
+        rc->is_move = 0;
 }
 
-int key_hook(int keycode, void *param)
+int key_hook(int keycode, void *param) // 작명을 나중에 mainloop같은 걸로 바꾸면 되지 않을까? 키만 받는거도 아니고.
 {
     t_info  *info;
     t_rc    *rc;
@@ -65,7 +66,6 @@ int key_hook(int keycode, void *param)
     info = (t_info *)param;
     rc = (t_rc *)malloc(sizeof(t_rc));
     init_rc_key(rc, keycode);
-    mlx_clear_window(info->mlx, info->win);
 
     // 테스트용
 	// int i;
@@ -91,7 +91,11 @@ int key_hook(int keycode, void *param)
 	// }
 
     move_and_rotate(info, rc);
-    raycast(info, rc);
+    if (rc->is_move == 1 || rc->rotation_dir != 0)
+    {
+        mlx_clear_window(info->mlx, info->win);
+        raycast(info, rc);
+    }
     free(rc);
     return (0);
 }

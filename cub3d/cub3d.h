@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 22:19:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 23:01:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct  s_raycast
     int     move_dir;
     int     rotation_dir;
     double  move_dist;
+    int     is_move;
     double  ray_angle;
     int     is_ray_up;
     int     is_ray_down;
