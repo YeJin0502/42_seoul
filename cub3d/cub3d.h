@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 23:01:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 02:39:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define KEY_ESC 65307
 
 typedef struct  s_img
 {
@@ -114,8 +115,8 @@ void    render(t_info *info, t_rc *rc, int i);
 void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
 void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
 void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
-int make_color(int r, int g, int b);
-int get_color(t_img *img, int x, int y);
-void change_color(t_img *img, int x, int y, int color);
+int     make_color(int r, int g, int b);
+int     get_color(t_img *img, int x, int y);
+void    change_color(t_img *img, int x, int y, int color);
 
 #endif

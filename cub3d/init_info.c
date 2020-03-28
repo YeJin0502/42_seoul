@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 21:51:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 01:40:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static void init_info_img(t_info *info)
     we = "./texture/w_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
     ea = "./texture/e_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
 
-    // no = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
-    // so = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
-    // we = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
-    // ea = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
+    // no = "./texture/chim.xpm"; // 나중엔 직접 찾아야함.
+    // so = "./texture/chim.xpm"; // 나중엔 직접 찾아야함.
+    // we = "./texture/chim.xpm"; // 나중엔 직접 찾아야함.
+    // ea = "./texture/chim.xpm"; // 나중엔 직접 찾아야함.
 
     info->no = make_img(no, info);
     info->so = make_img(so, info);
