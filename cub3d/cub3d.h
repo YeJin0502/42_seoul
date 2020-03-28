@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 20:13:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 22:19:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ typedef struct  s_raycast
     int     bar_height;
     int     bar_start;
     int     bar_end;
+    t_img   *wall_img;
     double  image_x;
     double  image_y;
+    // int     color;
 }               t_rc;
 
 typedef struct  s_find_dist // 작명이...
@@ -111,5 +113,8 @@ void    render(t_info *info, t_rc *rc, int i);
 void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
 void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
 void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
+int make_color(int r, int g, int b);
+int get_color(t_img *img, int x, int y);
+void change_color(t_img *img, int x, int y, int color);
 
 #endif

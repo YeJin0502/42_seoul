@@ -6,14 +6,14 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 20:29:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 21:51:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int w = 700; // 전역변수는 나중에 맵에서 읽어야할 정보들.
-int h = 700; // 지금은 임시로 전역변수로.
+int h = 500; // 지금은 임시로 전역변수로.
 double d = 0.0; // (1 / 2 * PI) 로 계산하면 0 나옴. 앞의 계산이 정수 나눗셈으로 0이 되어버려서.
 int F[3] = {20, 20, 20};
 int C[3] = {200, 200, 200};
@@ -49,10 +49,15 @@ static void init_info_img(t_info *info)
     char *we;
     char *ea;
 
-    no = "./texture/redbrick.xpm"; // 나중엔 직접 찾아야함.
-    so = "./texture/test.xpm"; // 나중엔 직접 찾아야함.
-    we = "./texture/we.xpm"; // 나중엔 직접 찾아야함.
-    ea = "./texture/ea.xpm"; // 나중엔 직접 찾아야함.
+    no = "./texture/n_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
+    so = "./texture/s_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
+    we = "./texture/w_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
+    ea = "./texture/e_wall_pixel.xpm"; // 나중엔 직접 찾아야함.
+
+    // no = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
+    // so = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
+    // we = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
+    // ea = "./texture/cobblestone-wall.xpm"; // 나중엔 직접 찾아야함.
 
     info->no = make_img(no, info);
     info->so = make_img(so, info);

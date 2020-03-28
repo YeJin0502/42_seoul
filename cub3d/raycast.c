@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 19:55:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/28 21:50:37 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static double norm_angle(double angle)
         angle = fmod(angle, 2 * PI);
     return (angle);
 }
-
-// static void init_new_scene(t_info *info, )
 
 static void init_rc_ray(t_rc *rc)
 {
@@ -55,19 +53,11 @@ void draw_line(int x1, int y1, int x2, int y2, t_info *info) // 구조체, 구�
     }
 }
 
-
 void raycast(t_info *info, t_rc *rc)
 {
     t_img *new_scene;
     int i;
 
-    // new_scene = info->scene; // 맞나?
-    // new_scene->width = info->win_width;
-    // new_scene->height = info->win_height;
-    // free(new_scene->image);
-    // new_scene->image = mlx_new_image(info->mlx, new_scene->width, new_scene->height);
-    // free(new_scene->image_data); // 맞나..?
-    // new_scene->image_data = mlx_get_data_addr(new_scene->image, &(new_scene->bpp), &(new_scene->size_line), &(info->scene->endian));
     rc->ray_angle = info->view_angle - (FOV / 2.0);
     i = -1;
     while (++i < info->win_width)
@@ -78,7 +68,5 @@ void raycast(t_info *info, t_rc *rc)
         render(info, rc, i);
         rc->ray_angle += FOV / info->win_width;
     }
-
     mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
-
 }
