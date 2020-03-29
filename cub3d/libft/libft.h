@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 20:52:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/03 23:46:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 22:05:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int	get_next_line(int fd, char **line);
 
 #endif

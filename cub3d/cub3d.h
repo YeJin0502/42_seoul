@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 08:22:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/29 22:05:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
+# include <fcntl.h> // open
 # include "libft/libft.h"
 
 # define PI 3.1415926535
@@ -121,5 +122,6 @@ void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
 int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
+void    parsing(char *filename, t_info *info);
 
 #endif
