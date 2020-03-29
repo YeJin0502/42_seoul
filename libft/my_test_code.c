@@ -71,11 +71,11 @@ int main()
 	char src1_lcpy[10] = "01234567";
 	char dst2_lcpy[20] = "helloworldmoon";
 	char src2_lcpy[10] = "01234567";
-	int size_lcpy = 0;
+	int size_lcpy = 8;
 	int my_lcpy = ft_strlcpy(dst1_lcpy, src1_lcpy, size_lcpy);
 	int real_lcpy = strlcpy(dst2_lcpy, src2_lcpy, size_lcpy);
-	// printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
-	// printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
+	printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
+	printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
 	if (my_lcpy != real_lcpy)
 		printf("ft_strlcpy ERROR1!\n");
 	if (ft_strncmp(dst1_lcpy, dst2_lcpy, 20) != 0)
