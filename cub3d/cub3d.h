@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 22:05:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 01:33:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
+typedef struct  s_parsing
+{
+    char *r;
+    char *no;
+    char *so;
+    char *we;
+    char *ea;
+    char *s;
+    // char *f;
+    // char *c;
+    char *map; // 이중으로 하기 어려울 듯...
+    // int r_complete;
+    // int no_complete;
+    // int so_complete;
+    // int we_complete;
+    // int ea_complete;
+    // int s_complete;
+    int f_complete;
+    int c_complete; // 필요할까?
+}               t_ps;
+
 typedef struct  s_img
 {
     int             width;
@@ -49,8 +70,8 @@ typedef struct  s_info
     // t_rc    *rc; // 필요 없나? 혹시 필요하면...
     int     win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
     int     win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
-    int     *f; // 아 포인터만 써서 배열을 오히려 모르겠네...
-    int     *c;
+    int     f[3]; // 아 포인터만 써서 배열을 오히려 모르겠네...
+    int     c[3];
     // int     **map;
     int     (*map)[15]; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
     int     map_width;
@@ -122,6 +143,6 @@ void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
 int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
-void    parsing(char *filename, t_info *info);
+void    init_info_test(char *filename, t_info *info);
 
 #endif

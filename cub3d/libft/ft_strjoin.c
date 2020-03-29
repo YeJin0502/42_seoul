@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:43:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 16:43:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 01:35:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	j;
 	size_t	len;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (0);
-	len = ft_strlen(s1) + ft_strlen(s2);
+	else if (!s1 && s2)
+		len = ft_strlen(s2);
+	else if (s1 && !s2)
+		len = ft_strlen(s1);
+	else
+		len = ft_strlen(s1) + ft_strlen(s2);
 	ret = (char *)malloc(len + 1);
 	if (!ret)
 		return (0);

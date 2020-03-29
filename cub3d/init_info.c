@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 08:24:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 00:56:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,33 +112,33 @@ static void init_info_img(t_info *info)
     info->ea = make_img(ea, info);
 }
 
-t_info *init_info() // 아마 매개변수로 argc, argv 받지않을까?
-{
-    t_info  *info;
-    void    *mlx_value;
-    void    *win_value;
+// t_info *init_info() // 아마 매개변수로 argc, argv 받지않을까?
+// {
+//     t_info  *info;
+//     void    *mlx_value;
+//     void    *win_value;
 
-    info = (t_info *)malloc(sizeof(t_info));
-    // ft_memset(info, 0, sizeof(info)); // 필요없으면 빼도...
+//     info = (t_info *)malloc(sizeof(t_info));
+//     // ft_memset(info, 0, sizeof(info)); // 필요없으면 빼도...
 
-    info->win_width = w;
-    info->win_height = h;
-    info->f = F;
-    info->c = C;
-    info->map = Map;
-    info->view_angle = d;
+//     info->win_width = w;
+//     info->win_height = h;
+//     info->f = F;
+//     info->c = C;
+//     info->map = Map;
+//     info->view_angle = d;
 
-    // init_test(info);
-    info->map_width = 15;
-    info->map_height = 11;
-    info->tile_width = (double)info->win_width / info->map_width; // 맵이 화면보다 더 큰경우 있어서 또 예외처리 해줘야됨.
-    info->tile_height = (double)info->win_height / info->map_height;
-    info->x = info->tile_width * 2;
-    info->y = info->tile_height * 2;
-    mlx_value = mlx_init();
-    win_value = mlx_new_window(mlx_value, info->win_width, info->win_height, "moon");
-    info->mlx = mlx_value;
-    info->win = win_value;
-    init_info_img(info);
-    return (info);
-}
+//     // init_test(info);
+//     info->map_width = 15;
+//     info->map_height = 11;
+//     info->tile_width = (double)info->win_width / info->map_width; // 맵이 화면보다 더 큰경우 있어서 또 예외처리 해줘야됨.
+//     info->tile_height = (double)info->win_height / info->map_height;
+//     info->x = info->tile_width * 2;
+//     info->y = info->tile_height * 2;
+//     mlx_value = mlx_init();
+//     win_value = mlx_new_window(mlx_value, info->win_width, info->win_height, "moon");
+//     info->mlx = mlx_value;
+//     info->win = win_value;
+//     init_info_img(info);
+//     return (info);
+// }
