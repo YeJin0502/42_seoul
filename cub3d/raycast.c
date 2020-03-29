@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 08:13:56 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 08:37:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static void init_ray_angle(t_rc *rc)
     rc->is_ray_up = !(rc->is_ray_down);
     rc->is_ray_left = (0.5 * PI < rc->ray_angle && rc->ray_angle < 1.5 * PI);
     rc->is_ray_right = !(rc->is_ray_left);	
-    
 }
 
 // 테스트용
-// void draw_line(int x1, int y1, int x2, int y2, t_info *info) // 구조체, 구조체의 포인터 장단점을 모르겠다.
+// void draw_line(int x1, int y1, int x2, int y2, t_info *info)
 // {
 // 	int dx = x2 - x1;
 //     int dy = y2 - y1;
@@ -42,7 +41,7 @@ static void init_ray_angle(t_rc *rc)
 //     else
 //         steps = abs(dy);
 //     float Xi = (float)dx / (float)steps;
-//     float Yi = (float)dy / (float)steps; // float 안붙여주면 증가 안함
+//     float Yi = (float)dy / (float)steps;
     
 //     float x = (float)x1, y = (float)y1;
 //     for (int v = 0; v < steps; v++)

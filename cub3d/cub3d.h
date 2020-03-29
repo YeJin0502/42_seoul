@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 08:03:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 08:20:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void    find_ray_dist(t_info *info, t_rc *rc);
 void    render(t_info *info, t_rc *rc, int i);
 void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
 void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
-void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
+void    init_ray_dist(t_rc *rc, t_fd *fd);
 int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
