@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 02:12:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 05:38:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct  s_info
     int     f[3]; // 아 포인터만 써서 배열을 오히려 모르겠네...
     int     c[3];
     // int     **map;
-    char    *map; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
+    char    **map; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
     int     map_width;
     int     map_height;
     double  tile_width;
@@ -87,6 +87,7 @@ typedef struct  s_info
     t_img   *so;
     t_img   *we;
     t_img   *ea;
+    t_img   *s; // 아직 안함
     t_img   *scene;
 }               t_info;
 

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 00:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 00:56:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 04:36:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ int Map[11][15] =
 //     //     printf("%d\n", (info->map[0][i]));
 // }
 
-static t_img *make_img(char *filename, t_info *info)
-{
-    t_img *img;
+// static t_img *make_img(char *filename, t_info *info)
+// {
+//     t_img *img;
 
-    img = (t_img *)malloc(sizeof(t_img));
-    img->image = mlx_xpm_file_to_image(info->mlx, filename, &(img->width), &(img->height));
-    img->image_data = mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
-    return (img);
-}
+//     img = (t_img *)malloc(sizeof(t_img));
+//     img->image = mlx_xpm_file_to_image(info->mlx, filename, &(img->width), &(img->height));
+//     img->image_data = mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
+//     return (img);
+// }
 
 static void init_info_img(t_info *info)
 {

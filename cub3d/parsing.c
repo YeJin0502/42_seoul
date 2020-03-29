@@ -12,14 +12,16 @@
 
 #include "cub3d.h"
 
-static t_img *make_img(char *filename, t_info *info)
+void init_info_win(char *line, t_ps *ps, t_info *info)
 {
-    t_img *img;
+    char *adr;
 
-    img = (t_img *)malloc(sizeof(t_img));
-    img->image = mlx_xpm_file_to_image(info->mlx, filename, &(img->width), &(img->height));
-    img->image_data = mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
-    return (img);
+    adr = line + 1;
+    while (*adr == ' ')
+        adr++;
+    info->win_width = ft_atoi(adr);
+    adr = ft_strchr(adr, ' ');
+    info->win_height = ft_atoi(adr);
 }
 
 void parsing_wall(char *line, char *wall, t_ps *ps)
@@ -41,63 +43,23 @@ void parsing_wall(char *line, char *wall, t_ps *ps)
         ps->s = ft_strdup(filename);
 }
 
+t_img *make_img(char *filename, t_info *info)
+{
+    t_img *img;
+
+    img = (t_img *)malloc(sizeof(t_img));
+    img->image = mlx_xpm_file_to_image(info->mlx, filename, &(img->width), &(img->height));
+    img->image_data = mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
+    return (img);
+}
+
 void init_info_wall(t_info *info, t_ps *ps)
 {
     info->no = make_img(ps->no, info);
     info->so = make_img(ps->so, info);
     info->we = make_img(ps->we, info);
-    info->ea = make_img(ps->ea, info);    
-}
-
-char	*c3_strjoin(char const *s1, char const *s2)
-{
-	char	*ret;
-	size_t	i;
-	size_t	j;
-    size_t  s1_len;
-	size_t	s2_len;
-
-	if (!s1 && !s2)
-		return (0);
-	else if (!s1 && s2)
-    {
-        s1_len = 0;
-		s2_len = ft_strlen(s2);
-    }
-	else if (s1 && !s2)
-    {
-		s1_len = ft_strlen(s1);
-        s2_len = 0;
-    }
-	else
-    {
-		s1_len = ft_strlen(s1);
-        s2_len = ft_strlen(s2);
-    }
-	ret = (char *)malloc(s1_len + s2_len + 1);
-	if (!ret)
-		return (0);
-	ret[s1_len + s2_len] = '\0';
-	i = 0;
-	j = 0;
-	while(i < s1_len)
-		ret[i++] = s1[j++];
-	j = 0;
-	while (i < s1_len + s2_len)
-		ret[i++] = s2[j++];
-	return (ret);
-}
-
-void init_info_map(char *line, t_ps *ps, t_info *info)
-{
-    char *joined_array;
-
-    if (info->map_width < ft_strlen(line))
-        info->map_width = ft_strlen(line);
-    info->map_height++;
-    joined_array = c3_strjoin(info->map, line); // int 형이라 join을 못쓴다.
-    free(info->map);
-    info->map = joined_array;
+    info->ea = make_img(ps->ea, info);
+    // info->s = make_img(ps->s, info);
 }
 
 void init_info_fc(char *line, char *fc, t_info *info, t_ps *ps)
@@ -127,30 +89,84 @@ void init_info_fc(char *line, char *fc, t_info *info, t_ps *ps)
     }
 }
 
-void init_info_win(char *line, t_ps *ps, t_info *info)
+void init_info_map_wh(char *line, t_info *info)
 {
-    char *adr;
+    // char *joined_array;
 
-    adr = line + 1;
-    while (*adr == ' ')
-        adr++;
-    info->win_width = ft_atoi(adr);
-    adr = ft_strchr(adr, ' ');
-    info->win_height = ft_atoi(adr);
+    if (info->map_width < ft_strlen(line))
+        info->map_width = ft_strlen(line);
+    info->map_height++;
+    // joined_array = ft_strjoin(info->map, line); // int 형이라 join을 못쓴다.
+    // free(info->map);
+    // info->map = joined_array;
 }
+
+// void init_info_map(char *line, t_info *info)
+// {
+//     char **map;
+//     int i;
+
+//     map = (char **)malloc(sizeof(char *) * info->map_height);
+//     i = -1;
+//     while (++i < info->map_height)
+//     {
+//         map[i] = (char *)malloc(info->map_width + 1);
+//         ft_strlcpy(map[i], line, info->map_width + 1);
+//         printf("[%s]\n", map[i]);
+//     }
+//     info->map = map;
+// }
 
 void convert_map(t_info *info)
 {
-    while (*(info->map))
+    int i;
+    int j;
+
+    i = -1;
+    while (++i < info->map_height)
     {
-        if (*(info->map) == ' ')
-            *(info->map) = 0;
-        else if (*(info->map) == '0')
-            *(info->map) = 0;
-        else if (*(info->map) == '1')
-            *(info->map) = 1;
-        // else if ()
-        (info->map)++;
+        j = -1;
+        while (++j < info->map_width)
+        {
+            if (info->map[i][j] == ' ')
+                info->map[i][j] = -1;
+            else if (info->map[i][j] == '0')
+                info->map[i][j] = 0;
+            else if (info->map[i][j] == '1')
+                info->map[i][j] = 1;
+            else if (info->map[i][j] == '2')
+                info->map[i][j] = 2;
+            else if (info->map[i][j] == 'N')
+            {
+                info->map[i][j] = 0;
+                info->x = info->tile_width * j + info->tile_width / 2;
+                info->y = info->tile_height * i + info->tile_height / 2;
+                info->view_angle = 1.5 * PI;
+            }
+            else if (info->map[i][j] == 'S')
+            {
+                info->map[i][j] = 0;
+                info->x = info->tile_width * j + info->tile_width / 2;
+                info->y = info->tile_height * i + info->tile_height / 2;
+                info->view_angle = 0.5 * PI;
+            }
+            else if (info->map[i][j] == 'W')
+            {
+                info->map[i][j] = 0;
+                info->x = info->tile_width * j + info->tile_width / 2;
+                info->y = info->tile_height * i + info->tile_height / 2;
+                info->view_angle = PI;
+            }
+            else if (info->map[i][j] == 'E')
+            {
+                info->map[i][j] = 0;
+                info->x = info->tile_width * j + info->tile_width / 2;
+                info->y = info->tile_height * i + info->tile_height / 2;
+                info->view_angle = 0;
+            }
+            else
+                info->map[i][j] = -1;
+        }
     }
 }
 
@@ -159,13 +175,16 @@ void init_info_test(char *filename, t_info *info)
     t_ps *ps;
     int fd;
     char *line;
+    int map_start;
 
     ps = (t_ps *)malloc(sizeof(t_ps));
     // ft_memset(ps, 0, sizeof(t_ps)); // 동적할당에는 sizeof 쓰면 안된다고 들었는데.. 되나? ps가 아니라 t_ps라고 하면 되나?
     fd = open(filename, O_RDONLY);
     line = 0;
+    map_start = 0;
     while ((get_next_line(fd, &line) || ft_strlen(line)))
     {
+        map_start++;
         if (ft_strnstr(line, "R ", 2))
             init_info_win(line, ps, info);
         else if (ft_strnstr(line, "NO ", 3))
@@ -183,10 +202,32 @@ void init_info_test(char *filename, t_info *info)
         else if (ft_strnstr(line, "S ", 2))
             parsing_wall(line, "S ", ps);
         else if (ft_strlen(line)) // 맵을 한줄로 저장. 근데 ft_strlen이 있는 줄만 해야겠지..?
-            init_info_map(line, ps, info); // 몇줄 될지 모르니까 연결리스트 쓰면 좋을것같은데...
+        {
+            map_start--;
+            init_info_map_wh(line, info); // 몇줄 될지 모르니까 연결리스트 쓰면 좋을것같은데...
+        }
         // parsing_map(info, ps);
         free(line);
     }
+    free(line); // 또 해줘야하는건가?
+    line = 0; // 안해주면 안되나?
+
+    // printf("%d\n", map_start);
+    close(fd);
+    fd = open(filename, O_RDONLY);
+    info->map = (char **)malloc(sizeof(char *) * info->map_height);
+    while ((get_next_line(fd, &line) || ft_strlen(line)))
+    {
+        if (map_start <= 0)
+        {
+            info->map[-map_start] = (char *)malloc(info->map_width + 1);
+            ft_strlcpy(info->map[-map_start], line, info->map_width + 1);
+            // printf("[%s]\n", info->map[-map_start]);
+        }
+        map_start--;
+        free(line);
+    }
+
     // printf("[%s]\n", ps->no);
     // printf("[%s]\n", ps->so);
     // printf("[%s]\n", ps->we);
@@ -199,13 +240,11 @@ void init_info_test(char *filename, t_info *info)
 
     info->mlx = mlx_init();
     info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
-    init_info_wall(info, ps);
-    convert_map(info);
 
     info->tile_width = info->win_width / info->map_width;
     info->tile_height = info->win_height / info->map_height;
-
-
+    init_info_wall(info, ps);
+    convert_map(info);
 
     free(ps->no);
     free(ps->so);
