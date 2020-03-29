@@ -6,48 +6,36 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 07:37:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 07:58:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void init_rc_key(t_rc *rc, int keycode)
+static void init_dir(int move_dir, int rotation_dir, t_rc *rc)
 {
-    rc->keycode = keycode; // 옆으로 이동할때 필요할 것 같아서 추가.
+    rc->move_dir = move_dir;
+    rc->rotation_dir = rotation_dir;
+}
+
+static void init_keycode(t_rc *rc, int keycode)
+{
+    rc->keycode = keycode;
     rc->move_dir = 0;  // 이런걸 release 함수가 대신하나? 도대체 release 함수는 언제 쓰는거지?
     rc->rotation_dir = 0; // 원하는 키 아닐때는 루프 안돌게 하는건가? 지금은 다른 키 눌러도 업데이트됨.
     printf("%d\n", keycode);
-    if (keycode == KEY_W) // 참고로 dir 두개 초기화 안해주면 다른 키 눌렀을때 오류 발생.
-    {
-        rc->move_dir = 1;
-        rc->rotation_dir = 0;
-    }
+    if (keycode == KEY_W)
+        init_dir(1, 0, rc);
     else if (keycode == KEY_S)
-    {
-        rc->move_dir = -1;
-        rc->rotation_dir = 0;
-    }
+        init_dir(-1, 0, rc);
     else if (keycode == KEY_D)
-    {
-        rc->move_dir = 1;
-        rc->rotation_dir = 0;
-    }
+        init_dir(1, 0, rc);
     else if (keycode == KEY_A)
-    {
-        rc->move_dir = -1;
-        rc->rotation_dir = 0;
-    }
+        init_dir(-1, 0, rc);
     else if (keycode == KEY_RIGHT)
-    {
-        rc->move_dir = 0;
-        rc->rotation_dir = 1;
-    }
+        init_dir(0, 1, rc);
     else if (keycode == KEY_LEFT)
-    {
-        rc->move_dir = 0;
-        rc->rotation_dir = -1;
-    }
+        init_dir(0, -1, rc);
 }
 
 static void move_and_rotate(t_info *info, t_rc *rc)
@@ -77,43 +65,44 @@ static void move_and_rotate(t_info *info, t_rc *rc)
         rc->is_move = 0;
 }
 
-
-
-void free_all(t_info *info, t_rc *rc)
+static void free_info(t_info *info, t_rc *rc)
 {
-    // free(info->f); // 전역변수가 아니면 malloc 하지않을까...? 헷갈리네. 애초에 *f가 아니라 f[3]? malloc 안써도 방법이 있나?
-    // free(info->c); // 지역변수를 너무 안쓰다보니...
-    mlx_destroy_image(info->mlx, info->no->image); // 이게 무슨 기능이지..? free의 기능인건가? image_data는 free를 안해도 되나?
-    mlx_destroy_image(info->mlx, info->so->image); // free를 따로 해줘야하는것인가..? free의 기능이 없다면
-    mlx_destroy_image(info->mlx, info->we->image); // destroy window는 창을 끄는거라고 쳐도, destroy image는 도대체 뭐여?
+    int i;
+
+    i = -1;
+    while (++i < info->map_height)
+        free(info->map[i]);
+    free(info->map);
+    mlx_destroy_image(info->mlx, info->no->image);
+    mlx_destroy_image(info->mlx, info->so->image);
+    mlx_destroy_image(info->mlx, info->we->image);
     mlx_destroy_image(info->mlx, info->ea->image);
     mlx_destroy_image(info->mlx, info->scene->image);
-    // free(info->f);
-    // free(info->c);
-    // int i;
-    // i = -1;
-    // while (++i < info->map_height) // 아 이거 항상 헷갈리네
-    //     free(info->map[i]);
-    // free(info->map);
     mlx_destroy_window(info->mlx, info->win);
-    free(info->win);
+    free(info->no);
+    free(info->so);
+    free(info->we);
+    free(info->ea);
+    // free(info->s);
+    free(info->scene);
     free(info->mlx);
+    free(info);
 }
 
-int key_hook(int keycode, void *param) // 작명을 나중에 mainloop같은 걸로 바꾸면 되지 않을까? 키만 받는거도 아니고.
+int key_hook(int keycode, void *param)
 {
     t_info  *info;
     t_rc    *rc;
 
     info = (t_info *)param;
-    rc = (t_rc *)malloc(sizeof(t_rc));
-    ft_memset(rc, 0, sizeof(rc)); // 널포인터는 프리해줄수 있나? 있으면 rc 위로 올리면 되지 않나?
-    if (keycode == KEY_ESC) // 0
+    if (keycode == KEY_ESC)
     {
-        free_all(info, rc);
-        exit(1);
+        free_info(info, rc);
+        exit(1); // 이렇게 끝내면 still reachable인데... 여기서 still reachable은 어떻게 해석해야하지?
     }
-    init_rc_key(rc, keycode);
+    rc = (t_rc *)malloc(sizeof(t_rc));
+    ft_memset(rc, 0, sizeof(rc));
+    init_keycode(rc, keycode);
     move_and_rotate(info, rc);
     if (rc->is_move == 1 || rc->rotation_dir != 0)
     {
@@ -121,6 +110,5 @@ int key_hook(int keycode, void *param) // 작명을 나중에 mainloop같은 걸
         raycast(info, rc);
     }
     free(rc);
-    rc = 0; // 댕글링 포인터
     return (0);
 }

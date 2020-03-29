@@ -20,8 +20,12 @@ static void init_win_size(char *line, t_ps *ps, t_info *info)
     while (*adr == ' ')
         adr++;
     info->win_width = ft_atoi(adr);
+    if (info->win_width > DISPLAY_WIDTH)
+        info->win_width = DISPLAY_WIDTH;
     adr = ft_strchr(adr, ' ');
     info->win_height = ft_atoi(adr);
+    if (info->win_height > DISPLAY_HEIGHT)
+        info->win_height = DISPLAY_HEIGHT;
 }
 
 static void init_fc(char *line, char *fc, t_info *info, t_ps *ps)

@@ -38,7 +38,7 @@ void init_vert(t_info *info, t_rc *rc, t_fd *vert)
     vert->intersection_x += (rc->is_ray_left) ? -1 : 0;
 }
 
-void init_rc_ray_dist(t_rc *rc, t_fd *fd)
+void init_ray_dist(t_rc *rc, t_fd *fd)
 {
     rc->intersection_x = fd->intersection_x;
     rc->intersection_y = fd->intersection_y;

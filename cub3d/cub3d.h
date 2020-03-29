@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 06:36:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 08:03:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define FOV 60.0 * PI / 180.0
 # define ROTATION_SPEED 2.0 * PI / 180.0
 # define MOVE_SPEED 2.0 // 그냥 2하면 왠지 오류날 것 같은... 되나?
-
+# define DISPLAY_WIDTH 1920
+# define DISPLAY_HEIGHT 1080
 # define KEY_W 119
 # define KEY_S 115
 # define KEY_A 97
@@ -69,18 +70,16 @@ typedef struct  s_img
 
 typedef struct  s_info
 {
-    // t_rc    *rc; // 필요 없나? 혹시 필요하면...
-    int     win_width; // tile을 double로 만들기 위해서 이걸 꼭 double로 만들어야하나? R이랑 map이 int면 double이 잘 안되네...
-    int     win_height; // double이었는데 int로 바꿔줬으니, 필요할 때 double로 바꿔줘야.
-    int     f[3]; // 아 포인터만 써서 배열을 오히려 모르겠네...
+    int     win_width;
+    int     win_height;
+    int     f[3];
     int     c[3];
-    // int     **map;
-    char    **map; // 원래는 1중 배열로 받아야 할듯? 뒤의 숫자를 모르니까. 아닌가..? // 괄호 안해주면 안됨.
+    char    **map;
     int     map_width;
     int     map_height;
     double  tile_width;
     double  tile_height;
-    double  x; // int로 했더니 더하는 값들이 double이니까 계산이 이상하게 되더라.
+    double  x;
     double  y;
     double  view_angle;
     void    *mlx;
@@ -118,7 +117,6 @@ typedef struct  s_raycast
     t_img   *wall_img;
     double  image_x;
     double  image_y;
-    // int     color;
 }               t_rc;
 
 typedef struct  s_find_dist // 작명이...

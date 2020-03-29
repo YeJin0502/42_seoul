@@ -44,13 +44,13 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
         horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
         if (rc->is_ray_up)
         {
+            horz->tile_x = fmod(horz->intersection_x, info->tile_width);
             horz->tile_hit_dir = 3;
-            horz->tile_x = fmod(horz->intersection_x, info->tile_width); // 맞을까?
         }
         else
         {
-            horz->tile_hit_dir = 1;
             horz->tile_x = info->tile_width - fmod(horz->intersection_x, info->tile_width);
+            horz->tile_hit_dir = 1;
         }
     }
     else
@@ -90,9 +90,9 @@ void find_ray_dist(t_info *info, t_rc *rc)
     horz = find_horz_dist(info, rc);
     vert = find_vert_dist(info, rc);
     if (vert->ray_dist < horz->ray_dist)
-        init_rc_ray_dist(rc, vert);
+        init_ray_dist(rc, vert);
     else
-        init_rc_ray_dist(rc, horz);
+        init_ray_dist(rc, horz);
     free(horz);
     free(vert);
 }

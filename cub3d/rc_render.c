@@ -23,11 +23,11 @@ static t_img *select_img(t_info *info, t_rc *rc)
     else if (rc->tile_hit_dir == 3)
         wall_img = info->so;
     else
-        wall_img = info->we; // 맞나? 순서 헷갈리네. 나중에 확인
+        wall_img = info->we;
     return (wall_img);
 }
 
-static void init_rc_to_render(t_info *info, t_rc *rc)
+static void init_for_render(t_info *info, t_rc *rc)
 {
     rc->corrected_ray_dist = rc->ray_dist * cos(info->view_angle - rc->ray_angle);
     rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
@@ -48,7 +48,7 @@ void render(t_info *info, t_rc *rc, int i)
     int j;
     int color;
 
-    init_rc_to_render(info, rc);
+    init_for_render(info, rc);
     j = -1;
     while (++j < rc->bar_start)
     {

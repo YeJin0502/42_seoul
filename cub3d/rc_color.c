@@ -39,19 +39,18 @@ int get_color(t_img *img, int x, int y)
     return (color);
 }
 
-void change_color(t_img *img, int x, int y, int color) // void로 해도 바뀔라나?
+void change_color(t_img *img, int x, int y, int color)
 {
     int r;
     int g;
     int b;
 
-    r = (int)((double)color / (16 * 16 * 16 * 16)); // 맞나..?
+    r = (int)((double)color / (16 * 16 * 16 * 16));
     color = color % (16 * 16 * 16 * 16);
     g = (int)((double)color / (16 * 16));
     b = color % (16 * 16); // 맞아..?
-
     // printf("(%d,%d,%d) <%d,%d,%d>\n", r, g, b, x * 4 + img->size_line * y, x * 4 + img->size_line * y + 1, x * 4 + img->size_line * y + 2);
-    img->image_data[x * 4 + img->size_line * y] = b; // 되나? 바뀌나??
+    img->image_data[x * 4 + img->size_line * y] = b;
     img->image_data[x * 4 + img->size_line * y + 1] = g;
     img->image_data[x * 4 + img->size_line * y + 2] = r;
 }
