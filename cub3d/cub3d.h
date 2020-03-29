@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 05:38:51 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/30 06:36:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@
 
 typedef struct  s_parsing
 {
-    char *r;
+    int fd;
+    char *line;
+    int map_start;
     char *no;
     char *so;
     char *we;
@@ -50,8 +52,8 @@ typedef struct  s_parsing
     // int we_complete;
     // int ea_complete;
     // int s_complete;
-    int f_complete;
-    int c_complete; // 필요할까?
+    // int f_complete;
+    // int c_complete; // 필요할까?
 }               t_ps;
 
 typedef struct  s_img
@@ -131,7 +133,6 @@ typedef struct  s_find_dist // 작명이...
     int     tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
 }               t_fd;
 
-t_info  *init_info(); // 아마 매개변수로 argc, argv 받지않을까?
 void    make_first_scene(t_info *info);
 int     key_hook(int keycode, void *param);
 void    raycast(t_info *info, t_rc *rc);
@@ -144,6 +145,10 @@ void    init_rc_ray_dist(t_rc *rc, t_fd *fd);
 int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
-void    init_info_test(char *filename, t_info *info);
+void    init_info(char *filename, t_info *info);
+void init_map_size(char *line, t_info *info);
+void init_map(t_info *info, t_ps *ps, char *filename);
+void ps_texture(char *line, char *wall, t_ps *ps);
+void init_texture(t_info *info, t_ps *ps);
 
 #endif
