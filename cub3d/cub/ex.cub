@@ -4,7 +4,7 @@ NO ./texture/n_wall_pixel.xpm
 SO ./texture/s_wall_pixel.xpm
 EA ./texture/e_wall_pixel.xpm
 WE ./texture/w_wall_pixel.xpm
-S ./texture/chim.xpm
+S ./texture/star.xpm
 
 C 125 ,  200,200
 F 30 ,  40,60
