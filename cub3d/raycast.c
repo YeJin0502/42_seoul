@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 08:37:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 05:11:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void raycast(t_info *info, t_rc *rc)
         render(info, rc, i);
         rc->ray_angle += FOV / info->win_width;
     }
-    mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
+    if (info->argc == 2)
+        mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
 }

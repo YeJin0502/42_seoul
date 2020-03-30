@@ -93,7 +93,8 @@ void init_info(char *filename, t_info *info)
     info->tile_height = info->win_height / info->map_height;
     init_map(info, ps, filename);
     info->mlx = mlx_init();
-    info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+    if (info->argc == 2) // bmp 저장할때 win 켜졌다가 꺼지는거 불편해서...
+        info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
     init_texture(info, ps);
     free(ps->no);
     free(ps->so);

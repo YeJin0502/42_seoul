@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 01:56:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 05:10:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct  s_img
 
 typedef struct  s_info
 {
+    int     argc;
     int     win_width;
     int     win_height;
     int     f[3];
@@ -150,5 +151,6 @@ void init_map_size(char *line, t_info *info);
 void init_map(t_info *info, t_ps *ps, char *filename);
 void ps_texture(char *line, char *wall, t_ps *ps);
 void init_texture(t_info *info, t_ps *ps);
+void save_bmp(int fd, t_img *scene);
 
 #endif
