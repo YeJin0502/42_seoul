@@ -55,8 +55,9 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
     }
     else
         horz->ray_dist = 100000000; // 선택되지 않기 위해 큰 값. max 값으로 교체해야 할듯... 몇인지 몰라.
-
+    return (horz);
 }
+
 static t_fd *find_vert_dist(t_info *info, t_rc *rc)
 {
     t_fd *vert;
@@ -80,6 +81,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
     }
     else
         vert->ray_dist = 100000000;
+    return (vert);
 }
 
 void find_ray_dist(t_info *info, t_rc *rc)

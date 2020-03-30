@@ -20,7 +20,7 @@ void make_first_scene(t_info *info)
     info->scene->width = info->win_width;
     info->scene->height = info->win_height;
     info->scene->image = mlx_new_image(info->mlx, info->win_width, info->win_height);
-    info->scene->image_data = mlx_get_data_addr(info->scene->image, &(info->scene->bpp),
+    info->scene->image_data = (unsigned char *)mlx_get_data_addr(info->scene->image, &(info->scene->bpp),
                             &(info->scene->size_line), &(info->scene->endian));
     rc = (t_rc *)malloc(sizeof(t_rc));
     raycast(info, rc);

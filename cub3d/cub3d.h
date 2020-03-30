@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 08:20:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 01:45:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUB3D_H
 
 # include <stdio.h> // 허용함수 아니면 나중에 삭제
-# include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h> // open
+# include "minilibx_linux/mlx.h"
 # include "libft/libft.h"
 
 # define PI 3.1415926535

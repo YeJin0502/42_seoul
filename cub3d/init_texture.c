@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ii_texture.c                                       :+:      :+:    :+:   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:29:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 06:43:36 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 01:46:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_img *make_xpm_img(char *filename, t_info *info) // 다른데서도 쓸�
 
     img = (t_img *)malloc(sizeof(t_img));
     img->image = mlx_xpm_file_to_image(info->mlx, filename, &(img->width), &(img->height));
-    img->image_data = mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
+    img->image_data = (unsigned char *)mlx_get_data_addr(img->image, &(img->bpp), &(img->size_line), &(img->endian));
     return (img);
 }
 
