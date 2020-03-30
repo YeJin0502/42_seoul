@@ -17,18 +17,20 @@ static double distance(double x1, double y1, double x2, double y2)
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-static void find_intersection(t_info *info, t_fd *horz)
+static void find_intersection(t_info *info, t_fd *fd)
 {
-    while (horz->intersection_x >= 0 && horz->intersection_x <= info->win_width &&
-            horz->intersection_y >= 0 && horz->intersection_y <= info->win_height)
+    while (fd->intersection_x >= 0 && fd->intersection_x <= info->win_width &&
+            fd->intersection_y >= 0 && fd->intersection_y <= info->win_height)
     {
-        if (is_wall(horz->intersection_x, horz->intersection_y, info))
+        if (is_wall(fd->intersection_x, fd->intersection_y, info) != 0)
         {
-            horz->is_wall_hit = 1;
+            fd->is_wall_hit = 1;
+            if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2)
+                fd->is_item_hit = 1;
             break;
         }
-        horz->intersection_x += horz->dx;
-        horz->intersection_y += horz->dy;
+        fd->intersection_x += fd->dx;
+        fd->intersection_y += fd->dy;
     }
 }
 
@@ -37,6 +39,7 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
     t_fd *horz;
 
     horz = (t_fd *)malloc(sizeof(t_fd));
+    ft_memset(horz, 0, sizeof(t_fd));
     init_horz(info, rc, horz);
     find_intersection(info, horz);
     if (horz->is_wall_hit)
@@ -63,6 +66,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
     t_fd *vert;
 
     vert = (t_fd *)malloc(sizeof(t_fd));
+    ft_memset(vert, 0, sizeof(t_fd));
     init_vert(info, rc, vert);
     find_intersection(info, vert);
     if (vert->is_wall_hit)

@@ -16,7 +16,9 @@ static t_img *select_img(t_info *info, t_rc *rc)
 {
     t_img *wall_img;
 
-    if (rc->tile_hit_dir == 1)
+    if (rc->is_item_hit == 1)
+        wall_img = info->s;
+    else if (rc->tile_hit_dir == 1)
         wall_img = info->no;
     else if (rc->tile_hit_dir == 2)
         wall_img = info->ea;
@@ -32,7 +34,7 @@ static void init_for_render(t_info *info, t_rc *rc)
     rc->corrected_ray_dist = rc->ray_dist * cos(info->view_angle - rc->ray_angle);
     rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
     rc->bar_height = (info->tile_height + info->tile_width) / 2
-                    * rc->projection_dist / rc->corrected_ray_dist; // 임시로 tile 높이 사용. 뭐 써야할라나..?
+                     * rc->projection_dist / rc->corrected_ray_dist; // 임시로 tile 높이 사용. 뭐 써야할라나..?
     rc->bar_start = (info->win_height / 2) - (rc->bar_height / 2);
     rc->bar_end = (info->win_height / 2) + (rc->bar_height / 2);
     rc->wall_img = select_img(info, rc);

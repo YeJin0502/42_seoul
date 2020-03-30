@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:29:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 01:46:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 02:16:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void init_texture(t_info *info, t_ps *ps)
     info->so = make_xpm_img(ps->so, info);
     info->we = make_xpm_img(ps->we, info);
     info->ea = make_xpm_img(ps->ea, info);
-    // info->s = make_img(ps->s, info);
+    info->s = make_xpm_img(ps->s, info);
 }
