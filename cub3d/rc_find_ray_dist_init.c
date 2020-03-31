@@ -42,12 +42,9 @@ void init_vert(t_info *info, t_rc *rc, t_fd *vert)
 
 void init_ray_dist(t_rc *rc, t_fd *fd)
 {
-    rc->intersection_x = fd->intersection_x;
-    rc->intersection_y = fd->intersection_y;
+    // rc->intersection_x = fd->intersection_x;
+    // rc->intersection_y = fd->intersection_y;
     rc->ray_dist = fd->ray_dist;
     rc->tile_x = fd->tile_x;
     rc->tile_hit_dir = fd->tile_hit_dir;
-
-    // rc->item_ray_dist = fd->item_ray_dist;
-    // rc->item_tile_x = fd->item_tile_x;
 }

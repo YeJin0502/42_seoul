@@ -93,7 +93,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
         }
     }
     else
-        vert->ray_dist = 2203;
+        vert->ray_dist = 2203; // 이게 최대값이라는 생각은 드는데... 어짜피 큰수 넣는거랑 똑같다면 max값 넣어도 될듯.
     return (vert);
 }
 

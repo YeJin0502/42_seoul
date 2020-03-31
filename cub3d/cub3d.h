@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 21:51:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 22:54:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,19 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
-typedef struct  s_parsing
+typedef struct      s_parsing
 {
-    int fd;
-    char *line;
-    int map_start;
-    char *no;
-    char *so;
-    char *we;
-    char *ea;
-    char *s;
-    // char *f;
-    // char *c;
-    // char *map; // 이중으로 하기 어려울 듯...
-    // int r_complete;
-    // int no_complete;
-    // int so_complete;
-    // int we_complete;
-    // int ea_complete;
-    // int s_complete;
-    // int f_complete;
-    // int c_complete; // 필요할까?
-}               t_ps;
+    int             fd;
+    char            *line;
+    int             map_start;
+    char            *no;
+    char            *so;
+    char            *we;
+    char            *ea;
+    char            *s;
+}                   t_ps;
 
-typedef struct  s_img
+typedef struct      s_image
 {
     int             width;
     int             height;
@@ -66,85 +55,78 @@ typedef struct  s_img
     int             size_line;
     int             endian;
     unsigned char   *image_data;
-}               t_img;
+}                   t_img;
 
-typedef struct  s_info
+typedef struct      s_info
 {
-    int     argc;
-    int     win_width;
-    int     win_height;
-    int     f[3];
-    int     c[3];
-    char    **map;
-    int     map_width;
-    int     map_height;
-    double  tile_width;
-    double  tile_height;
-    double  x;
-    double  y;
-    double  view_angle;
-    void    *mlx;
-    void    *win;
-    t_img   *no;
-    t_img   *so;
-    t_img   *we;
-    t_img   *ea;
-    t_img   *s;
-    t_img   *scene;
-}               t_info;
+    int             argc;
+    void            *mlx;
+    void            *win;
+    int             win_width;
+    int             win_height;
+    int             f[3];
+    int             c[3];
+    char            **map;
+    int             map_width;
+    int             map_height;
+    double          tile_width;
+    double          tile_height;
+    double          x;
+    double          y;
+    double          view_angle;
+    t_img           *no;
+    t_img           *so;
+    t_img           *we;
+    t_img           *ea;
+    t_img           *s;
+    t_img           *scene;
+}                   t_info;
 
-typedef struct  s_raycast
+typedef struct      s_raycast
 {
-    int     keycode;
-    int     move_dir;
-    int     rotation_dir;
-    double  move_dist;
-    int     is_move;
-    double  ray_angle;
-    int     is_ray_up;
-    int     is_ray_down;
-    int     is_ray_right;
-    int     is_ray_left;
-    double  intersection_x; // 이거
-    double  intersection_y; // 이거 쓰나?
-    double  ray_dist;
-    double  tile_x;
-    int     tile_hit_dir;
-    double  projection_dist;
-    int     bar_height;
-    int     bar_start;
-    int     bar_end;
-    t_img   *wall_img;
-    double  wall_image_x;
-    double  wall_image_y;
-    int     is_item_hit;
-    double  item_ray_dist;
-    double  item_tile_x;
-    double  item_image_x;
-    double  item_image_y;
-    double  item_bar_height;
-    double  item_bar_start;
-    double  item_bar_end;
-}               t_rc;
+    int             keycode;
+    int             move_dir;
+    int             rotation_dir;
+    int             is_move; // 여기까지는 분리할까..?
+    double          ray_angle;
+    int             is_ray_up;
+    int             is_ray_down;
+    int             is_ray_right;
+    int             is_ray_left;
+    double          ray_dist;
+    double          tile_x;
+    int             tile_hit_dir;
+    double          projection_dist;
+    int             bar_height;
+    int             bar_start;
+    int             bar_end;
+    t_img           *wall_image;
+    double          wall_image_x;
+    double          wall_image_y;
+    int             is_item_hit;
+    double          item_ray_dist;
+    double          item_tile_x;
+    double          item_image_x;
+    double          item_image_y;
+    double          item_bar_height;
+    double          item_bar_start;
+    double          item_bar_end;
+}                   t_rc;
 
-typedef struct  s_find_dist // 작명이...
+typedef struct      s_find_ray_dist
 {
-    int     is_horz;
-    int     is_vert; // 아 이거 진짜 필요한가 너무 별론데
-    double  intersection_x;
-    double  intersection_y;
-    double  dx;
-    double  dy;
-    int     is_wall_hit;
-    double  ray_dist;
-    double  tile_x;
-    int     tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
-    int     is_item_hit;
-    double  item_x;
-    double  item_y;
-    double  item_ray_dist;
-    double  item_tile_x;
-}               t_fd;
+    int             is_horz;
+    int             is_vert;
+    double          intersection_x;
+    double          intersection_y;
+    double          dx;
+    double          dy;
+    int             is_wall_hit;
+    double          ray_dist;
+    double          tile_x;
+    int             tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
+    int             is_item_hit;
+}                   t_fd;
 
 void    make_first_scene(t_info *info);
 int     key_hook(int keycode, void *param);
@@ -159,11 +141,11 @@ int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
 void    init_info(char *filename, t_info *info);
-void init_map_size(char *line, t_info *info);
-void init_map(t_info *info, t_ps *ps, char *filename);
-void ps_texture(char *line, char *wall, t_ps *ps);
-void init_texture(t_info *info, t_ps *ps);
-void save_bmp(t_img *scene, char *filename);
-void free_info(t_info *info);
+void    init_map_size(char *line, t_info *info);
+void    init_map(t_info *info, t_ps *ps, char *filename);
+void    ps_texture(char *line, char *wall, t_ps *ps);
+void    init_texture(t_info *info, t_ps *ps);
+void    save_bmp_image(t_img *scene, char *filename);
+void    free_info(t_info *info);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 03:45:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 08:28:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 22:54:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char *make_bmp_name(char *filename)
     return (bmp_name);
 }
 
-void save_bmp(t_img *scene, char *filename)
+void save_bmp_image(t_img *scene, char *filename)
 {
     char *bmp_name;
     int fd;
