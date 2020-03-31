@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_bmp.c                                         :+:      :+:    :+:   */
+/*   save_bmp_image.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 03:45:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 22:54:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 23:09:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void save_bmp_image(t_img *scene, char *filename)
     int fd;
 
     bmp_name = make_bmp_name(filename);
-    fd = open(bmp_name, O_RDWR | O_CREAT, 744); // 이렇게 하는건가?
+    fd = open(bmp_name, O_RDWR | O_CREAT, 744);
     write_bmp_header(fd, scene);
     write_pixel_data(fd, scene);
     free(bmp_name); 

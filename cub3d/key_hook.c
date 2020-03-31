@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 23:02:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 23:16:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void free_info(t_info *info)
     mlx_destroy_image(info->mlx, info->so->image);
     mlx_destroy_image(info->mlx, info->we->image);
     mlx_destroy_image(info->mlx, info->ea->image);
+    mlx_destroy_image(info->mlx, info->s->image);
     mlx_destroy_image(info->mlx, info->scene->image);
-    mlx_destroy_window(info->mlx, info->win);
+    if (info->argc == 2)
+        mlx_destroy_window(info->mlx, info->win);
     free(info->no);
     free(info->so);
     free(info->we);
