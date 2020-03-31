@@ -26,6 +26,8 @@ static void init_win_size(char *line, t_ps *ps, t_info *info)
     info->win_height = ft_atoi(adr);
     if (info->win_height > DISPLAY_HEIGHT)
         info->win_height = DISPLAY_HEIGHT;
+    if (!info->win_width || !info->win_height)
+        error_exit(1);
 }
 
 static void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
@@ -37,11 +39,15 @@ static void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
         rgb++;
     if (ft_strncmp(fc, "F", 1) == 0)
     {
+        if (info->f[0] || info->f[1] || info->f[2]) // 맞나? 이미 한번 들어오면... 이거 안되면 플래그 써야지.
+            error_exit(1);
         info->f[0] = ft_atoi(rgb);
         rgb = ft_strchr(rgb, ',') + 1;
         info->f[1] = ft_atoi(rgb);
         rgb = ft_strchr(rgb, ',') + 1;
         info->f[2] = ft_atoi(rgb);
+        if (!info->f[0] || !info->f[1] || !info->f[2])
+            error_exit(1);
     }
     else
     {
@@ -50,6 +56,8 @@ static void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
         info->c[1] = ft_atoi(rgb);
         rgb = ft_strchr(rgb, ',') + 1;
         info->c[2] = ft_atoi(rgb); 
+        if (!info->c[0] || !info->c[1] || !info->c[2])
+            error_exit(1);
     }
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ii_map.c                                           :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/30 06:34:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 00:24:12 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void init_player(t_info *info, double view_angle, int i, int j)
 static void convert_process(t_info *info, int i, int j)
 {
     if (info->map[i][j] == ' ')
-        info->map[i][j] = -1;
+        info->map[i][j] = 1;
     else if (info->map[i][j] == '0')
         info->map[i][j] = 0;
     else if (info->map[i][j] == '1')
