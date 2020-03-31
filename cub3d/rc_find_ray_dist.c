@@ -17,18 +17,23 @@ static double distance(double x1, double y1, double x2, double y2)
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-static void find_intersection(t_info *info, t_fd *fd)
+static void find_intersection(t_info *info, t_fd *fd, t_rc *rc)
 {
+    fd->is_item_hit = 0;
     while (fd->intersection_x >= 0 && fd->intersection_x <= info->win_width &&
             fd->intersection_y >= 0 && fd->intersection_y <= info->win_height)
     {
         if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2
-            && fd->is_horz == 1 && !fd->item_x && !fd->item_y)
+            && fd->is_horz == 1 && fd->is_item_hit == 0)
         {
-            fd->item_x = fd->intersection_x;
-            fd->item_y = fd->intersection_y;
+            fd->is_item_hit = 1;
+            rc->item_ray_dist = distance(info->x, info->y, fd->intersection_x, fd->intersection_y);
+            if (rc->is_ray_up)
+                rc->item_tile_x = fmod(fd->intersection_x, info->tile_width);
+            else
+                rc->item_tile_x = info->tile_width - fmod(fd->intersection_x, info->tile_width);
         }
-        if (is_wall(fd->intersection_x, fd->intersection_y, info) == 1)
+        else if (is_wall(fd->intersection_x, fd->intersection_y, info) == 1)
         {
             fd->is_wall_hit = 1;
             break;
@@ -45,15 +50,7 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
     horz = (t_fd *)malloc(sizeof(t_fd));
     ft_memset(horz, 0, sizeof(t_fd));
     init_horz(info, rc, horz);
-    find_intersection(info, horz);
-    if (horz->item_x)
-    {
-        horz->item_ray_dist = distance(info->x, info->y, horz->item_x, horz->item_y);
-        if (horz->item_x)
-            horz->item_tile_x = fmod(horz->item_x, info->tile_width);
-        if (horz->item_x)
-            horz->item_tile_x = info->tile_width - fmod(horz->item_x, info->tile_width);
-    }
+    find_intersection(info, horz, rc);
     if (horz->is_wall_hit)
     {
         horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
@@ -69,7 +66,7 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
         }
     }
     else
-        horz->ray_dist = 100000000; // 선택되지 않기 위해 큰 값. max 값으로 교체해야 할듯... 몇인지 몰라.
+        horz->ray_dist = 2203;
     return (horz);
 }
 
@@ -80,7 +77,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
     vert = (t_fd *)malloc(sizeof(t_fd));
     ft_memset(vert, 0, sizeof(t_fd));
     init_vert(info, rc, vert);
-    find_intersection(info, vert);
+    find_intersection(info, vert, rc);
     if (vert->is_wall_hit)
     {
         vert->ray_dist = distance(info->x, info->y, vert->intersection_x, vert->intersection_y);
@@ -96,7 +93,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
         }
     }
     else
-        vert->ray_dist = 100000000;
+        vert->ray_dist = 2203;
     return (vert);
 }
 
@@ -107,10 +104,7 @@ void find_ray_dist(t_info *info, t_rc *rc)
 
     horz = find_horz_dist(info, rc);
     vert = find_vert_dist(info, rc);
-
-    rc->item_ray_dist = horz->item_ray_dist;
-    rc->item_tile_x = horz->item_tile_x;
-
+    rc->is_item_hit = horz->is_item_hit;
     if (vert->ray_dist < horz->ray_dist)
         init_ray_dist(rc, vert);
     else

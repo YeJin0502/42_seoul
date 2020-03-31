@@ -16,8 +16,6 @@ static t_img *select_img(t_info *info, t_rc *rc)
 {
     t_img *wall_img;
 
-    // if (rc->is_item_hit == 1)
-    //     wall_img = info->s;
     if (rc->tile_hit_dir == 1)
         wall_img = info->no;
     else if (rc->tile_hit_dir == 2)
@@ -43,14 +41,41 @@ static void init_for_render(t_info *info, t_rc *rc)
     else
         rc->wall_image_x = rc->tile_x * rc->wall_img->width / info->tile_height + 0.000001;
     rc->wall_image_y = 0;
-    // printf("(%f / %f)\n", rc->item_tile_x, rc->item_ray_dist);
+    if (rc->is_item_hit)
+    {
+        rc->item_ray_dist *= cos(info->view_angle - rc->ray_angle);
+        rc->item_bar_height = (info->tile_height + info->tile_width) / 2
+                        * rc->projection_dist / rc->item_ray_dist;
+        rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
+        rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
+        rc->item_image_x = rc->item_tile_x * info->s->width / info->tile_width + 0.000001;
+        rc->item_image_y = 0;
+    }
+}
+
+void render_item(t_info *info, t_rc *rc, int i)
+{
+    int j;
+    int color;
+
     rc->item_ray_dist *= cos(info->view_angle - rc->ray_angle);
     rc->item_bar_height = (info->tile_height + info->tile_width) / 2
-                     * rc->projection_dist / rc->item_ray_dist;
+                    * rc->projection_dist / rc->item_ray_dist;
     rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
     rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
     rc->item_image_x = rc->item_tile_x * info->s->width / info->tile_width + 0.000001;
     rc->item_image_y = 0;
+    j = rc->item_bar_start - 1;
+    while (++j < rc->item_bar_end)
+    {
+        if (0 <= j && j <= info->win_height)
+        {
+            color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
+            if (color)
+                change_color(info->scene, i, j, color);
+        }
+        rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
+    }
 }
 
 void render(t_info *info, t_rc *rc, int i)
@@ -82,16 +107,20 @@ void render(t_info *info, t_rc *rc, int i)
         color = make_color(info->f[0], info->f[1], info->f[2]);
         change_color(info->scene, i, j, color);
     }
-    j = rc->item_bar_start - 1;
-    if (rc->item_tile_x)
-    while (++j < rc->item_bar_end)
-    {
-        if (0 <= j && j <= info->win_height)
-        {
-            color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
-            if (color)
-                change_color(info->scene, i, j, color);
-        }
-        rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
-    }
+    if (rc->is_item_hit)
+        render_item(info, rc, i);
+    // if (rc->is_item_hit)
+    // {
+    //     j = rc->item_bar_start - 1;
+    //     while (++j < rc->item_bar_end)
+    //     {
+    //         if (0 <= j && j <= info->win_height)
+    //         {
+    //             color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
+    //             if (color)
+    //                 change_color(info->scene, i, j, color);
+    //         }
+    //         rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
+    //     }
+    // }
 }

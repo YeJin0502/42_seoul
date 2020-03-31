@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 10:56:37 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 21:51:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct  s_raycast
     t_img   *wall_img;
     double  wall_image_x;
     double  wall_image_y;
+    int     is_item_hit;
     double  item_ray_dist;
     double  item_tile_x;
     double  item_image_x;
@@ -138,6 +139,7 @@ typedef struct  s_find_dist // 작명이...
     double  ray_dist;
     double  tile_x;
     int     tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
+    int     is_item_hit;
     double  item_x;
     double  item_y;
     double  item_ray_dist;
