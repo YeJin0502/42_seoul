@@ -47,9 +47,7 @@ void init_ray_dist(t_rc *rc, t_fd *fd)
     rc->ray_dist = fd->ray_dist;
     rc->tile_x = fd->tile_x;
     rc->tile_hit_dir = fd->tile_hit_dir;
-    // rc->is_item_hit = fd->is_item_hit; // 쓰려나?
-    rc->item_ray_dist = fd->item_ray_dist;
-    rc->item_tile_x = fd->item_tile_x;
-    // rc->item_y = fd->item_y;
-    
+
+    // rc->item_ray_dist = fd->item_ray_dist;
+    // rc->item_tile_x = fd->item_tile_x;
 }

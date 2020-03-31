@@ -46,24 +46,26 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
     ft_memset(horz, 0, sizeof(t_fd));
     init_horz(info, rc, horz);
     find_intersection(info, horz);
+    if (horz->item_x)
+    {
+        horz->item_ray_dist = distance(info->x, info->y, horz->item_x, horz->item_y);
+        if (horz->item_x)
+            horz->item_tile_x = fmod(horz->item_x, info->tile_width);
+        if (horz->item_x)
+            horz->item_tile_x = info->tile_width - fmod(horz->item_x, info->tile_width);
+    }
     if (horz->is_wall_hit)
     {
         horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
-        if (horz->item_x)
-            horz->item_ray_dist = distance(info->x, info->y, horz->item_x, horz->item_y);
         if (rc->is_ray_up)
         {
             horz->tile_x = fmod(horz->intersection_x, info->tile_width);
             horz->tile_hit_dir = 3;
-            if (horz->item_x)
-                horz->item_tile_x = fmod(horz->item_x, info->tile_width);
         }
         else
         {
             horz->tile_x = info->tile_width - fmod(horz->intersection_x, info->tile_width);
             horz->tile_hit_dir = 1;
-            if (horz->item_x)
-                horz->item_tile_x = info->tile_width - fmod(horz->item_x, info->tile_width);
         }
     }
     else
@@ -105,6 +107,10 @@ void find_ray_dist(t_info *info, t_rc *rc)
 
     horz = find_horz_dist(info, rc);
     vert = find_vert_dist(info, rc);
+
+    rc->item_ray_dist = horz->item_ray_dist;
+    rc->item_tile_x = horz->item_tile_x;
+
     if (vert->ray_dist < horz->ray_dist)
         init_ray_dist(rc, vert);
     else

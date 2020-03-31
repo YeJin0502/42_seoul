@@ -43,7 +43,7 @@ static void init_for_render(t_info *info, t_rc *rc)
     else
         rc->wall_image_x = rc->tile_x * rc->wall_img->width / info->tile_height + 0.000001;
     rc->wall_image_y = 0;
-    printf("(%f / %f)\n", rc->item_tile_x, rc->item_ray_dist);
+    // printf("(%f / %f)\n", rc->item_tile_x, rc->item_ray_dist);
     rc->item_ray_dist *= cos(info->view_angle - rc->ray_angle);
     rc->item_bar_height = (info->tile_height + info->tile_width) / 2
                      * rc->projection_dist / rc->item_ray_dist;
