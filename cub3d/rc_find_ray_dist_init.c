@@ -14,6 +14,7 @@
 
 void init_horz(t_info *info, t_rc *rc, t_fd *horz)
 {
+    horz->is_horz = 1;
     horz->intersection_y = floor(info->y / info->tile_height) * info->tile_height;
     horz->intersection_y += (rc->is_ray_down) ? info->tile_height : 0;
     horz->intersection_x = info->x + (horz->intersection_y - info->y) / tan(rc->ray_angle);
@@ -27,6 +28,7 @@ void init_horz(t_info *info, t_rc *rc, t_fd *horz)
 
 void init_vert(t_info *info, t_rc *rc, t_fd *vert)
 {
+    vert->is_vert = 1;
     vert->intersection_x = floor(info->x / info->tile_width) * info->tile_width;
     vert->intersection_x += (rc->is_ray_right) ? info->tile_width : 0;
     vert->intersection_y = info->y + (vert->intersection_x - info->x) * tan(rc->ray_angle);
@@ -45,5 +47,9 @@ void init_ray_dist(t_rc *rc, t_fd *fd)
     rc->ray_dist = fd->ray_dist;
     rc->tile_x = fd->tile_x;
     rc->tile_hit_dir = fd->tile_hit_dir;
-    rc->is_item_hit = fd->is_item_hit;
+    // rc->is_item_hit = fd->is_item_hit; // 쓰려나?
+    rc->item_ray_dist = fd->item_ray_dist;
+    rc->item_tile_x = fd->item_tile_x;
+    // rc->item_y = fd->item_y;
+    
 }

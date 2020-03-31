@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 08:19:31 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 10:56:37 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct  s_info
     t_img   *so;
     t_img   *we;
     t_img   *ea;
-    t_img   *s; // 아직 안함
+    t_img   *s;
     t_img   *scene;
 }               t_info;
 
@@ -105,24 +105,31 @@ typedef struct  s_raycast
     int     is_ray_down;
     int     is_ray_right;
     int     is_ray_left;
-    double  intersection_x;
-    double  intersection_y;
+    double  intersection_x; // 이거
+    double  intersection_y; // 이거 쓰나?
     double  ray_dist;
     double  tile_x;
     int     tile_hit_dir;
-    int     is_item_hit;
-    double  corrected_ray_dist;
     double  projection_dist;
     int     bar_height;
     int     bar_start;
     int     bar_end;
     t_img   *wall_img;
-    double  image_x;
-    double  image_y;
+    double  wall_image_x;
+    double  wall_image_y;
+    double  item_ray_dist;
+    double  item_tile_x;
+    double  item_image_x;
+    double  item_image_y;
+    double  item_bar_height;
+    double  item_bar_start;
+    double  item_bar_end;
 }               t_rc;
 
 typedef struct  s_find_dist // 작명이...
 {
+    int     is_horz;
+    int     is_vert; // 아 이거 진짜 필요한가 너무 별론데
     double  intersection_x;
     double  intersection_y;
     double  dx;
@@ -131,7 +138,10 @@ typedef struct  s_find_dist // 작명이...
     double  ray_dist;
     double  tile_x;
     int     tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
-    int     is_item_hit;
+    double  item_x;
+    double  item_y;
+    double  item_ray_dist;
+    double  item_tile_x;
 }               t_fd;
 
 void    make_first_scene(t_info *info);

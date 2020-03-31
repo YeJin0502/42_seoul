@@ -22,11 +22,15 @@ static void find_intersection(t_info *info, t_fd *fd)
     while (fd->intersection_x >= 0 && fd->intersection_x <= info->win_width &&
             fd->intersection_y >= 0 && fd->intersection_y <= info->win_height)
     {
-        if (is_wall(fd->intersection_x, fd->intersection_y, info) != 0)
+        if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2
+            && fd->is_horz == 1 && !fd->item_x && !fd->item_y)
+        {
+            fd->item_x = fd->intersection_x;
+            fd->item_y = fd->intersection_y;
+        }
+        if (is_wall(fd->intersection_x, fd->intersection_y, info) == 1)
         {
             fd->is_wall_hit = 1;
-            if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2)
-                fd->is_item_hit = 1;
             break;
         }
         fd->intersection_x += fd->dx;
@@ -45,15 +49,21 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
     if (horz->is_wall_hit)
     {
         horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
+        if (horz->item_x)
+            horz->item_ray_dist = distance(info->x, info->y, horz->item_x, horz->item_y);
         if (rc->is_ray_up)
         {
             horz->tile_x = fmod(horz->intersection_x, info->tile_width);
             horz->tile_hit_dir = 3;
+            if (horz->item_x)
+                horz->item_tile_x = fmod(horz->item_x, info->tile_width);
         }
         else
         {
             horz->tile_x = info->tile_width - fmod(horz->intersection_x, info->tile_width);
             horz->tile_hit_dir = 1;
+            if (horz->item_x)
+                horz->item_tile_x = info->tile_width - fmod(horz->item_x, info->tile_width);
         }
     }
     else
