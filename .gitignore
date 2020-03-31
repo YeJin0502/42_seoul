@@ -7,5 +7,6 @@ a.out
 # /*/*/
 # !/*/libft/
 
-# libft
 libft/*.txt
+
+cub3d/studied/
