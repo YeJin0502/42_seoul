@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 02:15:37 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 08:21:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void move_and_rotate(t_info *info, t_rc *rc)
         rc->is_move = 0;
 }
 
-static void free_info(t_info *info, t_rc *rc)
+void free_info(t_info *info)
 {
     int i;
 
@@ -88,7 +88,7 @@ static void free_info(t_info *info, t_rc *rc)
     free(info->so);
     free(info->we);
     free(info->ea);
-    // free(info->s);
+    free(info->s);
     free(info->scene);
     free(info->mlx);
     free(info);
@@ -102,7 +102,7 @@ int key_hook(int keycode, void *param)
     info = (t_info *)param;
     if (keycode == KEY_ESC)
     {
-        free_info(info, rc);
+        free_info(info);
         exit(1); // 이렇게 끝내면 still reachable인데... 여기서 still reachable은 어떻게 해석해야하지?
     }
     rc = (t_rc *)malloc(sizeof(t_rc));

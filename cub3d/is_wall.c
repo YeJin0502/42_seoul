@@ -26,11 +26,9 @@ int is_wall(double intersection_x, double intersection_y, t_info *info)
     // printf("(%d,%d) %d\n", map_x, map_y, info->map[map_y][map_x]);
     if (map_x < 0 || map_x >= info->map_width || map_y < 0 || map_y >= info->map_height)
         return (1);
-    // else if (info->map[map_y][map_x] != 0) // 왜 이걸 바꾸면 오류가 나지?
-    //     return (1);
     else if (info->map[map_y][map_x] == 1)
         return (1);
-    else if (info->map[map_y][map_x] == 2)
+    else if (info->map[map_y][map_x] == 2) // && (fmod(intersection_y, info->tile_height) < 1)) // 너무 야맨데..?
         return (2);
     return (0);
 }

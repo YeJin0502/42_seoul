@@ -51,6 +51,8 @@ void render(t_info *info, t_rc *rc, int i)
     int color;
 
     init_for_render(info, rc);
+    // printf("%d, %d, %d, %d\n", info->s->image_data[0], info->s->image_data[1], info->s->image_data[2], info->s->image_data[3]);
+    // 아이템하고 벽 힛포인트를 다 저장해놓고, 아이템 색이 0이면 힛포인트 색을 저장하는 식으로 해야할 듯?
     j = -1;
     while (++j < rc->bar_start)
     {

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 05:10:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 08:19:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void init_map_size(char *line, t_info *info);
 void init_map(t_info *info, t_ps *ps, char *filename);
 void ps_texture(char *line, char *wall, t_ps *ps);
 void init_texture(t_info *info, t_ps *ps);
-void save_bmp(int fd, t_img *scene);
+void save_bmp(t_img *scene, char *filename);
+void free_info(t_info *info);
 
 #endif

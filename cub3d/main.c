@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 06:47:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 08:18:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int main(int argc, char **argv)
     make_first_scene(info);
     if (argc == 3)
     {
-        int fd;
-        fd = open("image.bmp", O_RDWR | O_CREAT, 744); // 이렇게 하는건가?
-        save_bmp(fd, info->scene);
+        save_bmp(info->scene, argv[1]);
+        free_info(info);
         return (0);
     }
     else

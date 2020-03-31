@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 03:45:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 07:51:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/03/31 08:28:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,38 @@ void write_pixel_data(int fd, t_img *scene)
         }
     }
     write(fd, pixel_data, w * h * 3);
+    free(pixel_data);
 }
 
-void save_bmp(int fd, t_img *scene)
+char *make_bmp_name(char *filename)
 {
+    char    *mover;
+    int     len;
+    char    *cub_name;
+    char    *bmp_name;
+
+    mover = ft_strnstr(filename, ".cub", ft_strlen(filename));
+    len = 0;
+    while (*mover != '/')
+    {
+        mover--;
+        len++;
+    }
+    cub_name = (char *)malloc(len);
+    ft_strlcpy(cub_name, mover + 1, len);
+    bmp_name = ft_strjoin(cub_name, ".bmp");
+    free(cub_name);
+    return (bmp_name);
+}
+
+void save_bmp(t_img *scene, char *filename)
+{
+    char *bmp_name;
+    int fd;
+
+    bmp_name = make_bmp_name(filename);
+    fd = open(bmp_name, O_RDWR | O_CREAT, 744); // 이렇게 하는건가?
     write_bmp_header(fd, scene);
-    write_pixel_data(fd, scene);    
+    write_pixel_data(fd, scene);
+    free(bmp_name); 
 }
