@@ -6,11 +6,9 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/01 21:16:18 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/01 23:33:36 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# 참고링크: https://github.com/pbondoer/42-wolf3d/blob/master/Makefile
 
 NAME = cub3d
 
@@ -36,10 +34,10 @@ SRC = main.c \
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -O3
 
 MLXDIR = ./minilibx_linux
-MLX_LIB = $(addprefix $(MLX)/,mlx.a) # MLXDIR 아닌가?
+MLX_LIB = $(addprefix $(MLXDIR)/,mlx.a)
 MLX_INC = -I $(MLXDIR)
 MLX_LNK =  -L $(MLXDIR) -lmlx -lX11 -lXext
 
@@ -51,7 +49,7 @@ FT_LNK = -L $(FTDIR) -lft
 all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 
 obj:
-	mkdir -p $(OBJDIR) # p옵션은 뭐지?
+	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 18:48:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 23:03:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void init_keycode(t_rc *rc, int keycode)
     rc->keycode = keycode;
     rc->move_dir = 0;
     rc->rotation_dir = 0;
-    // printf("%d\n", keycode);
     if (keycode == KEY_W)
         init_dir(1, 0, rc);
     else if (keycode == KEY_S)
@@ -58,7 +57,7 @@ static void move_and_rotate(t_info *info, t_rc *rc)
         new_x += -sin(info->view_angle) * move_dist;
         new_y += cos(info->view_angle) * move_dist;
     }
-    if (is_wall(new_x, new_y, info) == 0)
+    if (is_wall(new_x, new_y, info) != 1)
     {
         info->x = new_x;
         info->y = new_y;
