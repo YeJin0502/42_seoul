@@ -6,26 +6,27 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 18:49:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/02 00:01:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h> // 허용함수 아니면 나중에 삭제
+# include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
-# include <fcntl.h> // open
-# include "minilibx_linux/mlx.h"
-# include "libft/libft.h"
+# include <fcntl.h>
+# include "mlx.h"
+# include "libft.h"
 
 # define PI 3.1415926535
 # define FOV 60.0 * PI / 180.0
 # define ROTATION_SPEED 2.0 * PI / 180.0
-# define MOVE_SPEED 2.0 // 그냥 2하면 왠지 오류날 것 같은... 되나?
+# define MOVE_SPEED 2.0
 # define DISPLAY_WIDTH 1920
 # define DISPLAY_HEIGHT 1080
+
 # define KEY_W 119
 # define KEY_S 115
 # define KEY_A 97
@@ -90,7 +91,7 @@ typedef struct      s_raycast
     int             keycode;
     int             move_dir;
     int             rotation_dir;
-    int             is_move; // 여기까지는 분리할까..?
+    int             is_move;
     double          ray_angle;
     int             is_ray_up;
     int             is_ray_down;
@@ -131,27 +132,27 @@ typedef struct      s_find_ray_dist
     int             is_item_hit;
 }                   t_fd;
 
-void    make_first_scene(t_info *info);
-int     key_hook(int keycode, void *param);
-void    raycast(t_info *info, t_rc *rc);
-int     is_wall(double intersection_x, double intersection_y, t_info *info);
-void    find_ray_dist(t_info *info, t_rc *rc);
-void    render(t_info *info, t_rc *rc, int i);
-void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
-void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
-void    init_ray_dist(t_rc *rc, t_fd *fd);
-int     make_color(int r, int g, int b);
-int     get_color(t_img *img, int x, int y);
-void    change_color(t_img *img, int x, int y, int color);
+void    error_exit(int errno);
 t_info  *init_info(int argc, char *filename);
 void    init_map_size(char *line, t_info *info);
 void    init_map(t_info *info, t_ps *ps, char *filename);
 void    ps_texture(char *line, char *wall, t_ps *ps);
+void    init_fc(char *line, char *fc, t_info *info, t_ps *ps);
 void    init_texture(t_info *info, t_ps *ps);
-void    save_bmp_image(t_img *scene, char *filename);
-void    error_exit(int errno);
+int     is_wall(double intersection_x, double intersection_y, t_info *info);
+int     key_hook(int keycode, void *param);
+void    make_first_scene(t_info *info);
 void    char_check(char *line);
 void    wall_check(t_info *info);
-void    init_fc(char *line, char *fc, t_info *info, t_ps *ps);
+void    raycast(t_info *info, t_rc *rc);
+int     make_color(int r, int g, int b);
+int     get_color(t_img *img, int x, int y);
+void    change_color(t_img *img, int x, int y, int color);
+void    init_horz(t_info *info, t_rc *rc, t_fd *horz);
+void    init_vert(t_info *info, t_rc *rc, t_fd *vert);
+void    init_ray_dist(t_rc *rc, t_fd *fd);
+void    find_ray_dist(t_info *info, t_rc *rc);
+void    render(t_info *info, t_rc *rc, int i);
+void    save_bmp_image(t_img *scene, char *filename);
 
 #endif

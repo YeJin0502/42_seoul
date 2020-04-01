@@ -1,14 +1,15 @@
 R 720   480
 
-NO ./texture/chim.xpm
-SO ./texture/chim.xpm
-EA ./texture/chim.xpm
-WE ./texture/chim.xpm
+NO ./texture/n_wall_pixel.xpm
+SO ./texture/s_wall_pixel.xpm
+EA ./texture/e_wall_pixel.xpm
+WE ./texture/w_wall_pixel.xpm
 S ./texture/barrel.xpm
 
-C 125 ,  200,200
+C 120 ,  200,200
 
-F 30 ,  40,60
+
+F 45 ,  50,30
 
         1111111111111111111111111
         1000000000110000000000001

@@ -32,7 +32,7 @@ static void init_to_render_wall(t_info *info, t_rc *rc)
     rc->ray_dist *= cos(info->view_angle - rc->ray_angle);
     rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
     rc->bar_height = (info->tile_height + info->tile_width) / 2
-                     * rc->projection_dist / rc->ray_dist; // 임시로 tile 높이 사용. 뭐 써야할라나..?
+                     * rc->projection_dist / rc->ray_dist; // 평균값으로 했는데, 뭐 써야할라나..?
     rc->bar_start = (info->win_height / 2) - (rc->bar_height / 2);
     rc->bar_end = (info->win_height / 2) + (rc->bar_height / 2);
     rc->wall_image = select_wall_img(info, rc);

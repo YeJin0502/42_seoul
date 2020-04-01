@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 23:03:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 23:46:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,8 @@ int key_hook(int keycode, void *param)
     free(rc);
     return (0);
 }
+
+// int press_x_button(void *param)
+// {
+//     exit(0);
+// }

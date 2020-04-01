@@ -6,14 +6,14 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/01 23:33:36 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/02 00:03:45 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRCDIR = ./src
-INCDIR = .
+INCDIR = ./include
 OBJDIR = ./obj
 
 SRC = main.c \
@@ -55,10 +55,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
-	@make -C $(FTDIR)
+	make -C $(FTDIR)
 
 $(MLX_LIB):
-	@make -C $(MLXDIR)
+	make -C $(MLXDIR)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -lbsd -o $(NAME)

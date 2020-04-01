@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 03:45:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 23:09:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 23:53:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void write_bmp_header(int fd, t_img *scene)
+static void write_bmp_header(int fd, t_img *scene)
 {
     unsigned char bmp_header[54];
     int filesize;
@@ -31,7 +31,7 @@ void write_bmp_header(int fd, t_img *scene)
     write(fd, bmp_header, 54);
 }
 
-void write_pixel_data(int fd, t_img *scene)
+static void write_pixel_data(int fd, t_img *scene)
 {
     int w;
     int h;
@@ -57,7 +57,7 @@ void write_pixel_data(int fd, t_img *scene)
     free(pixel_data);
 }
 
-char *make_bmp_name(char *filename)
+static char *make_bmp_name(char *filename)
 {
     char    *mover;
     int     len;
