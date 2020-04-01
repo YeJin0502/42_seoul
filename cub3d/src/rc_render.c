@@ -86,7 +86,7 @@ static void render_item(t_info *info, t_rc *rc, int i)
     j = rc->item_bar_start - 1;
     while (++j < rc->item_bar_end)
     {
-        if (0 <= j && j <= info->win_height)
+        if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist)
         {
             color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
             if (color)
