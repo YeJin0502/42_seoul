@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:29:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 15:51:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 18:10:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,39 @@ void ps_texture(char *line, char *wall, t_ps *ps) // 유효성검사를 여기�
     else if (ft_strncmp(wall, "S", 1) == 0 && !ps->s)
         ps->s = filename;
     else
+        error_exit(4);
+}
+
+static void check_init_fc(int fc[3], char *rgb)
+{
+    if (fc[0] || fc[1] || fc[2])
+        error_exit(4);
+    fc[0] = ft_atoi(rgb);
+    rgb = ft_strchr(rgb, ',') + 1;
+    fc[1] = ft_atoi(rgb);
+    rgb = ft_strchr(rgb, ',') + 1;
+    fc[2] = ft_atoi(rgb);
+    if (!fc[0] || !fc[1] || !fc[2])
         error_exit(2);
+}
+
+void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
+{
+    char *rgb;
+
+    rgb = line + 1;
+    while (*rgb == ' ')
+        rgb++;
+    if (ft_strncmp(fc, "F", 1) == 0)
+    {
+        check_init_fc(info->f, rgb);
+        ps->f_complete = 1;
+    }
+    else
+    {
+        check_init_fc(info->c, rgb);
+        ps->c_complete = 1;
+    }
 }
 
 static t_img *make_xpm_img(char *filename, t_info *info) // 다른데서도 쓸만함
