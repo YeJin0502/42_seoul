@@ -27,43 +27,20 @@ static void init_win_size(char *line, t_ps *ps, t_info *info)
     if (info->win_height > DISPLAY_HEIGHT)
         info->win_height = DISPLAY_HEIGHT;
     if (!info->win_width || !info->win_height)
-        error_exit(1);
+        error_exit(2);
+    ps->r_complete = 1;
 }
 
-static void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
+static void init_mlx(t_info *info, int argc)
 {
-    char *rgb;
-
-    rgb = line + 1;
-    while (*rgb == ' ')
-        rgb++;
-    if (ft_strncmp(fc, "F", 1) == 0)
-    {
-        if (info->f[0] || info->f[1] || info->f[2]) // 맞나? 이미 한번 들어오면... 이거 안되면 플래그 써야지.
-            error_exit(1);
-        info->f[0] = ft_atoi(rgb);
-        rgb = ft_strchr(rgb, ',') + 1;
-        info->f[1] = ft_atoi(rgb);
-        rgb = ft_strchr(rgb, ',') + 1;
-        info->f[2] = ft_atoi(rgb);
-        if (!info->f[0] || !info->f[1] || !info->f[2])
-            error_exit(1);
-    }
-    else
-    {
-        info->c[0] = ft_atoi(rgb);
-        rgb = ft_strchr(rgb, ',') + 1;
-        info->c[1] = ft_atoi(rgb);
-        rgb = ft_strchr(rgb, ',') + 1;
-        info->c[2] = ft_atoi(rgb); 
-        if (!info->c[0] || !info->c[1] || !info->c[2])
-            error_exit(1);
-    }
+    info->argc = argc;
+    info->mlx = mlx_init();
+    if (info->argc == 2)
+        info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
 }
 
-static void parsing(t_info *info, t_ps *ps, char *filename)
+static void ps_process(t_info *info, t_ps *ps)
 {
-    ps->fd = open(filename, O_RDONLY);
     while (get_next_line(ps->fd, &(ps->line)) || ft_strlen(ps->line))
     {
         ps->map_start++;
@@ -85,17 +62,21 @@ static void parsing(t_info *info, t_ps *ps, char *filename)
             ps_texture(ps->line, "S ", ps);
         else if (ft_strlen(ps->line) && --ps->map_start)
             init_map_size(ps->line, info);
-        free(ps->line);    
+        free(ps->line);
     }
     free(ps->line);
 }
 
-void init_mlx(t_info *info, int argc)
+static void parsing(t_info *info, t_ps *ps, char *filename)
 {
-    info->argc = argc;
-    info->mlx = mlx_init();
-    if (info->argc == 2)
-        info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+    ps->fd = open(filename, O_RDONLY);
+    if (ps->fd == -1)
+        error_exit(1);
+    ps_process(info, ps);
+    if (ps->r_complete != 1 || ps->f_complete != 1 || ps->c_complete != 1)
+        error_exit(2);
+    else if (!(ps->no && ps->so && ps->we && ps->ea && ps->s))
+        error_exit(2);
 }
 
 t_info *init_info(int argc, char *filename)

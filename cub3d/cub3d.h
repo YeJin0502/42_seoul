@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 14:42:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 15:48:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct      s_parsing
     int             fd;
     char            *line;
     int             map_start;
+    int             r_complete;
+    int             f_complete;
+    int             c_complete;
     char            *no;
     char            *so;
     char            *we;
@@ -149,5 +152,6 @@ void    save_bmp_image(t_img *scene, char *filename);
 void    free_info(t_info *info);
 void    error_exit(int errno);
 void    map_check(t_info *info);
+void    init_fc(char *line, char *fc, t_info *info, t_ps *ps);
 
 #endif

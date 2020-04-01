@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:29:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 14:41:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 15:51:48 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,18 @@ void ps_texture(char *line, char *wall, t_ps *ps) // 유효성검사를 여기�
     filename = ft_strdup(mover);
     if (open(filename, O_RDONLY) == -1)
         error_exit(1);
-    if (ft_strncmp(wall, "NO", 2) == 0)
+    if (ft_strncmp(wall, "NO", 2) == 0 && !ps->no)
         ps->no = filename;
-    else if (ft_strncmp(wall, "SO", 2) == 0)
+    else if (ft_strncmp(wall, "SO", 2) == 0 && !ps->so)
         ps->so = filename;
-    else if (ft_strncmp(wall, "WE", 2) == 0)
+    else if (ft_strncmp(wall, "WE", 2) == 0 && !ps->we)
         ps->we = filename;
-    else if (ft_strncmp(wall, "EA", 2) == 0)
+    else if (ft_strncmp(wall, "EA", 2) == 0 && !ps->ea)
         ps->ea = filename;
-    else
+    else if (ft_strncmp(wall, "S", 1) == 0 && !ps->s)
         ps->s = filename;
+    else
+        error_exit(2);
 }
 
 static t_img *make_xpm_img(char *filename, t_info *info) // 다른데서도 쓸만함

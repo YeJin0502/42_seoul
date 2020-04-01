@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 14:50:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 14:52:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,5 @@ void init_map(t_info *info, t_ps *ps, char *filename)
     }
     free(ps->line);
     convert_map(info);
-
-    // 테스트용 -맵 그리기
-    // int i = 0;
-    // int j;
-    // while (i < info->map_height)
-    // {
-    //     j = 0;
-    //     while (j < info->map_width)
-    //     {
-    //         printf("[%d]", info->map[i][j]);
-    //         j++;
-    //     }
-    //     printf("\n");
-    //     i++;
-    // }
-
     map_check(info);
 }

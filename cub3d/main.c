@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 14:22:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 16:01:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int main(int argc, char **argv)
     if (argc == 3)
     {
         save_bmp_image(info->scene, argv[1]);
-        free_info(info);
-        return (0);
+        exit(0);
     }
     else
     {
