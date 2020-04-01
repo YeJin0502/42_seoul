@@ -1,9 +1,9 @@
 R 720   480
 
-NO ./texture/redbrick.xpm
-SO ./texture/redbrick.xpm
-EA ./texture/redbrick.xpm
-WE ./texture/redbrick.xpm
+NO ./texture/chim.xpm
+SO ./texture/chim.xpm
+EA ./texture/chim.xpm
+WE ./texture/chim.xpm
 S ./texture/barrel.xpm
 
 C 125 ,  200,200

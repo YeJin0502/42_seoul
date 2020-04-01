@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/31 23:16:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 18:48:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,6 @@ static void move_and_rotate(t_info *info, t_rc *rc)
     }
 }
 
-void free_info(t_info *info)
-{
-    int i;
-
-    i = -1;
-    while (++i < info->map_height)
-        free(info->map[i]);
-    free(info->map);
-    mlx_destroy_image(info->mlx, info->no->image);
-    mlx_destroy_image(info->mlx, info->so->image);
-    mlx_destroy_image(info->mlx, info->we->image);
-    mlx_destroy_image(info->mlx, info->ea->image);
-    mlx_destroy_image(info->mlx, info->s->image);
-    mlx_destroy_image(info->mlx, info->scene->image);
-    if (info->argc == 2)
-        mlx_destroy_window(info->mlx, info->win);
-    free(info->no);
-    free(info->so);
-    free(info->we);
-    free(info->ea);
-    free(info->s);
-    free(info->scene);
-    free(info->mlx);
-    free(info);
-}
-
 int key_hook(int keycode, void *param)
 {
     t_info  *info;
@@ -99,10 +73,7 @@ int key_hook(int keycode, void *param)
 
     info = (t_info *)param;
     if (keycode == KEY_ESC)
-    {
-        free_info(info);
-        exit(1);
-    }
+        exit(0);
     rc = (t_rc *)malloc(sizeof(t_rc));
     ft_memset(rc, 0, sizeof(rc));
     init_keycode(rc, keycode);

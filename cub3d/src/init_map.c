@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 18:39:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 21:16:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void init_map_size(char *line, t_info *info)
 {
-    if (info->map_width < ft_strlen(line))
+    if (info->map_width < (int)ft_strlen(line))
         info->map_width = ft_strlen(line);
     info->map_height++;
 }
