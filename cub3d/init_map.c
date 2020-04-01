@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 00:24:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 14:50:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void convert_process(t_info *info, int i, int j)
     else if (info->map[i][j] == 'E')
         init_player(info, 0, i, j);
     else
-        info->map[i][j] = -1;   
+        info->map[i][j] = 1;   
 }
 
 static void convert_map(t_info *info)
@@ -65,6 +65,8 @@ static void convert_map(t_info *info)
 
 void init_map(t_info *info, t_ps *ps, char *filename)
 {
+    info->tile_width = info->win_width / info->map_width;
+    info->tile_height = info->win_height / info->map_height;
     ps->fd = open(filename, O_RDONLY);
     info->map = (char **)malloc(sizeof(char *) * info->map_height);
     while (get_next_line(ps->fd, &ps->line) || ft_strlen(ps->line))
@@ -79,4 +81,21 @@ void init_map(t_info *info, t_ps *ps, char *filename)
     }
     free(ps->line);
     convert_map(info);
+
+    // 테스트용 -맵 그리기
+    // int i = 0;
+    // int j;
+    // while (i < info->map_height)
+    // {
+    //     j = 0;
+    //     while (j < info->map_width)
+    //     {
+    //         printf("[%d]", info->map[i][j]);
+    //         j++;
+    //     }
+    //     printf("\n");
+    //     i++;
+    // }
+
+    map_check(info);
 }

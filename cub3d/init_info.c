@@ -87,27 +87,29 @@ static void parsing(t_info *info, t_ps *ps, char *filename)
             init_map_size(ps->line, info);
         free(ps->line);    
     }
+    free(ps->line);
 }
 
-void init_info(char *filename, t_info *info)
+void init_mlx(t_info *info, int argc)
 {
+    info->argc = argc;
+    info->mlx = mlx_init();
+    if (info->argc == 2)
+        info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+}
+
+t_info *init_info(int argc, char *filename)
+{
+    t_info *info;
     t_ps *ps;
 
+    info = (t_info *)malloc(sizeof(t_info));
+    ft_memset(info, 0, sizeof(t_info));
     ps = (t_ps *)malloc(sizeof(t_ps));
     ft_memset(ps, 0, sizeof(t_ps));
     parsing(info, ps, filename);
-    free(ps->line);
-    info->tile_width = info->win_width / info->map_width;
-    info->tile_height = info->win_height / info->map_height;
     init_map(info, ps, filename);
-    info->mlx = mlx_init();
-    if (info->argc == 2) // bmp 저장할때 win 켜졌다가 꺼지는거 불편해서...
-        info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+    init_mlx(info, argc);
     init_texture(info, ps);
-    free(ps->no);
-    free(ps->so);
-    free(ps->we);
-    free(ps->ea);
-    free(ps->s);
-    free(ps);
+    return (info);
 }

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 00:49:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 14:22:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int main(int argc, char **argv)
 
     if (!(argc == 2 || (argc == 3 && ft_strncmp(argv[2], "--save", sizeof(argv[2])) == 0)))
         error_exit(1);
-    info = (t_info *)malloc(sizeof(t_info));
-    ft_memset(info, 0, sizeof(t_info));
-    info->argc = argc;
-    init_info(argv[1], info);
+    info = init_info(argc, argv[1]);
     make_first_scene(info);
     if (argc == 3)
     {

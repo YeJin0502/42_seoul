@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 00:46:39 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/01 14:42:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void    init_ray_dist(t_rc *rc, t_fd *fd);
 int     make_color(int r, int g, int b);
 int     get_color(t_img *img, int x, int y);
 void    change_color(t_img *img, int x, int y, int color);
-void    init_info(char *filename, t_info *info);
+t_info  *init_info(int argc, char *filename);
 void    init_map_size(char *line, t_info *info);
 void    init_map(t_info *info, t_ps *ps, char *filename);
 void    ps_texture(char *line, char *wall, t_ps *ps);
@@ -148,5 +148,6 @@ void    init_texture(t_info *info, t_ps *ps);
 void    save_bmp_image(t_img *scene, char *filename);
 void    free_info(t_info *info);
 void    error_exit(int errno);
+void    map_check(t_info *info);
 
 #endif
