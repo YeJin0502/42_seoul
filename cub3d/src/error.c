@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 00:45:12 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 18:50:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/02 18:43:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void error_exit(int errno)
     else if (errno == 4)
     {
         ft_putstr_fd("Error\n: Duplicate elements.\n", 1);
+        exit(1);
+    }
+    else if (errno == 5)
+    {
+        ft_putstr_fd("Error\n: Xserver error.\n", 1);
         exit(1);
     }
 }

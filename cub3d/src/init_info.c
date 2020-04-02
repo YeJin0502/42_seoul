@@ -16,6 +16,8 @@ static void init_win_size(char *line, t_ps *ps, t_info *info)
 {
     char *adr;
 
+    if (ps->r_complete)
+        error_exit(4);
     adr = line + 1;
     while (*adr == ' ')
         adr++;
@@ -35,8 +37,14 @@ static void init_mlx(t_info *info, int argc)
 {
     info->argc = argc;
     info->mlx = mlx_init();
+    if (!info->mlx)
+        error_exit(5);
     if (info->argc == 2)
+    {
         info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+        if (!info->win)
+            error_exit(5);
+    }
 }
 
 static void ps_process(t_info *info, t_ps *ps)
@@ -73,9 +81,8 @@ static void parsing(t_info *info, t_ps *ps, char *filename)
     if (ps->fd == -1)
         error_exit(1);
     ps_process(info, ps);
-    if (ps->r_complete != 1 || ps->f_complete != 1 || ps->c_complete != 1)
-        error_exit(2);
-    else if (!(ps->no && ps->so && ps->we && ps->ea && ps->s))
+    if (!(ps->r_complete == 1 && ps->f_complete == 1 && ps->c_complete == 1 &&
+        ps->no && ps->so && ps->we && ps->ea && ps->s))
         error_exit(2);
 }
 

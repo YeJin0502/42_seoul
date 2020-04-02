@@ -6,9 +6,10 @@ EA ./texture/redbrick.xpm
 WE ./texture/redbrick.xpm
 S ./texture/barrel.xpm
 
-C 125 ,  200,200
 
-F 30 ,  40,60
+C 10 ,  10,0
+
+F 120 ,  0,10
 
         1111111111111111111111111
         1000000000110000000000001

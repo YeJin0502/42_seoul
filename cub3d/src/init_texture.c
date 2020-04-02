@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:29:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 18:10:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/02 19:06:32 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ps_texture(char *line, char *wall, t_ps *ps) // 유효성검사를 여기서?
+void ps_texture(char *line, char *wall, t_ps *ps)
 {
     char *mover;
     char *filename;
@@ -42,11 +42,19 @@ static void check_init_fc(int fc[3], char *rgb)
     if (fc[0] || fc[1] || fc[2])
         error_exit(4);
     fc[0] = ft_atoi(rgb);
+    if (!(0 <= fc[0] && fc[0] <= 255))
+        error_exit(2);
+    if (!ft_strchr(rgb, ','))
+        error_exit(2);
     rgb = ft_strchr(rgb, ',') + 1;
     fc[1] = ft_atoi(rgb);
+    if (!(0 <= fc[1] && fc[1] <= 255))
+        error_exit(2);
+    if (!ft_strchr(rgb, ','))
+        error_exit(2);
     rgb = ft_strchr(rgb, ',') + 1;
     fc[2] = ft_atoi(rgb);
-    if (!fc[0] || !fc[1] || !fc[2])
+    if (!(0 <= fc[2] && fc[2] <= 255))
         error_exit(2);
 }
 
@@ -55,7 +63,7 @@ void init_fc(char *line, char *fc, t_info *info, t_ps *ps)
     char *rgb;
 
     rgb = line + 1;
-    while (*rgb == ' ')
+    while (*rgb == ' ' && *rgb)
         rgb++;
     if (ft_strncmp(fc, "F", 1) == 0)
     {
