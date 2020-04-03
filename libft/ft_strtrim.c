@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:57:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 16:57:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/04 04:19:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 			end = i;
 	ret = (char *)malloc(end - start + 2);
 	if (!ret)
-		return 0;
-	ret[end -start + 1] = '\0';
+		return (0);
+	ret[end - start + 1] = '\0';
 	i = 0;
 	while (start <= end)
 		ret[i++] = s1[start++];

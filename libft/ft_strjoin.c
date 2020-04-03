@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:43:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 16:43:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/04 04:18:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ret[len] = '\0';
 	i = 0;
 	j = 0;
-	while(i < ft_strlen(s1))
+	while (i < ft_strlen(s1))
 		ret[i++] = s1[j++];
 	j = 0;
 	while (i < len)

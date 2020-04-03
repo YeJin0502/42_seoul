@@ -31,6 +31,8 @@ static int	n_size(int n)
 
 int main()
 {
+	printf("===test start.===\n");
+
 	// ft_strlen
 	char a[20] = "hello world!";
 	if (ft_strlen(a) != strlen(a))
@@ -74,8 +76,8 @@ int main()
 	int size_lcpy = 8;
 	int my_lcpy = ft_strlcpy(dst1_lcpy, src1_lcpy, size_lcpy);
 	int real_lcpy = strlcpy(dst2_lcpy, src2_lcpy, size_lcpy);
-	printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
-	printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
+	// printf("my: [%s], real:[%s]\n", dst1_lcpy, dst2_lcpy);
+	// printf("my:[%d], real:[%d]\n", my_lcpy, real_lcpy);
 	if (my_lcpy != real_lcpy)
 		printf("ft_strlcpy ERROR1!\n");
 	if (ft_strncmp(dst1_lcpy, dst2_lcpy, 20) != 0)
@@ -123,7 +125,9 @@ int main()
 	char c_chr2 = '\0';
 	char *my_chr2 = ft_strchr(s1_chr2, c_chr2);
 	char *real_chr2 = strchr(s1_chr2, c_chr2);
-	printf("test ft_strchr: [%s] [%s]\n", my_chr2, real_chr2); // real은 []. 수정 전 my는 seg fault.
+	if (strncmp(my_chr2, real_chr2, 10) != 0)
+		printf("ft_strchr ERROR!\n");
+	// printf("test ft_strchr: [%s] [%s]\n", my_chr2, real_chr2); // real은 []. 수정 전 my는 seg fault.
 
 	// ft_strrchr
 	char s_rchr[20] = "hello world";

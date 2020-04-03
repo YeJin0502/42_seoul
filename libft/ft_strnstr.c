@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 19:37:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/24 19:37:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/04 04:14:37 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 			while (j < little_size && j + i < len)
 			{
 				if (little[j] != big[i + j])
-					break;
+					break ;
 				else
 					j++;
 				if (j == little_size)
