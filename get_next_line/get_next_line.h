@@ -6,19 +6,19 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 04:50:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/05 20:41:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/06 04:56:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 void	pull_buf(int *read_len, char *buf);
 int		is_make_line(char **line, char *buf, int *read_len);
-void 	free_and_null(char **buf);
+void	free_and_null(char **buf);
 int		get_next_line(int fd, char **line);
 
 int		ft_strlen(char *str);
