@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/28 04:50:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 04:56:46 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/06 05:13:08 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/06 07:33:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-void	pull_buf(int *read_len, char *buf);
-int		is_make_line(char **line, char *buf, int *read_len);
-void	free_and_null(char **buf);
-int		get_next_line(int fd, char **line);
-
-int		ft_strlen(char *str);
-int		ft_strlen_until_lf(char *str);
-int		ft_strlen_after_lf(char *str, int read_len);
-void	*ft_memmove(void *dest, void *src, int n);
-char	*ft_strjoin(char *s1, char *s2, int read_len, int is_contain_lf);
+# include <stdio.h> // 임시
+# include <fcntl.h> // open? 임시
 
 #endif
