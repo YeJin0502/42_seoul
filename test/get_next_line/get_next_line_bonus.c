@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 16:55:05 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/07 04:03:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 06:17:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	free_and_ret(char **buf, char **line, int ret)
 	if (ret < 0)
 	{
 		free(*line);
+		*line = 0;
 		return (-1);
 	}
 	free(*buf);
@@ -49,7 +50,8 @@ int			get_next_line(int fd, char **line)
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
 		return (-1);
-	*line = (char *)malloc(1);
+	if (!(*line = (char *)malloc(1)))
+		return (-1);
 	**line = '\0';
 	if (buf[fd])
 	{
@@ -57,7 +59,8 @@ int			get_next_line(int fd, char **line)
 			return (1);
 	}
 	else
-		buf[fd] = (char *)malloc(BUFFER_SIZE + 1);
+		if (!(buf[fd] = (char *)malloc(BUFFER_SIZE + 1)))
+			return (-1);
 	while ((ret = read(fd, buf[fd], BUFFER_SIZE)) > 0)
 	{
 		buf[fd][ret] = '\0';
