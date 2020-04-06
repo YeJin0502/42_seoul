@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/06 14:43:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 16:58:57 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/06 16:55:01 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/06 16:58:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int is_contain_lf(char *buf)
 {

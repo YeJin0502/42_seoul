@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 17:27:44 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/06 16:55:05 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/06 17:51:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void pull_buf(char *buf)
 {
 	gnl_memmove(buf,
 				buf + strlen_lf(buf) + 1,
-				gnl_strlen(buf) - strlen_lf(buf));
+				gnl_strlen(buf) - strlen_lf(buf)); // 아 이거 헷갈리네
 }
 
 static int is_line_made(char *buf, char **line)
@@ -44,25 +44,25 @@ static int free_and_ret(char **buf, char **line, int ret)
 
 int get_next_line(int fd, char **line)
 {
-	static char	*buf;
+	static char	*buf[1024];
 	int			ret;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
 		return (-1);
 	*line = (char *)malloc(1);
 	**line = '\0';
-	if (buf)
+	if (buf[fd])
 	{
-		if (is_line_made(buf, line) == 1)
+		if (is_line_made(buf[fd], line) == 1)
 			return (1);
 	}
 	else
-		buf = (char *)malloc(BUFFER_SIZE + 1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+		buf[fd] = (char *)malloc(BUFFER_SIZE + 1);
+	while ((ret = read(fd, buf[fd], BUFFER_SIZE)) > 0)
 	{
-		buf[ret] = '\0';
-		if (is_line_made(buf, line) == 1)
+		buf[fd][ret] = '\0';
+		if (is_line_made(buf[fd], line) == 1)
 			return (1);
 	}
-	return (free_and_ret(&buf, line, ret));
+	return (free_and_ret(&buf[fd], line, ret));
 }

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 15:50:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/06 17:27:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void pull_buf(char *buf)
 {
 	gnl_memmove(buf,
 				buf + strlen_lf(buf) + 1,
-				gnl_strlen(buf) - strlen_lf(buf)); // 아 이거 헷갈리네
+				gnl_strlen(buf) - strlen_lf(buf));
 }
 
 static int is_line_made(char *buf, char **line)
@@ -27,6 +27,18 @@ static int is_line_made(char *buf, char **line)
 		pull_buf(buf);
 		return (1);
 	}
+	return (0);
+}
+
+static int free_and_ret(char **buf, char **line, int ret)
+{
+	if (ret < 0)
+	{
+		free(*line);
+		return (-1);
+	}
+	free(*buf);
+	*buf = 0;
 	return (0);
 }
 
@@ -52,66 +64,5 @@ int get_next_line(int fd, char **line)
 		if (is_line_made(buf, line) == 1)
 			return (1);
 	}
-	if (ret < 0)
-		return (-1);
-	free(buf);
-	buf = 0;
-	return (0);
+	return (free_and_ret(&buf, line, ret));
 }
-
-// int main()
-// {
-// 	int fd;
-// 	char *line;
-// 	int ret;
-	
-// 	fd = open("empty_file", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)))
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-// }
-
-// int main()
-// {
-// 	// printf("%s\n", gnl_strjoin("hello", "world")); //buffer_size = 5 라고 가정.
-// 	// printf("%s\n", gnl_strjoin("hello", "wo\nrl"));
-
-// 	int fd;
-// 	char *line;
-// 	int ret;
-
-// 	fd = open("mix_marge1", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)))
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-
-// 	printf("=============================\n");
-	
-// 	fd = open("empty_lines", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)))
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-
-// 	printf("=============================\n");
-
-// 	fd = open("empty_file", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)))
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-// }
