@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 16:55:05 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 17:51:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 03:57:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void pull_buf(char *buf)
 {
 	gnl_memmove(buf,
 				buf + strlen_lf(buf) + 1,
-				gnl_strlen(buf) - strlen_lf(buf)); // 아 이거 헷갈리네
+				gnl_strlen(buf) - strlen_lf(buf));
 }
 
 static int is_line_made(char *buf, char **line)
