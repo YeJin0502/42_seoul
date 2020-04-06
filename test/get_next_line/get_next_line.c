@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/07 06:15:17 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 06:26:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int			get_next_line(int fd, char **line)
 			return (1);
 	}
 	else
+	{
 		if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
 			return (-1);
+	}
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
@@ -69,62 +71,3 @@ int			get_next_line(int fd, char **line)
 	}
 	return (free_and_ret(&buf, line, ret));
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	int ret;
-// 	char *line;
-
-// 	line = 0;
-// 	fd = open("mix_marge1", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)) > 0)
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-
-// 	printf("=============================\n");
-	
-// 	fd = open("empty_lines", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)) > 0)
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-
-// 	printf("=============================\n");
-
-// 	fd = open("empty_file", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)) > 0)
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	free(line);
-// }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	int ret;
-// 	char *line;
-
-// 	fd = open("mix_marge", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)) > 0)
-// 	{
-// 		printf("[%s] %d\n", line, ret);
-// 		free(line);
-// 	}
-// 	printf("[%s] %d\n", line, ret);
-// 	// free(line);
-// }

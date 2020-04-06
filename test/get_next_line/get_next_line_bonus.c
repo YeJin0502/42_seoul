@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 16:55:05 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/07 06:17:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 06:27:25 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ int			get_next_line(int fd, char **line)
 			return (1);
 	}
 	else
+	{
 		if (!(buf[fd] = (char *)malloc(BUFFER_SIZE + 1)))
 			return (-1);
+	}
 	while ((ret = read(fd, buf[fd], BUFFER_SIZE)) > 0)
 	{
 		buf[fd][ret] = '\0';
