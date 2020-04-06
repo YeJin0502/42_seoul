@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 14:43:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 16:58:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 04:07:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int is_contain_lf(char *buf)
+int		is_contain_lf(char *buf)
 {
 	while (*buf)
 	{
@@ -23,7 +23,7 @@ int is_contain_lf(char *buf)
 	return (0);
 }
 
-int strlen_lf(char *str)
+int		strlen_lf(char *str)
 {
 	int i;
 
@@ -33,7 +33,7 @@ int strlen_lf(char *str)
 	return (i);
 }
 
-int gnl_strlen(char *str)
+int		gnl_strlen(char *str)
 {
 	int i;
 
@@ -43,13 +43,13 @@ int gnl_strlen(char *str)
 	return (i);
 }
 
-char *gnl_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
-	int s1_size;
-	int s2_size;
-	int size;
-	char *ret;
-	int i;
+	int		s1_size;
+	int		s2_size;
+	int		size;
+	char	*ret;
+	int		i;
 
 	s1_size = (s1) ? gnl_strlen(s1) : 0;
 	s2_size = (s2) ? strlen_lf(s2) : 0;

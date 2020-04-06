@@ -2,6 +2,7 @@
 a.out
 *.o
 *.a
+*.swap
 
 cub3d/studied/
 cub3d/obj

@@ -6,20 +6,20 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 17:27:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 06:26:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void pull_buf(char *buf)
+static void	pull_buf(char *buf)
 {
 	gnl_memmove(buf,
 				buf + strlen_lf(buf) + 1,
 				gnl_strlen(buf) - strlen_lf(buf));
 }
 
-static int is_line_made(char *buf, char **line)
+static int	is_line_made(char *buf, char **line)
 {
 	*line = gnl_strjoin(*line, buf);
 	if (is_contain_lf(buf) == 1)
@@ -30,11 +30,12 @@ static int is_line_made(char *buf, char **line)
 	return (0);
 }
 
-static int free_and_ret(char **buf, char **line, int ret)
+static int	free_and_ret(char **buf, char **line, int ret)
 {
 	if (ret < 0)
 	{
 		free(*line);
+		*line = 0;
 		return (-1);
 	}
 	free(*buf);
@@ -42,14 +43,15 @@ static int free_and_ret(char **buf, char **line, int ret)
 	return (0);
 }
 
-int get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*buf;
 	int			ret;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
 		return (-1);
-	*line = (char *)malloc(1);
+	if (!(*line = (char *)malloc(1)))
+		return (-1);
 	**line = '\0';
 	if (buf)
 	{
@@ -57,7 +59,10 @@ int get_next_line(int fd, char **line)
 			return (1);
 	}
 	else
-		buf = (char *)malloc(BUFFER_SIZE + 1);
+	{
+		if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+			return (-1);
+	}
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
