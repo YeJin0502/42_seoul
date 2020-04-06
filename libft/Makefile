@@ -1,6 +1,6 @@
 NAME = libft.a
 
-SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
+SRCS = 	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
 		ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c ft_strdup.c \
 		ft_memcpy.c ft_memset.c ft_memmove.c ft_memccpy.c ft_memcmp.c \
@@ -17,12 +17,12 @@ OBJS = $(SRCS:.c=.o)
 INCS = .
 
 $(NAME): $(OBJS)
-	ar -rcs $@ $(OBJS)
+	ar rc $@ $(OBJS)
+
+all: $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
-
-all: $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -32,4 +32,4 @@ fclean:	clean
 
 re: fclean all
 
-bonus: all
+.PHONY: all clean fclean re
