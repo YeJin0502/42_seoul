@@ -6,20 +6,20 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 16:55:05 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 17:51:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 04:03:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static void pull_buf(char *buf)
+static void	pull_buf(char *buf)
 {
 	gnl_memmove(buf,
 				buf + strlen_lf(buf) + 1,
-				gnl_strlen(buf) - strlen_lf(buf)); // 아 이거 헷갈리네
+				gnl_strlen(buf) - strlen_lf(buf));
 }
 
-static int is_line_made(char *buf, char **line)
+static int	is_line_made(char *buf, char **line)
 {
 	*line = gnl_strjoin(*line, buf);
 	if (is_contain_lf(buf) == 1)
@@ -30,7 +30,7 @@ static int is_line_made(char *buf, char **line)
 	return (0);
 }
 
-static int free_and_ret(char **buf, char **line, int ret)
+static int	free_and_ret(char **buf, char **line, int ret)
 {
 	if (ret < 0)
 	{
@@ -42,7 +42,7 @@ static int free_and_ret(char **buf, char **line, int ret)
 	return (0);
 }
 
-int get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*buf[1024];
 	int			ret;

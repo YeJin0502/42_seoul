@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 16:54:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 17:40:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 03:57:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h> // 임시
-# include <fcntl.h> // open? 임시
 
 int		is_contain_lf(char *buf);
 int		strlen_lf(char *str);
