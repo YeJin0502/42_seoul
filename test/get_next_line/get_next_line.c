@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/07 11:10:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 11:23:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	free_and_ret(char **buf, char **line, int ret)
 	{
 		free(*line);
 		*line = 0;
+		free(*buf);
+		*buf = 0;
 		return (-1);
 	}
 	free(*buf);
