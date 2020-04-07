@@ -58,3 +58,15 @@ int main()
 	printf("[%s] %d\n", line, ret);
 	free(line);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	char *line;
+// 	while (get_next_line(0, &line) > 0)
+// 	{
+// 		printf("%s\n", line);
+// 		free(line);
+// 	}
+// 	free(line);
+// }
