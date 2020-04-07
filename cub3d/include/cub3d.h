@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/02 00:01:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 15:51:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # define PI 3.1415926535
 # define FOV 60.0 * PI / 180.0
-# define ROTATION_SPEED 2.0 * PI / 180.0
-# define MOVE_SPEED 2.0
+# define ROTATION_SPEED 4.0 * PI / 180.0
+# define MOVE_SPEED 4.0
 # define DISPLAY_WIDTH 1920
 # define DISPLAY_HEIGHT 1080
 

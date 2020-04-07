@@ -21,6 +21,8 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
+bonus: $(NAME)
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(INCS)
 
