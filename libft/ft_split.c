@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 17:32:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/06 14:26:47 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 08:22:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char		**ft_split(char const *s, char c)
 	int		i;
 	int		j;
 
+	if (!s)
+		return (0);
 	wc = word_count(s, c);
 	if (!(ret = (char **)malloc(sizeof(char *) * (wc + 1))))
 		return (0);

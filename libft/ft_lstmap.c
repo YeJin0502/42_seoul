@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 16:29:18 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/07 08:20:29 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/07 08:25:51 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/07 09:32:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*ret;
-	size_t	i;
+	t_list *ret;
+	t_list *curr;
 
-	if (!s)
+	if (!lst)
 		return (0);
-	else if (ft_strlen(s) < start)
+	else if (!(ret = ft_lstnew((*f)(lst->content))))
 		return (0);
-	ret = (char *)malloc(len + 1);
-	if (!ret)
-		return (0);
-	ret[len] = '\0';
-	i = 0;
-	while (i < len && s[start + i])
+	curr = ret;
+	while (lst)
 	{
-		ret[i] = s[start + i];
-		i++;
+		curr->next = ft_lstnew((*f)(lst->content));
+		if (!curr->next)
+		{
+			ft_lstclear(&ret, del);
+			return (0);
+		}
+		curr = curr->next;
+		lst = lst->next;
 	}
 	return (ret);
 }
