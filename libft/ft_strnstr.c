@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 19:37:15 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/04 04:14:37 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/08 06:52:23 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (little_size == 0)
 		return ((char *)big);
 	i = -1;
-	while (++i < len)
+	while (++i < len && big[i])
 	{
 		j = 0;
 		if (little[j] == big[i])
