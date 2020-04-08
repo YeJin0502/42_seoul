@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 01:44:36 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/04 04:15:04 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/27 19:59:37 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/27 19:59:37 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	unsigned char	*a;
-	unsigned char	*b;
-	size_t			i;
+	t_list	*tmp;
 
-	a = (unsigned char *)s1;
-	b = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
+	while (*lst)
 	{
-		if (a[i] != b[i])
-			return (a[i] - b[i]);
-		i++;
+		tmp = (*lst)->next;
+		del((*lst)->content);
+		free(*lst);
+		*lst = tmp;
 	}
-	return (0);
 }

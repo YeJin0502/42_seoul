@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 01:44:36 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/04 04:15:04 by gmoon            ###   ########.fr       */
+/*   Created: 2020/02/25 02:28:47 by gmoon             #+#    #+#             */
+/*   Updated: 2020/02/25 02:28:47 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*a;
-	unsigned char	*b;
-	size_t			i;
+	char	*tmp;
+	size_t	i;
 
-	a = (unsigned char *)s1;
-	b = (unsigned char *)s2;
+	tmp = (char *)s;
 	i = 0;
 	while (i < n)
 	{
-		if (a[i] != b[i])
-			return (a[i] - b[i]);
+		tmp[i] = 0;
 		i++;
 	}
-	return (0);
 }
