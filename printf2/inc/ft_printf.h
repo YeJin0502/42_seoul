@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 10:05:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/09 16:57:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/10 17:02:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct		s_content
 	int				zero;
 	size_t			width;
 	size_t			prec;
+	int				is_nega;
+	// int				is_prec_zero;
 	// char			spec; // 변환에서 필요하면 추가하는데, switch에서만 필요하면 없앨거임.
 }					t_cont; // static 변수로 연결리스트 위치 저장해야하나?
 
@@ -40,17 +42,18 @@ typedef struct	s_info
 	t_list		*curr;
 }				t_info;
 
-int	ft_printf(const char *fmt, ...);
-int check_and_init(const char *fmt, t_info *info);
-int is_spec(char mover);
-int print_and_count(const char *fmt, t_info *info);
-int c_process(t_info *info);
-int s_process(t_info *info);
-int p_process(t_info *info);
-int di_process(t_info *info);
-int uxx_process(t_info *info, char spec);
-char *apply_flag(char *s_arg, t_info *info);
-char *apply_flag_s(char *s_arg, t_info *info);
+int		ft_printf(const char *fmt, ...);
+int		check_and_init(const char *fmt, t_info *info);
+int		is_spec(char mover);
+int		print_and_count(const char *fmt, t_info *info);
+int		c_process(t_info *info, char spec);
+int		s_process(t_info *info);
+int		p_process(t_info *info, char spec);
+int		di_process(t_info *info, char spec);
+int		uxx_process(t_info *info, char spec);
+char	*apply_flag(char *s_arg, t_info *info, char spec);
+char	*apply_flag_s(char *s_arg, t_info *info);
 char	*dec_to_hex(size_t dec, char spec);
+char	*pf_itoa_u(unsigned int n);
 
 #endif

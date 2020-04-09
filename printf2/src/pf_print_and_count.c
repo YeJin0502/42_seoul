@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 13:47:59 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/09 17:07:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/10 17:02:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int	spec_switch(const char fmt, t_info *info)
 {
-	if (fmt == 'c')
-		return (c_process(info));
+	if (fmt == 'c' || fmt == '%')
+		return (c_process(info, fmt));
 	else if (fmt == 's')
 		return (s_process(info));
 	else if (fmt == 'p')
-		return (p_process(info));
+		return (p_process(info, fmt));
 	else if (fmt == 'd' || fmt == 'i')
-		return (di_process(info));
+		return (di_process(info, fmt));
 	else
 		return (uxx_process(info, fmt));
 }
@@ -29,19 +29,19 @@ static int	spec_switch(const char fmt, t_info *info)
 static void	meet_percent(const char **fmt, int *count, t_info *info)
 {
 	(*fmt)++;
-	if (**fmt == '%')
-	{
-		ft_putchar_fd(**fmt, 1);
-		count += 2;
-		(*fmt)++;
-	}
-	else
-	{
+	// if (**fmt == '%')
+	// {
+	// 	ft_putchar_fd(**fmt, 1);
+	// 	count++;
+	// 	(*fmt)++;
+	// }
+	// else
+	// {
 		while (is_spec(**fmt) == 0)
 			(*fmt)++;
-		count += spec_switch(**fmt, info);
+		*count += spec_switch(**fmt, info);
 		info->curr = info->curr->next;
-	}
+	// }
 }
 
 int			print_and_count(const char *fmt, t_info *info)

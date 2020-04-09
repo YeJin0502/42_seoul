@@ -12,7 +12,8 @@ SRC =	src/ft_printf.c \
 		src/pf_print_and_count.c \
 		src/pf_spec_switch.c \
 		src/pf_apply_flag.c \
-		src/pf_util.c
+		src/pf_util.c \
+		src/pf_apply_flag_s.c
 		# 폴더 안에 안넣고 하는거 연습 하자.
 OBJ = $(SRC:.c=.o)
 # 폴더 따로 만드는 연습 하자.
