@@ -6,20 +6,60 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 13:47:59 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/08 14:05:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/09 17:07:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-int arg_process(va_list ap, t_flag *flag)
+static int	spec_switch(const char fmt, t_info *info)
 {
-	// 글자수 반환.
+	if (fmt == 'c')
+		return (c_process(info));
+	else if (fmt == 's')
+		return (s_process(info));
+	else if (fmt == 'p')
+		return (p_process(info));
+	else if (fmt == 'd' || fmt == 'i')
+		return (di_process(info));
+	else
+		return (uxx_process(info, fmt));
 }
 
-int print_and_count(const char *fmt, t_info *info)
+static void	meet_percent(const char **fmt, int *count, t_info *info)
 {
-	// *fmt 있는 동안 한 글자씩 출력, 카운트.
-	// 어느 조건에서 arg_process를 진행할지 생각해봐야.
-	
+	(*fmt)++;
+	if (**fmt == '%')
+	{
+		ft_putchar_fd(**fmt, 1);
+		count += 2;
+		(*fmt)++;
+	}
+	else
+	{
+		while (is_spec(**fmt) == 0)
+			(*fmt)++;
+		count += spec_switch(**fmt, info);
+		info->curr = info->curr->next;
+	}
+}
+
+int			print_and_count(const char *fmt, t_info *info)
+{
+	int count;
+
+	count = 0;
+	info->curr = info->lst;
+	while (*fmt)
+	{
+		if (*fmt == '%')
+			meet_percent(&fmt, &count, info);
+		else
+		{
+			ft_putchar_fd(*fmt, 1);
+			count++;
+		}
+		fmt++;
+	}
+	return (count);
 }

@@ -8,10 +8,14 @@ CFLAG = -Wall -Wextra -Werror -g3
 # CFLAG = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRC =	src/ft_printf.c \
-		src/pf_check_and_init.c
-		# pf_print_and_count.c
-		# 폴더 안에 안넣고 하는거 연습하자.
+		src/pf_check_and_init.c \
+		src/pf_print_and_count.c \
+		src/pf_spec_switch.c \
+		src/pf_apply_flag.c \
+		src/pf_util.c
+		# 폴더 안에 안넣고 하는거 연습 하자.
 OBJ = $(SRC:.c=.o)
+# 폴더 따로 만드는 연습 하자.
 INC = ./inc
 
 $(NAME): $(OBJ)
