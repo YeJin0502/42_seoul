@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 16:21:17 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/10 17:16:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/11 12:14:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-int		is_spec(char mover)
+int			is_spec(char mover)
 {
 	char *spec;
 
@@ -26,14 +26,12 @@ int		is_spec(char mover)
 	return (0);
 }
 
-char	*dec_to_hex(size_t dec, char spec)
+char		*dec_to_hex(size_t dec, char spec)
 {
 	long long	hex_len;
 	size_t		tmp;
 	char		*hex;
 
-	if (dec == 0)
-		return (ft_strdup("0"));
 	tmp = dec;
 	hex_len = 0;
 	while (tmp)
@@ -87,4 +85,19 @@ char		*pf_itoa_u(unsigned int n)
 		n = n / 10;
 	}
 	return (ret);
+}
+
+void		putstr_c(char *cv_arg, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (cv_arg[i] == 'M')
+			ft_putchar_fd('\0', 1);
+		else
+			ft_putchar_fd(cv_arg[i], 1);
+		i++;
+	}
 }

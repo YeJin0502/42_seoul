@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 10:05:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/10 17:02:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/11 14:09:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,16 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
-// malloc, free, write, va_start, va_arg, va_copy, va_end
-// libft 다 써도 됨.
-// - 다음 변환을 관리한다: cspdiuxX%
-#include <stdio.h> //임시
 
-typedef struct		s_content
+typedef struct	s_content
 {
-	int				met_dot;
-	int				minus;
-	int				zero;
-	size_t			width;
-	size_t			prec;
-	int				is_nega;
-	// int				is_prec_zero;
-	// char			spec; // 변환에서 필요하면 추가하는데, switch에서만 필요하면 없앨거임.
-}					t_cont; // static 변수로 연결리스트 위치 저장해야하나?
+	int			met_dot;
+	int			minus;
+	int			zero;
+	int			width;
+	int			prec;
+	int			is_nega;
+}				t_cont;
 
 typedef struct	s_info
 {
@@ -42,18 +36,21 @@ typedef struct	s_info
 	t_list		*curr;
 }				t_info;
 
-int		ft_printf(const char *fmt, ...);
-int		check_and_init(const char *fmt, t_info *info);
-int		is_spec(char mover);
-int		print_and_count(const char *fmt, t_info *info);
-int		c_process(t_info *info, char spec);
-int		s_process(t_info *info);
-int		p_process(t_info *info, char spec);
-int		di_process(t_info *info, char spec);
-int		uxx_process(t_info *info, char spec);
-char	*apply_flag(char *s_arg, t_info *info, char spec);
-char	*apply_flag_s(char *s_arg, t_info *info);
-char	*dec_to_hex(size_t dec, char spec);
-char	*pf_itoa_u(unsigned int n);
+int				ft_printf(const char *fmt, ...);
+int				check_and_init(const char *fmt, t_info *info);
+int				is_spec(char mover);
+int				print_and_count(const char *fmt, t_info *info);
+int				c_process(t_info *info, char spec);
+int				s_process(t_info *info);
+int				p_process(t_info *info);
+int				di_process(t_info *info);
+int				uxx_process(t_info *info, char spec);
+char			*apply_flag(char *s_arg, t_info *info);
+char			*apply_flag_s(char *s_arg, t_info *info);
+char			*dec_to_hex(size_t dec, char spec);
+char			*pf_itoa_u(unsigned int n);
+void			make_cv_arg(char *cv_arg, size_t size, t_cont *flag, char *str);
+int				ci_sub(char **mover, t_cont *flag, t_info *info);
+void			putstr_c(char *cv_arg, int count);
 
 #endif
