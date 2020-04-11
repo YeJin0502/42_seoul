@@ -1,50 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_specifier_process_utils.c                       :+:      :+:    :+:   */
+/*   pf_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/05 01:50:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/10 08:08:56 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/09 16:21:17 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/11 12:14:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
-static unsigned int	n_size_u(unsigned int n)
+int			is_spec(char mover)
 {
-	int	size;
-	
-	size = 0;
-	if (n == 0)
-		return (1);
-	while (n != 0)
+	char *spec;
+
+	spec = "cspdiuxX%";
+	while (*spec)
 	{
-		n = n / 10;
-		size++;
+		if (mover == *spec)
+			return (1);
+		spec++;
 	}
-	return (size);
+	return (0);
 }
 
-char	*ft_itoa_u(unsigned int n)
-{
-	int		size;
-	char	*ret;
-
-	size = n_size_u(n);
-	if (!(ret = (char *)malloc(size + 1)))
-		return 0;
-	ret[size] = '\0';
-	while (size > 0)
-	{
-		ret[(size--) - 1] = n % 10 + '0';
-		n = n / 10;
-	}
-	return (ret);
-}
-
-char	*dec_to_hex(size_t dec, char spec)
+char		*dec_to_hex(size_t dec, char spec)
 {
 	long long	hex_len;
 	size_t		tmp;
@@ -71,4 +53,51 @@ char	*dec_to_hex(size_t dec, char spec)
 		dec = dec / 16;
 	}
 	return (hex);
+}
+
+static int	un_size(unsigned int n)
+{
+	int	size;
+
+	size = 0;
+	if (n <= 0)
+		size++;
+	while (n != 0)
+	{
+		n = n / 10;
+		size++;
+	}
+	return (size);
+}
+
+char		*pf_itoa_u(unsigned int n)
+{
+	unsigned int	size;
+	char			*ret;
+
+	size = un_size(n);
+	if (!(ret = (char *)malloc(size + 1)))
+		return (0);
+	ret[size] = '\0';
+	while (size > 0)
+	{
+		ret[(size--) - 1] = n % 10 + '0';
+		n = n / 10;
+	}
+	return (ret);
+}
+
+void		putstr_c(char *cv_arg, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (cv_arg[i] == 'M')
+			ft_putchar_fd('\0', 1);
+		else
+			ft_putchar_fd(cv_arg[i], 1);
+		i++;
+	}
 }

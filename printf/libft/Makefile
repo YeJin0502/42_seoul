@@ -12,7 +12,7 @@ SRCS = 	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_lstiter.c ft_lstmap.c
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 OBJS = $(SRCS:.c=.o)
 INCS = .
 
