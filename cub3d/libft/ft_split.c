@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 17:32:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/06 11:19:52 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 08:22:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*malloc_or_free(char **ret, int i, int wl)
 	return (s);
 }
 
-char	**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
 	char	**ret;
 	int		wc;
@@ -60,9 +60,11 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		j;
 
+	if (!s)
+		return (0);
 	wc = word_count(s, c);
 	if (!(ret = (char **)malloc(sizeof(char *) * (wc + 1))))
-		return 0;
+		return (0);
 	ret[wc] = 0;
 	i = -1;
 	while (++i < wc)

@@ -6,14 +6,14 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/08 10:11:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/13 13:50:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
+# include <stdio.h> // 왜들어가더라? 에러함수?
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>

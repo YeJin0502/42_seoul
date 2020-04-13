@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 01:29:53 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 01:29:53 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/04 04:48:41 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	while (i < n)
 	{
 		d[i] = s[i];
-		if (d[i] == c)
-			break;
+		if (d[i] == (unsigned char)c)
+			break ;
 		i++;
 	}
 	if (i == n)

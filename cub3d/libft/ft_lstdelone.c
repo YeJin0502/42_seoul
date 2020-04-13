@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 17:04:50 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/27 17:04:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/07 08:25:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	del(lst->content);
-	free(lst->content);
+	free(lst);
 }

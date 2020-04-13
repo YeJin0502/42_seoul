@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/28 04:50:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 21:55:07 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/06 05:13:08 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/13 13:35:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-// # include "../libft/libft.h"
 
-# define BUFFER_SIZE 1 // 몇으로 하는게 빠르려나..?
+# define BUFFER_SIZE 5
 
-int		get_next_line(int fd, char **line);
-
+int		is_contain_lf(char *buf);
+int		strlen_lf(char *str);
 int		gnl_strlen(char *str);
-int		gnl_strlen_until_lf(char *str);
-int		gnl_strlen_after_lf(char *str, int read_len);
-void	*gnl_memmove(void *dest, void *src, int n);
-char	*gnl_strjoin(char *s1, char *s2, int read_len, int is_contain_lf);
+char	*gnl_strjoin(char *s1, char *s2);
+void	*gnl_memmove(void *dest, const void *src, size_t n);
+int		get_next_line(int fd, char **line);
 
 #endif

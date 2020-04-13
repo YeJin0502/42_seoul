@@ -10,10 +10,10 @@ SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 		ft_lstiter.c \
-		get_next_line.c get_next_line_util.c
+		get_next_line.c get_next_line_utils.c
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -g3
 OBJS = $(SRCS:.c=.o)
 INCS = .
 

@@ -5,79 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/29 18:31:29 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 21:53:12 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/06 05:15:29 by gmoon             #+#    #+#             */
+/*   Updated: 2020/04/07 11:24:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void pull_buf(int *read_len, char *buf)
+static void	pull_buf(char *buf)
 {
-    int	jump_len;
-
-    jump_len = 0;
-    while (buf[jump_len] != '\n')
-        jump_len++;
-    if (buf[jump_len] == '\n')
-        jump_len++;
-    buf = gnl_memmove(buf, buf + jump_len, gnl_strlen_after_lf(buf, *read_len));
-    *read_len = *read_len - jump_len;
-    buf[*read_len] = '\0';
+	gnl_memmove(buf,
+				buf + strlen_lf(buf) + 1,
+				gnl_strlen(buf) - strlen_lf(buf));
 }
 
-static int	is_make_line(char **line, char *buf, int *read_len)
+static int	is_line_made(char *buf, char **line)
 {
-    int is_contain_lf;
-    int i;
-
-    is_contain_lf = 0;
-    i = -1;
-    while (++i < *read_len)
-        if (buf[i] == '\n')
-        {
-            is_contain_lf = 1;
-            break;
-        }
-    *line = gnl_strjoin(*line, buf, *read_len, is_contain_lf);
-    if (is_contain_lf == 1)
-    {
-        pull_buf(read_len, buf);
-        return (1);
-    }
-    return (0);
+	*line = gnl_strjoin(*line, buf);
+	if (is_contain_lf(buf) == 1)
+	{
+		pull_buf(buf);
+		return (1);
+	}
+	return (0);
 }
 
-static void free_and_null(char **buf)
+static int	free_and_ret(char **buf, char **line, int ret)
 {
-    free(*buf);
-    *buf = 0;
-    return ;
+	if (ret < 0)
+	{
+		free(*line);
+		*line = 0;
+		free(*buf);
+		*buf = 0;
+		return (-1);
+	}
+	free(*buf);
+	*buf = 0;
+	return (0);
 }
 
-int	get_next_line(int fd, char **line)
+static int	free_line(char **line)
 {
-    static char	*buf;
-    static int	read_len;
+	free(*line);
+	*line = 0;
+	return (-1);
+}
 
-    if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
-        return (-1);
-    if (!buf)
-        if (!(buf = (char *)malloc(BUFFER_SIZE)))
-            return (-1);
-    if (!(*line = (char *)malloc(1)))
-    {
-        free_and_null(&buf);
-        return (-1);
-    }
-    *line[0] = '\0';
-    if (read_len > 0)
-        if (is_make_line(line, buf, &read_len) == 1)
-            return (1);
-    while ((read_len = read(fd, buf, BUFFER_SIZE)) > 0)
-        if (is_make_line(line, buf, &read_len) == 1)
-            return (1);
-    if (read_len == 0)
-        free_and_null(&buf);
-    return (read_len);
+int			get_next_line(int fd, char **line)
+{
+	static char	*buf;
+	int			ret;
+
+	if (fd < 0 || line == NULL || BUFFER_SIZE < 1)
+		return (-1);
+	if (!(*line = (char *)malloc(1)))
+		return (-1);
+	**line = '\0';
+	if (buf)
+	{
+		if (is_line_made(buf, line) == 1)
+			return (1);
+	}
+	else
+	{
+		if (!(buf = (char *)malloc(BUFFER_SIZE + 1)))
+			return (free_line(line));
+	}
+	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[ret] = '\0';
+		if (is_line_made(buf, line) == 1)
+			return (1);
+	}
+	return (free_and_ret(&buf, line, ret));
 }

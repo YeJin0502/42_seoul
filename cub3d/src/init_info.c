@@ -91,9 +91,11 @@ t_info *init_info(int argc, char *filename)
     t_info *info;
     t_ps *ps;
 
-    info = (t_info *)malloc(sizeof(t_info));
+    if (!(info = (t_info *)malloc(sizeof(t_info))))
+        error_exit(1);
     ft_memset(info, 0, sizeof(t_info));
-    ps = (t_ps *)malloc(sizeof(t_ps));
+    if (!(ps = (t_ps *)malloc(sizeof(t_ps))))
+        error_exit(1);
     ft_memset(ps, 0, sizeof(t_ps));
     parsing(info, ps, filename);
     init_map(info, ps, filename);

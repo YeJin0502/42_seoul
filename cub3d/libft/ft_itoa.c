@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 21:55:12 by gmoon             #+#    #+#             */
-/*   Updated: 2020/02/25 21:55:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/04 04:23:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	n_size(int n)
 {
 	int	size;
-	
+
 	size = 0;
 	if (n <= 0)
 		size++;
@@ -38,7 +38,7 @@ char		*ft_itoa(int n)
 	size = n_size(n);
 	ret = (char *)malloc(size + 1);
 	if (!ret)
-		return 0;
+		return (0);
 	ret[size] = '\0';
 	flag = 0;
 	if (n < 0)

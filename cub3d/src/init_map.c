@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/01 21:16:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/13 14:51:47 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ void init_map(t_info *info, t_ps *ps, char *filename)
     info->tile_width = info->win_width / info->map_width;
     info->tile_height = info->win_height / info->map_height;
     ps->fd = open(filename, O_RDONLY);
-    info->map = (char **)malloc(sizeof(char *) * info->map_height);
+    if (!(info->map = (char **)malloc(sizeof(char *) * info->map_height)))
+        error_exit(1) ;
+    ft_memset(info->map, 0, sizeof(char *) * info->map_height);
     while (get_next_line(ps->fd, &ps->line) || ft_strlen(ps->line))
     {
         if (ps->map_start <= 0)
         {
-            info->map[-ps->map_start] = (char *)malloc(info->map_width + 1);
+            if (!(info->map[-ps->map_start] = (char *)malloc(info->map_width + 1)))
+                error_exit(1);
+            ft_memset(info->map[-ps->map_start], 0, info->map_width + 1);
             char_check(ps->line);
             ft_strlcpy(info->map[-ps->map_start], ps->line, info->map_width + 1);
         }

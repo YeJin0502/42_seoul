@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/13 13:28:33 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/13 14:23:55 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC = main.c \
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g3 -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -g3
 
 MLXDIR = ./minilibx_linux
 MLX_LIB = $(addprefix $(MLXDIR)/,mlx.a)
