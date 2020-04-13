@@ -6,14 +6,14 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/02 00:03:45 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/13 13:28:33 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRCDIR = ./src
-INCDIR = ./include
+INCDIR = ./inc
 OBJDIR = ./obj
 
 SRC = main.c \
