@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/13 13:50:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/13 22:56:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct      s_info
     int             map_height;
     double          tile_width;
     double          tile_height;
+	int				item_count;
     double          x;
     double          y;
     double          view_angle;
@@ -85,6 +86,12 @@ typedef struct      s_info
     t_img           *s;
     t_img           *scene;
 }                   t_info;
+
+typedef struct		s_item
+{
+	double			item_x;
+	double			item_y;
+}					t_item;
 
 typedef struct      s_raycast
 {
@@ -107,14 +114,15 @@ typedef struct      s_raycast
     t_img           *wall_image;
     double          wall_image_x;
     double          wall_image_y;
-    int             is_item_hit;
-    double          item_ray_dist;
-    double          item_tile_x;
-    double          item_image_x;
-    double          item_image_y;
-    double          item_bar_height;
-    double          item_bar_start;
-    double          item_bar_end;
+	t_item			*item;
+    // int             is_item_hit;
+    // double          item_ray_dist;
+    // double          item_tile_x;
+    // double          item_image_x;
+    // double          item_image_y;
+    // double          item_bar_height;
+    // double          item_bar_start;
+    // double          item_bar_end;
 }                   t_rc;
 
 typedef struct      s_find_ray_dist

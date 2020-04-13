@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/13 14:51:47 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/13 22:56:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static void convert_process(t_info *info, int i, int j)
     else if (info->map[i][j] == '1')
         info->map[i][j] = 1;
     else if (info->map[i][j] == '2')
+	{
+		info->item_count++;
         info->map[i][j] = 2;
+	}
     else if (info->map[i][j] == 'N')
         init_player(info, 1.5 * PI, i, j);
     else if (info->map[i][j] == 'S')
