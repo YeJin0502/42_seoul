@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 00:23:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 00:57:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,12 @@ static void render_item(t_info *info, t_rc *rc, int i)
 
 static void render_item_rev(t_info *info, t_rc *rc, int i)
 {
+	int i_min;
+	int i_max;
 	int j;
 	int color;
 
+	// printf("%d, %d\n", rc->item_i_start, rc->item_i_end);
 	rc->item_ray_dist = distance(info->x, info->y,
 						rc->items->item_x, rc->items->item_y);
 	rc->item_bar_height = (info->tile_height + info->tile_width) / 2
@@ -95,35 +98,21 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 	rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
 	rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
 	rc->item_width = (rc->item_bar_height * info->s->width) / info->s->height;
-	// printf("b) %f\n", rc->item_width);
 	rc->item_image_x = info->s->width;
-	rc->item_image_y = 0;
-	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
-	// printf("[%f, %f, %f, %f]\n", rc->item_ray_dist, rc->item_bar_height,
-	// 							rc->item_bar_start, rc->item_bar_end);
-	int i_min;
-	// i_max = i + info->s->width;
-	i_min = i - (int)rc->item_width;
-	// printf("%d %d\n", i_min, i); 
-	// printf("[%d]\n", i);
-	i++;
-	while (--i > i_min)
+	i_min = i - (int)rc->item_width / 2 - 1;
+	i_max = i + (int)rc->item_width / 2;
+	while (++i_min < i_max)
 	{
 		j = rc->item_bar_start - 1;
 		rc->item_image_y = 0;
 		while (++j < rc->item_bar_end)
 		{
 			if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist
-				&& 0 < i && i < info->win_width)
+				&& 0 <= i_min && i_min <= info->win_width)
 			{
 				color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
 				if (color)
-				{
-					// printf("[%d, %d]\n", (int)rc->item_image_x, (int)rc->item_image_y);
-					// printf("(%d,%d)\n", i, j);
-					// printf("(%d,%d) %d,%d\n", i, j, get_color(info->scene, i, j), color);
-					change_color(info->scene, i, j, color);
-				}
+					change_color(info->scene, i_min, j, color);
 			}
 			rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
 		}
@@ -149,10 +138,23 @@ void raycast(t_info *info, t_rc *rc)
 		if (rc->is_item == 1 && !rc->item_i_start)
 			rc->item_i_start = i;
 		else if (rc->is_item == 0 && rc->item_i_start && !rc->item_i_end)
-		{
 			rc->item_i_end = i - 1;
-		}
 		rc->ray_angle += FOV / info->win_width;
+	}
+	if (rc->item_i_start == 1)
+	{
+		rc->ray_angle = info->view_angle - (FOV / 2.0);
+		rc->is_item = 1;
+		i = 0;
+		while (rc->is_item == 1)
+		{
+			find_ray_dist(info, rc);
+			if (rc->is_item == 0)
+				rc->item_i_start = i + 1;
+			rc->ray_angle -= FOV / info->win_width;
+			i--;
+		}
+		printf("%d\n", rc->item_i_start); // 뭔가 밖의 것이 계산이 잘 안됨.
 	}
 	if (rc->item_i_start && !rc->item_i_end)
 	{
@@ -164,12 +166,10 @@ void raycast(t_info *info, t_rc *rc)
 			rc->ray_angle += FOV / info->win_width;
 			i++;
 		}
-		render_item_rev(info, rc, rc->item_i_end);
+		render_item_rev(info, rc, (rc->item_i_start + rc->item_i_end) / 2); // 매개변수 받을 필요도 없겠음.
 	}
 	else if (rc->item_i_end)
-	{
-		render_item_rev(info, rc, rc->item_i_end);
-	}
+		render_item_rev(info, rc, (rc->item_i_start + rc->item_i_end) / 2);
 	if (info->argc == 2)
 		mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
 }
