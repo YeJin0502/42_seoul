@@ -12,28 +12,37 @@
 
 #include "cub3d.h"
 
-static double distance(double x1, double y1, double x2, double y2)
+double distance(double x1, double y1, double x2, double y2)
 {
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
 static void find_intersection(t_info *info, t_fd *fd, t_rc *rc)
 {
-    fd->is_item_hit = 0;
+    // fd->is_item_hit = 0;
+    // rc->items = 0;
     while (fd->intersection_x >= 0 && fd->intersection_x <= info->win_width &&
             fd->intersection_y >= 0 && fd->intersection_y <= info->win_height)
     {
-        if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2
-            && fd->is_horz == 1 && fd->is_item_hit == 0)
-        {
-            fd->is_item_hit = 1;
-            rc->item_ray_dist = distance(info->x, info->y, fd->intersection_x, fd->intersection_y);
-            if (rc->is_ray_up)
-                rc->item_tile_x = fmod(fd->intersection_x, info->tile_width);
-            else
-                rc->item_tile_x = info->tile_width - fmod(fd->intersection_x, info->tile_width);
-        }
-        else if (is_wall(fd->intersection_x, fd->intersection_y, info) == 1)
+        // if (is_wall(fd->intersection_x, fd->intersection_y, info) == 2
+        //     && fd->is_horz == 1 && fd->is_item_hit == 0)
+        // {
+        //     fd->is_item_hit = 1;
+        //     rc->item_ray_dist = distance(info->x, info->y, fd->intersection_x, fd->intersection_y);
+        //     if (rc->is_ray_up)
+        //         rc->item_tile_x = fmod(fd->intersection_x, info->tile_width);
+        //     else
+        //         rc->item_tile_x = info->tile_width - fmod(fd->intersection_x, info->tile_width);
+        // }
+        // else if (is_wall(fd->intersection_x, fd->intersection_y, info) == 1)
+        // if (is_wall(fd->intersection_x, fd->intersection_y, info, rc) == 2 &&
+        //     rc->items->item_x == 0 && rc->items->item_y == 0)
+        // {
+            // printf("zz\n");
+            // rc->items->item_x = fd->intersection_x / info->tile_width + 0.00000001;
+            // rc->items->item_y = fd->intersection_y / info->tile_height + 0.00000001;
+        // }
+        if (is_wall(fd->intersection_x, fd->intersection_y, info, rc) == 1)
         {
             fd->is_wall_hit = 1;
             break;
@@ -104,7 +113,7 @@ void find_ray_dist(t_info *info, t_rc *rc)
 
     horz = find_horz_dist(info, rc);
     vert = find_vert_dist(info, rc);
-    rc->is_item_hit = horz->is_item_hit;
+    // rc->is_item_hit = horz->is_item_hit;
     if (vert->ray_dist < horz->ray_dist)
         init_ray_dist(rc, vert);
     else

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/13 14:53:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 18:44:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void move_and_rotate(t_info *info, t_rc *rc)
         new_x += -sin(info->view_angle) * move_dist;
         new_y += cos(info->view_angle) * move_dist;
     }
-    if (is_wall(new_x, new_y, info) != 1)
+    if (is_wall(new_x, new_y, info, rc) != 1)
     {
         info->x = new_x;
         info->y = new_y;
@@ -74,7 +74,7 @@ int key_hook(int keycode, void *param)
     if (keycode == KEY_ESC)
         exit(0);
     rc = (t_rc *)malloc(sizeof(t_rc));
-    ft_memset(rc, 0, sizeof(rc));
+    ft_memset(rc, 0, sizeof(t_rc));
     init_keycode(rc, keycode);
     move_and_rotate(info, rc);
     if (rc->is_move == 1 || rc->rotation_dir != 0)
