@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 23:28:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 00:23:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,8 @@ void raycast(t_info *info, t_rc *rc)
 		render(info, rc, i);
 		if (rc->is_item == 1 && !rc->item_i_start)
 			rc->item_i_start = i;
-		else if (rc->was_item == 1 && !rc->item_i_end)
+		else if (rc->is_item == 0 && rc->item_i_start && !rc->item_i_end)
 		{
-			printf("%d\n", rc->item_i_start);
 			rc->item_i_end = i - 1;
 		}
 		rc->ray_angle += FOV / info->win_width;
@@ -160,19 +159,15 @@ void raycast(t_info *info, t_rc *rc)
 		while (!rc->item_i_end)
 		{
 			find_ray_dist(info, rc);
-			if (rc->is_item == 1 && !rc->item_i_start)
-				rc->item_i_start = i;
-			else if (rc->was_item == 1 && !rc->item_i_end)
+			if (rc->is_item == 0)
 				rc->item_i_end = i - 1;
 			rc->ray_angle += FOV / info->win_width;
 			i++;
 		}
-		printf("a) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
 		render_item_rev(info, rc, rc->item_i_end);
 	}
 	else if (rc->item_i_end)
 	{
-		printf("b) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
 		render_item_rev(info, rc, rc->item_i_end);
 	}
 	if (info->argc == 2)
