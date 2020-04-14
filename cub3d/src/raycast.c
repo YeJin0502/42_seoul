@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 19:23:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 20:19:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ static void render_item(t_info *info, t_rc *rc, int i)
 	rc->item_image_x = 0;
 	rc->item_image_y = 0;
 	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
-	// printf("%f, %f, %f, %f\n", rc->item_ray_dist, rc->item_bar_height,
-	// 							rc->item_bar_start, rc->item_bar_end);
+	// printf("%f,%f\n", rc->item_bar_height, rc->item_width);
 	int i_max;
 	// i_max = i + info->s->width;
 	i_max = i + (int)rc->item_width;
 	// printf("[%d]\n", i);
 	i--;
+		j = rc->item_bar_start - 1;
+	// printf("%d,%d\n", i,j);
 	while (++i < i_max)
 	{
 		j = rc->item_bar_start - 1;
@@ -76,6 +77,7 @@ static void render_item(t_info *info, t_rc *rc, int i)
 	rc->is_item = 0;
 }
 
+
 static void render_item_rev(t_info *info, t_rc *rc, int i)
 {
 	int j;
@@ -89,9 +91,9 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 	rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
 	rc->item_width = (rc->item_bar_height * info->s->width) / info->s->height;
 	rc->item_image_x = info->s->width;
-	rc->item_image_y = info->s->height;
+	rc->item_image_y = 0;
 	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
-	// printf("%f, %f, %f, %f\n", rc->item_ray_dist, rc->item_bar_height,
+	// printf("[%f, %f, %f, %f]\n", rc->item_ray_dist, rc->item_bar_height,
 	// 							rc->item_bar_start, rc->item_bar_end);
 	int i_min;
 	// i_max = i + info->s->width;
@@ -115,12 +117,13 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 					change_color(info->scene, i, j, color);
 				}
 			}
-			rc->item_image_y -= (double)info->s->height / rc->item_bar_height + 0.000001;
+			rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
 		}
 		rc->item_image_x -= (double)info->s->width / rc->item_width + 0.000001; // ??
 	}
 	rc->is_item = 0;
 }
+
 
 void raycast(t_info *info, t_rc *rc)
 {
@@ -139,10 +142,16 @@ void raycast(t_info *info, t_rc *rc)
 	}
 	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
 	// printf("(%d, %d)\n", rc->item_i_start, rc->item_i_end);
-	if (rc->is_item == 1 && rc->item_i_start != 1)
+	if (rc->item_i_start > 1)
+	{
+		// printf("a\n");
 		render_item(info, rc, rc->item_i_start);
+	}
 	else if (rc->item_i_end)
+	{
+		// printf("b\n");
 		render_item_rev(info, rc, rc->item_i_end);
+	}
 	if (info->argc == 2)
 		mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
 }

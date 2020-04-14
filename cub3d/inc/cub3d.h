@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 19:16:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 19:53:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct      s_raycast
 	double          item_bar_end;
 	double			item_width;
 	int				is_item;
+	int				was_item;
 	int				item_i_start;
 	int				item_i_end;
 }                   t_rc;

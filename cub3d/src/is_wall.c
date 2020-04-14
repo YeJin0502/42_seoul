@@ -16,6 +16,7 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 {
     int map_x;
     int map_y;
+
     if (intersection_x < 0 || intersection_x > info->win_width ||
         intersection_y < 0 || intersection_y > info->win_height)
         return (1);
@@ -23,14 +24,14 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
     map_y = intersection_y / info->tile_height + 0.00000001;
     if (map_x < 0 || map_x >= info->map_width || map_y < 0 || map_y >= info->map_height)
     {
-        // if (rc->is_item)
-        //     rc->is_item = 2;
+        if (rc->is_item == 0 && rc->item_i_start)
+            rc->was_item = 1;
         return (1);
     }
     else if (info->map[map_y][map_x] == 1)
     {
-        // if (rc->is_item)
-        //     rc->is_item = 2;
+        if (rc->is_item == 0 && rc->item_i_start)
+            rc->was_item = 1;
         return (1);
     }
     else if (info->map[map_y][map_x] == 2)

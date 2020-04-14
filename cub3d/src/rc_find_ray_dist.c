@@ -111,6 +111,7 @@ void find_ray_dist(t_info *info, t_rc *rc)
     t_fd *horz;
     t_fd *vert;
 
+    rc->is_item = 0;
     horz = find_horz_dist(info, rc);
     vert = find_vert_dist(info, rc);
     // rc->is_item_hit = horz->is_item_hit;

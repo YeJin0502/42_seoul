@@ -113,7 +113,8 @@ void render(t_info *info, t_rc *rc, int i)
 		// rc->items->item_x = -1;
 		// rc->items->item_y = -1;
 		rc->item_i_start = i;
+		// rc->is_item = 0;
 	}
-	else if (rc->is_item == 2 && rc->item_i_start)
+	else if (rc->was_item == 1 && !rc->item_i_end)
 		rc->item_i_end = i - 1;
 }
