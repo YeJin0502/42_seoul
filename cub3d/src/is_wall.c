@@ -38,8 +38,7 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
     {
         // printf("%d,%d\n", map_x, map_y);
         rc->is_item = 1;
-        printf("%f\n", (map_x + 0.5) * info->tile_width);
-        rc->items->item_x = (map_x + 0.5) * info->tile_width;
+        rc->items->item_x = (map_x + 0.5) * info->tile_width; // distance만 구해서 넘기면 되나?
         rc->items->item_y = (map_y + 0.5) * info->tile_height;
         // return (2);
     }

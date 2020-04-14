@@ -56,6 +56,7 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
 {
     t_fd *horz;
 
+    // rc->is_item = 0;
     horz = (t_fd *)malloc(sizeof(t_fd));
     ft_memset(horz, 0, sizeof(t_fd));
     init_horz(info, rc, horz);
@@ -83,6 +84,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
 {
     t_fd *vert;
 
+    // rc->is_item = 0;
     vert = (t_fd *)malloc(sizeof(t_fd));
     ft_memset(vert, 0, sizeof(t_fd));
     init_vert(info, rc, vert);

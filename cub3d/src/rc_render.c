@@ -107,14 +107,4 @@ void render(t_info *info, t_rc *rc, int i)
 		// render_item(info, rc, i);
 	// printf("(%f,%f)\n", rc->items->item_x, rc->items->item_y);
 	// printf("%d, %d\n", rc->is_item, rc->item_i_start);
-	if (rc->is_item == 1 && !rc->item_i_start)
-	{
-		// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
-		// rc->items->item_x = -1;
-		// rc->items->item_y = -1;
-		rc->item_i_start = i;
-		// rc->is_item = 0;
-	}
-	else if (rc->was_item == 1 && !rc->item_i_end)
-		rc->item_i_end = i - 1;
 }

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 21:13:32 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 23:28:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void init_ray_angle(t_rc *rc)
 	rc->is_ray_right = !(rc->is_ray_left);	
 }
 
+/*
 static void render_item(t_info *info, t_rc *rc, int i)
 {
 	int j;
@@ -79,6 +80,7 @@ static void render_item(t_info *info, t_rc *rc, int i)
 	}
 	rc->is_item = 0;
 }
+*/
 
 
 static void render_item_rev(t_info *info, t_rc *rc, int i)
@@ -102,16 +104,17 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 	int i_min;
 	// i_max = i + info->s->width;
 	i_min = i - (int)rc->item_width;
-	// printf("b) %d %d\n", i_min, i); 
+	// printf("%d %d\n", i_min, i); 
 	// printf("[%d]\n", i);
 	i++;
-	while (--i > i_min && i > 0)
+	while (--i > i_min)
 	{
 		j = rc->item_bar_start - 1;
 		rc->item_image_y = 0;
 		while (++j < rc->item_bar_end)
 		{
-			if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist)
+			if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist
+				&& 0 < i && i < info->win_width)
 			{
 				color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
 				if (color)
@@ -143,17 +146,33 @@ void raycast(t_info *info, t_rc *rc)
 		init_ray_angle(rc);
 		find_ray_dist(info, rc);
 		render(info, rc, i);
+		if (rc->is_item == 1 && !rc->item_i_start)
+			rc->item_i_start = i;
+		else if (rc->was_item == 1 && !rc->item_i_end)
+		{
+			printf("%d\n", rc->item_i_start);
+			rc->item_i_end = i - 1;
+		}
 		rc->ray_angle += FOV / info->win_width;
 	}
-	// printf("(%d, %d)\n", rc->item_i_start, rc->item_i_end);
-	if (rc->item_i_start > 1)
+	if (rc->item_i_start && !rc->item_i_end)
 	{
-		// printf("a) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_start);
-		render_item(info, rc, rc->item_i_start);
+		while (!rc->item_i_end)
+		{
+			find_ray_dist(info, rc);
+			if (rc->is_item == 1 && !rc->item_i_start)
+				rc->item_i_start = i;
+			else if (rc->was_item == 1 && !rc->item_i_end)
+				rc->item_i_end = i - 1;
+			rc->ray_angle += FOV / info->win_width;
+			i++;
+		}
+		printf("a) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
+		render_item_rev(info, rc, rc->item_i_end);
 	}
 	else if (rc->item_i_end)
 	{
-		// printf("b) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
+		printf("b) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
 		render_item_rev(info, rc, rc->item_i_end);
 	}
 	if (info->argc == 2)

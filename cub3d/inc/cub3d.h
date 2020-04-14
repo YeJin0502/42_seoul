@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 19:53:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 22:28:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct      s_raycast
 	int				was_item;
 	int				item_i_start;
 	int				item_i_end;
+	int				ray_angle_tmp;
 }                   t_rc;
 
 typedef struct      s_find_ray_dist

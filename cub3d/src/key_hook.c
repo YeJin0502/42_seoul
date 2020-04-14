@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 18:44:17 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 22:33:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int key_hook(int keycode, void *param)
     if (rc->is_move == 1 || rc->rotation_dir != 0)
         raycast(info, rc);
     free(rc);
+    rc = 0;
     return (0);
 }
 
