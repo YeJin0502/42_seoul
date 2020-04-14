@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 20:19:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/14 21:13:32 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void render_item(t_info *info, t_rc *rc, int i)
 	rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
 	rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
 	rc->item_width = (rc->item_bar_height * info->s->width) / info->s->height;
+	// printf("a) %f\n", rc->item_width);
 	rc->item_image_x = 0;
 	rc->item_image_y = 0;
 	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
@@ -49,11 +50,13 @@ static void render_item(t_info *info, t_rc *rc, int i)
 	int i_max;
 	// i_max = i + info->s->width;
 	i_max = i + (int)rc->item_width;
+	// printf("a) %d %d\n", i, i_max); 
 	// printf("[%d]\n", i);
 	i--;
 		j = rc->item_bar_start - 1;
 	// printf("%d,%d\n", i,j);
-	while (++i < i_max)
+	// printf("%d %d\n", i, i_max);
+	while (++i < i_max && i < info->win_width)
 	{
 		j = rc->item_bar_start - 1;
 		rc->item_image_y = 0;
@@ -90,6 +93,7 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 	rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
 	rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
 	rc->item_width = (rc->item_bar_height * info->s->width) / info->s->height;
+	// printf("b) %f\n", rc->item_width);
 	rc->item_image_x = info->s->width;
 	rc->item_image_y = 0;
 	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
@@ -98,9 +102,10 @@ static void render_item_rev(t_info *info, t_rc *rc, int i)
 	int i_min;
 	// i_max = i + info->s->width;
 	i_min = i - (int)rc->item_width;
+	// printf("b) %d %d\n", i_min, i); 
 	// printf("[%d]\n", i);
 	i++;
-	while (--i > i_min)
+	while (--i > i_min && i > 0)
 	{
 		j = rc->item_bar_start - 1;
 		rc->item_image_y = 0;
@@ -140,16 +145,15 @@ void raycast(t_info *info, t_rc *rc)
 		render(info, rc, i);
 		rc->ray_angle += FOV / info->win_width;
 	}
-	// printf("%f,%f\n", rc->items->item_x, rc->items->item_y);
 	// printf("(%d, %d)\n", rc->item_i_start, rc->item_i_end);
 	if (rc->item_i_start > 1)
 	{
-		// printf("a\n");
+		// printf("a) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_start);
 		render_item(info, rc, rc->item_i_start);
 	}
 	else if (rc->item_i_end)
 	{
-		// printf("b\n");
+		// printf("b) %f,%f / %d\n", rc->items->item_x, rc->items->item_y, rc->item_i_end);
 		render_item_rev(info, rc, rc->item_i_end);
 	}
 	if (info->argc == 2)

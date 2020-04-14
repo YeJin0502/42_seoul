@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/14 19:56:49 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/14 20:41:36 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,3 +73,6 @@ fclean: clean
 	make -C $(FTDIR) fclean
 
 re: fclean all
+
+run: all
+	./cub3d map/castle.cub
