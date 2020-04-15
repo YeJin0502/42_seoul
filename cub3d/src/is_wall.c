@@ -30,9 +30,12 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 	{
 		if (rc)
 		{
-			rc->is_item = 1;
-			rc->item_x = (map_x + 0.5) * info->tile_width; // distance만 구해서 넘기면 되나?
+			// rc->is_item = 1;
+			rc->item_x = (map_x + 0.5) * info->tile_width;
 			rc->item_y = (map_y + 0.5) * info->tile_height;
+			// printf("%f, %f, %f, %f\n", info->x, info->y,
+			// 							(map_x + 0.5) * info->tile_width,
+			// 							(map_y + 0.5) * info->tile_height);
 			rc->item_ray_dist = distance(info->x, info->y,
 										(map_x + 0.5) * info->tile_width,
 										(map_y + 0.5) * info->tile_height);

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 17:05:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 23:21:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ typedef struct		s_item
 	double			item_x;
 	double			item_y;
 	double			ray_dist;
-	int				i_start;
-	int				i_end;
+	// int				i_start;
+	// int				i_end;
 	double          bar_height;
 	double          bar_start;
 	double          bar_end;
@@ -184,5 +184,7 @@ double	distance(double x1, double y1, double x2, double y2);
 void	render_item(t_info *info, t_rc *rc, t_item **item);
 double	norm_angle(double angle);
 void	init_ray_angle(t_rc *rc);
+// int find_i_end(t_info *info, t_rc *rc);
+// int find_i_start(t_info *info, t_rc *rc);
 
 #endif
