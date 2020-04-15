@@ -12,10 +12,28 @@
 
 #include "cub3d.h"
 
+int is_dup_item(double item_x, double item_y, t_item **item, int item_count)
+{
+	int i;
+
+	i = 0;
+	while (i < item_count)
+	{
+		if ((int)item[i]->x == (int)item_x && (int)item[i]->y == (int)item_y)
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc)
 {
 	int map_x;
 	int map_y;
+	// static int i_item;
+				// int i = -1;
 
 	if (intersection_x < 0 || intersection_x > info->win_width ||
 		intersection_y < 0 || intersection_y > info->win_height)
@@ -28,17 +46,24 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 		return (1);
 	else if (info->map[map_y][map_x] == 2)
 	{
-		if (rc)
+		if (rc) // 필요 없나?
 		{
-			// rc->is_item = 1;
 			rc->item_x = (map_x + 0.5) * info->tile_width;
 			rc->item_y = (map_y + 0.5) * info->tile_height;
-			// printf("%f, %f, %f, %f\n", info->x, info->y,
-			// 							(map_x + 0.5) * info->tile_width,
-			// 							(map_y + 0.5) * info->tile_height);
-			rc->item_ray_dist = distance(info->x, info->y,
-										(map_x + 0.5) * info->tile_width,
-										(map_y + 0.5) * info->tile_height);
+			// printf("%d\n", is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count));
+			// printf("%d\n", i_item);
+			if (is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count) == 0)
+			{
+				// while (++i < 3 &&  (rc->item)[i]->x &&  (rc->item)[i]->y)
+					// printf("%f,%f\n", (rc->item)[i]->x, (rc->item)[i]->y);
+				// printf("%f,%f\n", rc->item_x, rc->item_y);
+				(rc->item)[rc->i_item]->x = rc->item_x;
+				(rc->item)[rc->i_item]->y = rc->item_y;
+				(rc->item)[rc->i_item]->ray_dist = distance(info->x, info->y,
+												(map_x + 0.5) * info->tile_width,
+												(map_y + 0.5) * info->tile_height);
+				rc->i_item++;
+			}
 		}
 		return (2);
 	}

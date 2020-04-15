@@ -22,7 +22,8 @@ void make_first_scene(t_info *info)
     info->scene->image = mlx_new_image(info->mlx, info->win_width, info->win_height);
     info->scene->image_data = (unsigned char *)mlx_get_data_addr(info->scene->image, &(info->scene->bpp),
                             &(info->scene->size_line), &(info->scene->endian));
-    rc = (t_rc *)malloc(sizeof(t_rc));
+    if (!(rc = (t_rc *)malloc(sizeof(t_rc))))
+        error_exit(1);
     ft_memset(rc, 0, sizeof(t_rc));
     raycast(info, rc);
     free(rc);
