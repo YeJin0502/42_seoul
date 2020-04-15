@@ -96,8 +96,6 @@ static void render_wall(t_info *info, t_rc *rc, int i)
 //     }
 // }
 
-
-
 void render(t_info *info, t_rc *rc, int i)
 {
 	init_to_render_wall(info, rc);

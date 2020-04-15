@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 13:23:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 16:33:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ typedef struct      s_info
 	t_img           *scene;
 }                   t_info;
 
-typedef struct		s_item
-{
-	double			item_x;
-	double			item_y;
-}					t_item;
 
 typedef struct      s_raycast
 {
@@ -105,7 +100,6 @@ typedef struct      s_raycast
 	int             is_ray_right;
 	int             is_ray_left;
 	double          ray_dist;
-	double			*ray_dists;
 	double          tile_x;
 	int             tile_hit_dir;
 	double          projection_dist;
@@ -115,22 +109,34 @@ typedef struct      s_raycast
 	t_img           *wall_image;
 	double          wall_image_x;
 	double          wall_image_y;
-	t_item			*items;
-	// int             is_item_hit;
-	double          item_ray_dist;
-	double          item_tile_x;
-	double          item_image_x;
-	double          item_image_y;
-	double          item_bar_height;
-	double          item_bar_start;
-	double          item_bar_end;
-	double			item_width;
 	int				is_item;
-	int				was_item;
+	double			*ray_dists; // 하나로 통합할 수 있을 듯?
+	double			item_ray_dist;
 	int				item_i_start;
 	int				item_i_end;
-	int				ray_angle_tmp;
 }                   t_rc;
+
+typedef struct		s_position
+{
+	double			x;
+	double			y;
+}					t_pos;
+
+typedef struct		s_item
+{
+	double			ray_dist;
+	int				i_start;
+	int				i_end;
+	double          bar_height;
+	double          bar_start;
+	double          bar_end;
+	double			render_width;
+	int				i;
+	int				i_min;
+	int				i_max; // 작명 나중에 수정.
+	double          image_x;
+	double          image_y;
+}					t_item;
 
 typedef struct      s_find_ray_dist
 {
@@ -171,7 +177,7 @@ void    find_ray_dist(t_info *info, t_rc *rc);
 void    render(t_info *info, t_rc *rc, int i);
 void    save_bmp_image(t_img *scene, char *filename);
 double	distance(double x1, double y1, double x2, double y2);
-void	render_item(t_info *info, t_rc *rc);
+void	render_item(t_info *info, t_rc *rc, t_item **item);
 double	norm_angle(double angle);
 void	init_ray_angle(t_rc *rc);
 

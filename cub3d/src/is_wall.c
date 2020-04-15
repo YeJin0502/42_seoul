@@ -28,7 +28,7 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 		return (1);
 	else if (info->map[map_y][map_x] == 2)
 	{
-		if (rc && rc->items)
+		if (rc)
 		{
 			rc->is_item = 1;
 			rc->item_ray_dist = distance(info->x, info->y,
