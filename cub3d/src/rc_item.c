@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 17:15:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 22:07:25 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void render_item(t_info *info, t_rc *rc, t_item **item)
 			item[i_item]->i_end = find_i_end(info, rc);
 		if (item[i_item]->i_end)
 		{
+			printf("%d, (%d, %d)\n", i_item, item[i_item]->i_start, item[i_item]->i_end);
 			render_item_sub1(info, rc, item[i_item]);
 		}
 	}
