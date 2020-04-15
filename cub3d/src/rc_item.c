@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 13:14:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 14:43:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ static void render_item_sub2(t_info *info, t_rc *rc, int i_min, int i_max)
 	{
 		j = rc->item_bar_start - 1;
 		rc->item_image_y = 0;
-		printf("%f, %f\n", rc->item_ray_dist, rc->ray_dist);
-		// 마지막 i = 720의 ray_dist가 저장되는 것이 문제.
 		while (++j < rc->item_bar_end)
 		{
-			if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist
+			if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dists[i_min]
 				&& 0 <= i_min && i_min <= info->win_width)
 			{
 				color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
@@ -44,8 +42,8 @@ static void render_item_sub1(t_info *info, t_rc *rc, int i)
 	int i_min;
 	int i_max;
 
-	rc->item_ray_dist = distance(info->x, info->y,
-						rc->items->item_x, rc->items->item_y);
+	// rc->item_ray_dist = distance(info->x, info->y,
+						// rc->items->item_x, rc->items->item_y);
 	rc->item_bar_height = (info->tile_height + info->tile_width) / 2
 						* rc->projection_dist / rc->item_ray_dist;
 	rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);

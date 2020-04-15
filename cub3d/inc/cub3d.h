@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 13:17:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 13:23:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct      s_raycast
 	int             is_ray_right;
 	int             is_ray_left;
 	double          ray_dist;
+	double			*ray_dists;
 	double          tile_x;
 	int             tile_hit_dir;
 	double          projection_dist;
