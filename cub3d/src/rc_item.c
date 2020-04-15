@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/15 16:32:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 17:15:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
 	// rc->item_ray_dist = distance(info->x, info->y,
 						// rc->items->item_x, rc->items->item_y);
 	item->bar_height = (info->tile_height + info->tile_width) / 2
-						* rc->projection_dist / rc->item_ray_dist;
+						* rc->projection_dist / item->ray_dist;
 	item->bar_start = (info->win_height / 2) - (item->bar_height / 2);
 	item->bar_end = (info->win_height / 2) + (item->bar_height / 2);
 	item->render_width = (item->bar_height * info->s->width) / info->s->height;
@@ -96,12 +96,17 @@ void render_item(t_info *info, t_rc *rc, t_item **item)
 
 	i_item = -1;
 	while (++i_item < info->item_count && item[i_item]->ray_dist)
+	// i_item = 1;
 	{
+		// printf("%d, %f, (%d, %d)\n", i_item, item[i_item]->ray_dist,
+		// 		item[i_item]->i_start, item[i_item]->i_end);
 		if (item[i_item]->i_start == 1)
 			item[i_item]->i_start = find_i_start(info, rc);
 		else if (item[i_item]->i_start && !item[i_item]->i_end)
 			item[i_item]->i_end = find_i_end(info, rc);
 		if (item[i_item]->i_end)
+		{
 			render_item_sub1(info, rc, item[i_item]);
+		}
 	}
 }
