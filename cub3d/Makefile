@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/14 20:41:36 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/15 13:02:13 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC = main.c \
 	rc_find_ray_dist_init.c \
 	rc_find_ray_dist.c \
 	rc_render.c \
-	save_bmp_image.c
+	save_bmp_image.c \
+	rc_item.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 CC = clang

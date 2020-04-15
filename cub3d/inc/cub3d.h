@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/14 22:28:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/15 13:17:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,8 @@ void    find_ray_dist(t_info *info, t_rc *rc);
 void    render(t_info *info, t_rc *rc, int i);
 void    save_bmp_image(t_img *scene, char *filename);
 double	distance(double x1, double y1, double x2, double y2);
+void	render_item(t_info *info, t_rc *rc);
+double	norm_angle(double angle);
+void	init_ray_angle(t_rc *rc);
 
 #endif
