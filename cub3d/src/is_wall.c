@@ -17,12 +17,10 @@ int is_dup_item(double item_x, double item_y, t_item **item, int item_count)
 	int i;
 
 	i = 0;
-	while (i < item_count)
+	while (i < item_count && item[i])
 	{
 		if ((int)item[i]->x == (int)item_x && (int)item[i]->y == (int)item_y)
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -46,7 +44,7 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 		return (1);
 	else if (info->map[map_y][map_x] == 2)
 	{
-		if (rc) // 필요 없나?
+		if (rc && rc->item) // 필요 없나?
 		{
 			rc->item_x = (map_x + 0.5) * info->tile_width;
 			rc->item_y = (map_y + 0.5) * info->tile_height;

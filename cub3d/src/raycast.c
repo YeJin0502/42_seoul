@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 00:22:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 23:16:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ t_item **init_item(t_info *info) // 작명 마음에 안든당
 	return (item);
 }
 
+void free_item(t_info *info, t_item **item) // 삼중 포인터?
+{
+	int i;
+
+	i = -1;
+	while (++i < info->item_count)
+	{
+		free(item[i]);
+		item[i] = 0;
+	}
+	free(item);
+	item = 0;
+}
+
 void raycast(t_info *info, t_rc *rc)
 {
 	int i;
@@ -69,4 +83,7 @@ void raycast(t_info *info, t_rc *rc)
 	render_item(info, rc, item);
 	if (info->argc == 2)
 		mlx_put_image_to_window(info->mlx, info->win, info->scene->image, 0, 0);
+	free_item(info, item);
+	free(rc->ray_dists);
+	rc->ray_dists = 0;
 }
