@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 15:32:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 20:51:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,47 +52,26 @@ static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
 
 	item->vec_x = item->x - info->x;
 	item->vec_y = item->y - info->y;
-	printf("%f, %f\n", item->vec_x, item->vec_y);
-	item->dirvec_x = cos(info->view_angle);
-	item->dirvec_y = sin(info->view_angle);
-	printf("%f, %f\n", item->dirvec_x, item->dirvec_y);
+	item->dirvec_x = item->ray_dist * cos(info->view_angle);
+	item->dirvec_y = item->ray_dist * sin(info->view_angle);
 	dot_product = item->vec_x * item->dirvec_x + item->vec_y * item->dirvec_y;
 	abs_vec = distance(0, 0, item->vec_x, item->vec_y);
 	abs_dirvec = distance(0, 0, item->dirvec_x, item->dirvec_y);
-	// printf("%f, %f\n", abs_vec, abs_dirvec);
-	printf("%f// \n", dot_product);
 	item->dir_angle = acos(dot_product / (abs_vec * abs_dirvec));
-
-	// printf("%f\n", item->dir_angle);
-
 	item->bar_height = (info->tile_height + info->tile_width) / 2
 						* rc->projection_dist / item->ray_dist;
 	item->bar_start = (info->win_height / 2) - (item->bar_height / 2);
 	item->bar_end = (info->win_height / 2) + (item->bar_height / 2);
 	item->render_width = (item->bar_height * info->s->width) / info->s->height;
 	item->image_x = info->s->width;
-	if (item->dir_angle == 0)
-		item->i = (info->win_width / 2);
-	else if (item->vec_x - item->dirvec_x >= 0) // 이게 아니라... 각도가 음수로 나오게 해야하는데.
-	{
-		// printf("a\n");
-
+	// if (item->dir_angle == 0)
+	// 	item->i = (info->win_width / 2);
+	if (item->vec_x - item->dirvec_x >= 0)
 		item->i = ((info->win_width / 2) + (abs_vec * sin(item->dir_angle))
 				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));
-	}
 	else if (item->vec_x - item->dirvec_x < 0)
-	{
-		printf("b\n");
 		item->i = (int)((info->win_width / 2) - (abs_vec * sin(item->dir_angle))
 				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));		
-	}
-
-	// printf("%d, %f, %f, %f\n", info->win_width / 2, abs_vec * sin(item->dir_angle),
-	// 		rc->projection_dist, abs_vec * cos(item->dir_angle));
-
-	// printf("%d\n", item->i);
-	// printf("%f, %f\n", abs_double(abs_vec * cos(item->dir_angle)), abs_double(abs_vec * sin(item->dir_angle)));
-
 	item->i_min = item->i - (int)item->render_width / 2 - 1;
 	item->i_max = item->i + (int)item->render_width / 2;
 	render_item_sub2(info, rc, item);

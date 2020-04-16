@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 14:01:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 20:52:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,17 @@ typedef struct		s_item
 	double			vec_y;
 	double			dirvec_x;
 	double			dirvec_y;
-	double			dir_angle; // 작명이...
+	double			dir_angle;
+	// double			dot_product;
+	// double			abs_vec;
+	// double			abs_dirvec;
 	double          bar_height;
 	double          bar_start;
 	double          bar_end;
 	double			render_width;
 	int				i;
 	int				i_min;
-	int				i_max; // 작명 나중에 수정.
+	int				i_max;
 	double          image_x;
 	double          image_y;
 }					t_item;
