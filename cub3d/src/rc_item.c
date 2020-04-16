@@ -6,17 +6,27 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 20:51:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 22:04:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void render_item_sub2(t_info *info, t_rc *rc, t_item *item)
+double abs_double(double num)
+{
+	if (num >= 0)
+		return (num);
+	else
+		return (num);
+}
+
+static void render_item_sub(t_info *info, t_rc *rc, t_item *item)
 {
 	int j;
 	int color;
 
+	item->i_min = item->i - (int)item->render_width / 2 - 1;
+	item->i_max = item->i + (int)item->render_width / 2;
 	while (++item->i_min < item->i_max)
 	{
 		j = item->bar_start - 1;
@@ -32,19 +42,11 @@ static void render_item_sub2(t_info *info, t_rc *rc, t_item *item)
 			}
 			item->image_y += (double)info->s->height / item->bar_height + 0.000001;
 		}
-		item->image_x -= (double)info->s->width / item->render_width + 0.000001; // ??
+		item->image_x -= (double)info->s->width / item->render_width + 0.000001;
 	}
 }
 
-double abs_double(double num)
-{
-	if (num >= 0)
-		return (num);
-	else
-		return (num);
-}
-
-static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
+static void render_item_init(t_info *info, t_rc *rc, t_item *item)
 {
 	double dot_product;
 	double abs_vec;
@@ -64,29 +66,49 @@ static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
 	item->bar_end = (info->win_height / 2) + (item->bar_height / 2);
 	item->render_width = (item->bar_height * info->s->width) / info->s->height;
 	item->image_x = info->s->width;
-	// if (item->dir_angle == 0)
-	// 	item->i = (info->win_width / 2);
 	if (item->vec_x - item->dirvec_x >= 0)
 		item->i = ((info->win_width / 2) + (abs_vec * sin(item->dir_angle))
 				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));
 	else if (item->vec_x - item->dirvec_x < 0)
 		item->i = (int)((info->win_width / 2) - (abs_vec * sin(item->dir_angle))
 				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));		
-	item->i_min = item->i - (int)item->render_width / 2 - 1;
-	item->i_max = item->i + (int)item->render_width / 2;
-	render_item_sub2(info, rc, item);
+}
+
+static void sort_item(t_item **item)
+{
+	int count;
+	int i;
+	t_item *tmp;
+
+	count = 0;
+	while (item[count]->ray_dist)
+		count++;
+	while (--count)
+	{
+		i = -1;
+		while (++i < count)
+			if (item[i]->ray_dist < item[i + 1]->ray_dist)
+			{
+				tmp = (t_item *)malloc(sizeof(t_item));
+				ft_memmove(tmp, item[i], sizeof(t_item));
+				ft_memmove(item[i], item[i + 1], sizeof(t_item));
+				ft_memmove(item[i + 1], tmp, sizeof(t_item));
+			}
+	}
 }
 
 void render_item(t_info *info, t_rc *rc, t_item **item)
 {
 	int i_item;
 
+	sort_item(item);
 	i_item = -1;
 	while (++i_item < info->item_count && item[i_item]->ray_dist)
 	{
 		if (item[i_item]->x || item[i_item]->y)
 		{
-			render_item_sub1(info, rc, item[i_item]);
+			render_item_init(info, rc, item[i_item]);
+			render_item_sub(info, rc, item[i_item]);
 		}
 	}
 }

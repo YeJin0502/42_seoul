@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 20:52:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 22:05:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct      s_info
 	t_img           *scene;
 }                   t_info;
 
-
 typedef struct		s_item
 {
 	double			x;
@@ -98,9 +97,6 @@ typedef struct		s_item
 	double			dirvec_x;
 	double			dirvec_y;
 	double			dir_angle;
-	// double			dot_product;
-	// double			abs_vec;
-	// double			abs_dirvec;
 	double          bar_height;
 	double          bar_start;
 	double          bar_end;
@@ -140,13 +136,6 @@ typedef struct      s_raycast
 	int				i_item;
 }                   t_rc;
 
-// typedef struct		s_position
-// {
-// 	double			x;
-// 	double			y;
-// }					t_pos;
-
-
 typedef struct      s_find_ray_dist
 {
 	int             is_horz;
@@ -159,8 +148,6 @@ typedef struct      s_find_ray_dist
 	double          ray_dist;
 	double          tile_x;
 	int             tile_hit_dir; // 타일의 위부터 시계방향으로 1, 2, 3, 4
-	// t_item			*item;
-	// int             is_item_hit;
 }                   t_fd;
 
 void    error_exit(int errno);
@@ -189,7 +176,5 @@ double	distance(double x1, double y1, double x2, double y2);
 void	render_item(t_info *info, t_rc *rc, t_item **item);
 double	norm_angle(double angle);
 void	init_ray_angle(t_rc *rc);
-// int find_i_end(t_info *info, t_rc *rc);
-// int find_i_start(t_info *info, t_rc *rc);
 
 #endif
