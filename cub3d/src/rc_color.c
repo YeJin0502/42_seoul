@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/28 22:11:33 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/28 22:11:33 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:53:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int make_color(int r, int g, int b)
+int		make_color(int r, int g, int b)
 {
 	int color;
 
@@ -23,7 +23,7 @@ int make_color(int r, int g, int b)
 	return (color);
 }
 
-int	get_color(t_img *img, int x, int y)
+int		get_color(t_img *img, int x, int y)
 {
 	int b;
 	int g;

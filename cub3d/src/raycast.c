@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 06:10:46 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:05:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:54:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		init_ray_angle(t_rc *rc)
 	rc->is_ray_down = (0 < rc->ray_angle && rc->ray_angle < PI);
 	rc->is_ray_up = !(rc->is_ray_down);
 	rc->is_ray_left = (0.5 * PI < rc->ray_angle && rc->ray_angle < 1.5 * PI);
-	rc->is_ray_right = !(rc->is_ray_left);	
+	rc->is_ray_right = !(rc->is_ray_left);
 }
 
 static void		init_rc(t_info *info, t_rc *rc)

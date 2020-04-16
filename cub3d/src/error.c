@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/01 00:45:12 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 23:56:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:58:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void error_exit(int errno)
+void	error_exit(int errno)
 {
 	if (errno == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:10:11 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:37:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define PI 3.1415926535
-# define FOV 60.0 * PI / 180.0
-# define ROTATION_SPEED 3.0 * PI / 180.0
+# define PI 3.141592
+# define FOV 60.0 * 3.141592 / 180.0
+# define ROTATION_SPEED 3.0 * 3.141592 / 180.0
 # define MOVE_SPEED 3.0
 # define DISPLAY_WIDTH 1920
 # define DISPLAY_HEIGHT 1080
@@ -50,7 +50,7 @@ typedef struct		s_parsing
 	char			*s;
 }					t_ps;
 
-typedef struct      s_image
+typedef struct		s_image
 {
 	int				width;
 	int				height;
@@ -59,7 +59,7 @@ typedef struct      s_image
 	int				size_line;
 	int				endian;
 	unsigned char	*image_data;
-}                   t_img;
+}					t_img;
 
 typedef struct		s_info
 {
@@ -126,7 +126,7 @@ typedef struct		s_raycast
 	int				bar_height;
 	int				bar_start;
 	int				bar_end;
-	t_img 			*wall_image;
+	t_img			*wall_image;
 	double			wall_image_x;
 	double			wall_image_y;
 	double			item_x;
@@ -157,7 +157,8 @@ void	init_map(t_info *info, t_ps *ps, char *filename);
 void	ps_texture(char *line, char *wall, t_ps *ps);
 void	init_fc(char *line, char *fc, t_info *info, t_ps *ps);
 void	init_texture(t_info *info, t_ps *ps);
-int		is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc);
+int		is_wall(double intersection_x, double intersection_y,
+				t_info *info, t_rc *rc);
 int		key_hook(int keycode, void *param);
 void	make_first_scene(t_info *info);
 void	char_check(char *line);

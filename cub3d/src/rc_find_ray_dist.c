@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_ray_dist.c                                    :+:      :+:    :+:   */
+/*   rc_find_ray_dist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 04:53:01 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/27 04:53:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:52:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	find_intersection(t_info *info, t_fd *fd, t_rc *rc)
 		if (is_wall(fd->intersection_x, fd->intersection_y, info, rc) == 1)
 		{
 			fd->is_wall_hit = 1;
-			break;
+			break ;
 		}
 		fd->intersection_x += fd->dx;
 		fd->intersection_y += fd->dy;
@@ -42,7 +42,8 @@ static t_fd	*find_horz_dist(t_info *info, t_rc *rc)
 	find_intersection(info, horz, rc);
 	if (horz->is_wall_hit)
 	{
-		horz->ray_dist = distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
+		horz->ray_dist =
+		distance(info->x, info->y, horz->intersection_x, horz->intersection_y);
 		if (rc->is_ray_up)
 		{
 			horz->tile_x = fmod(horz->intersection_x, info->tile_width);
@@ -50,7 +51,8 @@ static t_fd	*find_horz_dist(t_info *info, t_rc *rc)
 		}
 		else
 		{
-			horz->tile_x = info->tile_width - fmod(horz->intersection_x, info->tile_width);
+			horz->tile_x =
+			info->tile_width - fmod(horz->intersection_x, info->tile_width);
 			horz->tile_hit_dir = 1;
 		}
 	}
@@ -69,7 +71,8 @@ static t_fd	*find_vert_dist(t_info *info, t_rc *rc)
 	find_intersection(info, vert, rc);
 	if (vert->is_wall_hit)
 	{
-		vert->ray_dist = distance(info->x, info->y, vert->intersection_x, vert->intersection_y);
+		vert->ray_dist =
+		distance(info->x, info->y, vert->intersection_x, vert->intersection_y);
 		if (rc->is_ray_right)
 		{
 			vert->tile_x = fmod(vert->intersection_y, info->tile_height);
@@ -77,12 +80,13 @@ static t_fd	*find_vert_dist(t_info *info, t_rc *rc)
 		}
 		else
 		{
-			vert->tile_x = info->tile_height - fmod(vert->intersection_y, info->tile_height);
-			vert->tile_hit_dir = 2;	
+			vert->tile_x =
+			info->tile_height - fmod(vert->intersection_y, info->tile_height);
+			vert->tile_hit_dir = 2;
 		}
 	}
 	else
-		vert->ray_dist = 2203; // 이게 최대값이라는 생각은 드는데... 어짜피 큰수 넣는거랑 똑같다면 max값 넣어도 될듯.
+		vert->ray_dist = 2203;
 	return (vert);
 }
 

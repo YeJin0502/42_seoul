@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 03:45:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:09:41 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:42:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ static void	write_pixel_data(int fd, t_img *scene)
 		j = -1;
 		while (++j < scene->height)
 		{
-			pixel_data[3 * i + 3 * w * j] = scene->image_data[4 * i + 4 * w * (h - j)];
-			pixel_data[3 * i + 3 * w * j + 1] = scene->image_data[4 * i + 4 * w * (h - j) + 1];
-			pixel_data[3 * i + 3 * w * j + 2] = scene->image_data[4 * i + 4 * w * (h - j) + 2];
+			pixel_data[3 * i + 3 * w * j] =
+			scene->image_data[4 * i + 4 * w * (h - j)];
+			pixel_data[3 * i + 3 * w * j + 1] =
+			scene->image_data[4 * i + 4 * w * (h - j) + 1];
+			pixel_data[3 * i + 3 * w * j + 2] =
+			scene->image_data[4 * i + 4 * w * (h - j) + 2];
 		}
 	}
 	write(fd, pixel_data, w * h * 3);
@@ -87,5 +90,5 @@ void		save_bmp_image(t_img *scene, char *filename)
 	fd = open(bmp_name, O_RDWR | O_CREAT, 744);
 	write_bmp_header(fd, scene);
 	write_pixel_data(fd, scene);
-	free(bmp_name); 
+	free(bmp_name);
 }

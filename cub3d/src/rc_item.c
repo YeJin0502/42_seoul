@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:01:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:50:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ static void		render_item_sub(t_info *info, t_rc *rc, t_item *item)
 			if (0 <= j && j <= info->win_height
 				&& item->ray_dist < rc->ray_dists[item->i_min]
 				&& 0 <= item->i_min && item->i_min <= info->win_width)
-				if ((color = get_color(info->s, (int)item->image_x, (int)item->image_y)))
+				if ((color = get_color(info->s,
+					(int)item->image_x, (int)item->image_y)))
 					change_color(info->scene, item->i_min, j, color);
-			item->image_y += (double)info->s->height / item->bar_height + 0.000001;
+			item->image_y +=
+			(double)info->s->height / item->bar_height + 0.000001;
 		}
-		item->image_x -= (double)info->s->width / item->render_width + 0.000001;
+		item->image_x -=
+		(double)info->s->width / item->render_width + 0.000001;
 	}
 }
 
@@ -52,15 +55,16 @@ static void		render_item_init(t_info *info, t_rc *rc, t_item *item)
 	item->render_width = (item->bar_height * info->s->width) / info->s->height;
 	item->image_x = info->s->width;
 	if (cos(item->dir_angle) != 0)
-		item->i = ((info->win_width / 2) - (item->ray_dist * sin(item->dir_angle))
-				* rc->projection_dist / (item->ray_dist * cos(item->dir_angle)));
+		item->i =
+		((info->win_width / 2) - (item->ray_dist * sin(item->dir_angle))
+		* rc->projection_dist / (item->ray_dist * cos(item->dir_angle)));
 }
 
 static void		sort_item(t_info *info, t_item **item)
 {
-	int count;
-	int i;
-	t_item *tmp;
+	int		count;
+	int		i;
+	t_item	*tmp;
 
 	count = 0;
 	while (count < info->item_count && item[count]->ray_dist)

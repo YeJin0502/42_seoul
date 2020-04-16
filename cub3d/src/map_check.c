@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 23:46:53 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:04:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:54:29 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	wall_check(t_info *info)
 				j == 0 || j == info->map_height - 1) &&
 				info->map[j][i] != 1)
 				error_exit(3);
-			// else if (info->map[j][i] < 0 || info->map[j][i] > 2)
-				// error_exit(3);
 		}
 	}
 }

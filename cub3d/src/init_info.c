@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 21:23:03 by gmoon             #+#    #+#             */
-/*   Updated: 2020/03/29 21:23:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:58:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	init_mlx(t_info *info, int argc)
 		error_exit(5);
 	if (info->argc == 2)
 	{
-		info->win = mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
+		info->win =
+		mlx_new_window(info->mlx, info->win_width, info->win_height, "gmoon");
 		if (!info->win)
 			error_exit(5);
 	}
