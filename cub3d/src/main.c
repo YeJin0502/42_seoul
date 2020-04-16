@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:04:51 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 01:27:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		mlx_key_hook(info->win, key_hook, (void *)info);
-		// mlx_hook(info->win, 17, 1L << 17, press_x_button, (void *)0);
+		mlx_hook(info->win, 17, 1L << 17, press_x_button, (void *)0);
 		mlx_loop(info->mlx);
 	}
 }

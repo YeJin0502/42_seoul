@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:37:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 01:29:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,35 @@
 # include "libft.h"
 
 # define PI 3.141592
-# define FOV 60.0 * 3.141592 / 180.0
-# define ROTATION_SPEED 3.0 * 3.141592 / 180.0
+# define FOV 1.0472
+# define ROTATION_SPEED 0.05236
 # define MOVE_SPEED 3.0
 # define DISPLAY_WIDTH 1920
 # define DISPLAY_HEIGHT 1080
 
-# define KEY_W 119
-# define KEY_S 115
-# define KEY_A 97
-# define KEY_D 100
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_ESC 65307
+/*
+** FOV = 60 * PI / 180
+** ROTATION_SPEED = 3 * PI / 180
+*/
+
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 8
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_ESC 53
+
+/*
+** linux key
+** # define KEY_W 119
+** # define KEY_S 115
+** # define KEY_A 97
+** # define KEY_D 100
+** # define KEY_LEFT 65361
+** # define KEY_RIGHT 65363
+** # define KEY_ESC 65307
+*/
 
 typedef struct		s_parsing
 {
@@ -150,30 +166,31 @@ typedef struct		s_find_ray_dist
 	int				tile_hit_dir;
 }					t_fd;
 
-void	error_exit(int errno);
-t_info	*init_info(int argc, char *filename);
-void	init_map_size(char *line, t_info *info);
-void	init_map(t_info *info, t_ps *ps, char *filename);
-void	ps_texture(char *line, char *wall, t_ps *ps);
-void	init_fc(char *line, char *fc, t_info *info, t_ps *ps);
-void	init_texture(t_info *info, t_ps *ps);
-int		is_wall(double intersection_x, double intersection_y,
-				t_info *info, t_rc *rc);
-int		key_hook(int keycode, void *param);
-void	make_first_scene(t_info *info);
-void	char_check(char *line);
-void	wall_check(t_info *info);
-void	raycast(t_info *info, t_rc *rc);
-int		make_color(int r, int g, int b);
-int		get_color(t_img *img, int x, int y);
-void	change_color(t_img *img, int x, int y, int color);
-void	init_horz(t_info *info, t_rc *rc, t_fd *horz);
-void	init_vert(t_info *info, t_rc *rc, t_fd *vert);
-void	init_ray_dist(t_rc *rc, t_fd *fd);
-void	find_ray_dist(t_info *info, t_rc *rc);
-void	render(t_info *info, t_rc *rc, int i);
-void	save_bmp_image(t_img *scene, char *filename);
-double	distance(double x1, double y1, double x2, double y2);
-void	render_item(t_info *info, t_rc *rc, t_item **item);
+void				error_exit(int errno);
+t_info				*init_info(int argc, char *filename);
+void				init_map_size(char *line, t_info *info);
+void				init_map(t_info *info, t_ps *ps, char *filename);
+void				ps_texture(char *line, char *wall, t_ps *ps);
+void				init_fc(char *line, char *fc, t_info *info, t_ps *ps);
+void				init_texture(t_info *info, t_ps *ps);
+int					is_wall(double intersection_x, double intersection_y,
+							t_info *info, t_rc *rc);
+int					key_hook(int keycode, void *param);
+void				make_first_scene(t_info *info);
+void				char_check(char *line);
+void				wall_check(t_info *info);
+void				raycast(t_info *info, t_rc *rc);
+int					make_color(int r, int g, int b);
+int					get_color(t_img *img, int x, int y);
+void				change_color(t_img *img, int x, int y, int color);
+void				init_horz(t_info *info, t_rc *rc, t_fd *horz);
+void				init_vert(t_info *info, t_rc *rc, t_fd *vert);
+void				init_ray_dist(t_rc *rc, t_fd *fd);
+void				find_ray_dist(t_info *info, t_rc *rc);
+void				render(t_info *info, t_rc *rc, int i);
+void				save_bmp_image(t_img *scene, char *filename);
+double				distance(double x1, double y1, double x2, double y2);
+void				render_item(t_info *info, t_rc *rc, t_item **item);
+int					press_x_button(void *param);
 
 #endif
