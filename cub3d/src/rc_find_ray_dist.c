@@ -12,12 +12,12 @@
 
 #include "cub3d.h"
 
-double distance(double x1, double y1, double x2, double y2)
+double		distance(double x1, double y1, double x2, double y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-static void find_intersection(t_info *info, t_fd *fd, t_rc *rc)
+static void	find_intersection(t_info *info, t_fd *fd, t_rc *rc)
 {
 	while (fd->intersection_x >= 0 && fd->intersection_x <= info->win_width &&
 			fd->intersection_y >= 0 && fd->intersection_y <= info->win_height)
@@ -32,7 +32,7 @@ static void find_intersection(t_info *info, t_fd *fd, t_rc *rc)
 	}
 }
 
-static t_fd *find_horz_dist(t_info *info, t_rc *rc)
+static t_fd	*find_horz_dist(t_info *info, t_rc *rc)
 {
 	t_fd *horz;
 
@@ -59,7 +59,7 @@ static t_fd *find_horz_dist(t_info *info, t_rc *rc)
 	return (horz);
 }
 
-static t_fd *find_vert_dist(t_info *info, t_rc *rc)
+static t_fd	*find_vert_dist(t_info *info, t_rc *rc)
 {
 	t_fd *vert;
 
@@ -86,7 +86,7 @@ static t_fd *find_vert_dist(t_info *info, t_rc *rc)
 	return (vert);
 }
 
-void find_ray_dist(t_info *info, t_rc *rc)
+void		find_ray_dist(t_info *info, t_rc *rc)
 {
 	t_fd *horz;
 	t_fd *vert;

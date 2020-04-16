@@ -6,21 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 23:20:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/17 00:01:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double abs_double(double num)
-{
-	if (num >= 0)
-		return (num);
-	else
-		return (num);
-}
-
-static void render_item_sub(t_info *info, t_rc *rc, t_item *item)
+static void		render_item_sub(t_info *info, t_rc *rc, t_item *item)
 {
 	int j;
 	int color;
@@ -33,34 +25,26 @@ static void render_item_sub(t_info *info, t_rc *rc, t_item *item)
 		item->image_y = 0;
 		while (++j < item->bar_end)
 		{
-			if (0 <= j && j <= info->win_height && item->ray_dist < rc->ray_dists[item->i_min]
+			if (0 <= j && j <= info->win_height
+				&& item->ray_dist < rc->ray_dists[item->i_min]
 				&& 0 <= item->i_min && item->i_min <= info->win_width)
-			{
-				color = get_color(info->s, (int)item->image_x, (int)item->image_y);
-				if (color)
+				if ((color = get_color(info->s, (int)item->image_x, (int)item->image_y)))
 					change_color(info->scene, item->i_min, j, color);
-			}
 			item->image_y += (double)info->s->height / item->bar_height + 0.000001;
 		}
 		item->image_x -= (double)info->s->width / item->render_width + 0.000001;
 	}
 }
 
-static void render_item_init(t_info *info, t_rc *rc, t_item *item)
+static void		render_item_init(t_info *info, t_rc *rc, t_item *item)
 {
-	// double dot_product;
-	double abs_vec;
-	double abs_dirvec;
-
 	item->vec_x = item->x - info->x;
 	item->vec_y = item->y - info->y;
 	item->dirvec_x = item->ray_dist * cos(info->view_angle);
 	item->dirvec_y = item->ray_dist * sin(info->view_angle);
-	abs_vec = distance(0, 0, item->vec_x, item->vec_y);
-	abs_dirvec = distance(0, 0, item->dirvec_x, item->dirvec_y);
-	item->dir_angle = asin((item->vec_x * item->dirvec_y - item->vec_y * item->dirvec_x)
-						/ (abs_vec * abs_dirvec));
-	norm_angle(item->dir_angle);
+	item->dir_angle = asin((item->vec_x * item->dirvec_y
+					- item->vec_y * item->dirvec_x)
+					/ (item->ray_dist * item->ray_dist));
 	item->bar_height = (info->tile_height + info->tile_width) / 2
 						* rc->projection_dist / item->ray_dist;
 	item->bar_start = (info->win_height / 2) - (item->bar_height / 2);
@@ -68,11 +52,11 @@ static void render_item_init(t_info *info, t_rc *rc, t_item *item)
 	item->render_width = (item->bar_height * info->s->width) / info->s->height;
 	item->image_x = info->s->width;
 	if (cos(item->dir_angle) != 0)
-		item->i = ((info->win_width / 2) - (abs_vec * sin(item->dir_angle))
-				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));
+		item->i = ((info->win_width / 2) - (item->ray_dist * sin(item->dir_angle))
+				* rc->projection_dist / (item->ray_dist * cos(item->dir_angle)));
 }
 
-static void sort_item(t_info *info, t_item **item)
+static void		sort_item(t_info *info, t_item **item)
 {
 	int count;
 	int i;
@@ -81,6 +65,7 @@ static void sort_item(t_info *info, t_item **item)
 	count = 0;
 	while (count < info->item_count && item[count]->ray_dist)
 		count++;
+	tmp = (t_item *)malloc(sizeof(t_item));
 	while (--count > 0)
 	{
 		i = -1;
@@ -88,7 +73,6 @@ static void sort_item(t_info *info, t_item **item)
 		{
 			if (item[i]->ray_dist < item[i + 1]->ray_dist)
 			{
-				tmp = (t_item *)malloc(sizeof(t_item));
 				ft_memmove(tmp, item[i], sizeof(t_item));
 				ft_memmove(item[i], item[i + 1], sizeof(t_item));
 				ft_memmove(item[i + 1], tmp, sizeof(t_item));
@@ -99,7 +83,7 @@ static void sort_item(t_info *info, t_item **item)
 	tmp = 0;
 }
 
-void render_item(t_info *info, t_rc *rc, t_item **item)
+void			render_item(t_info *info, t_rc *rc, t_item **item)
 {
 	int i_item;
 

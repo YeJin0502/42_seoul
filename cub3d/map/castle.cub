@@ -1,6 +1,6 @@
 R 720   480
 
-NO ./texture/n_wall_pixel.xpm
+NO   ./texture/n_wall_pixel.xpm
 SO ./texture/s_wall_pixel.xpm
 EA ./texture/e_wall_pixel.xpm
 WE ./texture/w_wall_pixel.xpm

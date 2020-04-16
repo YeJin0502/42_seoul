@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static t_img *select_wall_img(t_info *info, t_rc *rc)
+static t_img	*select_wall_img(t_info *info, t_rc *rc)
 {
 	t_img *wall_img;
 
@@ -27,12 +27,12 @@ static t_img *select_wall_img(t_info *info, t_rc *rc)
 	return (wall_img);
 }
 
-static void init_to_render_wall(t_info *info, t_rc *rc)
+static void		init_to_render_wall(t_info *info, t_rc *rc)
 {
 	rc->ray_dist *= cos(info->view_angle - rc->ray_angle);
 	rc->projection_dist = info->win_width / (2 * tan(FOV / 2));
 	rc->bar_height = (info->tile_height + info->tile_width) / 2
-					 * rc->projection_dist / rc->ray_dist; // 평균값으로 했는데, 뭐 써야할라나..?
+					 * rc->projection_dist / rc->ray_dist;
 	rc->bar_start = (info->win_height / 2) - (rc->bar_height / 2);
 	rc->bar_end = (info->win_height / 2) + (rc->bar_height / 2);
 	rc->wall_image = select_wall_img(info, rc);
@@ -43,7 +43,7 @@ static void init_to_render_wall(t_info *info, t_rc *rc)
 	rc->wall_image_y = 0;
 }
 
-static void render_wall(t_info *info, t_rc *rc, int i)
+static void		render_wall(t_info *info, t_rc *rc, int i)
 {
 	int j;
 	int color;
@@ -71,38 +71,8 @@ static void render_wall(t_info *info, t_rc *rc, int i)
 	}
 }
 
-// static void render_item(t_info *info, t_rc *rc, int i)
-// {
-//     int j;
-//     int color;
-
-//     rc->item_ray_dist *= cos(info->view_angle - rc->ray_angle);
-//     rc->item_bar_height = (info->tile_height + info->tile_width) / 2
-//                     * rc->projection_dist / rc->item_ray_dist;
-//     rc->item_bar_start = (info->win_height / 2) - (rc->item_bar_height / 2);
-//     rc->item_bar_end = (info->win_height / 2) + (rc->item_bar_height / 2);
-//     rc->item_image_x = rc->item_tile_x * info->s->width / info->tile_width + 0.000001;
-//     rc->item_image_y = 0;
-//     j = rc->item_bar_start - 1;
-//     while (++j < rc->item_bar_end)
-//     {
-//         if (0 <= j && j <= info->win_height && rc->item_ray_dist < rc->ray_dist)
-//         {
-//             color = get_color(info->s, (int)rc->item_image_x, (int)rc->item_image_y);
-//             if (color)
-//                 change_color(info->scene, i, j, color);
-//         }
-//         rc->item_image_y += (double)info->s->height / rc->item_bar_height + 0.000001;
-//     }
-// }
-
-void render(t_info *info, t_rc *rc, int i)
+void 			render(t_info *info, t_rc *rc, int i)
 {
 	init_to_render_wall(info, rc);
 	render_wall(info, rc, i);
-	// printf("%d\n", get_color(info->scene, 463,359));
-	// if (rc->is_item_hit)
-		// render_item(info, rc, i);
-	// printf("(%f,%f)\n", rc->items->item_x, rc->items->item_y);
-	// printf("%d, %d\n", rc->is_item, rc->item_i_start);
 }

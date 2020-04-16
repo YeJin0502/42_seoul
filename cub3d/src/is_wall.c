@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int is_dup_item(double item_x, double item_y, t_item **item, int item_count)
+static int	is_dup_item(double item_x, double item_y, t_item **item, int item_count)
 {
 	int i;
 
@@ -26,12 +26,25 @@ int is_dup_item(double item_x, double item_y, t_item **item, int item_count)
 	return (0);
 }
 
-int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc)
+static void	init_item(int map_x, int map_y, t_info *info, t_rc *rc)
+{
+	rc->item_x = (map_x + 0.5) * info->tile_width;
+	rc->item_y = (map_y + 0.5) * info->tile_height;
+	if (is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count) == 0)
+	{
+		(rc->item)[rc->i_item]->x = rc->item_x;
+		(rc->item)[rc->i_item]->y = rc->item_y;
+		(rc->item)[rc->i_item]->ray_dist = distance(info->x, info->y,
+										(map_x + 0.5) * info->tile_width,
+										(map_y + 0.5) * info->tile_height);
+		rc->i_item++;
+	}
+}
+
+int			is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc)
 {
 	int map_x;
 	int map_y;
-	// static int i_item;
-				// int i = -1;
 
 	if (intersection_x < 0 || intersection_x > info->win_width ||
 		intersection_y < 0 || intersection_y > info->win_height)
@@ -44,20 +57,8 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 		return (1);
 	else if (info->map[map_y][map_x] == 2)
 	{
-		if (rc && rc->item) // 필요 없나?
-		{
-			rc->item_x = (map_x + 0.5) * info->tile_width;
-			rc->item_y = (map_y + 0.5) * info->tile_height;
-			if (is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count) == 0)
-			{
-				(rc->item)[rc->i_item]->x = rc->item_x;
-				(rc->item)[rc->i_item]->y = rc->item_y;
-				(rc->item)[rc->i_item]->ray_dist = distance(info->x, info->y,
-												(map_x + 0.5) * info->tile_width,
-												(map_y + 0.5) * info->tile_height);
-				rc->i_item++;
-			}
-		}
+		if (rc && rc->item)
+			init_item(map_x, map_y, info, rc);
 		return (2);
 	}
 	return (0);
