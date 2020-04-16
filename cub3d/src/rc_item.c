@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/13 22:55:34 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 15:03:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 15:32:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
 	printf("%f, %f\n", item->vec_x, item->vec_y);
 	item->dirvec_x = cos(info->view_angle);
 	item->dirvec_y = sin(info->view_angle);
-	// printf("%f, %f\n", item->dirvec_x, item->dirvec_y);
+	printf("%f, %f\n", item->dirvec_x, item->dirvec_y);
 	dot_product = item->vec_x * item->dirvec_x + item->vec_y * item->dirvec_y;
 	abs_vec = distance(0, 0, item->vec_x, item->vec_y);
 	abs_dirvec = distance(0, 0, item->dirvec_x, item->dirvec_y);
 	// printf("%f, %f\n", abs_vec, abs_dirvec);
+	printf("%f// \n", dot_product);
 	item->dir_angle = acos(dot_product / (abs_vec * abs_dirvec));
 
-	// printf("%f %f\n", item->dir_angle, FOV);
+	// printf("%f\n", item->dir_angle);
 
 	item->bar_height = (info->tile_height + info->tile_width) / 2
 						* rc->projection_dist / item->ray_dist;
@@ -72,14 +73,14 @@ static void render_item_sub1(t_info *info, t_rc *rc, t_item *item)
 	item->image_x = info->s->width;
 	if (item->dir_angle == 0)
 		item->i = (info->win_width / 2);
-	else if (item->vec_x >= 0) // 이게 아니라... 각도가 음수로 나오게 해야하는데.
+	else if (item->vec_x - item->dirvec_x >= 0) // 이게 아니라... 각도가 음수로 나오게 해야하는데.
 	{
-		printf("a\n");
+		// printf("a\n");
 
 		item->i = ((info->win_width / 2) + (abs_vec * sin(item->dir_angle))
 				* rc->projection_dist / (abs_vec * cos(item->dir_angle)));
 	}
-	else if (item->vec_x < 0)
+	else if (item->vec_x - item->dirvec_x < 0)
 	{
 		printf("b\n");
 		item->i = (int)((info->win_width / 2) - (abs_vec * sin(item->dir_angle))
