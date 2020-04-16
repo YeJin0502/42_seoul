@@ -91,7 +91,6 @@ void find_ray_dist(t_info *info, t_rc *rc)
 	t_fd *horz;
 	t_fd *vert;
 
-	// rc->is_item = 0; // 삭제하고 싶음.
 	rc->item_x = 0;
 	rc->item_y = 0;
 	horz = find_horz_dist(info, rc);

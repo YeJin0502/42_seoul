@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/16 00:19:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/16 14:01:57 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,11 @@ typedef struct		s_item
 	double			x;
 	double			y;
 	double			ray_dist;
-	// int				i_start;
-	// int				i_end;
+	double			vec_x;
+	double			vec_y;
+	double			dirvec_x;
+	double			dirvec_y;
+	double			dir_angle; // 작명이...
 	double          bar_height;
 	double          bar_start;
 	double          bar_end;
@@ -127,15 +130,11 @@ typedef struct      s_raycast
 	t_img           *wall_image;
 	double          wall_image_x;
 	double          wall_image_y;
-	// int				is_item;
 	double			item_x;
 	double			item_y;
-	double			*ray_dists; // 하나로 통합할 수 있을 듯?
-	double			item_ray_dist;
+	double			*ray_dists;
 	t_item			**item;
 	int				i_item;
-	// int				item_i_start;
-	// int				item_i_end;
 }                   t_rc;
 
 // typedef struct		s_position

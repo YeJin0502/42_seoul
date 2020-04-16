@@ -50,13 +50,8 @@ int is_wall(double intersection_x, double intersection_y, t_info *info, t_rc *rc
 		{
 			rc->item_x = (map_x + 0.5) * info->tile_width;
 			rc->item_y = (map_y + 0.5) * info->tile_height;
-			// printf("%d\n", is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count));
-			// printf("%d\n", i_item);
 			if (is_dup_item(rc->item_x, rc->item_y, rc->item, info->item_count) == 0)
 			{
-				// while (++i < 3 &&  (rc->item)[i]->x &&  (rc->item)[i]->y)
-					// printf("%f,%f\n", (rc->item)[i]->x, (rc->item)[i]->y);
-				// printf("%f,%f\n", rc->item_x, rc->item_y);
 				(rc->item)[rc->i_item]->x = rc->item_x;
 				(rc->item)[rc->i_item]->y = rc->item_y;
 				(rc->item)[rc->i_item]->ray_dist = distance(info->x, info->y,
