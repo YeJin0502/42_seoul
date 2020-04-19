@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:58:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 04:40:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	convert_process(t_info *info, int i, int j)
 	else if (info->map[i][j] == 'E')
 		init_player(info, 0, i, j);
 	else
-		info->map[i][j] = 1;
+		info->map[i][j] = -1;
 }
 
 static void	convert_map(t_info *info)
@@ -84,7 +84,7 @@ void		init_map(t_info *info, t_ps *ps, char *filename)
 			(char *)malloc(info->map_width + 1)))
 				error_exit(1);
 			ft_memset(info->map[-ps->map_start], 0, info->map_width + 1);
-			char_check(ps->line);
+			char_check(ps->line, info->map_width);
 			ft_strlcpy(info->map[-ps->map_start],
 			ps->line, info->map_width + 1);
 		}

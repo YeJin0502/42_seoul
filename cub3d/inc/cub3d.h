@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 01:29:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 04:55:38 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define FOV 1.0472
 # define ROTATION_SPEED 0.05236
 # define MOVE_SPEED 3.0
-# define DISPLAY_WIDTH 1920
-# define DISPLAY_HEIGHT 1080
+# define DISPLAY_WIDTH 5120
+# define DISPLAY_HEIGHT 2880
 
 /*
 ** FOV = 60 * PI / 180
@@ -177,7 +177,7 @@ int					is_wall(double intersection_x, double intersection_y,
 							t_info *info, t_rc *rc);
 int					key_hook(int keycode, void *param);
 void				make_first_scene(t_info *info);
-void				char_check(char *line);
+void				char_check(char *line, int map_width);
 void				wall_check(t_info *info);
 void				raycast(t_info *info, t_rc *rc);
 int					make_color(int r, int g, int b);

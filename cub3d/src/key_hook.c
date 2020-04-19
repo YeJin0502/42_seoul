@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 01:42:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 01:32:11 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 03:45:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	move_and_rotate(t_info *info, t_rc *rc)
 		new_x += -sin(info->view_angle) * move_dist;
 		new_y += cos(info->view_angle) * move_dist;
 	}
-	if (is_wall(new_x, new_y, info, rc) != 1)
+	if (is_wall(new_x, new_y, info, rc) == 0)
 	{
 		info->x = new_x;
 		info->y = new_y;
