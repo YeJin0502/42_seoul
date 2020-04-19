@@ -6,18 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 06:30:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/20 04:40:15 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 05:21:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void		init_map_size(char *line, t_info *info)
-{
-	if (info->map_width < (int)ft_strlen(line))
-		info->map_width = ft_strlen(line);
-	info->map_height++;
-}
 
 static void	init_player(t_info *info, double view_angle, int i, int j)
 {
@@ -84,7 +77,7 @@ void		init_map(t_info *info, t_ps *ps, char *filename)
 			(char *)malloc(info->map_width + 1)))
 				error_exit(1);
 			ft_memset(info->map[-ps->map_start], 0, info->map_width + 1);
-			char_check(ps->line, info->map_width);
+			char_check(ps->line);
 			ft_strlcpy(info->map[-ps->map_start],
 			ps->line, info->map_width + 1);
 		}

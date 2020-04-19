@@ -6,18 +6,25 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 23:46:53 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/20 04:38:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 05:21:53 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		char_check(char *line, int map_width)
+void		init_map_size(char *line, t_info *info)
+{
+	if (info->map_width < (int)ft_strlen(line))
+		info->map_width = ft_strlen(line);
+	info->map_height++;
+}
+
+int			char_check(char *line)
 {
 	int i;
 
 	i = 0;
-	while (i < map_width && line[i])
+	while (line[i])
 	{
 		if (line[i] != '0' && line[i] != '1' && line[i] != '2' &&
 			line[i] != ' ' && line[i] != '\n' && line[i] != 'N' &&
@@ -25,6 +32,7 @@ void		char_check(char *line, int map_width)
 			error_exit(3);
 		i++;
 	}
+	return (0);
 }
 
 static void	wall_check_sub1(char **map, int i, int j, t_info *info)

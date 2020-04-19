@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/29 21:23:03 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 00:58:30 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 05:48:56 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ static void	ps_process(t_info *info, t_ps *ps)
 			ps_texture(ps->line, "WE", ps);
 		else if (ft_strnstr(ps->line, "EA ", 3))
 			ps_texture(ps->line, "EA", ps);
+		else if (ft_strnstr(ps->line, "S ", 2))
+			ps_texture(ps->line, "S ", ps);
 		else if (ft_strnstr(ps->line, "F ", 2))
 			init_fc(ps->line, "F", info, ps);
 		else if (ft_strnstr(ps->line, "C ", 2))
 			init_fc(ps->line, "C", info, ps);
-		else if (ft_strnstr(ps->line, "S ", 2))
-			ps_texture(ps->line, "S ", ps);
-		else if (ft_strlen(ps->line) && --ps->map_start)
+		else if (ft_strlen(ps->line) && --ps->map_start &&
+				char_check(ps->line) == 0)
 			init_map_size(ps->line, info);
 		free(ps->line);
 	}
@@ -100,6 +101,8 @@ t_info		*init_info(int argc, char *filename)
 	ft_memset(ps, 0, sizeof(t_ps));
 	parsing(info, ps, filename);
 	init_map(info, ps, filename);
+	if (!info->x || !info->y)
+		error_exit(3);
 	init_mlx(info, argc);
 	init_texture(info, ps);
 	return (info);

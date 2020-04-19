@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/20 04:55:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 05:43:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int					is_wall(double intersection_x, double intersection_y,
 							t_info *info, t_rc *rc);
 int					key_hook(int keycode, void *param);
 void				make_first_scene(t_info *info);
-void				char_check(char *line, int map_width);
+int					char_check(char *line);
 void				wall_check(t_info *info);
 void				raycast(t_info *info, t_rc *rc);
 int					make_color(int r, int g, int b);
@@ -192,5 +192,6 @@ void				save_bmp_image(t_img *scene, char *filename);
 double				distance(double x1, double y1, double x2, double y2);
 void				render_item(t_info *info, t_rc *rc, t_item **item);
 int					press_x_button(void *param);
+void				check_filename(char *filename);
 
 #endif

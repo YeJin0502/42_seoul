@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/17 01:27:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 05:43:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int argc, char **argv)
 
 	if (!(argc == 2 || (argc == 3
 		&& ft_strncmp(argv[2], "--save", sizeof(argv[2])) == 0)))
-		error_exit(1);
+		error_exit(0);
+	check_filename(argv[1]);
 	info = init_info(argc, argv[1]);
 	make_first_scene(info);
 	if (argc == 3)
