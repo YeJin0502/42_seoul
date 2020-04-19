@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 23:46:53 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/20 05:21:53 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 06:32:09 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	wall_check_sub1(char **map, int i, int j, t_info *info)
 	{
 		if (map[i - mov][j] == 1)
 			break ;
-		else if (map[i - mov][j] == -1)
+		else if (map[i - mov][j] == -1 ||
+				i - mov == 0)
 			error_exit(3);
 	}
 	mov = -1;
@@ -52,7 +53,8 @@ static void	wall_check_sub1(char **map, int i, int j, t_info *info)
 	{
 		if (map[i + mov][j] == 1)
 			break ;
-		else if (map[i + mov][j] == -1)
+		else if (map[i + mov][j] == -1 ||
+				i + mov == info->map_height - 1)
 			error_exit(3);
 	}
 }
@@ -66,7 +68,8 @@ static void	wall_check_sub2(char **map, int i, int j, t_info *info)
 	{
 		if (map[i][j - mov] == 1)
 			break ;
-		else if (map[i][j - mov] == -1)
+		else if (map[i][j - mov] == -1 ||
+				j - mov == 0)
 			error_exit(3);
 	}
 	mov = -1;
@@ -74,16 +77,17 @@ static void	wall_check_sub2(char **map, int i, int j, t_info *info)
 	{
 		if (map[i][j + mov] == 1)
 			break ;
-		else if (map[i][j + mov] == -1)
+		else if (map[i][j + mov] == -1 ||
+				j + mov == info->map_width - 1)
 			error_exit(3);
 	}
 }
 
 void		wall_check(t_info *info)
 {
-	char **map;
-	int i;
-	int j;
+	char	**map;
+	int		i;
+	int		j;
 
 	map = info->map;
 	i = -1;

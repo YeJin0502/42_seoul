@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/20 04:39:38 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/20 06:20:36 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,10 +67,12 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -lbsd -o $(NAME)
 	# $(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
 
+bonus: $(NAME)
+
 clean:
 	rm -rf $(OBJDIR)
 	make -C $(FTDIR) clean
-	# make -C $(MLXDIR) clean
+	make -C $(MLXDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -78,5 +80,6 @@ fclean: clean
 
 re: fclean all
 
-run: all
-	./cub3d map/castle.cub
+.PHONY : all bonus clean fclean re
+
+# comment is for macos.
