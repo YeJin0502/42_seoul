@@ -8,7 +8,7 @@
 
 ***2 circle***
 * [x] [ft_server](https://github.com/moon9ua/42_seoul/wiki/2.-ft_server)
-* [ ] [cub3D](https://github.com/moon9ua/42_seoul/wiki/2.-cub3D)
+* [x] [cub3D](https://github.com/moon9ua/42_seoul/wiki/2.-cub3D)
 * [ ] exam rank 02
 
 ***3 circle***
