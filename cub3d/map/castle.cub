@@ -1,4 +1,4 @@
-R 720   480
+R    800 600
 
 NO   ./texture/n_wall_pixel.xpm
 SO ./texture/s_wall_pixel.xpm

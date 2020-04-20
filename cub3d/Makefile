@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/01 20:59:37 by gmoon             #+#    #+#              #
-#    Updated: 2020/04/20 06:20:36 by gmoon            ###   ########.fr        #
+#    Updated: 2020/04/20 21:22:15 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,15 +34,15 @@ SRC = main.c \
 	rc_item.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
-CC = clang
-#CC = gcc
+# CC = clang
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -O3 -g3
 
-MLXDIR = ./minilibx_linux
-MLX_LIB = $(addprefix $(MLXDIR)/,mlx.a)
-MLX_INC = -I $(MLXDIR)
-MLX_LNK =  -L $(MLXDIR) -lmlx -lX11 -lXext
-#MLX_LNK = -lmlx -framework OpenGL -framework AppKit
+# MLXDIR = ./minilibx_linux
+# MLX_LIB = $(addprefix $(MLXDIR)/,mlx.a)
+# MLX_INC = -I $(MLXDIR)
+# MLX_LNK =  -L $(MLXDIR) -lmlx -lX11 -lXext
+MLX_LNK = -lmlx -framework OpenGL -framework AppKit
 
 FTDIR = ./libft
 FT_LIB = $(addprefix $(FTDIR)/,libft.a)
@@ -64,15 +64,15 @@ $(MLX_LIB):
 	make -C $(MLXDIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -lbsd -o $(NAME)
-	# $(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
+	# $(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -lbsd -o $(NAME)
+	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
 
 bonus: $(NAME)
 
 clean:
 	rm -rf $(OBJDIR)
 	make -C $(FTDIR) clean
-	make -C $(MLXDIR) clean
+	# make -C $(MLXDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -82,4 +82,4 @@ re: fclean all
 
 .PHONY : all bonus clean fclean re
 
-# comment is for macos.
+# comment is for linux.

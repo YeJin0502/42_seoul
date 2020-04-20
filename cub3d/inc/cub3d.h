@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 23:26:26 by gmoon             #+#    #+#             */
-/*   Updated: 2020/04/20 05:43:31 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/04/20 21:21:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define FOV 1.0472
 # define ROTATION_SPEED 0.05236
 # define MOVE_SPEED 3.0
-# define DISPLAY_WIDTH 5120
-# define DISPLAY_HEIGHT 2880
+# define DISPLAY_WIDTH 1920
+# define DISPLAY_HEIGHT 1080
 
 /*
 ** FOV = 60 * PI / 180
@@ -42,13 +42,13 @@
 
 /*
 ** linux key
-** # define KEY_W 119
-** # define KEY_S 115
-** # define KEY_A 97
-** # define KEY_D 100
-** # define KEY_LEFT 65361
-** # define KEY_RIGHT 65363
-** # define KEY_ESC 65307
+** define KEY_W 119
+** define KEY_S 115
+** define KEY_A 97
+** define KEY_D 100
+** define KEY_LEFT 65361
+** define KEY_RIGHT 65363
+** define KEY_ESC 65307
 */
 
 typedef struct		s_parsing
