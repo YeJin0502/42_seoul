@@ -4,7 +4,7 @@ SRCDIR = ./src
 INCDIR = ./inc
 OBJDIR = ./obj
 
-SRC = 
+SRC = main.c 
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 CC = gcc
@@ -15,19 +15,19 @@ FT_LIB = $(addprefix $(FTDIR)/,libft.a)
 FT_INC = -I $(FTDIR)
 FT_LNK = -L $(FTDIR) -lft
 
-all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
+all: obj $(FT_LIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	make -C $(FTDIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(FT_LNK) -lm -o $(NAME)
+	$(CC) $(OBJ) $(FT_LNK) -o $(NAME)
 
 bonus: $(NAME)
 
@@ -41,4 +41,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all bonus clean fclean re
+run: $(NAME)
+	@./minishell
+
+.PHONY : all bonus clean fclean re run
