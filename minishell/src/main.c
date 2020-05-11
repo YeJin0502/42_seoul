@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:50:17 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:42:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/11 23:27:02 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ static void command_switch(char *line, char *cwd, t_list *envs)
 	}
 }
 
+// char **get_commands(char *line)
+// {
+// 	char **ret;
+
+// 	ret = ft_split(line, ';');
+
+// }
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_list *envs;
 	char *cwd;
 	char *line;
+	char **commands;
 
 	if (!argc && argv)
 		exit(1);
@@ -49,10 +58,15 @@ int	main(int argc, char **argv, char **envp)
 	print_commandline(&cwd);
 	while (get_next_line(0, &line) > 0)
 	{
-		command_switch(line, cwd, envs);
+		commands = ft_split(line, ';'); // ; 없으면 어떻게되지?
+		while (*commands)
+		{
+			command_switch(line, cwd, envs);
+			commands++;
+		}
+		print_commandline(&cwd);
 		free(line);
 		free(cwd);
-		print_commandline(&cwd);
 	}
 	free(line);
 	free(cwd);

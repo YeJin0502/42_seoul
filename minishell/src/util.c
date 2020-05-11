@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:39:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:19:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/11 23:19:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,4 @@ void print_commandline(char **cwd) // 작명이...
 	ft_putstr_fd("(", 1);
 	ft_putstr_fd(ft_strrchr(*cwd, '/') + 1, 1);
 	ft_putstr_fd(") >> ", 1);
-}
-
-char **get_args(char *line, char *command)
-{
-	char **args;
-
-	if (ft_strlen(line) == ft_strlen(command))
-		return (0);
-	args = 0;
-	line += ft_strlen(command);
-	line = ft_strtrim(line, " "); // 공백만 있으면 ft_strtrim은 어떻게되지?
-	args = ft_split(line, ' ');
-	free(line); // 맞나?
-	return (args);
 }
