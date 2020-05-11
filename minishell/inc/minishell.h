@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/10 19:17:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/11 17:26:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include "libft.h"
+
+typedef struct	s_env
+{
+	char *key;
+	char *value;
+}				t_env;
 
 #endif

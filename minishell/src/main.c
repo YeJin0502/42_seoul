@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:50:17 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 15:32:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/11 18:05:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,102 @@ void sh_cd(char *line)
 	}
 }
 
-void sh_env(t_list *env)
+void sh_env(t_list *envs)
 {
 	t_list *curr;
 
-	curr = env;
+	curr = envs;
 	while (curr)
 	{
-		ft_putendl_fd(curr->content, 1);
+		ft_putstr_fd(((t_env *)curr->content)->key, 1);
+		ft_putstr_fd("=", 1);
+		ft_putendl_fd(((t_env *)curr->content)->value, 1);
 		curr = curr->next;
 	}
 }
 
-t_list *make_env(char **envp)
+char *get_key(char *str)
 {
-	t_list *env;
+	int len;
+	char *key;
 
-	env = 0;
+	len = 0;
+	while (str[len] != '=')
+		len++;
+	key = (char *)malloc(len + 1);
+	key[len] = '\0';
+	key = ft_memcpy(key, str, len);
+	return (key);
+}
+
+char *get_value(char *str)
+{
+	int len;
+	char *value;
+
+	len = 0;
+	while (*str != '=')
+		str++;
+	str++;
+	while (str[len])
+		len++;
+	value = (char *)malloc(len + 1);
+	value[len] = '\0';
+	value = ft_memcpy(value, str, len);
+	return (value);
+}
+
+t_list *make_envs(char **envp)
+{
+	t_list *envs;
+	t_env *env;
+
+	envs = 0;
 	while (*envp)
 	{
-		ft_lstadd_back(&env, ft_lstnew(*envp));
+		env = (t_env *)malloc(sizeof(t_env));
+		env->key = get_key(*envp);
+		env->value = get_value(*envp);
+		ft_lstadd_back(&envs, ft_lstnew(env));
 		envp++;
 	}
-	return (env);
+	return (envs);
 }
 
-void sh_export()
+void sh_export(char *line, t_list *envs)
 {
+	t_env *env;
 
-}
-
-void sh_unset()
-{
+	line += 6;
+	while (*line == ' ')
+		line++;
+	env = (t_env *)malloc(sizeof(t_env));
+	env->key = get_key(line);
+	env->value = get_value(line);
 	
+	t_list *curr;
+	curr = envs;
+
+	while (curr)
+	{
+		if (ft_strncmp(((t_env *)curr->content)->key, env->key,
+			ft_max(ft_strlen(((t_env *)curr->content)->key), ft_strlen(env->key))) == 0)
+		{
+			free(((t_env *)curr->content)->value);
+			((t_env *)curr->content)->value = env->value;
+			free(env->key);
+			break ;
+		}
+		curr = curr->next;
+	}
+	if (!curr)
+		ft_lstadd_back(&envs, ft_lstnew(env));
 }
+
+// void sh_unset(char *line, t_list *envs)
+// {
+	
+// }
 
 void print_commandline(char **cwd) // 작명이...
 {
@@ -104,13 +166,13 @@ void print_commandline(char **cwd) // 작명이...
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_list *env;
+	t_list *envs;
 	char *cwd;
 	char *line;
 
 	if (!argc && argv)
 		exit(1);
-	env = make_env(envp);
+	envs = make_envs(envp);
 	print_commandline(&cwd);
 	while (get_next_line(0, &line) > 0)
 	{
@@ -123,11 +185,11 @@ int	main(int argc, char **argv, char **envp)
 		else if (is_command(line, "cd"))
 			sh_cd(line);
 		else if (is_command(line, "env"))
-			sh_env(env);
+			sh_env(envs);
 		else if (is_command(line, "export"))
-			sh_export(line, env);
-		else if (is_command(line, "unset"))
-			sh_unset(line, env);
+			sh_export(line, envs);
+		// else if (is_command(line, "unset"))
+		// 	sh_unset(line, envs);
 		else
 		{
 			ft_putstr_fd("moong_shell: command not found: ", 1);
