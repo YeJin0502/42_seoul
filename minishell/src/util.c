@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:39:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 23:19:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 00:29:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_max(int a, int b) // 이런건 libft로 가야?
+int ft_max(int a, int b)
 {
 	if (a < b)
 		return (b);
@@ -43,10 +43,13 @@ int is_command(char *a, char *b) // shell에서 실험 후 수정 필요
 	return (ret);
 }
 
-void print_commandline(char **cwd) // 작명이...
+void print_commandline()
 {
-	*cwd = getcwd(0, 1024); // 1024가 의미하는 것이 뭐지? gnl때도 1024로 했던것같은데...
+	char *cwd;
+
+	cwd = getcwd(0, 1024); // 1024가 의미하는 것이 뭐지? gnl때도 1024로 했던것같은데...
 	ft_putstr_fd("(", 1);
-	ft_putstr_fd(ft_strrchr(*cwd, '/') + 1, 1);
+	ft_putstr_fd(ft_strrchr(cwd, '/') + 1, 1);
 	ft_putstr_fd(") >> ", 1);
+	free(cwd); // 바로바로 free해주게 바꿨음. 뭐가 나은지는 아직 모르겠음.
 }

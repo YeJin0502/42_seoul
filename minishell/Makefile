@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/11 21:00:54 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/12 00:19:06 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC =	main.c \
 		env.c \
 		export.c \
 		ls.c \
+		pwd.c \
+		split.c \
 		unset.c \
 		util.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))

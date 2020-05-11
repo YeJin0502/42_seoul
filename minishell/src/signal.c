@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls.c                                               :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/11 20:21:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 00:29:52 by gmoon            ###   ########.fr       */
+/*   Created: 2020/05/12 02:19:55 by gmoon             #+#    #+#             */
+/*   Updated: 2020/05/12 02:20:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sh_ls(void)
+void		sigint_handle()
 {
-	char			*cwd;
-	DIR				*dir;
-	int				flag;
-	struct dirent	*file;
-
-	cwd = getcwd(0, 1024);
-	dir = opendir(cwd);
-	flag = 0;
-	while ((file = readdir(dir)))
-	{
-		if (flag != 0)
-			ft_putstr_fd("  ", 1);
-		if (!is_same(file->d_name, ".") && !is_same(file->d_name, ".."))
-		{
-			ft_putstr_fd(file->d_name, 1);
-			flag = 1;
-		}
-	}
 	ft_putstr_fd("\n", 1);
-	closedir(dir);
-	free(cwd);
+	ft_putendl_fd("SIGINT?", 1);
+	print_commandline();
+}
+
+void		sigquit_handle()
+{
+	ft_putstr_fd("\n", 1);
+	ft_putendl_fd("SIGQUIT?", 1);
+	print_commandline();
 }

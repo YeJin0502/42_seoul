@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:36:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 02:20:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <dirent.h>
+# include <signal.h>
 # include "libft.h"
 
 typedef struct	s_env
@@ -34,11 +35,14 @@ char			*find_value(t_list *envs, char *key);
 void			sh_env(t_list *envs);
 void			sh_export(char *line, t_list *envs);
 void			sh_unset(char *line, t_list *envs);
-void			sh_ls(char *cwd);
+void			sh_ls(void);
 int				ft_max(int a, int b);
 int				is_same(char *a, char *b);
 int				is_command(char *a, char *b);
-void			print_commandline(char **cwd);
+void			print_commandline();
 char			**get_args(char *line, char *command);
+void			sh_pwd(void);
+void			sigint_handle();
+void			sigquit_handle();
 
 #endif
