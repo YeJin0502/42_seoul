@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:39:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 00:29:10 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 16:47:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,17 @@ void print_commandline()
 	ft_putstr_fd(ft_strrchr(cwd, '/') + 1, 1);
 	ft_putstr_fd(") >> ", 1);
 	free(cwd); // 바로바로 free해주게 바꿨음. 뭐가 나은지는 아직 모르겠음.
+}
+
+void double_char_free(char ***str)
+{
+	char **str_adr;
+
+	str_adr = *str;
+	while (**str)
+	{
+		free(**str);
+		(*str)++;
+	}
+	free(str_adr);
 }

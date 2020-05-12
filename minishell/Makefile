@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/12 00:19:06 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/12 16:32:55 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,11 @@ SRC =	main.c \
 		echo.c \
 		env_util.c \
 		env.c \
+		exec.c \
 		export.c \
 		ls.c \
 		pwd.c \
+		signal.c \
 		split.c \
 		unset.c \
 		util.c

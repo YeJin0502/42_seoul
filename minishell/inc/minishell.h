@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 02:20:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 17:56:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_env
 }				t_env;
 
 void			sh_cd(char *line, t_list *envs);
-void			sh_echo(char *line);
+void			sh_echo(char *line, t_list *envs);
 char			*get_key(char *str);
 char			*get_value(char *str);
 t_list			*make_envs(char **envp);
@@ -44,5 +44,9 @@ char			**get_args(char *line, char *command);
 void			sh_pwd(void);
 void			sigint_handle();
 void			sigquit_handle();
+void			sh_exec(char *command, char **envp);
+void			sigint_handle();
+void			sigquit_handle();
+void			double_char_free(char ***str);
 
 #endif
