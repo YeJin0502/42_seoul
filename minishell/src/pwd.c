@@ -6,17 +6,17 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 00:17:27 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 00:18:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 21:55:05 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void sh_pwd(void)
+void sh_pwd(int fd)
 {
 	char *cwd;
 
 	cwd = getcwd(0, 1024);
-	ft_putendl_fd(cwd, 1);
+	ft_putendl_fd(cwd, fd);
 	free(cwd);
 }

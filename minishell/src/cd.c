@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:41:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:48:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/12 21:56:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	sh_cd(char *line, t_list *envs)
 		if (chdir(home) == -1)
 		{
 			ft_putstr_fd("cd: no such file or directory: ", 1);
+			// 이런건 에러 관련함수로 따로 해야할거같은데.
 			ft_putendl_fd(home, 1);
 		}
 	}
