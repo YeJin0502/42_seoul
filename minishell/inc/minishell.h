@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 02:58:36 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 03:25:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void			exec_command(char *line, t_list *envs, char **envp);
 void			get_fd(char *mover, char **command, int *fd);
 char			**command_split(char *line);
 int				get_argc(char **args);
+char			*char_to_str(char c);
+char			**get_args(char *command, t_list *envs);
 
 #endif

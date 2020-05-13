@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:39:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 02:53:36 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 03:25:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,14 @@ int get_argc(char **args)
 		args++;
 	}
 	return (count);
+}
+
+char *char_to_str(char c)
+{
+	char *ret;
+
+	ret = (char *)malloc(2);
+	ret[0] = c;
+	ret[1] = '\0';
+	return (ret);
 }

@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/14 02:32:31 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/14 03:28:25 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRC =	command_split.c \
 		get_fd.c \
 		main.c \
 		print_commandline.c \
-		quote.c \
 		sh_cd.c \
 		sh_echo.c \
 		sh_env.c \
