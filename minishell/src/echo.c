@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:40:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 22:15:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/13 16:20:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void echo_print(char **str, int fd)
 	return ;
 }
 
-void echo_process(char *str, int fd)
+void echo_process(char *str, int fd, int option_n)
 {
 	int wc;
 	int i;
 
+	if (option_n == -1)
+		return ;
 	wc = echo_count(str);
 	if (wc == 0)
 	{
@@ -74,7 +76,7 @@ void echo_process(char *str, int fd)
 		echo_print(&str, fd);
 		if (i != wc - 1)
 			ft_putchar_fd(' ', fd);
-		else
+		else if (option_n == 0)
 			ft_putchar_fd('\n', fd);
 	}
 	return ;
@@ -83,9 +85,22 @@ void echo_process(char *str, int fd)
 void sh_echo(char *command, t_list *envs, int fd)
 {
 	char *str;
+	char *str_tmp;
+	int option_n;
 
 	if (!envs)
 		return ;
 	str = command + 4;
-	echo_process(str, fd);
+	str_tmp = str;
+	option_n = 0;
+	while (*str_tmp == ' ' && *str_tmp)
+		str_tmp++;
+	if (ft_strncmp(str_tmp, "-n ", 3) == 0)
+	{
+		option_n = 1;
+		str_tmp += 3;
+	}
+	echo_process(str_tmp, fd, option_n);
+	if (option_n == 1 && fd == 1)
+		ft_putstr_fd("%\n", 1);
 }

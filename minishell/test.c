@@ -10,10 +10,16 @@
 //     }
 // }
 
-#include <fcntl.h>
+// #include <fcntl.h>
+// #include <unistd.h>
+// int main()
+// {
+//     int fd = open("test", O_WRONLY |O_CREAT | O_TRUNC, 0744);
+//     write(fd, "hello", 5);
+// }
+
 #include <unistd.h>
 int main()
 {
-    int fd = open("test", O_WRONLY |O_CREAT | O_TRUNC, 0744);
-    write(fd, "hello", 5);
+    write(2, "hello", 5);
 }

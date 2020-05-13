@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:41:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 21:56:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/13 19:42:19 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	sh_cd(char *line, t_list *envs)
 		home = find_value(envs, "HOME");
 		if (chdir(home) == -1)
 		{
-			ft_putstr_fd("cd: no such file or directory: ", 1);
-			// 이런건 에러 관련함수로 따로 해야할거같은데.
+			ft_putstr_fd("cd: no such file or directory: ", 1); // 에러로 수정 필요.
 			ft_putendl_fd(home, 1);
 		}
 	}
@@ -34,6 +33,8 @@ void	sh_cd(char *line, t_list *envs)
 			mover++;
 		if (chdir(mover) == -1)
 		{
+			// ft_putstr_fd("moong_shell: ", 2); // 이런식으로 바꿔야됨.
+			// ft_putendl_fd(strerror(errno), 1);
 			ft_putstr_fd("cd: no such file or directory: ", 1);
 			ft_putendl_fd(mover, 1);
 		}

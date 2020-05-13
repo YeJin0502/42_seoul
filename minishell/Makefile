@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/12 16:32:55 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/13 19:39:02 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,15 @@ SRCDIR = ./src
 INCDIR = ./inc
 OBJDIR = ./obj
 
-SRC =	main.c \
-		cd.c \
+SRC =	cd.c \
+		command.c \
 		echo.c \
 		env_util.c \
 		env.c \
 		exec.c \
 		export.c \
 		ls.c \
+		main.c \
 		pwd.c \
 		signal.c \
 		split.c \

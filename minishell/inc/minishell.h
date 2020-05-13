@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 21:58:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/13 19:38:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <dirent.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 # include "libft.h"
 
 typedef struct	s_env
@@ -49,5 +51,6 @@ void			sh_exec(char *command, char **envp);
 void			sigint_handle();
 void			sigquit_handle();
 void			double_char_free(char ***str);
+void			exec_commands(char *line, t_list *envs, char **envp);
 
 #endif
