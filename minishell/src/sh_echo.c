@@ -6,14 +6,14 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:40:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/13 16:20:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 00:12:25 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdio.h>
 
-int echo_count(char *str)
+static int echo_count(char *str)
 {
 	int wc;
 	int flag;
@@ -33,7 +33,7 @@ int echo_count(char *str)
 	return (wc);
 }
 
-void echo_print(char **str, int fd)
+static void echo_print(char **str, int fd)
 {
 	int flag;
 
@@ -55,7 +55,7 @@ void echo_print(char **str, int fd)
 	return ;
 }
 
-void echo_process(char *str, int fd, int option_n)
+static void echo_process(char *str, int fd, int option_n)
 {
 	int wc;
 	int i;

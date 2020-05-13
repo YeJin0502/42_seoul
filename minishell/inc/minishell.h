@@ -6,11 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/13 19:38:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 00:25:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <unistd.h>
@@ -51,6 +51,8 @@ void			sh_exec(char *command, char **envp);
 void			sigint_handle();
 void			sigquit_handle();
 void			double_char_free(char ***str);
-void			exec_commands(char *line, t_list *envs, char **envp);
+void			exec_command(char *line, t_list *envs, char **envp);
+void			get_fd(char *mover, char **command, int *fd);
+char			**command_split(char *line);
 
 #endif

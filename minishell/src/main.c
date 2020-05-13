@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:50:17 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/13 19:45:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 00:11:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	print_commandline();
 	while (get_next_line(0, &line) > 0)
 	{
-		exec_commands(line, envs, envp);
+		exec_command(line, envs, envp);
 		print_commandline();
 		free(line);
 	}

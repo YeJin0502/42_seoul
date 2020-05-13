@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/13 19:39:02 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/14 00:26:02 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,19 +16,23 @@ SRCDIR = ./src
 INCDIR = ./inc
 OBJDIR = ./obj
 
-SRC =	cd.c \
-		command.c \
-		echo.c \
+SRC =	command_split.c \
 		env_util.c \
-		env.c \
-		exec.c \
-		export.c \
-		ls.c \
+		exec_command.c \
+		get_fd.c \
 		main.c \
-		pwd.c \
+		print_commandline.c \
+		quote.c \
+		sh_cd.c \
+		sh_echo.c \
+		sh_env.c \
+		sh_exec.c \
+		sh_export.c \
+		sh_ls.c \
+		sh_pwd.c \
+		sh_unset.c \
 		signal.c \
 		split.c \
-		unset.c \
 		util.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 

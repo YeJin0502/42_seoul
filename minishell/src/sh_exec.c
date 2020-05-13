@@ -6,13 +6,13 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 02:20:53 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/12 17:55:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 00:07:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int exec_fork(char **argv, char **envp)
+static int exec_fork(char **argv, char **envp)
 {
 	int pid;
 
