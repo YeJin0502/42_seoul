@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/14 00:26:02 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/14 02:32:31 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ OBJDIR = ./obj
 SRC =	command_split.c \
 		env_util.c \
 		exec_command.c \
+		get_args.c \
 		get_fd.c \
 		main.c \
 		print_commandline.c \
@@ -32,7 +33,6 @@ SRC =	command_split.c \
 		sh_pwd.c \
 		sh_unset.c \
 		signal.c \
-		split.c \
 		util.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
@@ -71,6 +71,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	@./minishell
+	@valgrind --leak-check=full ./minishell
 
 .PHONY : all bonus clean fclean re run

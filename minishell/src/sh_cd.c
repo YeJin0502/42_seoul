@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   sh_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:41:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/13 19:42:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 03:11:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sh_cd(char *line, t_list *envs)
+void	sh_cd(char **args, t_list *envs)
 {
-	char	*mover;
+	int		argc;
 	char	*home;
 
-	mover = line + 2;
-	if (ft_strlen(line) == 2)
+	argc = get_argc(args);
+	if (argc == 1)
 	{
 		home = find_value(envs, "HOME");
 		if (chdir(home) == -1)
@@ -27,16 +27,16 @@ void	sh_cd(char *line, t_list *envs)
 			ft_putendl_fd(home, 1);
 		}
 	}
-	else
+	else if (argc == 2)
 	{
-		while (*mover == ' ')
-			mover++;
-		if (chdir(mover) == -1)
+		if (chdir(args[1]) == -1)
 		{
 			// ft_putstr_fd("moong_shell: ", 2); // 이런식으로 바꿔야됨.
 			// ft_putendl_fd(strerror(errno), 1);
 			ft_putstr_fd("cd: no such file or directory: ", 1);
-			ft_putendl_fd(mover, 1);
+			ft_putendl_fd(args[1], 1);
 		}
 	}
+	else
+		ft_putendl_fd("cd: too many arguments", 2);
 }

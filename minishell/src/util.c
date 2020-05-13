@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:39:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/13 19:41:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 02:53:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,17 @@ void double_char_free(char ***str)
 		(*str)++;
 	}
 	free(str_adr);
+}
+
+int get_argc(char **args)
+{
+	int count;
+
+	count = 0;
+	while (*args)
+	{
+		count++;
+		args++;
+	}
+	return (count);
 }

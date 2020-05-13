@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   sh_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:42:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:54:52 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 02:57:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,18 @@ static int	is_valid_env(char *str)
 	return (0);
 }
 
-void		sh_export(char *line, t_list *envs)
+void		sh_export(char **args, t_list *envs)
 {
-	char	**args;
-	char	**mover;
 	t_env	*env;
 	t_list	*curr;
 
-	args = get_args(line, "export");
-	mover = args;
-	while (*mover)
+	while (*args)
 	{
-		if (is_valid_env(*mover))
+		if (is_valid_env(*args))
 		{
 			env = (t_env *)malloc(sizeof(t_env));
-			env->key = get_key(*mover);
-			env->value = get_value(*mover);
+			env->key = get_key(*args);
+			env->value = get_value(*args);
 			curr = envs;
 			while (curr)
 			{
@@ -55,8 +51,6 @@ void		sh_export(char *line, t_list *envs)
 			if (!curr)
 				ft_lstadd_back(&envs, ft_lstnew(env));
 		}
-		free(*mover);
-		mover++;
+		args++;
 	}
-	free(args);
 }

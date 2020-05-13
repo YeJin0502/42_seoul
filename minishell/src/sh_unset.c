@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   sh_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 18:43:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/11 20:19:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 02:58:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void sh_unset(char *line, t_list *envs)
+void sh_unset(char **args, t_list *envs)
 {
-	char **args;
-	char **mover;
 	t_list *curr;
 	t_list *next;
 
-	args = get_args(line, "unset");
-	mover = args;
-	while (*mover)
+	while (*args)
 	{
 		curr = envs;
 		while (curr->next)
 		{
 			next = curr->next;
-			if (is_same(((t_env *)next->content)->key, *mover))
+			if (is_same(((t_env *)next->content)->key, *args))
 			{
 				curr->next = next->next;
 				free(((t_env *)next->content)->key);
@@ -38,8 +34,6 @@ void sh_unset(char *line, t_list *envs)
 			}
 			curr = next;
 		}
-		free(*mover);
-		mover++;
+		args++;
 	}
-	free(args);
 }
