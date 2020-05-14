@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 16:36:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/15 00:38:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void		exec_command(char *line, t_list *envs, char **envp)
 	int		fd;
 	char	**args;
 
-	commands = command_split(line);
+	commands = semicolon_split(line);
 	mover = commands;
 	while (*mover)
 	{
-		get_fd(*mover, &command, &fd);
+		redirection_split(*mover, &command, &fd);
 		if (fd > 0)
 		{
 			args = get_args(command, envs);
@@ -72,3 +72,8 @@ void		exec_command(char *line, t_list *envs, char **envp)
 	}
 	double_char_free(&commands);
 }
+
+// echo a | cat -e > b
+// 우선순위는 > 인듯. 어떻게 해야할지 아직 모르겠음.
+// echo a | cat -e ; pwd
+// 우선순위는 ;이다.

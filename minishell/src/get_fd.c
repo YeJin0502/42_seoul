@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 23:53:20 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 00:44:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 23:07:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_redirection(char *str, int *command_len)
 	return (0);
 }
 
-void	get_fd(char *mover, char **command, int *fd)
+void	redirection_split(char *mover, char **command, int *fd)
 {
 	int		command_len;
 	int		redirection;

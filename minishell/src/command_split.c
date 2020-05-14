@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 23:52:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 00:02:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 23:07:40 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int command_len(char *line)
 	return (len);
 }
 
-char **command_split(char *line)
+char **semicolon_split(char *line)
 {
 	char **commands;
 	int count;
