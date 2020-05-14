@@ -18,8 +18,13 @@
 //     write(fd, "hello", 5);
 // }
 
-#include <unistd.h>
+// #include <unistd.h>
+// int main()
+// {
+//     write(2, "hello", 5);
+// }
+
 int main()
 {
-    write(2, "hello", 5);
+    printf("hello world\n");
 }

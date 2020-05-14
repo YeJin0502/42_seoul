@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 00:55:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 03:28:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 16:32:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char *convert_arg(char **command, t_list *envs)
 		{
 			(*command)++;
 			key = ft_substr(*command, 0, key_len(*command));
-			to_add = find_value(envs, key);
+			to_add = ft_strdup(find_value(envs, key));
 			ret_tmp = ft_strjoin(ret_tmp, to_add);
 			free(to_add);
 			*command += ft_strlen(key) - 1;

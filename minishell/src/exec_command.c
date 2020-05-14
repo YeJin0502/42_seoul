@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 03:26:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/14 16:36:04 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void		exec_command(char *line, t_list *envs, char **envp)
 			// }
 			command_switch(args, envs, envp, fd);
 			free(command);
+			double_char_free(&args);
 		}
 		if (fd > 2)
 			close(fd);
-		double_char_free(&args);
 		mover++;
 	}
 	double_char_free(&commands);
