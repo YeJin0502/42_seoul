@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/15 18:55:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/15 22:11:45 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,59 @@ void		exec_command(char *line, t_list *envs, char **envp)
 	{
 		int len;
 		char *command;
-		char *command_tmp;
-		command_tmp = *mover;
-		while (*command_tmp) // 뭔가 불안한데...
+		char *queue;
+
+		queue = *mover;
+		while (*queue) // 뭔가 불안한데...
 		{
-			if (*command_tmp == '>')
-				do_redirection();
-			else if (*command_tmp == '|')
-				do_pipe();
-			
-			len = get_command_len(command_tmp);
-			command = ft_substr(command_tmp, 0, len);
-			args = get_args(command, envs);
-			fd = fork_process(args, envs, envp);
-			command_tmp += len; // 이렇게는 어떻게되지?
+			int redirection = 0;
+			int pipe = 0;
+			if (*queue == '>')
+			{
+				redirection = 1;
+				queue++;
+				if (*queue == '>' && *(queue + 1) == '>')
+				{
+					ft_putendl_fd("moong_shell: parse error near `>'", 2);
+					break ;
+				}
+				else if (*queue == '>')
+				{
+					redirection = 2;
+					queue++;
+				}
+			}
+			else if (*queue == '|')
+			{
+				pipe = 1;
+				queue++;
+				if (*queue == '|')
+					break ;
+			}
+			while (*queue && *queue == ' ')
+				queue++;
+			if (!*queue)
+				break ;
+			if (redirection == 1)
+			{
+
+			}
+			else if (redirection == 2)
+			{
+
+			}
+			else if (pipe = 1)
+			{
+
+			}
+			len = get_command_len(queue); // > 나 | 전까지 길이 구함.
+			command = ft_substr(queue, 0, len); // 전까지의 문자열 malloc
+			args = get_args(command, envs); // 명령 실행하기 위해 args 구함.
+			free(command);
+			fd = fork_process(args, envs, envp); // 명령 실행.
+			queue += len; // queue 밀기.
 		}
+
 		mover++;
 	}
 	double_char_free(&semicolon);
@@ -122,3 +160,23 @@ void		exec_command(char *line, t_list *envs, char **envp)
 // cd 같은 것들. fork 신경쓰기.
 // 리다이렉션이나 파이프.
 // 리다이렉션이나 파이프 없을때 1로 출력.
+
+
+// 두개 단위로 자른다.
+// 실행한다.
+
+// '>', '>>' 앞에꺼를 fd에 받아오고,
+// 뒤꺼를 fd 열고, dup2를 쓴다.
+
+// '<' 뒤꺼 fd를 무조건 먼저 얻어오고 실행해야하지 않나?
+// pipe를 써야만한다?
+
+// 2개만 실행하고 
+
+// echo a | cat -e < b
+
+// 중첩 파이프는 자식의..자식의..자식 느낌?
+// 일단 파이프 하나, 리다이렉션 하나인 경우 먼저 생각해야 할듯...
+// 내 실력으론 리다이렉션하고 파이프 같이 있는 경우는 못할듯?
+// 결국은 모두다 뒤부터 순차적으로 해야하는것같은데.
+// 파이프도 그렇고 리다이렉션도 뒤부터 오픈해야하고.
