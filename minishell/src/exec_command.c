@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/15 18:42:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/15 18:55:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void		exec_command(char *line, t_list *envs, char **envp)
 {
 	char	**semicolon;
 	char	**mover;
-	// char	*command;
 	int		fd;
 	char	**args;
 
@@ -103,33 +102,17 @@ void		exec_command(char *line, t_list *envs, char **envp)
 		command_tmp = *mover;
 		while (*command_tmp) // 뭔가 불안한데...
 		{
+			if (*command_tmp == '>')
+				do_redirection();
+			else if (*command_tmp == '|')
+				do_pipe();
+			
 			len = get_command_len(command_tmp);
 			command = ft_substr(command_tmp, 0, len);
 			args = get_args(command, envs);
 			fd = fork_process(args, envs, envp);
-			char buffer[1024];
-			read(fd, buffer, 1024);
-			printf("[%s]\n", buffer);
 			command_tmp += len; // 이렇게는 어떻게되지?
 		}
-
-		// redirection_split(*mover, &command, &fd);
-		// if (fd > 0)
-		// {
-
-		// 	args = get_args(command, envs);
-		// 	// int i = 0;
-		// 	// while (args[i])
-		// 	// {
-		// 	// 	printf("[%s]\n", args[i]);
-		// 	// 	i++;
-		// 	// }
-		// 	command_switch(args, envs, envp, fd);
-		// 	free(command);
-		// 	double_char_free(&args);
-		// }
-		// if (fd > 2)
-		// 	close(fd);
 		mover++;
 	}
 	double_char_free(&semicolon);
