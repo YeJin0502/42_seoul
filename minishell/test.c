@@ -68,16 +68,16 @@
 //     return (0);
 // }
 
-int main()
-{
-    int fd;
-    char buffer[1024];
+// int main()
+// {
+//     int fd;
+//     char buffer[1024];
 
-    fd = 3;
-    write(fd, "hello", 20);
-    read(fd, buffer, 1024);
-    printf("%s\n", buffer);
-}
+//     fd = 3;
+//     write(fd, "hello", 20);
+//     read(fd, buffer, 1024);
+//     printf("%s\n", buffer);
+// }
 
 // int main(void)
 // {
@@ -164,3 +164,25 @@ int main()
 //     ft_strlcat(buffer, "hello", 1024);
 //     printf("%s\n", buffer);
 // }
+
+// int main()
+// {
+//     char a;
+
+//     while (scanf("%c", &a) > 0)
+//         printf("%c", a);
+//     // echo hello | ./a.out
+//     // : hello
+// }
+
+int main()
+{
+    int fd[2];
+    char buffer[1024];
+
+    pipe(fd);
+    write(fd[1], "hello", 20);
+    read(fd[0], buffer, 1024);
+    printf("%d, %d\n", fd[0], fd[1]);
+    printf("%s\n", buffer);
+}

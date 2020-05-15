@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/15 18:29:54 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/16 00:18:29 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ OBJDIR = ./obj
 SRC =	env_util.c \
 		exec_command.c \
 		get_args.c \
-		get_fd.c \
 		main.c \
 		print_commandline.c \
 		redirection.c \

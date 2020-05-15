@@ -6,11 +6,12 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 00:55:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 16:32:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/16 00:19:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdio.h>
 
 static int args_count(char *command)
 {
@@ -25,8 +26,25 @@ static int args_count(char *command)
 			quote += *command;
 		else if (quote != 0 && *command == quote)
 			quote -= *command;
-		if (quote == 0 && *command != ' ' && (*(command + 1) == ' ' || !*(command + 1)))
+		if (quote == 0 &&
+			(*command != ' ' && *command != '>' && *command != '|') &&
+			(*(command + 1) == ' ' || !*(command + 1) ||
+			*(command + 1) == '>' || *(command + 1) == '|'))
 			count++;
+		else if (quote == 0 && *command == '>')
+		{
+			count++;
+			while (*command == '>')
+				command++;
+			command--;
+		}
+		else if (quote == 0 && *command == '|') // 잘 될까?
+		{
+			count++;
+			while (*command == '|')
+				command++;
+			command--;
+		}
 		command++;
 	}
 	return (count);
@@ -52,28 +70,47 @@ static char *convert_arg(char **command, t_list *envs)
 	int quote;
 	char *key;
 	char *to_add;
+	int	len;
 
 	quote = 0;
 	ret = ft_strdup("");
 	ret_tmp = ret;
 	while (**command)
 	{
+		if (quote == 0 && **command == '>')
+		{
+			len = 0;
+			while (*(*command + len) == '>')
+				len++;
+			free(ret);
+			ret = ft_substr(*command, 0, len);
+			*command += len;
+			return (ret);
+		}
+		else if (quote == 0 && **command == '|')
+		{
+			len = 0;
+			while (*(*command + len) == '|')
+				len++;
+			free(ret);
+			ret = ft_substr(*command, 0, len);
+			*command += len;
+			return (ret);
+		}
 		if (quote == 0 && (**command == '\'' || **command == '\"'))
 			quote += **command;
 		else if (quote != 0 && **command == quote)
 			quote -= **command;
-		else if (quote == 0 && **command == ' ')
-			break;
 		else if (quote != '\'' && **command == '$')
 		{
 			(*command)++;
 			key = ft_substr(*command, 0, key_len(*command));
-			to_add = ft_strdup(find_value(envs, key));
+			// printf("<%s>\n", key);
+			to_add = find_value(envs, key);
 			ret_tmp = ft_strjoin(ret_tmp, to_add);
-			free(to_add);
-			*command += ft_strlen(key) - 1;
 			free(ret);
 			ret = ret_tmp;
+			*command += ft_strlen(key) - 1;
 		}
 		else
 		{
@@ -84,13 +121,11 @@ static char *convert_arg(char **command, t_list *envs)
 			ret = ret_tmp;
 		}
 		(*command)++;
+		if (quote == 0 && (**command == ' ' || **command == '>' || **command == '|'))
+			break;
 	}
 	return (ret);
 }
-
-// ''는 환경변수명, ""는 환경변수내용.
-// echo "hello '$HOME' world" -> hello '/home/guadesktop' world
-// echo 'hello "$HOME" world' -> hello "$HOME" world
 
 char **get_args(char *command, t_list *envs)
 {
@@ -99,6 +134,7 @@ char **get_args(char *command, t_list *envs)
 	int i;
 
 	count = args_count(command);
+	// printf("%d\n", count);
 	args = (char **)malloc(sizeof(char *) * (count + 1));
 	args[count] = 0;
 	i = -1;
@@ -110,5 +146,3 @@ char **get_args(char *command, t_list *envs)
 	}
 	return (args);
 }
-
-// echo "hello$HOMEworld" 안됨. 수정 필요.
