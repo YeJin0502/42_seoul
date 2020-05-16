@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/17 03:22:07 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 03:24:14 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void exec_cmd(char ***cmd, t_list *envs, char **envp)
 				dup2(fd[1], 1);
 			close(fd[0]);
 			command_switch(*cmd, envs, envp, 1);
-			exit(1); // 아 모르겠는데. 
+			exit(1);
 		}
 		else
 		{
@@ -72,6 +72,7 @@ void exec_cmd(char ***cmd, t_list *envs, char **envp)
 		}
 	}
 }
+// https://gist.github.com/iomonad/a66f6e9cfb935dc12c0244c1e48db5c8
 
 void		exec_command(char *line, t_list *envs, char **envp)
 {
@@ -80,17 +81,17 @@ void		exec_command(char *line, t_list *envs, char **envp)
 
 	if (!envp && !envs)
 		printf("zz\n");
-	semicolon = semicolon_split(line); // 아마 확정.
+	semicolon = semicolon_split(line);
 	semicolon_mover = semicolon;
 	while (*semicolon_mover)
 	{
 		char **args;
 		char ***cmd;
 
-		args = get_args(*semicolon_mover, envs); // 아마 확정?
-		cmd = pipe_split(args); // pipe 기준으로 자르는...게 될까?
+		args = get_args(*semicolon_mover, envs);
+		cmd = pipe_split(args);
 
-		// 출력 테스트
+		// // 출력 테스트
 		// int test;
 		// while (*cmd)
 		// {
@@ -104,7 +105,7 @@ void		exec_command(char *line, t_list *envs, char **envp)
 		// 	cmd++;
 		// }
 
-		exec_cmd(cmd, envs, envp);
+		exec_cmd(cmd, envs, envp); // 아직 정리도 완성도 X. 나중에...
 		semicolon_mover++;
 	}
 	double_char_free(&semicolon);
