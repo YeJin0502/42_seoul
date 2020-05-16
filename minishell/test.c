@@ -175,14 +175,34 @@
 //     // : hello
 // }
 
-int main()
-{
-    int fd[2];
-    char buffer[1024];
+// int main()
+// {
+//     int fd[2];
+//     char buffer[1024];
 
-    pipe(fd);
-    write(fd[1], "hello", 20);
-    read(fd[0], buffer, 1024);
-    printf("%d, %d\n", fd[0], fd[1]);
-    printf("%s\n", buffer);
+//     pipe(fd);
+//     write(fd[1], "hello", 20);
+//     read(fd[0], buffer, 1024);
+//     printf("%d, %d\n", fd[0], fd[1]);
+//     printf("%s\n", buffer);
+// }
+
+int main(int ac, char **av)
+{
+    int fds[2];
+    pid_t pid;
+
+    pipe(fds);
+    pid = fork();
+    if (pid == 0)
+    {
+        write(fds[1], av[1], strlen(av[1]));
+    }
+    else
+    {
+        char buf[100];
+        wait(NULL);
+        read(fds[0], buf, 100);
+        printf("%s\n", buf);
+    }
 }
