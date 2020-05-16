@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/16 01:51:10 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/16 22:29:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,38 @@ static void	command_switch(char **args, t_list *envs, char **envp, int fd)
 void		exec_command(char *line, t_list *envs, char **envp)
 {
 	char	**semicolon;
-	char	**mover;
+	char	**semicolon_mover;
 
 	if (!envp && !envs)
 		printf("zz\n");
 	semicolon = semicolon_split(line);
-	mover = semicolon;
-	while (*mover)
+	semicolon_mover = semicolon;
+	while (*semicolon_mover)
 	{
 		char **args;
 
-		args = get_args(*mover, envs);
-		while (*args)
+		args = get_args(*semicolon_mover, envs);
+		char **args_mover;
+		args_mover = args;
+		while (*args_mover)
 		{
-			printf("[%s]\n", *args);
-			args++;
+			pid_t pid;
+			int fds[2];
+
+			pipe(fds);
+			pid = fork();
+
 		}
-		// while (*args)
-		// {
-		// 	// 여기서 앞에서부터 순서대로 진행하려면
-		// 	// fork와 wait를 써야할 듯.
-		// 	int fd = 1; // 임시.
-		// 	command_switch(args, envs, envp, fd);
-		// }
-		mover++;
+		
+		
+		semicolon_mover++;
 	}
 	double_char_free(&semicolon);
 }
 
 // 수정할 점.
 // echo "$HOME>me" 등 특문이 들어가면 다 돼야함. 현재는 띄어쓰기같은거만 분리되게 해놓음.
+
+// 할 것.
+// [ ] char **의 substr같은 기능 구현해놔야? >나 | 앞까지만 일단 실행하게?
+// [ ] sh 함수들을 fork로 할 수 있게..? 해보기

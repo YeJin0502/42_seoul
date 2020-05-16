@@ -191,18 +191,23 @@ int main(int ac, char **av)
 {
     int fds[2];
     pid_t pid;
+    char buf[1024];
 
     pipe(fds);
     pid = fork();
     if (pid == 0)
     {
+        // dup2(fds[1], 1);
         write(fds[1], av[1], strlen(av[1]));
     }
     else
     {
-        char buf[100];
-        wait(NULL);
-        read(fds[0], buf, 100);
-        printf("%s\n", buf);
+        read(fds[0], buf, 1024);
+        printf("%s", buf);
+        // while (read(fds[0], buf, 1024) > 0)
+        // {
+        //     // printf("zz\n");
+        //     printf("%s", buf);
+        // }
     }
 }
