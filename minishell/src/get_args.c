@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 00:55:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/16 00:19:16 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 00:37:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static char *convert_arg(char **command, t_list *envs)
 			quote += **command;
 		else if (quote != 0 && **command == quote)
 			quote -= **command;
-		else if (quote != '\'' && **command == '$')
+		if (quote != '\'' && **command == '$')
 		{
 			(*command)++;
 			key = ft_substr(*command, 0, key_len(*command));
