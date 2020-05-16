@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/15 20:27:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 03:20:52 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ char			**semicolon_split(char *line);
 int				get_argc(char **args);
 char			*char_to_str(char c);
 char			**get_args(char *command, t_list *envs);
+char			***pipe_split(char **args);
 
 #endif

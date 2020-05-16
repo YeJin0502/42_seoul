@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/16 00:18:29 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/17 03:21:02 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC =	env_util.c \
 		exec_command.c \
 		get_args.c \
 		main.c \
+		pipe.c \
 		print_commandline.c \
 		redirection.c \
 		semicolon.c \
