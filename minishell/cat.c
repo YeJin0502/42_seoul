@@ -10,6 +10,13 @@ int main()
 
     while (scanf("%c", &a) > 0)
         printf("%c", a);
-    // echo hello | ./a.out
-    // : hello
 }
+
+// int main()
+// {
+//     char a[100];
+
+//     bzero(a, 100);
+//     read(0, a, 100);
+//     write(1, a, 100);
+// }

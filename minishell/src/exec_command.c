@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/17 20:34:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 21:33:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int check_redirection(char **cmd, char **filename)
 			*filename = *cmd; // 이렇게 해도 되나?
 			break ;
 		}
+		// printf("zz\n");
 		cmd++;
 	}
 	return (ret);
@@ -86,25 +87,33 @@ void exec_cmd(char ***cmd, t_list *envs, char **envp)
 		else if (pid == 0)
 		{
 			dup2(fdd, 0);
+			redirection = check_redirection(*cmd, &filename);
+			// 여기서 filename이 아니라 fd를 가져와야 할듯. 그래야 열기만 하고, cmd 따라서 실행은 안되게.
 			if (*(cmd + 1))
 				dup2(fd[1], 1);
-			redirection = check_redirection(*cmd, &filename);
-			// printf("[rd:%d filename:%s]\n", redirection, filename);
 			if (redirection == -1)
 			{
 				fd_file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0744);
-				dup2(fd_file, 1);
+				if (!*(cmd + 1))
+					dup2(fd_file, 1);
 			}
 			else if (redirection == -2)
 			{
 				fd_file = open(filename, O_WRONLY | O_CREAT | O_APPEND , 0744);
-				dup2(fd_file, 1);
+				if (!*(cmd + 1))
+					dup2(fd_file, 1);
 			}
 			else if (redirection == -3)
 			{
 				fd_file = open(filename, O_RDONLY);
-				dup2(fd_file, 0); // 되나? 이게 문젠데.
+				if (fd_file < 0)
+				{
+					ft_putstr_fd("error.\n", 2);
+					exit(1);
+				}
+				dup2(fd_file, 0);
 			}
+			// 리팩토링 가능!!!
 			close(fd[0]);
 			command_switch(*cmd, envs, envp);
 			// close(fd_file); // 해줘야하나?
@@ -139,17 +148,19 @@ void		exec_command(char *line, t_list *envs, char **envp)
 		cmd = pipe_split(args);
 
 		// // 출력 테스트
-		// int test;
-		// while (*cmd)
+		// int i;
+		// i = 0;
+		// while (cmd[i])
 		// {
-		// 	test = 0;
-		// 	while (**cmd)
+		// 	int j = 0;
+		// 	while (cmd[i][j])
 		// 	{
-		// 		printf("%d: %s\n", test, **cmd);
-		// 		(*cmd)++;
-		// 		test++;
+		// 		printf("%d: %s\n", i, cmd[i][j]);
+		// 		j++;
 		// 	}
-		// 	cmd++;
+		// 	printf("%d\n", i);
+		// 	i++;
+
 		// }
 
 		exec_cmd(cmd, envs, envp); // 아직 정리도 완성도 X. 나중에...
@@ -161,5 +172,5 @@ void		exec_command(char *line, t_list *envs, char **envp)
 // 수정할 점.
 // [ ] echo "$HOME>me" 등 특문이 들어가면 다 돼야함. 현재는 띄어쓰기같은거만 분리되게 해놓음. - 나중에...
 // [ ] fork를 도입하다보니 아직 exit랑 cd같은건 안됨.
-// [ ] 아직 리다이렉션 구현 안함.
+// [x] 아직 리다이렉션 구현 안함.
 // [ ] free를 아직 신경 못씀. ... 쉬고 하자.
