@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/14 00:55:32 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/17 00:37:21 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 20:28:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,33 @@ static char *convert_arg(char **command, t_list *envs)
 			while (*(*command + len) == '>')
 				len++;
 			free(ret);
-			ret = ft_substr(*command, 0, len);
+			// ret = ft_substr(*command, 0, len);
+			if (len == 1)
+				ret = char_to_str(-1);
+			else if (len == 2)
+				ret = char_to_str(-2);
+			else
+			{
+				ft_putstr_fd("error in >.\n", 2); //임시
+				return (0);
+			}
+			*command += len;
+			return (ret);
+		}
+		else if (quote == 0 && **command == '<')
+		{
+			len = 0;
+			while (*(*command + len) == '<')
+				len++;
+			free(ret);
+			// ret = ft_substr(*command, 0, len);
+			if (len == 1)
+				ret = char_to_str(-3);
+			else
+			{
+				ft_putstr_fd("error in <.\n", 2); //임시
+				return (0);
+			}
 			*command += len;
 			return (ret);
 		}
@@ -93,7 +119,14 @@ static char *convert_arg(char **command, t_list *envs)
 			while (*(*command + len) == '|')
 				len++;
 			free(ret);
-			ret = ft_substr(*command, 0, len);
+			// ret = ft_substr(*command, 0, len);
+			if (len == 1)
+				ret = char_to_str(-4);
+			else
+			{
+				ft_putstr_fd("error in |.\n", 2);
+				return (0);
+			}
 			*command += len;
 			return (ret);
 		}
@@ -101,7 +134,7 @@ static char *convert_arg(char **command, t_list *envs)
 			quote += **command;
 		else if (quote != 0 && **command == quote)
 			quote -= **command;
-		if (quote != '\'' && **command == '$')
+		else if (quote != '\'' && **command == '$') // 이부분
 		{
 			(*command)++;
 			key = ft_substr(*command, 0, key_len(*command));

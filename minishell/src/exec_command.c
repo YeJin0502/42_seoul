@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 19:36:42 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/17 03:24:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/17 20:34:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 // echo만 되게 해놨는데, 'echo'와 "echo"도 되게 고쳐야.
 
-static void	command_switch(char **args, t_list *envs, char **envp, int fd)
+static void	command_switch(char **args, t_list *envs, char **envp)
 {
+	int fd = 1; // 임시
 	if (is_command(args[0], "exit"))
 		exit(0);
 	else if (is_command(args[0], "echo"))
@@ -42,11 +43,39 @@ static void	command_switch(char **args, t_list *envs, char **envp, int fd)
 	}
 }
 
+int check_redirection(char **cmd, char **filename)
+{
+	// 리다이렉션 체크.
+	// filename 만들기.
+
+	int ret;
+
+	ret = 0;
+	while (*cmd)
+	{
+		if (**cmd < 0)
+		{
+			ret = **cmd;
+			cmd++;
+			// *fliename = ft_strdup(*cmd); // 복제본 만들어야할까?
+			*filename = *cmd; // 이렇게 해도 되나?
+			break ;
+		}
+		cmd++;
+	}
+	return (ret);
+}
+
 void exec_cmd(char ***cmd, t_list *envs, char **envp)
 {
 	int fd[2];
 	pid_t pid;
 	int fdd;
+	int status;
+
+	int fd_file;
+	char *filename;
+	int redirection;
 
 	fdd = 0; // 아직 모름.
 	while (*cmd)
@@ -59,13 +88,31 @@ void exec_cmd(char ***cmd, t_list *envs, char **envp)
 			dup2(fdd, 0);
 			if (*(cmd + 1))
 				dup2(fd[1], 1);
+			redirection = check_redirection(*cmd, &filename);
+			// printf("[rd:%d filename:%s]\n", redirection, filename);
+			if (redirection == -1)
+			{
+				fd_file = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0744);
+				dup2(fd_file, 1);
+			}
+			else if (redirection == -2)
+			{
+				fd_file = open(filename, O_WRONLY | O_CREAT | O_APPEND , 0744);
+				dup2(fd_file, 1);
+			}
+			else if (redirection == -3)
+			{
+				fd_file = open(filename, O_RDONLY);
+				dup2(fd_file, 0); // 되나? 이게 문젠데.
+			}
 			close(fd[0]);
-			command_switch(*cmd, envs, envp, 1);
+			command_switch(*cmd, envs, envp);
+			// close(fd_file); // 해줘야하나?
 			exit(1);
 		}
 		else
 		{
-			wait(NULL);
+			wait(&status);
 			close(fd[1]);
 			fdd = fd[0];
 			cmd++;
@@ -115,3 +162,4 @@ void		exec_command(char *line, t_list *envs, char **envp)
 // [ ] echo "$HOME>me" 등 특문이 들어가면 다 돼야함. 현재는 띄어쓰기같은거만 분리되게 해놓음. - 나중에...
 // [ ] fork를 도입하다보니 아직 exit랑 cd같은건 안됨.
 // [ ] 아직 리다이렉션 구현 안함.
+// [ ] free를 아직 신경 못씀. ... 쉬고 하자.
