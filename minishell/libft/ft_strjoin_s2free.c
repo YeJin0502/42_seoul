@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strjoin_s2free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sanam <sanam@studenr.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/12 00:17:27 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 00:13:34 by gmoon            ###   ########.fr       */
+/*   Created: 2020/04/30 15:29:04 by sanam             #+#    #+#             */
+/*   Updated: 2020/04/30 15:29:15 by sanam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void sh_pwd(int fd)
+char			*ft_strjoin_s2free(char *s1, char *s2)
 {
-	char *cwd;
+	char		*ret;
 
-	cwd = getcwd(0, 1024);
-	ft_putendl_fd(cwd, fd);
-	free(cwd);
+	ret = ft_strjoin(s1, s2);
+	free(s2);
+	return (ret);
 }

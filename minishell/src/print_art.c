@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_commandline.c                                :+:      :+:    :+:   */
+/*   print_art.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sanam <sanam@studenr.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/14 00:10:11 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/19 01:44:27 by sanam            ###   ########.fr       */
+/*   Created: 2020/05/17 22:11:05 by sanam             #+#    #+#             */
+/*   Updated: 2020/05/19 00:05:27 by sanam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			print_commandline(void)
+void		print_art(void)
 {
-	char	*cwd;
+	int		fd;
+	char	*line;
 
-	cwd = getcwd(0, 1024);
-	ft_putstr_fd("\033[36m\033[3m\033[01m", 1);
-	ft_putstr_fd(ft_strrchr(cwd, '/') + 1, 1);
-	ft_putstr_fd("\033[35m", 1);
-	ft_putstr_fd(" >> ", 1);
+	fd = open("config/art", O_RDONLY);
+	while (get_next_line(fd, &line))
+	{
+		ft_putstr_fd("\033[36m", 1);
+		ft_putendl_fd(line, STDOUT_FILENO);
+		free(line);
+	}
+	close(fd);
+	free(line);
 	ft_putstr_fd("\033[0m", 1);
-	free(cwd);
-	return (1);
 }

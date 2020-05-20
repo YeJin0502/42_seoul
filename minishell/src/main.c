@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:50:17 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 00:45:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/20 14:21:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,17 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_list	*envs;
 	char	*line;
+	int		wstatus;
 
+	g_core = getpid();
 	if (!argc && argv)
 		exit(1);
+	print_art();
 	signal(SIGINT, sigint_handle);
-	signal(SIGQUIT, sigquit_handle); // 컨트롤\는 안먹힘.
-	// 컨트롤d눌러도 exit되게 추가해야.
+	signal(SIGQUIT, sigquit_handle);
 	envs = make_envs(envp);
-	print_commandline();
-	while (get_next_line(0, &line) > 0)
-	{
-		exec_command(line, envs, envp);
-		print_commandline();
-		free(line);
-	}
+	while ((print_commandline() && get_line(&line)) || (wstatus = 0))
+		exec_line(line, envs, envp, &wstatus);
 	free(line);
+	ft_lstclear(&envs, del);
 }

@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_unset.c                                         :+:      :+:    :+:   */
+/*   sh_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/11 18:43:23 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/14 02:58:30 by gmoon            ###   ########.fr       */
+/*   Created: 2020/05/12 00:17:27 by gmoon             #+#    #+#             */
+/*   Updated: 2020/05/20 11:07:54 by sanam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void sh_unset(char **args, t_list *envs)
+void		sh_pwd(char **args, int fd)
 {
-	t_list *curr;
-	t_list *next;
+	int		argc;
+	char	*cwd;
 
-	while (*args)
+	argc = get_argc(args);
+	if (argc > 1)
 	{
-		curr = envs;
-		while (curr->next)
-		{
-			next = curr->next;
-			if (is_same(((t_env *)next->content)->key, *args))
-			{
-				curr->next = next->next;
-				free(((t_env *)next->content)->key);
-				free(((t_env *)next->content)->value);
-				free(next->content);
-				free(next);
-				break ;
-			}
-			curr = next;
-		}
-		args++;
+		ft_putstr_fd("pwd: ", 2);
+		ft_putendl_fd("too many arguments", 2);
+		exit(1);
 	}
+	cwd = getcwd(0, 1024);
+	ft_putendl_fd(cwd, fd);
+	free(cwd);
+	exit(0);
 }

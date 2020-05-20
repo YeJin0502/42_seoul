@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/17 03:21:02 by gmoon            ###   ########.fr        #
+#    Updated: 2020/05/20 14:12:45 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,24 +16,30 @@ SRCDIR = ./src
 INCDIR = ./inc
 OBJDIR = ./obj
 
-SRC =	env_util.c \
-		exec_command.c \
+SRC =	check_redirection.c \
+		cmd_switch.c \
+		convert_arg.c \
+		exec_line.c \
 		get_args.c \
 		main.c \
 		pipe.c \
+		print_art.c \
 		print_commandline.c \
-		redirection.c \
 		semicolon.c \
-		sh_cd.c \
-		sh_echo.c \
-		sh_env.c \
-		sh_exec.c \
-		sh_export.c \
-		sh_ls.c \
-		sh_pwd.c \
-		sh_unset.c \
 		signal.c \
-		util.c
+		store_status.c \
+		util_env.c \
+		util_free.c \
+		util.c	\
+		builtin/sh_cd.c \
+		builtin/sh_clear.c \
+		builtin/sh_echo.c \
+		builtin/sh_env.c \
+		builtin/sh_exec.c \
+		builtin/sh_export.c \
+		builtin/sh_ls.c \
+		builtin/sh_pwd.c \
+		builtin/sh_unset.c
 OBJ = $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 CC = gcc
@@ -48,6 +54,7 @@ all: obj $(FT_LIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/builtin
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
@@ -71,6 +78,9 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
+	@ ./minishell
+
+val: $(NAME)
 	@valgrind --leak-check=full ./minishell
 
 .PHONY : all bonus clean fclean re run

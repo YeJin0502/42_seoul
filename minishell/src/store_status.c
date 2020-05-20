@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_commandline.c                                :+:      :+:    :+:   */
+/*   store_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sanam <sanam@studenr.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/14 00:10:11 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/19 01:44:27 by sanam            ###   ########.fr       */
+/*   Created: 2020/05/19 13:06:41 by sanam             #+#    #+#             */
+/*   Updated: 2020/05/19 17:48:34 by sanam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			print_commandline(void)
+void		store_status(t_list *envs, int *wstatus)
 {
-	char	*cwd;
+	char	*status;
+	char	*str;
+	char	*args[2];
 
-	cwd = getcwd(0, 1024);
-	ft_putstr_fd("\033[36m\033[3m\033[01m", 1);
-	ft_putstr_fd(ft_strrchr(cwd, '/') + 1, 1);
-	ft_putstr_fd("\033[35m", 1);
-	ft_putstr_fd(" >> ", 1);
-	ft_putstr_fd("\033[0m", 1);
-	free(cwd);
-	return (1);
+	status = ft_itoa(*wstatus);
+	str = ft_strjoin("?=", status);
+	args[0] = ft_strdup(str);
+	args[1] = NULL;
+	sh_export(args, envs);
+	free(args[0]);
+	free(status);
+	free(str);
 }
