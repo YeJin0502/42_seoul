@@ -1,5 +1,6 @@
 # :pineapple: PINE APPLE SHELL
-***Minishell for 42***
+***minishell by [gmoon](https://github.com/moon9ua) and [sanam](https://github.com/simian114).***<br>
+***@ 42 Seoul***
 
 ![GIF](GIF.gif)
 
@@ -40,3 +41,9 @@
 * [x] makefile에 빌트인 함수들은 따로 폴더를 만들까?
 * [x] `echo a >>> b`, `echo a << b`, `echo a <<< b` 등 에러.
 * [x] signal 처리
+
+### 2020. 05. 21
+* [x] Signals
+* [x] Double Quotes
+* [x] export
+* [x] Environment Path

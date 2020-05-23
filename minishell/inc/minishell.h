@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/20 14:12:56 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/22 22:13:44 by sanam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_env
 }				t_env;
 
 int				g_core;
+int				g_option;
 
 /*
 ** builtins
@@ -38,7 +39,7 @@ void			sh_cd(char **args, t_list *envs, int *wstatus);
 void			sh_clear(char **args, int fd);
 void			sh_echo(char **args, int fd);
 void			sh_env(char **args, t_list *envs, int fd);
-void			sh_exec(char **args, char **envp);
+void			sh_exec(char **args, char **envp, t_list *envs);
 void			sh_export(char **args, t_list *envs);
 void			sh_ls(int fd);
 void			sh_pwd(char **args, int fd);
@@ -99,13 +100,18 @@ char			**semicolon_split(char *line);
 /*
 ** signal.c
 */
-void			sigint_handle();
-void			sigquit_handle();
+void			sigint_handle(int signo);
+void			sigquit_handle(int signo);
 
 /*
 ** store_status.c
 */
 void			store_status(t_list *envs, int *wstatus);
+
+/*
+** get_line.c
+*/
+int				get_line(char **line);
 
 /*
 ** util_env.c
@@ -125,7 +131,6 @@ void			del(void *content);
 /*
 ** util.c
 */
-int				get_line(char **line);
 int				ft_max(int a, int b);
 int				is_same(char *a, char *b);
 int				get_argc(char **args);
