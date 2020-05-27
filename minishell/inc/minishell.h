@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/10 18:29:52 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/22 22:13:44 by sanam            ###   ########.fr       */
+/*   Updated: 2020/05/27 16:55:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void			sh_clear(char **args, int fd);
 void			sh_echo(char **args, int fd);
 void			sh_env(char **args, t_list *envs, int fd);
 void			sh_exec(char **args, char **envp, t_list *envs);
+int				sh_exit(char **cmd);
 void			sh_export(char **args, t_list *envs);
 void			sh_ls(int fd);
 void			sh_pwd(char **args, int fd);
@@ -78,6 +79,11 @@ char			**get_args(char *command, t_list *envs);
 int				key_len(char *str);
 
 /*
+** get_line.c
+*/
+int				get_line(char **line);
+
+/*
 ** pipe.c
 */
 char			***pipe_split(char **args);
@@ -107,11 +113,6 @@ void			sigquit_handle(int signo);
 ** store_status.c
 */
 void			store_status(t_list *envs, int *wstatus);
-
-/*
-** get_line.c
-*/
-int				get_line(char **line);
 
 /*
 ** util_env.c

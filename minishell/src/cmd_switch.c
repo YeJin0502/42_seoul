@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 22:44:14 by gmoon             #+#    #+#             */
-/*   Updated: 2020/05/23 23:56:24 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/05/26 09:24:37 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int		cmd_switch(char **cmd, t_list *envs, int *wstatus)
 	char	*file;
 
 	if (is_same(*cmd, "exit"))
-		exit(0);
+	{
+		*wstatus = sh_exit(cmd);
+		return (1);
+	}
 	else if (is_same(*cmd, "cd") || is_same(*cmd, "unset") ||
 			(is_same(*cmd, "export") && *(cmd + 1)))
 	{

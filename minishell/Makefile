@@ -6,7 +6,7 @@
 #    By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/11 21:00:54 by gmoon             #+#    #+#              #
-#    Updated: 2020/05/22 22:15:01 by sanam            ###   ########.fr        #
+#    Updated: 2020/05/27 16:56:20 by gmoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ SRC =	check_redirection.c \
 		convert_arg.c \
 		exec_line.c \
 		get_args.c \
+		get_line.c \
 		main.c \
 		pipe.c \
-		get_line.c \
 		print_art.c \
 		print_commandline.c \
 		semicolon.c \
@@ -37,6 +37,7 @@ SRC =	check_redirection.c \
 		builtin/sh_echo.c \
 		builtin/sh_env.c \
 		builtin/sh_exec.c \
+		builtin/sh_exit.c \
 		builtin/sh_export.c \
 		builtin/sh_ls.c \
 		builtin/sh_pwd.c \
@@ -79,7 +80,7 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	@ ./minishell
+	@./minishell
 
 val: $(NAME)
 	@valgrind --leak-check=full ./minishell
