@@ -1,15 +1,16 @@
-			section	.text
-			global	ft_strlen
+section	.text
+global	_ft_strlen
 
-; delete RAX
+_ft_strlen:
+xor		rax, rax
+jmp		compare
 
-ft_strlen:
-			xor		rax, rax			; i = 0
-			jmp		compare
 increment:
-			inc		rax					; i++
+inc		rax
+
 compare:
-			cmp		BYTE [rdi + rax], 0	; str[i] == 0
-			jne		increment
+cmp		BYTE [rdi + rax], 0
+jne		increment
+
 done:
-			ret							; return i
+ret
