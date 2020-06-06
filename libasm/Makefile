@@ -1,6 +1,6 @@
 NAME = libasm.a
-SRC =	ft_strlen.s \
-		ft_strdup.s
+SRC =	src/ft_strlen.s \
+		src/ft_write.s
 OBJ = $(SRC:.s=.o)
 
 CC = gcc
