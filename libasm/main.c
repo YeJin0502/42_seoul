@@ -1,7 +1,4 @@
 #include "inc/libasm.h"
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
 
 int main()
 {
@@ -18,6 +15,11 @@ int main()
     fd = open("test", O_RDONLY);
     while (ft_read(fd, &buf, 1))
         ft_write(1, &buf, 1);
+
+    printf("======================\n");
+    printf("ft_read error test: %ld\n", ft_read(80, &buf, 1));
+    char test = -1;
+    printf(" [%ld]\n", ft_write(1, &test, 1));
 
     printf("======================\n");
     char c[20] = "hihello";
