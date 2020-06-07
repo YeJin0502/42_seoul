@@ -1,21 +1,43 @@
 #include "inc/libasm.h"
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
 
 int main()
 {
-    int a;
+    printf("\n");
+    printf("START=================\n");
+    char *a = "test";
 
-    a = ft_strlen("hello");
-    printf("ft_strlen: %d\n", a);
+    printf("ft_strlen: %ld\n", ft_strlen(a));
+    printf("strlen: %ld\n", strlen(a));
 
-    char *b;
-    b = "test\n";
-    ft_write(1, b, ft_strlen(b));
+    printf("======================\n");
+    int fd;
+    char buf;
+    fd = open("test", O_RDONLY);
+    while (ft_read(fd, &buf, 1))
+        ft_write(1, &buf, 1);
 
-    char *c = "hello";
-    char d[20] = "hihello";
+    printf("======================\n");
+    char c[20] = "hihello";
+    char *d = "ft_strcpy test.";
 
-    ft_strcpy(d, c);
-    printf("ft_strcpy: %s\n", d);
+    ft_strcpy(c, d);
+    printf("%s\n", c);
+
+    printf("======================\n");
+    char *e = "hello";
+    char *f = "helloworld";
+
+    printf("ft_strcmp: %d\n", ft_strcmp(e, f));
+    printf("strcmp: %d\n", strcmp(e, f));
+
+    printf("======================\n");
+    char *g = "ft_strdup test.";
+
+    printf("%s\n", ft_strdup(g));
+
+    printf("===================END\n");
+    printf("\n");
 }

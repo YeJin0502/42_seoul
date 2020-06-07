@@ -16,7 +16,6 @@ global  ft_strcpy
 
 ft_strcpy:
     xor rcx, rcx
-    xor rdx, rdx
     start_loop:
         mov dl, byte[rsi + rcx]
         mov byte[rdi + rcx], dl

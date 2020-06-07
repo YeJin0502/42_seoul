@@ -17,8 +17,18 @@
 ; }
 
 section .text
+extern malloc
+extern ft_strlen
+extern ft_strcpy
 global  ft_strdup
 
 ft_strdup:
-    mov rax, 0
-    
+    push rdi
+    call ft_strlen
+    inc rax
+    mov rdi, rax
+    call malloc
+    pop rsi
+    mov rdi, rax
+    call ft_strcpy
+    ret
