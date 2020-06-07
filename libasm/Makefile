@@ -30,3 +30,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+# makefile if문을 통해 linux랑 mac 구분해서 해보고싶은데... 폴더명 연습까지.
