@@ -19,7 +19,7 @@ int main()
     printf("======================\n");
     printf("ft_read error test: %ld\n", ft_read(80, &buf, 1));
     char test = -1;
-    printf(" [%ld]\n", ft_write(1, &test, 1));
+    printf(" [%ld]\n", ft_write(80, &test, 1));
 
     printf("======================\n");
     char c[20] = "hihello";

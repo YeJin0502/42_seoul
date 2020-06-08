@@ -11,8 +11,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 NA = nasm
-# NAFLAGS = -f macho64
-NAFLAGS = -f elf64
+NAFLAGS = -f macho64
+# NAFLAGS = -f elf64
 
 all: $(NAME)
 
