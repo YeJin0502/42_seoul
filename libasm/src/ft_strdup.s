@@ -2,9 +2,9 @@ section .text
 extern  ft_strlen
 extern  malloc
 extern  ft_strcpy
-global  ft_strdup
+global  _ft_strdup
 
-ft_strdup:
+_ft_strdup:
     push rdi
     call ft_strlen
     inc rax
