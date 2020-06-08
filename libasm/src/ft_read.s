@@ -1,6 +1,6 @@
 section .text
 extern ___error
-global  _ft_read
+global _ft_read
 
 _ft_read:
     mov rax, 0x2000003
@@ -9,10 +9,8 @@ _ft_read:
     ret
 
 error:
-    mov rdx, rax
-    push rdx
-	call ___error
-	pop rdx
-	mov qword[rax], rdx
-	mov rax, -1
-	ret
+    push rax
+    call ___error
+    pop qword[rax]
+    mov rax, -1
+    ret
