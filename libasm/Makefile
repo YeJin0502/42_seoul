@@ -20,7 +20,6 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.s
-	# $(NA) $(NAFLAGS) -o $@ $<
 	$(NA) $(NAFLAGS) $<
 
 clean:
