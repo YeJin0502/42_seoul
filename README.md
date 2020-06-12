@@ -13,6 +13,6 @@
 
 ***3 circle***
 * [ ] [ft_services](https://github.com/moon9ua/42_seoul/wiki/3.-ft_services)
-* [ ] [libasm](https://github.com/moon9ua/42_seoul/wiki/3.-libasm)
-* [ ] [minishell](https://github.com/moon9ua/42_seoul/wiki/3.-minishell)
+* [x] [libasm](https://github.com/moon9ua/42_seoul/wiki/3.-libasm)
+* [x] [minishell](https://github.com/moon9ua/42_seoul/wiki/3.-minishell)
 * [ ] exam rank 03
