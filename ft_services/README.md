@@ -3,9 +3,10 @@
 ## 20.07.06 1일차
 https://subicura.com/2019/05/19/kubernetes-basic-1.html
 
----
+https://github.com/t0mm4rx/ft_services
 
-https://github.com/t0mm4rx/ft_services <br>
+<details>
+<summary> 번역 </summary>
 
 ### 개요
 
@@ -64,5 +65,43 @@ minikube ip
 minikube delete
 ```
 
-#### 어떻게 쿠버네티스로 IP를 관리하는가
-쿠버네티스는 모든 컨테이너들을 연결하는 네트워크를 만든다. 각 컨테이너에는 고유한 개인 IP 주소가 있다. 네트워크는 (minikube ip로 얻을 수 있는) 외부 IP가 있다. 
+#### 쿠버네티스로 IP를 관리하는 법
+쿠버네티스는 모든 컨테이너들을 연결하는 네트워크를 만든다. 각 컨테이너에는 고유한 개인 IP 주소가 있다. 네트워크는 (minikube ip로 얻을 수 있는) 외부 IP가 있다. 때로는 당신은 컨테이너를 다른 컨테이너와 연결하고 싶을 수 있다. 예를 들어, 당신은 컨테이너 안에 다른 컨테이너의 데이터베이스를 필요로 하는 웹사이트를 가지고 있다고 하자. 이럴 때엔 데이터베이스 컨테이너에 쉽게 접근할 수 있는 service를 만들어야 할 것이다.
+
+쿠버네티스 네트워크에서는 service에 IP가 아닌 서비스명으로 접근할 수 있다. 예를 들어, MySQL 컨테이너와 연결된 mysql 서비스가 있다. 이 컨테이너를 Nginx 컨테이너에서 접근하려면 다음과 같이 할 수 있다:
+
+```
+mysql <database> -u <user> -p -h mysql
+mysql <database> -u <user> -p -h 127.0.0.10
+```
+
+다른 예로, "test"라는 서비스와 포트 1000으로 호스트된 웹페이지가 있다고 하자. minikube ip는 192.168.0.1이다.
+```
+# 컨테이너에서 웹페이지에 접근
+curl http://test:1000
+# 외부에서 웹페이지에 접근
+curl http://192.168.0.1:1000
+```
+
+#### minikube와 도커 연결하기
+minikube는 도커 이미지를 실행할 특정 VM을 VirtualBox에 만든다. 당신은 당신의 셸과 minikube를 연결해야 한다. 다음 명령어를 통해 수행할 수 있다:
+```
+eval $(minikube docker-env)
+```
+다음을 통해 실행되고 있는지 테스트해볼 수 있다:
+```
+docker images
+```
+당신은 현재 환경에 연결된 모든 이미지를 확인할 수 있다.
+
+기본적으로 쿠버네티스 deployment는 온라인 도커 이미지를 찾지만, 우리는 사용자의 로컬 이미지를 로드하고자 한다. 당신은 컨테이너 객체에 "imagePullPolicy:Never"을 추가하여 이것을 수행할 수 있다.
+
+### 컨테이너들
+
+#### Nginx
+#### FTPs
+#### Wordpress
+#### PHPMyAdmin
+#### Grafana
+
+</details>
