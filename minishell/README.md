@@ -8,9 +8,6 @@
 
 ### 참고자료
 
-* https://brennan.io/2015/01/16/write-a-shell-in-c/ <br>
-당시에는 참고하지 않았지만 읽어볼만한 글.
-
 \# redirection
 * http://www.sarathlakshman.com/2012/09/24/implementation-overview-of-redirection-and-pipe-operators-in-shell
 
@@ -20,6 +17,10 @@
 
 \# escape 문자
 * https://unix.stackexchange.com/questions/390148/escaping-in-double-quotes-in-bash-scripts
+
+그 외
+* https://brennan.io/2015/01/16/write-a-shell-in-c/
+: 당시에는 참고하지 않았지만 읽어볼만한 글.
 
 ### 개선할 점
 
