@@ -2,7 +2,7 @@
 
 공부한 기록은 [노션](https://www.notion.so/libasm-8ba41c0c897f4988b80d4fd6c01ac370)으로.
 
-## 참고자료
+### 참고자료
 
 \# 어셈블리어
 * https://aistories.tistory.com/12
