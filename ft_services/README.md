@@ -126,3 +126,9 @@
     ```
 
 * https://github.com/ClemaX/ft_services
+
+* https://judo0179.tistory.com/70
+: #`the connection to the server localhost 8080 was refused minikube` 기본적인 내용이 잘 나와있다.
+
+* https://judo0179.tistory.com/66?category=349244
+: 쿠버네티스 기본 명령어
