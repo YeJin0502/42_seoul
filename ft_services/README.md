@@ -105,30 +105,38 @@
     ### PHPMyAdmin
     ### Grafana
 
-</details>
+    </details>
 
 ## 20.07.15 (수) 2일차
 
-\#minikube \#쿠버네티스 <br>
-\#node \#pod \#service
+\#ft_services
 
 * https://github.com/woolimi/ft_services
 
 * https://www.notion.so/ft_service-85d6cd8b023043f08ed0f5e1f04848cf
 
+* https://github.com/ClemaX/ft_services
+
+\#쿠버네티스
 * https://github.com/kubernetes/examples/tree/master/staging/https-nginx/
 
 * https://kubernetes.io/ko/docs/tasks/tools/install-minikube/
-: minikube 설치
+: `brew install minikube`
 
-    ```
-    brew install minikube
-    ```
+* https://judo0179.tistory.com/66?category=349244
+: 쿠버네티스 기본 명령어
 
-* https://github.com/ClemaX/ft_services
+\#minikube
 
 * https://judo0179.tistory.com/70
 : #`the connection to the server localhost 8080 was refused minikube` 기본적인 내용이 잘 나와있다.
 
-* https://judo0179.tistory.com/66?category=349244
-: 쿠버네티스 기본 명령어
+* https://aidanbae.github.io/code/devops/k8s/start/
+
+* https://m.blog.naver.com/PostView.nhn?blogId=sharplee7&logNo=221737855770&categoryNo=0&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+* https://medium.com/humanscape-tech/kubernetes-%EB%8F%84%EC%9E%85-%EC%A0%84-minikube-%EC%82%AC%EC%9A%A9%EA%B8%B0-2eb2b6d8e444
+
+* https://medium.com/@cratios48/minikube-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%9C%EC%9A%A9-4a63ddbc7fcb
+
+* https://bum752.github.io/posts/minikube%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EB%A1%9C%EC%BB%AC-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/
