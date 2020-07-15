@@ -105,3 +105,9 @@ docker images
 ### Grafana
 
 </details>
+
+## 20.07.15 (수)
+
+* https://github.com/woolimi/ft_services
+* https://www.notion.so/ft_service-85d6cd8b023043f08ed0f5e1f04848cf
+: ft_services 가이드
