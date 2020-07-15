@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nakim-ingress
+  annotations: #없어도 될것 같다 어차피 http로 접속해도 리다렉해두 접속만 하면되니가.
+    nginx.ingress.kubernetes.io/ssl-redirect: "false" #http 요청을 https로 보내지 않음
+spec:
+  tls: #https는 443만 지원해서 따로 포트 설정 칸이 없다고 추정
+    - hosts:
+      - nginxsvc #ssl를 만들 때 CN이름을 사용합니다.
+    - secretName: nginxsecret
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: wordpress-nginx #nginx 서비스의 이름! 이거 틀리면 안되요!!
+          servicePort: 80
