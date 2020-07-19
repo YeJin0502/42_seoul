@@ -112,44 +112,52 @@
 \#ft_services
 
 * https://github.com/woolimi/ft_services
-
 * https://www.notion.so/ft_service-85d6cd8b023043f08ed0f5e1f04848cf
-
 * https://github.com/ClemaX/ft_services
 
 \#쿠버네티스
 * https://github.com/kubernetes/examples/tree/master/staging/https-nginx/
-
 * https://kubernetes.io/ko/docs/tasks/tools/install-minikube/ : `brew install minikube`
-
 * https://judo0179.tistory.com/66?category=349244 : 쿠버네티스 기본 명령어
 
 \#minikube
 
 * https://judo0179.tistory.com/70 : # *the connection to the server localhost 8080 was refused minikube* 기본적인 내용이 잘 나와있다.
-
 * https://aidanbae.github.io/code/devops/k8s/start/
-
 * https://m.blog.naver.com/PostView.nhn?blogId=sharplee7&logNo=221737855770&categoryNo=0&proxyReferer=https:%2F%2Fwww.google.com%2F
-
 * https://medium.com/humanscape-tech/kubernetes-%EB%8F%84%EC%9E%85-%EC%A0%84-minikube-%EC%82%AC%EC%9A%A9%EA%B8%B0-2eb2b6d8e444
-
 * https://medium.com/@cratios48/minikube-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%9C%EC%9A%A9-4a63ddbc7fcb
-
 * https://bum752.github.io/posts/minikube%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EB%A1%9C%EC%BB%AC-%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/
 
 ## 20.07.19 (일) 3일차
 
 * https://kubernetes.io/ko/docs/tutorials/hello-minikube/ : 공식 문서 - 튜토리얼
-
 * https://judo0179.tistory.com/71?category=349244
-
 * https://coffeewhale.com/kubernetes/cka/2019/01/13/cak/
-
 * https://coffeewhale.com/k8s/network/2019/04/19/k8s-network-01/
-
 * https://kubernetes.io/ko/docs/concepts/workloads/pods/pod/ : 공식 문서 - 파드
 
 \# Load Balander
 
 * https://post.naver.com/viewer/postView.nhn?volumeNo=27046347&memberNo=2521903
+
+\# /dev/null
+
+* https://twpower.github.io/201-ignore-stderr-using-dev-null
+
+\# 쉘 명령어
+
+* https://mug896.github.io/bash-shell/eval.html : eval
+
+\# 알파인 리눅스 \# apk add --no-cache
+
+* https://jhhwang4195.tistory.com/67
+* https://www.it-swarm-ko.tech/ko/docker/nocache-%eb%8c%80-alpine-dockerfile%ec%9d%98-%ec%9e%a5%ec%a0%90-rm-var-cache-apk/837954939/
+* https://www.lesstif.com/docker/alpine-linux-35356819.html
+* https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade: update vs upgrade
+
+\# nginx default.conf
+
+* https://sarc.io/index.php/nginx/61-nginx-nginx-conf
+* https://wedul.site/579
+* https://12bme.tistory.com/366

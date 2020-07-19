@@ -1,6 +1,13 @@
-# 모든 어플리케이션을 설정하는 파일.
+minikube delete
 
-minikube start
+export MINIKUBE_HOME=~/goinfre
+minikube start --vm-driver=virtualbox
+# vm-driver 설정을 안하면 docker로 실행되는 것 같은데, 어떤걸로 해야하는거지?
+# extra-config는? 해야하는건가? # minikube start --extra-config=apiserver.service-node-port-range=1-35000
+
+minikube dashboard
+# minikube dashboard & 이랑 차이가 뭐지?
+
 
 # echo "대쉬보드 설치"
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
