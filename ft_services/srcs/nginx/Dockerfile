@@ -1,11 +1,19 @@
-FROM nginx:stable-alpine
+# docker rm $(docker ps -a -q)
+# docker rmi $(docker images -a -q)
+# docker run -it --name nginx -p 80:80 -p 443:443 alpine
 
-RUN apk add --no-cache bash
+FROM alpine
 
-# COPY index2.html /usr/share/nginx/html/index2.html
-# RUN chmod +r /usr/share/nginx/html/index2.html
-# COPY auto-reload-nginx.sh /home/auto-reload-nginx.sh
-# RUN chmod +x /home/auto-reload-nginx.sh
+RUN apk update && apk upgrade
+# upgrade 할게 있나?
+RUN apk add --no-cache nginx
+# no-cache 하면 뭐가 좋지?
 
-# # install inotify
-# RUN apt-get update && apt-get install -y inotify-tools
+COPY default.conf /etc/nginx/conf.d/
+# 여기에 하는게 맞나? /etc/nginx/nginx.conf 도 있는데... 어디에 하는거지?
+COPY entrypoint.sh /tmp
+
+EXPOSE 80 443 22
+# 22는 뭐임?
+
+ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
