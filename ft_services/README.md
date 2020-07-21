@@ -165,3 +165,10 @@
 ## 20.07.21 (화) 4일차
 
 * https://www.redhat.com/ko/topics/containers/what-is-kubernetes
+* https://www.notion.so/ft_service-a71586e4e6ed4c43965b9c9254e95dfc
+
+\# 쿠버네티스 오브젝트 \# yaml
+* https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/kubernetes-objects/
+
+\# 레플리카셋
+* https://kubernetes.io/ko/docs/concepts/workloads/controllers/replicaset/
