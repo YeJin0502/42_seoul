@@ -7,7 +7,7 @@ minikube start --vm-driver=virtualbox
 # extra-config는? 해야하는건가?
 # minikube start --extra-config=apiserver.service-node-port-range=1-35000
 
-minikube dashboard
+# minikube dashboard
 # minikube dashboard & 이랑 차이가 뭐지?
 
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system
