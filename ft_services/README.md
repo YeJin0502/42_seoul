@@ -109,18 +109,18 @@
 
 ## 20.07.15 (수) 2일차
 
-\#ft_services
+\# ft_services
 
 * https://github.com/woolimi/ft_services
 * https://www.notion.so/ft_service-85d6cd8b023043f08ed0f5e1f04848cf
 * https://github.com/ClemaX/ft_services
 
-\#쿠버네티스
+\# 쿠버네티스
 * https://github.com/kubernetes/examples/tree/master/staging/https-nginx/
 * https://kubernetes.io/ko/docs/tasks/tools/install-minikube/ : `brew install minikube`
 * https://judo0179.tistory.com/66?category=349244 : 쿠버네티스 기본 명령어
 
-\#minikube
+\# minikube
 
 * https://judo0179.tistory.com/70 : # *the connection to the server localhost 8080 was refused minikube* 기본적인 내용이 잘 나와있다.
 * https://aidanbae.github.io/code/devops/k8s/start/
@@ -161,3 +161,7 @@
 * https://sarc.io/index.php/nginx/61-nginx-nginx-conf
 * https://wedul.site/579
 * https://12bme.tistory.com/366
+
+## 20.07.21 (화) 4일차
+
+* https://www.redhat.com/ko/topics/containers/what-is-kubernetes
