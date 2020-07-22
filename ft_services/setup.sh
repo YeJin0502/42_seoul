@@ -4,6 +4,7 @@
 echo "minikube start"
 export MINIKUBE_HOME=~/goinfre
 minikube start --vm-driver=virtualbox
+eval $(minikube docker-env)
 # vm-driver 설정을 안하면 docker로 실행되는 것 같은데, 어떤걸로 해야하는거지?
 
 # extra-config는? 해야하는건가?
