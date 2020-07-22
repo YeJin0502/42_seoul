@@ -196,3 +196,6 @@
 * https://www.osetc.com/en/how-to-install-and-configure-nginx-web-server-on-alpine-linux.html
 * https://www.osetc.com/en/how-to-start-stop-restart-services-on-alpine-linux.html
 * https://github.com/gliderlabs/docker-alpine/issues/437
+
+\# CreateContainerConfigError
+* https://stackoverflow.com/questions/50424754/pod-status-as-createcontainerconfigerror-in-minikube-cluster

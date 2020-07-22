@@ -4,7 +4,8 @@ clear
 
 echo "=> Start minikube."
 export MINIKUBE_HOME=~/goinfre
-minikube start --driver=virtualbox --extra-config=apiserver.service-node-port-range=1-35000
+minikube config set vm-driver virtualbox
+minikube start --extra-config=apiserver.service-node-port-range=1-35000
 # vm-driver? driver? 어떤걸 선택해야하지? virtualbox로 하던데, 나는 클러스터에 설치가 안되어있다고 뜨는데...
 eval $(minikube docker-env)
 
@@ -26,7 +27,7 @@ kubectl apply -f srcs/metallb.yaml
 # cd ../..
 
 echo "=> Build images."
-docker build -t nginx-image:1.0 srcs/nginx
+docker build -t nginx-image srcs/nginx
 
 echo "=> apply yaml."
 kubectl apply -f srcs/nginx.yaml
