@@ -179,6 +179,7 @@
 * https://stackoverflow.com/questions/52310599/what-does-minikube-docker-env-mean
 * https://medium.com/@yunhochung/k8s-%EB%8C%80%EC%89%AC%EB%B3%B4%EB%93%9C-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%EA%B8%B0%EB%8A%A5-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0-22ed1cd0999f
 * https://kubernetes.io/ko/docs/reference/kubectl/cheatsheet/
+* https://velog.io/@labyu/kubernetes-1
 
 \# ssh
 * https://storycompiler.tistory.com/112
