@@ -41,8 +41,8 @@ spec:
         configMap:
           name: nginxconfigmap
       containers:
-      - name: nginx
-        image: nakim_nginx:1.0
+      - name: gmoon
+        image: gmoon_nginx:1.0
         imagePullPolicy: Never #이미지가 로컬에 있다고 가정합니다.
         ports:
         - containerPort: 443

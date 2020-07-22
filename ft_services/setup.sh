@@ -13,11 +13,33 @@ minikube start --vm-driver=virtualbox
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl apply -f - -n kube-system
 
+echo "metalLB manifest"
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 cd srcs/metallb
 kubectl apply -f config.yaml
+
+echo "fieldPath: status.hostTP"
+
+echo "nginx directory"
+cd ../nginx
+
+echo "ssl create"
+make keys
+
+echo "nginx ssl secret create"
+kubectl create secret tls nginxsecret --key /Users/gmoon/Desktop/nginx.key --cert /Users/gmoon/Desktop/nginx.crt
+
+echo "nginx configmap create"
+kubectl create configmap nginxconfigmap --from-file=default.conf
+
+echo "nginx image build"
+docker build -t gmoon
+_nginx:1.0 .
+
+echo "nginx deployment"
+kubectl apply -f nginx.yaml
 
 
 # echo "대쉬보드 설치"
