@@ -176,3 +176,4 @@
 
 ## 20.07.22 (수) 5일차
 
+* https://stackoverflow.com/questions/52310599/what-does-minikube-docker-env-mean

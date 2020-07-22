@@ -1,5 +1,7 @@
-minikube delete
+# echo "minikube delete"
+# minikube delete
 
+echo "minikube start"
 export MINIKUBE_HOME=~/goinfre
 minikube start --vm-driver=virtualbox
 # vm-driver 설정을 안하면 docker로 실행되는 것 같은데, 어떤걸로 해야하는거지?
@@ -10,6 +12,7 @@ minikube start --vm-driver=virtualbox
 # minikube dashboard
 # minikube dashboard & 이랑 차이가 뭐지?
 
+echo "activate ARP"
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl apply -f - -n kube-system
 
