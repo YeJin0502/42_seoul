@@ -187,9 +187,12 @@
 
 ## 20.07.23 (목) 6일차
 
-* https://www.osetc.com/en/how-to-start-stop-restart-services-on-alpine-linux.html
+* https://minikube.sigs.k8s.io/docs/commands/start/#options : minikube start 옵션
+* https://cheatsheet.dennyzhang.com/cheatsheet-minikube-a4 : minikube cheet sheet
+
 
 \# nginx
 * https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
 * https://www.osetc.com/en/how-to-install-and-configure-nginx-web-server-on-alpine-linux.html
+* https://www.osetc.com/en/how-to-start-stop-restart-services-on-alpine-linux.html
 * https://github.com/gliderlabs/docker-alpine/issues/437

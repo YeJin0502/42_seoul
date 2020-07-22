@@ -1,3 +1,4 @@
+clear
 # echo "=> Delete minikube."
 # minikube delete
 
