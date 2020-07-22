@@ -22,6 +22,5 @@ EXPOSE 80 443 22
 # 22는 뭐임?
 
 RUN apk add --no-cache openrc
-RUN service nginx start
 
 ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
