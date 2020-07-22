@@ -1,63 +1,60 @@
 apiVersion: v1
-kind: Service #파드에 접근하기 위한 오브젝트
+kind: Service
 metadata:
-  name: wordpress-nginx #서비스 오브젝트의 이름
-  labels: #서비스의 레이블인데 선택 사항
+  name: wordpress-nginx
+  labels:
     run: nginx
 spec:
-  ports: #우리는 멀티포트를 사용하기 때문에 포트의 네임필드가 필수
+  type: LoadBalancer
+  ports: #포트가 두개 일때 포트 이름을 명시해줘야 합니다.
   - port: 80
-    protocol: TCP #서비스의 기본 프로토콜이 TCP이다.
+    protocol: TCP
     name: http
   - port: 443
     protocol: TCP
     name: https
-  selector: #서비스로 묶을 파드를 식별하는 셀럭터
-    run: nginx
----
-apiVersion: apps/v1 #말그대로 앱버전이다. 특별한 건 없다.
-kind: Deployment #우리가 의도하는 상태를 오브젝트이다.
-metadata: #우리가 의도하는 상태를 유지하기 위해 컨트롤러가 계속 일한다고 보면 된다.
-  name: wordpress-nginx #디플로이먼트의 이름
-spec: #의도하는 상태의 상세 사항을 아래에서 나타낸다.
   selector:
-    matchLabels: #run, tier가의 value가 같은 것들을 관리한다.
+    run: nginx
+    tier: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-nginx
+spec:
+  selector:
+    matchLabels:
       run: nginx
       tier: backend
-  replicas: 1 #레플리카 복제본의 수 
-  template: #파드에 대한 상세 사항 
+  replicas: 1
+  template:
     metadata:
-      labels: #이 레이블이 맞지 않다면 디플로이먼트가 제대로 작동하지 않는다.
+      labels:
         run: nginx
         tier: backend
     spec:
-      volumes: #우리가 사용할 볼륨에 대한 정의
-      - name: secret-volume #ssl에 관련된 것
+      volumes:
+      - name: secret-volume
         secret:
-          secretName: nginxsecret 
-      - name: wordpress-persistent-storage #wordpress파일을 위한 것
-        persistentVolumeClaim:
-          claimName: wp-pv-claim
-      - name: configmap-volume #nginx 설정 파일을 위한 것
+          secretName: nginxsecret
+      - name: configmap-volume
         configMap:
           name: nginxconfigmap
       containers:
-      - name: nginxhttps #컨테이너의 이름 중요하지 않다.
-        image: nakim_nginx:1.0 #우리가 사용하고자 하는 도커 이미지
-        imagePullPolicy: Never #이 옵션은 이미지가 로컬에 있다고 가정한다.
-        ports: # http https를 위해 두 포트 개방
+      - name: nginx
+        image: nakim_nginx:1.0
+        imagePullPolicy: Never #이미지가 로컬에 있다고 가정합니다.
+        ports:
         - containerPort: 443
         - containerPort: 80
-        livenessProbe: #엔진엑스가 오류로 인해 중단된다면 파드를 재시작하기 위해 존재
-          httpGet:     #하지만 우리의 과제에선 필요 없지만 실제로 사용 할 때 필요 !
-            path: /readme.html
-            port: 80
-          initialDelaySeconds: 30 #이 옵션이 작동 할때까지 기다려 주는 시간 
-          timeoutSeconds: 1 #멈췄을 때 대기 시간
-        volumeMounts: 
-        - mountPath: /etc/nginx/ssl #ssl
+        # livenessProbe:
+        #   httpGet:
+        #     path: /readme.html
+        #     port: 80
+        #   initialDelaySeconds: 30
+        #   timeoutSeconds: 1
+        volumeMounts: #nginx, ssl 설정을 볼륨 마운트를 통해 전달!
+        - mountPath: /etc/nginx/ssl
           name: secret-volume
-        - mountPath: /etc/nginx/conf.d #nginx 설정 파일 
+        - mountPath: /etc/nginx/conf.d
           name: configmap-volume
-        - name: wordpress-persistent-storage #wordpress 파일
-          mountPath: /var/www/html
