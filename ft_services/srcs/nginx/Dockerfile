@@ -23,4 +23,4 @@ RUN echo "gmoon:1234" | chpasswd
 EXPOSE 80 443 22
 # 22는 뭐임?
 
-ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
+ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]

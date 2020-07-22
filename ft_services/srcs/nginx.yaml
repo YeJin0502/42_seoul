@@ -1,60 +1,56 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-nginx
+  name: nginx-service
   labels:
     run: nginx
 spec:
+  selector: nginx
   type: LoadBalancer
-  ports: #포트가 두개 일때 포트 이름을 명시해줘야 합니다.
+  ports:
   - port: 80
-    protocol: TCP
-    name: http
+    name: nginx-http
+    targetPort: 80
+    nodePort: 80
   - port: 443
-    protocol: TCP
-    name: https
-  selector:
-    run: nginx
-    tier: backend
+    name: nginx-https
+    targetPort: 443
+    nodePort: 443
+  - port: 22
+    name: nginx-ssh
+    targetPort: 22
+    nodePort: 22
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-nginx
+  name: nginx-deployment
 spec:
   selector:
     matchLabels:
-      run: nginx
-      tier: backend
+      app: nginx
   replicas: 1
   template:
     metadata:
+      name: nginx-pod
       labels:
-        run: nginx
-        tier: backend
+        app: nginx
     spec:
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: nginxsecret
-      - name: configmap-volume
-        configMap:
-          name: nginxconfigmap
       containers:
-      - name: nginx
-        image: nginx_image:1.0
-        imagePullPolicy: Never #이미지가 로컬에 있다고 가정합니다.
+      - name: nginx-container
+        image: nginx_image
+        imagePullPolicy: Never
         ports:
-        - containerPort: 443
-        - containerPort: 80
-        # livenessProbe:
-        #   httpGet:
-        #     path: /readme.html
-        #     port: 80
-        #   initialDelaySeconds: 30
-        #   timeoutSeconds: 1
-        volumeMounts: #nginx, ssl 설정을 볼륨 마운트를 통해 전달!
-        - mountPath: /etc/nginx/ssl
-          name: secret-volume
-        - mountPath: /etc/nginx/conf.d
-          name: configmap-volume
+          - containerPort: 80
+            name: nginx-http
+          - containerPort: 443
+            name: nginx-https
+          - containerPort: 22
+            name: nginx-ssh
+          livenessProbe:
+            tcpSocket:
+              port: 22
+            initialDelaySeconds: 15
+            periodSeconds: 10
