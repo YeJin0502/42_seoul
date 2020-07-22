@@ -35,8 +35,7 @@ echo "nginx configmap create"
 kubectl create configmap nginxconfigmap --from-file=default.conf
 
 echo "nginx image build"
-docker build -t gmoon
-_nginx:1.0 .
+docker build -t gmoon_nginx:1.0 .
 
 echo "nginx deployment"
 kubectl apply -f nginx.yaml
