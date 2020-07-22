@@ -1,48 +1,39 @@
-# echo "minikube delete"
+# echo "=> Delete minikube."
 # minikube delete
 
-echo "minikube start"
+echo "=> Start minikube."
 export MINIKUBE_HOME=~/goinfre
 minikube start --vm-driver=virtualbox
 eval $(minikube docker-env)
 # vm-driver 설정을 안하면 docker로 실행되는 것 같은데, 어떤걸로 해야하는거지?
-
 # extra-config는? 해야하는건가?
 # minikube start --extra-config=apiserver.service-node-port-range=1-35000
 
 # minikube dashboard
 # minikube dashboard & 이랑 차이가 뭐지?
 
-echo "activate ARP"
+echo "=> Activate ARP."
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system
 kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl apply -f - -n kube-system
 
-echo "metalLB manifest"
+echo "=> Install metalLB."
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-cd srcs/metallb
-kubectl apply -f config.yaml
+# kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl apply -f srcs/metallb.yaml
 
-echo "fieldPath: status.hostTP"
+# echo "=> Setting nginx."
+# cd src/nginx
+# make keys
+# kubectl create secret tls nginxsecret --key /Users/gmoon/Desktop/nginx.key --cert /Users/gmoon/Desktop/nginx.crt
+# kubectl create configmap nginxconfigmap --from-file=default.conf
+# cd ../..
 
-echo "nginx directory"
-cd ../nginx
+echo "=> Build images."
+docker build -t nginx_image:1.0 src/nginx
 
-echo "ssl create"
-make keys
-
-echo "nginx ssl secret create"
-kubectl create secret tls nginxsecret --key /Users/gmoon/Desktop/nginx.key --cert /Users/gmoon/Desktop/nginx.crt
-
-echo "nginx configmap create"
-kubectl create configmap nginxconfigmap --from-file=default.conf
-
-echo "nginx image build"
-docker build -t gmoon_nginx:1.0 .
-
-echo "nginx deployment"
-kubectl apply -f nginx.yaml
+echo "=> apply yaml." # 뭐라고 해야하지?
+kubectl apply -f srcs/nginx.yaml
 
 
 # echo "대쉬보드 설치"
