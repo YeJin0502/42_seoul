@@ -8,10 +8,10 @@
 FROM alpine
 
 RUN apk update
-
 RUN apk add --no-cache nginx openssl openssh openrc
 
 # RUN adduser -D -g 'Nginx www user' -h /home/mynginx/ mynginx
+# 유저는 왜 생성하는거지?
 
 COPY default.conf /etc/nginx/conf.d/
 COPY entrypoint.sh /tmp/

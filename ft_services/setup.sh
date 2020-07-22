@@ -24,7 +24,7 @@ kubectl apply -f srcs/metallb.yaml
 # cd ../..
 
 echo "=> Build images."
-docker build -t nginx_image:1.0 src/nginx
+docker build -t nginx-image:1.0 src/nginx
 
 echo "=> apply yaml."
 kubectl apply -f srcs/nginx.yaml
