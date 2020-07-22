@@ -184,3 +184,11 @@
 
 \# ssh
 * https://storycompiler.tistory.com/112
+
+## 20.07.23 (목) 6일차
+
+* https://www.osetc.com/en/how-to-start-stop-restart-services-on-alpine-linux.html
+* https://www.cyberciti.biz/faq/how-to-enable-and-start-services-on-alpine-linux/
+* https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
+* https://www.osetc.com/en/how-to-install-and-configure-nginx-web-server-on-alpine-linux.html
+* https://github.com/gliderlabs/docker-alpine/issues/437
