@@ -1,3 +1,4 @@
-# /usr/sbin/sshd
 service nginx restart
-nginx -g 'daemon off;'
+# /usr/sbin/sshd
+service sshd restart
+nginx -g "daemon off;"
