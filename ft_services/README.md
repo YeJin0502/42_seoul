@@ -199,3 +199,9 @@
 
 \# CreateContainerConfigError
 * https://stackoverflow.com/questions/50424754/pod-status-as-createcontainerconfigerror-in-minikube-cluster
+
+
+## 20.07.25 (토) 7일차
+
+\# minikube metallb
+* https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
