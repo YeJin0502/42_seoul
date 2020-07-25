@@ -215,3 +215,6 @@
 ## 20.07.26 (일) 8일차
 
 * https://hello-bryan.tistory.com/168?category=771155
+
+\# ssh key
+* https://opentutorials.org/module/432/3742
