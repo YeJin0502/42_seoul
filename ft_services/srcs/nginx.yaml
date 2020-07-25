@@ -7,13 +7,18 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 80
     protocol: TCP
     name: http
   - port: 443
+    targetPort: 443
     protocol: TCP
     name: https
+  - port: 22
+    targetPort: 22
+    protocol: TCP
+    name: ssh
   selector:
     run: my-nginx
 ---
@@ -41,9 +46,14 @@ spec:
       containers:
       - name: nginx
         image: nginx-image
+        imagePullPolicy: Never
         ports:
-        - containerPort: 443
         - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        - containerPort: 22
+          name: ssh
         # volumeMounts:
         # - mountPath: /etc/nginx/ssl
         #   name: secret-volume
