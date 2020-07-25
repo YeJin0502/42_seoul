@@ -190,7 +190,6 @@
 * https://minikube.sigs.k8s.io/docs/commands/start/#options : minikube start 옵션
 * https://cheatsheet.dennyzhang.com/cheatsheet-minikube-a4 : minikube cheet sheet
 
-
 \# nginx
 * https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
 * https://www.osetc.com/en/how-to-install-and-configure-nginx-web-server-on-alpine-linux.html
@@ -215,3 +214,4 @@
 
 ## 20.07.26 (일) 8일차
 
+* https://hello-bryan.tistory.com/168?category=771155

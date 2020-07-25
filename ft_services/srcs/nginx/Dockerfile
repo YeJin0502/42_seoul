@@ -10,11 +10,17 @@ FROM alpine
 RUN apk update
 RUN apk add --no-cache nginx openssl openssh openrc
 
-# RUN adduser -D -g 'Nginx www user' -h /home/mynginx/ mynginx
-# 유저는 왜 생성하는거지?
+RUN adduser -D -g 'www' www
+RUN mkdir /www
+RUN chown -R www:www /var/lib/nginx
+RUN chown -R www:www /www
 
-COPY default.conf /etc/nginx/conf.d/
+# COPY default.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY index.html /www/index.html
+# 두 개 파일 차이점이 뭐임?
 COPY entrypoint.sh /tmp/
+
 RUN mkdir -p /run/nginx
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -subj "/CN=nginxsvc/O=nginxsvc"
 
