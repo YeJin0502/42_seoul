@@ -14,6 +14,7 @@ RUN adduser -D -g 'nginx www user' -h /home/www/ www
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 # COPY nginx.conf /etc/nginx/nginx.conf
+COPY index.html /home/www/index.html
 # 두 개 파일 차이점이 뭐임?
 COPY entrypoint.sh /tmp/
 
