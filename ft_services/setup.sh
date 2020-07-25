@@ -8,7 +8,7 @@ export MINIKUBE_HOME=~/goinfre
 # minikube start --extra-config=apiserver.service-node-port-range=1-35000
 minikube start --vm-driver=virtualbox
 # vm-driver? driver? 어떤걸 선택해야하지?
-# eval $(minikube docker-env)
+eval $(minikube docker-env)
 
 echo "=> Install MetalLB"
 Kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
