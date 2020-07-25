@@ -6,12 +6,14 @@ echo "=> Start minikube."
 export MINIKUBE_HOME=~/goinfre
 # minikube config set vm-driver virtualbox
 # minikube start --extra-config=apiserver.service-node-port-range=1-35000
-minikube start --vm-driver=virtualbox
+# minikube start --vm-driver=virtualbox
+minikube start --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-35000
 # vm-driver? driver? 어떤걸 선택해야하지?
 eval $(minikube docker-env)
 
 echo "=> Install MetalLB"
-Kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+# kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+minikube addons enable metallb
 
 # echo "=> Activate ARP."
 # kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system

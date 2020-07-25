@@ -203,5 +203,8 @@
 
 ## 20.07.25 (토) 7일차
 
+* https://kubernetes.io/ko/docs/tutorials/stateless-application/expose-external-ip-address/ : external-ip pending
+
 \# minikube metallb
 * https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
+* https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe
