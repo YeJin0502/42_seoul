@@ -208,3 +208,7 @@
 \# minikube metallb
 * https://medium.com/faun/metallb-configuration-in-minikube-to-enable-kubernetes-service-of-type-loadbalancer-9559739787df
 * https://medium.com/@shoaib_masood/metallb-network-loadbalancer-minikube-335d846dfdbe
+
+\# nginx service
+* https://kubernetes.io/ko/docs/concepts/services-networking/connect-applications-service/
+* https://github.com/kubernetes/examples/tree/master/staging/https-nginx/

@@ -14,6 +14,8 @@ eval $(minikube docker-env)
 echo "=> Install MetalLB"
 # kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
 minikube addons enable metallb
+# minikube addons configure metallb
+# 이거 미리 입력하는 방법이 뭐지?
 
 # echo "=> Activate ARP."
 # kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl diff -f - -n kube-system
