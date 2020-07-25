@@ -10,14 +10,15 @@ FROM alpine
 RUN apk update
 RUN apk add --no-cache nginx openssl openssh openrc
 
-RUN adduser -D -g 'www' www
-RUN mkdir /www
-RUN chown -R www:www /var/lib/nginx
-RUN chown -R www:www /www
+# RUN adduser -D -g 'www' www
+# RUN mkdir /www
+# RUN chown -R www:www /var/lib/nginx
+# RUN chown -R www:www /www
+RUN adduser -D -g 'Nginx www user' -h /home/www/ wwwcbz
 
-# COPY default.conf /etc/nginx/conf.d/
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY index.html /www/index.html
+COPY default.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/nginx.conf
+# COPY index.html /www/index.html
 # 두 개 파일 차이점이 뭐임?
 COPY entrypoint.sh /tmp/
 
