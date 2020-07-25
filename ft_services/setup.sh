@@ -34,8 +34,8 @@ minikube addons enable metallb
 # kubectl create configmap nginxconfigmap --from-file=default.conf
 # cd ../..
 
-echo "=> Build images."
-docker build -t nginx-image srcs/nginx
+# echo "=> Build images."
+# docker build -t nginx-image srcs/nginx
 
-echo "=> apply yaml."
-kubectl apply -f srcs/nginx.yaml
+# echo "=> apply yaml."
+# kubectl apply -f srcs/nginx.yaml

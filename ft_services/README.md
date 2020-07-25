@@ -212,3 +212,6 @@
 \# nginx service
 * https://kubernetes.io/ko/docs/concepts/services-networking/connect-applications-service/
 * https://github.com/kubernetes/examples/tree/master/staging/https-nginx/
+
+## 20.07.26 (일) 8일차
+
