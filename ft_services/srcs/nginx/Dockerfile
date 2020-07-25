@@ -12,14 +12,13 @@ RUN apk add --no-cache nginx openssl openssh openrc
 
 RUN adduser -D -g 'nginx www user' -h /home/www/ www
 
-# COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 # COPY nginx.conf /etc/nginx/nginx.conf
-# COPY index.html /www/index.html
 # 두 개 파일 차이점이 뭐임?
 COPY entrypoint.sh /tmp/
 
 RUN mkdir -p /run/nginx
-# RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -subj "/CN=nginxsvc/O=nginxsvc"
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -subj "/CN=nginxsvc/O=nginxsvc"
 
 EXPOSE 80 443 22
 
