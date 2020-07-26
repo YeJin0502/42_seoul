@@ -226,3 +226,7 @@
 
 \# replicaset
 * https://nirsa.tistory.com/136
+
+\# shell script export variable not working
+* https://stackoverflow.com/questions/10781824/export-not-working-in-my-shell-script
+* https://unix.stackexchange.com/questions/30189/how-can-i-make-environment-variables-exported-in-a-shell-script-stick-around
