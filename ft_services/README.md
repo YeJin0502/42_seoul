@@ -228,5 +228,7 @@
 * https://nirsa.tistory.com/136
 
 \# shell script export variable not working
+`sh setup.sh`로 클러스터가 종종 생성되지 않았었다.
+그 이유는 shell script를 sh 등으로 실행시키면 export가 작동하지 않았기 때문.
 * https://stackoverflow.com/questions/10781824/export-not-working-in-my-shell-script
 * https://unix.stackexchange.com/questions/30189/how-can-i-make-environment-variables-exported-in-a-shell-script-stick-around
