@@ -8,3 +8,7 @@ eval $(minikube docker-env)
 
 kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
 kubectl create -f srcs/metallb.yaml
+
+docker build -t nginx-image srcs/nginx
+
+kubectl create -f srcs/nginx.yaml
