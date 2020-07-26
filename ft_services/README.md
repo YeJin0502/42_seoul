@@ -217,14 +217,12 @@
 * https://hello-bryan.tistory.com/168?category=771155
 * https://blog.voidmainvoid.net/138 : yaml
 
-\# ssh key
-* https://opentutorials.org/module/432/3742
-
-\# replicaset
-* https://nirsa.tistory.com/136
-
 \# ssh
+* https://opentutorials.org/module/432/3742
 * http://egloos.zum.com/totoriver/v/2975161 : ssh_config vs sshd_config
 * https://storycompiler.tistory.com/112
 * https://thisblogfor.me/web/ssh/ : ssh 개념 설명
 * https://zetawiki.com/wiki/Sshd : sshd
+
+\# replicaset
+* https://nirsa.tistory.com/136
