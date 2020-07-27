@@ -252,6 +252,7 @@
 \# vsftpd.conf
 * https://zetawiki.com/wiki//etc/vsftpd/vsftpd.conf
 * https://2factor.tistory.com/96
+* https://purekid79.tistory.com/62 : 설정
 
 \# docker run p 옵션
 * https://soft.plusblog.co.kr/139

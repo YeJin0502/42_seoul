@@ -4,7 +4,7 @@ RUN apk update
 RUN apk add --no-cache vsftpd openssl openrc
 
 COPY entrypoint.sh /tmp
-COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
+COPY vsftpd2.conf /etc/vsftpd/vsftpd.conf
 RUN mkdir /srv/ftp
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/vsftpd/vsftpd.pem -out /etc/vsftpd/vsftpd.pem -subj "/CN=localhost"
@@ -17,6 +17,5 @@ RUN chmod 777 /etc/vsftpd.user_list
 # RUN echo "vsftpd: ALL" >> /etc/hosts.allow
 
 EXPOSE 20 21
-# 이걸 잘 모르겠음.
 
 ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
