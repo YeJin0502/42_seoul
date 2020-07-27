@@ -264,3 +264,6 @@
 * https://peemangit.tistory.com/66
 
 * `kubectl delete services,deployment -l app=ftps`
+
+\# tcp_wrappers is set to YES but no tcp wrapper support complined in
+* https://dgblog.tistory.com/167
