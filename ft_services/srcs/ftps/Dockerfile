@@ -4,6 +4,7 @@ RUN apk update
 RUN apk add --no-cache vsftpd openssl openrc
 
 ARG ip
+RUN echo $ip
 
 COPY entrypoint.sh /tmp
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
