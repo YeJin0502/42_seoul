@@ -228,7 +228,27 @@
 * https://nirsa.tistory.com/136
 
 \# shell script export variable not working
-`sh setup.sh`로 클러스터가 종종 생성되지 않았었다.
-그 이유는 shell script를 sh 등으로 실행시키면 export가 작동하지 않았기 때문.
+* `sh setup.sh`로 클러스터가 종종 생성되지 않았었다. 그 이유는 shell script를 sh 등으로 실행시키면 export가 작동하지 않았기 때문.
 * https://stackoverflow.com/questions/10781824/export-not-working-in-my-shell-script
 * https://unix.stackexchange.com/questions/30189/how-can-i-make-environment-variables-exported-in-a-shell-script-stick-around
+
+## 20.07.27 (월) 9일차
+
+\# ftp \# ftps
+* https://nhj12311.tistory.com/76
+* https://hamonikr.org/board_bFBk25/15985 : 개인 서버 구축 가이드 - ftp 서버
+* https://m.blog.naver.com/PostView.nhn?blogId=haejoon90&logNo=220740558965&proxyReferer=https:%2F%2Fwww.google.com%2F : ftp 사용법
+* https://heojea.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-vsftp%EC%82%AC%EC%9A%A9%EB%B2%95%EB%B0%8F-%EC%84%A4%EC%A0%95%EB%B0%A9%EB%B2%95: ftp 사용법 및 설정
+* https://systembash.com/evaluating-ftp-servers-proftpd-vs-pureftpd-vs-vsftpd/ : ftp 비교
+
+\# ftps alpine
+* https://www.opensourceforu.com/2015/03/set-up-an-ftps-server-in-linux/ : ftps linux
+* https://www.hiroom2.com/2018/09/01/alpinelinux-3-8-vsftpd-en/ : ftp alpine
+* https://goddaehee.tistory.com/73 : ftp linux
+
+\# docker ftp
+* https://lahuman.jabsiri.co.kr/135 : ftp 서버 구축하기
+
+\# vsftpd.conf
+* https://zetawiki.com/wiki//etc/vsftpd/vsftpd.conf
+* https://2factor.tistory.com/96
