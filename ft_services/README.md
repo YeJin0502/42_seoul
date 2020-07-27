@@ -267,3 +267,5 @@
 
 \# tcp_wrappers is set to YES but no tcp wrapper support complined in
 * https://dgblog.tistory.com/167
+
+\# kubectl apply vs create
