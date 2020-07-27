@@ -270,3 +270,6 @@
 * https://dgblog.tistory.com/167
 
 \# kubectl apply vs create
+
+## 20.07.28 (화) 10일차
+
