@@ -238,7 +238,7 @@
 * https://nhj12311.tistory.com/76
 * https://hamonikr.org/board_bFBk25/15985 : 개인 서버 구축 가이드 - ftp 서버
 * https://m.blog.naver.com/PostView.nhn?blogId=haejoon90&logNo=220740558965&proxyReferer=https:%2F%2Fwww.google.com%2F : ftp 사용법
-* https://heojea.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-vsftp%EC%82%AC%EC%9A%A9%EB%B2%95%EB%B0%8F-%EC%84%A4%EC%A0%95%EB%B0%A9%EB%B2%95: ftp 사용법 및 설정
+* https://heojea.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-vsftp%EC%82%AC%EC%9A%A9%EB%B2%95%EB%B0%8F-%EC%84%A4%EC%A0%95%EB%B0%A9%EB%B2%95 : ftp 사용법 및 설정
 * https://systembash.com/evaluating-ftp-servers-proftpd-vs-pureftpd-vs-vsftpd/ : ftp 비교
 
 \# ftps alpine
@@ -252,3 +252,6 @@
 \# vsftpd.conf
 * https://zetawiki.com/wiki//etc/vsftpd/vsftpd.conf
 * https://2factor.tistory.com/96
+
+\# docker run p 옵션
+* https://soft.plusblog.co.kr/139
