@@ -1,5 +1,7 @@
 FROM alpine
 
+ENV ip $ip
+
 RUN apk update
 RUN apk add --no-cache vsftpd openssl openrc
 
