@@ -10,5 +10,7 @@ kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifes
 kubectl create -f srcs/metallb.yaml
 
 docker build -t nginx-image srcs/nginx
+docker build -t ftps-image srcs/ftps
 
-kubectl create -f srcs/nginx.yaml
+kubectl create -f srcs/yaml/nginx.yaml
+kubectl create -f srcs/yaml/ftps.yaml

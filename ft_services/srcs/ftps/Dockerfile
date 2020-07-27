@@ -13,7 +13,7 @@ RUN adduser -D -g 'ftps gmoon user' -h /home/gmoon/ gmoon
 RUN echo "gmoon:gmoon" | chpasswd
 RUN echo "gmoon" >> /etc/vsftpd/vsftpd.userlist
 
-EXPOSE 21 30020
+EXPOSE 20 21
 # 이걸 잘 모르겠음.
 
 ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]

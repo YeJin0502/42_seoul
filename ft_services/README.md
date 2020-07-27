@@ -255,3 +255,10 @@
 
 \# docker run p 옵션
 * https://soft.plusblog.co.kr/139
+
+\# ftp active mode passive mode
+* https://sata.kr/entry/5BFTP5D20FTPEC9D9820Active20ModeEC998020Passive20Mode20ECB0A8EC9DB4ECA090
+* https://m.blog.naver.com/PostView.nhn?blogId=leekh8412&logNo=100152842034&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+\# ftp 20 21
+* https://peemangit.tistory.com/66

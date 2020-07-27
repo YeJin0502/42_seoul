@@ -52,9 +52,9 @@ spec:
         image: nginx-image
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
-          name: http
-        - containerPort: 443
-          name: https
-        - containerPort: 22
-          name: ssh
+          - containerPort: 80
+            name: http
+          - containerPort: 443
+            name: https
+          - containerPort: 22
+            name: ssh
