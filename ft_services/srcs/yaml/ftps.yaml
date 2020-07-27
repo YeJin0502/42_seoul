@@ -22,7 +22,7 @@ spec:
 
 apiVersion: apps/v1
 kind: Deployment
-metadate:
+metadata:
   name: ftps-Deployment
   labels:
     app: ftps
