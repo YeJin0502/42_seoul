@@ -32,7 +32,7 @@ spec:
     matchLabels:
       app: ftps
   template:
-    metadate:
+    metadata:
       labels:
         app: ftps
     spec:
