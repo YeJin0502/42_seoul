@@ -15,6 +15,7 @@ RUN adduser -D -g 'ftps gmoon user' -h /home/gmoon/ gmoon
 RUN echo "gmoon:gmoon" | chpasswd
 RUN printf "\npasv_address=$ip\n" >> /etc/vsftpd/vsftpd.conf
 RUN chown gmoon:gmoon /home/gmoon -R
+RUN chmod +x /tmp
 # RUN touch /etc/vsftpd.user_list
 # RUN chmod 777 /etc/vsftpd.user_list
 # RUN echo "gmoon" >> /etc/vsftpd.user_list
