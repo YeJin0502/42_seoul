@@ -262,3 +262,5 @@
 
 \# ftp 20 21
 * https://peemangit.tistory.com/66
+
+* `kubectl delete services,deployment -l app=ftps`
