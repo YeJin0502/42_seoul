@@ -57,6 +57,3 @@ spec:
               name: ftps-pasvmin
             - containerPort: 30021
               name: ftps-pasvmax
-      env:
-        - name: ip
-          value: $ip
