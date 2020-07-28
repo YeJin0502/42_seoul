@@ -11,6 +11,8 @@ kubectl apply -f srcs/yaml/metallb.yaml
 
 docker build -t nginx-image srcs/nginx
 docker build -t ftps-image srcs/ftps --build-arg ip=$ip
+docker build -t wordpress-image srcs/wordpress --build-arg ip=$ip
 
 kubectl create -f srcs/yaml/nginx.yaml
 kubectl create -f srcs/yaml/ftps.yaml
+kubectl create -f srcs/yaml/wordpress.yaml

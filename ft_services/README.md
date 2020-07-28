@@ -273,3 +273,17 @@
 
 ## 20.07.28 (화) 10일차
 
+\# 500 oops child died vsftpd
+* https://serverfault.com/questions/574722/vsftp-error-500-oops-child-died
+
+\# alpine wordpress
+* https://wiki.alpinelinux.org/wiki/WordPress
+
+\# apk add --no-cache
+* https://stackoverflow.com/questions/49118579/alpine-dockerfile-advantages-of-no-cache-vs-rm-var-cache-apk
+
+\# \#!/bin/sh 의미
+* https://storycompiler.tistory.com/101
+
+\# php option
+* http://www.ktword.co.kr/abbr_view.php?m_temp1=5729

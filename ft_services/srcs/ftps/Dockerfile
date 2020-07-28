@@ -23,4 +23,4 @@ RUN chmod +x /tmp
 
 EXPOSE 20 21 30020 30021
 
-ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
+ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
