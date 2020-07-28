@@ -287,3 +287,18 @@
 
 \# php option
 * http://www.ktword.co.kr/abbr_view.php?m_temp1=5729
+
+\# mysql vs mysql-client
+* https://stackoverflow.com/questions/6962890/what-is-the-difference-between-mysql-server-and-mysql-client
+
+\# my.cnf
+* https://mysqldba.tistory.com/26
+* https://zetawiki.com/wiki/MySQL_%EC%84%A4%EC%A0%95%ED%8C%8C%EC%9D%BC_my.cnf#cite_note-1
+
+\# mysqld
+* https://jjongwoo.tistory.com/29
+
+\# mysql bootstrap option
+* https://mysqldba.tistory.com/289
+* http://www.mysqlkorea.com/sub.html?mcode=manual&scode=01&m_no=21324&cat1=5&cat2=120&cat3=134&lang=k : MySQL코리아 - 한글매뉴얼 - mysqld 명령어 옵션
+* http://www.dbguide.net/db.db?cmd=view&boardUid=146579&boardConfigUid=9&boardIdx=127&boardStep=1 : 데이터 전문가 지식포털 - MySQL 가이드

@@ -16,7 +16,4 @@ RUN echo "Port 22" >> /etc/ssh/sshd_config
 
 EXPOSE 80 443 22
 
-# entryporint로 nginx -g 'daemon off;' 하면 안돼?
-# ssh는 아직 전혀 모르겠다. ㅠㅠ
-
-ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
+ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
