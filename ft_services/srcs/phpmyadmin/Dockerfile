@@ -8,6 +8,8 @@ RUN tar -xzvf phpMyAdmin-4.9.5-all-languages.tar.gz
 RUN rm phpMyAdmin-4.9.5-all-languages.tar.gz
 RUN mv phpMyAdmin-4.9.5-all-languages /etc/phpmyadmin
 
+COPY config.inc.php /etc/phpmyadmin
+
 EXPOSE 5000
 
 CMD [ "php", "-S", "0.0.0.0:5000", "-t", "/etc/phpmyadmin" ]
