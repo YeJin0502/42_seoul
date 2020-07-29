@@ -2,12 +2,17 @@ FROM alpine
 
 RUN apk update
 # RUN apk add --no-cache mysql
-RUN apk add mysql
+RUN apk add mysql mysql-client
+
+ARG ip
 
 RUN mkdir -p /run/mysqld
 COPY my.cnf /etc/mysql
 COPY mysql-init /tmp
 COPY entrypoint.sh /tmp
+COPY wordpress.sql /tmp
+RUN printf "환경변수가 잘 들어왔나? -> [$ip]\n"
+RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
 
 EXPOSE 3306
 

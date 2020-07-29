@@ -13,13 +13,14 @@ RUN mv wordpress /etc
 
 COPY wp-config.php /etc/wordpress
 # RUN sed -i "s/minikube_ip/$ip/g" /etc/wordpress/wp-config.php
+RUN printf "환경변수가 잘 들어왔나? -> [$ip]\n"
 RUN printf "\ndefine( 'WP_HOME', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 RUN printf "\ndefine( 'WP_SITEURL', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 
 
-COPY wordpress.sql /tmp
-RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
-COPY init-wordpress.sh /tmp
+# COPY wordpress.sql /tmp
+# RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
+# COPY init-wordpress.sh /tmp
 COPY entrypoint.sh /tmp
 
 EXPOSE 5050
