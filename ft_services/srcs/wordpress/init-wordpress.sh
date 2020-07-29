@@ -1,3 +1,4 @@
+sleep 5
 mysql --host=mysql-service --user=wordpress_user --password=password wordpress < /tmp/wordpress.sql
 # until [ $? != 1 ]
 # do
