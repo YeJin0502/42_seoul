@@ -311,3 +311,6 @@
 \# wordpress mysql minikube
 * https://kubernetes.io/ko/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/ : 공식 - wordpress와 mysql을 퍼시스턴스 볼륨에 배포하기
 * https://arisu1000.tistory.com/27849 : 쿠버네티스 볼륨
+
+\# error establishing a database connection
+* https://www.thewordcracker.com/basic/error-establishing-a-database-connection-error/ : 워드프레스에서 '데이터베이스 연결 중 오류'

@@ -11,8 +11,8 @@ RUN rm latest.tar.gz
 RUN mv wordpress /etc
 
 COPY wp-config.php /etc/wordpress
-RUN printf "\ndefine( 'WP_HOME', 'http://$ip:5050' );\n"
-RUN printf "\ndefine( 'WP_SITEURL', 'http://$ip:5050' );\n"
+RUN printf "\ndefine( 'WP_HOME', 'http://$ip:5050' );\n" >> wp-config.php
+RUN printf "\ndefine( 'WP_SITEURL', 'http://$ip:5050' );\n" >> wp-config.php
 
 EXPOSE 5050
 
