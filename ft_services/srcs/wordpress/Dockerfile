@@ -16,7 +16,9 @@ COPY wp-config.php /etc/wordpress
 RUN printf "\ndefine( 'WP_HOME', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 RUN printf "\ndefine( 'WP_SITEURL', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 
+
 COPY wordpress.sql /tmp
+RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
 COPY init-wordpress.sh /tmp
 COPY entrypoint.sh /tmp
 
