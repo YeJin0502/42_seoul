@@ -302,3 +302,12 @@
 * https://mysqldba.tistory.com/289
 * http://www.mysqlkorea.com/sub.html?mcode=manual&scode=01&m_no=21324&cat1=5&cat2=120&cat3=134&lang=k : MySQL코리아 - 한글매뉴얼 - mysqld 명령어 옵션
 * http://www.dbguide.net/db.db?cmd=view&boardUid=146579&boardConfigUid=9&boardIdx=127&boardStep=1 : 데이터 전문가 지식포털 - MySQL 가이드
+
+## 20.07.29 (수) 11일차
+
+\# persistentvolume vs persistentvolumeclaim
+* https://stackoverflow.com/questions/48956049/what-is-the-difference-between-persistent-volume-pv-and-persistent-volume-clai
+
+\# wordpress mysql minikube
+* https://kubernetes.io/ko/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/ : 공식 - wordpress와 mysql을 퍼시스턴스 볼륨에 배포하기
+* https://arisu1000.tistory.com/27849 : 쿠버네티스 볼륨
