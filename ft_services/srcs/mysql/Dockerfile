@@ -8,7 +8,7 @@ ARG ip
 
 RUN mkdir -p /run/mysqld
 COPY my.cnf /etc/mysql
-COPY init-db /tmp
+COPY init-db.sh /tmp
 COPY init-mysql /tmp
 COPY entrypoint.sh /tmp
 COPY wordpress.sql /tmp
