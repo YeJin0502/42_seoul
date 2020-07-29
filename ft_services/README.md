@@ -317,3 +317,6 @@
 
 \# nohup 명령어
 * https://medium.com/@jinnyjinnyjinjin/nohup-%EB%AA%85%EB%A0%B9%EC%96%B4%EB%A1%9C-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0-d66cc85d4f9
+
+## 20.07.30 (목) 12일차
+
