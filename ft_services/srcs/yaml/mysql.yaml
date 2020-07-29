@@ -73,5 +73,8 @@ spec:
               name: mysql-port
           volumeMounts:
             - name: mysql-pv
-              persistentVolumeClaim:
-                claimName: mysql-pvc
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-pv
+          persistentVolumeClaim:
+            claimName: mysql-pvc
