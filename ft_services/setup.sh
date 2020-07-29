@@ -18,3 +18,5 @@ docker build -t phpmyadmin-image srcs/phpmyadmin
 kubectl create -f srcs/yaml/nginx.yaml
 kubectl create -f srcs/yaml/ftps.yaml
 kubectl create -f srcs/yaml/wordpress.yaml
+kubectl create -f srcs/yaml/mysql.yaml
+kubectl create -f srcs/yaml/phpmyadmin.yaml
