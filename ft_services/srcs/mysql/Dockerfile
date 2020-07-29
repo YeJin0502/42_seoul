@@ -8,7 +8,8 @@ ARG ip
 
 RUN mkdir -p /run/mysqld
 COPY my.cnf /etc/mysql
-COPY mysql-init /tmp
+COPY init-db /tmp
+COPY init-mysql /tmp
 COPY entrypoint.sh /tmp
 COPY wordpress.sql /tmp
 RUN printf "환경변수가 잘 들어왔나? -> [$ip]\n"
