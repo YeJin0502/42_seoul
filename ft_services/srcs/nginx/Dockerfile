@@ -1,7 +1,8 @@
 FROM alpine
 
 RUN apk update
-RUN apk add --no-cache nginx openssl openssh openrc
+# RUN apk add --no-cache nginx openssl openssh openrc
+RUN apk add nginx openssl openssh openrc
 
 RUN adduser -D -g 'nginx www user' -h /home/www/ www
 RUN mkdir -p /run/nginx

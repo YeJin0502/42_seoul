@@ -1,7 +1,8 @@
 FROM alpine
 
 RUN apk update
-RUN apk add --no-cache mysql
+# RUN apk add --no-cache mysql
+RUN apk add mysql
 
 RUN mkdir -p /run/mysqld
 COPY my.cnf /etc/mysql

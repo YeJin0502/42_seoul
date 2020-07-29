@@ -1,7 +1,8 @@
 FROM alpine
 
 RUN apk update
-RUN apk add --no-cache vsftpd openssl openrc
+# RUN apk add --no-cache vsftpd openssl openrc
+RUN apk add vsftpd openssl openrc
 
 ARG ip
 
