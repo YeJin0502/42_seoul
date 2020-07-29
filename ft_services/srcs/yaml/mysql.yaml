@@ -24,7 +24,7 @@ metadata:
 spec:
   storageClassName: mysql-db
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   capacity:
     storage: 1Gi
   hostPath:
@@ -41,7 +41,7 @@ metadata:
 spec:
   storageClassName: mysql-db
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
