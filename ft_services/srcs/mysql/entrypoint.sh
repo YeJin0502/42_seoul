@@ -1,8 +1,8 @@
 mysql_install_db --user=root
+mysql -u root < /tmp/init_mysql
+mysql -u root wordpress < /tmp/wordpress.sql
 # mysqld --user=root --bootstrap < /tmp/init_mysql
-# mysql -u root < /tmp/init_mysql
-# mysql -u wordpress_user -p password wordpress < /tmp/wordpress.sql
-# mysqld_safe --user=root
+mysqld_safe -u root
 
 # nohup sh /tmp/init-db.sh &
 # mysql_install_db --user=mysql --datadir="/var/lib/mysql"
