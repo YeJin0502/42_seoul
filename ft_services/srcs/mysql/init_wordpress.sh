@@ -1,9 +1,9 @@
 #!/bin/sh
 
-until mysql
-do
-	echo "NO_UP"
-done
+# until mysql
+# do
+# 	echo "NO_UP"
+# done
 # 아니면 이거?
 
 mysql -u root < /tmp/init_mysql
