@@ -20,8 +20,7 @@ kind: PersistentVolume
 metadata:
   name: mysql-pv
   labels:
-    type: local
-spec:
+    type: mysql
   storageClassName: mysql-db
   accessModes:
     - ReadWriteMany
