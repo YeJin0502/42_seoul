@@ -1,4 +1,20 @@
-nohup ./init_wordpress.sh &
+#!/bin/sh
+
+# nohup ./init_wordpress.sh &
+
+mysql -u root < /tmp/init_mysql
+until [ $? != 1 ]
+do
+	sleep 1
+	mysql -u root < /tmp/init_mysql
+done
+
+mysql -u root --skip-password wordpress < /tmp/wordpress.sql
+until [ $? != 1 ]
+do
+	sleep 1
+	mysql -u root --skip-password wordpress < /tmp/wordpress.sql
+done
 
 /usr/bin/mysql_install_db --user=mysql --datadir="/var/lib/mysql"
 /usr/bin/mysqld_safe --datadir="/var/lib/mysql"
