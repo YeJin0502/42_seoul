@@ -3,11 +3,11 @@
 mysql -u root < /tmp/init_mysql
 
 mysql -u root --skip-password wordpress < /tmp/wordpress.sql
-until [ $? != 1 ]
-do
-	sleep 1
-	mysql -u root --skip-password wordpress < /tmp/wordpress.sql
-done
+# until [ $? != 1 ]
+# do
+# 	sleep 1
+# 	mysql -u root --skip-password wordpress < /tmp/wordpress.sql
+# done
 
 # until mysql
 # do
