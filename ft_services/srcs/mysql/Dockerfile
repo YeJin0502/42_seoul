@@ -14,6 +14,7 @@ COPY my.cnf /etc/mysql
 # RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
 COPY init_mysql /tmp
 COPY entrypoint.sh /tmp
+RUN chmod +x /tmp
 
 EXPOSE 3306
 
