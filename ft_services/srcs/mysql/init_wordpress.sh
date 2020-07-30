@@ -1,9 +1,6 @@
+#!/bin/sh
+
 mysql -u root < /tmp/init_mysql
-until [ $? != 1 ]
-do
-	sleep 1
-	mysql -u root < /tmp/init_mysql
-done
 
 mysql -u root --skip-password wordpress < /tmp/wordpress.sql
 until [ $? != 1 ]
