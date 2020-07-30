@@ -4,5 +4,5 @@
 
 nohup sh /tmp/init-db.sh &
 
-mysql_install_db --user=root --datadir="/var/lib/mysql"
+mysql_install_db --user=mysql --datadir="/var/lib/mysql"
 mysqld --datadir="/var/lib/mysql"

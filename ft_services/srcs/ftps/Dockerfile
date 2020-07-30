@@ -14,7 +14,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/vsftpd/vsft
 
 RUN adduser -D -g 'ftps gmoon user' -h /home/gmoon/ gmoon
 RUN echo "gmoon:gmoon" | chpasswd
-RUN printf "환경변수가 잘 들어왔나? -> [$ip]\n"
+RUN printf "CHECK MINIKUBE IP -> [$ip]\n"
 RUN printf "\npasv_address=$ip\n" >> /etc/vsftpd/vsftpd.conf
 RUN chown gmoon:gmoon /home/gmoon -R
 RUN chmod +x /tmp

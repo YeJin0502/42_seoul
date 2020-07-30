@@ -1,7 +1,7 @@
-# until mysql
-# do
-# 	echo -n "" > /dev/null
-# done
+until mysql
+do
+	echo "NO_UP" > /dev/null
+done
 
 mysql -uroot --skip-password < init-mysql
-mysql wordpress -uroot --skip-password < /tmp/wordpress.sql
+mysql wordpress -uroot --password= < /tmp/wordpress.sql

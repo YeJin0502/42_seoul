@@ -12,7 +12,7 @@ COPY init-db.sh /tmp
 COPY init-mysql /tmp
 COPY entrypoint.sh /tmp
 COPY wordpress.sql /tmp
-RUN printf "환경변수가 잘 들어왔나? -> [$ip]\n"
+RUN printf "CHECK MINIKUBE IP -> [$ip]\n"
 RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
 
 EXPOSE 3306
