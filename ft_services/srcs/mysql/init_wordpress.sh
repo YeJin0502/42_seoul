@@ -1,5 +1,10 @@
 #!/bin/sh
 
+until mysql
+do
+	echo "NO_UP"
+done
+
 mysql -u root < /tmp/init_mysql
 
 mysql -u root --skip-password wordpress < /tmp/wordpress.sql
