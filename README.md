@@ -3,16 +3,16 @@
 
 ***1 circle***
 * [x] [netwhat](https://github.com/moon9ua/42_seoul/tree/master/netwhat)
-* [x] [get_next_line](https://github.com/moon9ua/42_seoul/wiki/1.-get_next_line)
-* [x] [printf](https://github.com/moon9ua/42_seoul/wiki/1.-printf)
+* [x] [get_next_line](https://github.com/moon9ua/42_seoul/tree/master/get_next_line)
+* [x] [printf](https://github.com/moon9ua/42_seoul/tree/master/printf)
 
 ***2 circle***
-* [x] [ft_server](https://github.com/moon9ua/42_seoul/wiki/2.-ft_server)
-* [x] [cub3D](https://github.com/moon9ua/42_seoul/wiki/2.-cub3D)
+* [x] [ft_server](https://github.com/moon9ua/42_seoul/tree/master/ft_server)
+* [x] [cub3D](https://github.com/moon9ua/42_seoul/tree/master/cub3d)
 * [ ] exam rank 02
 
 ***3 circle***
-* [ ] [ft_services](https://github.com/moon9ua/42_seoul/wiki/3.-ft_services)
-* [x] [libasm](https://github.com/moon9ua/42_seoul/wiki/3.-libasm)
-* [x] [minishell](https://github.com/moon9ua/42_seoul/wiki/3.-minishell)
+* [ ] [ft_services](https://github.com/moon9ua/42_seoul/tree/master/ft_services)
+* [x] [libasm](https://github.com/moon9ua/42_seoul/tree/master/libasm)
+* [x] [minishell](https://github.com/moon9ua/42_seoul/tree/master/minishell)
 * [ ] exam rank 03
