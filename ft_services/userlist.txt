@@ -1,0 +1,2 @@
+gmoon:gmoon
+wordpress_user:password
