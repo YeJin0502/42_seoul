@@ -1,6 +1,7 @@
 # ft_server
 
-공부한 기록은 [노션](https://www.notion.so/ft_server-cb7a001bf3ab4b0a946519f2ae5b9c5d)으로.
+공부한 기록은 [노션](https://www.notion.so/ft_server-cb7a001bf3ab4b0a946519f2ae5b9c5d)으로.<br>
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/ft_server/subject_kr_by_gmoon.md)로.
 
 ### 참고자료
 

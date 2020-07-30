@@ -1,6 +1,7 @@
 # libasm
 
-공부한 기록은 [노션](https://www.notion.so/libasm-8ba41c0c897f4988b80d4fd6c01ac370)으로.
+공부한 기록은 [노션](https://www.notion.so/libasm-8ba41c0c897f4988b80d4fd6c01ac370)으로.<br>
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/libasm/subject_kr_by_gmoon.md)로.
 
 ### 참고자료
 

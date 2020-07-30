@@ -1,7 +1,7 @@
 # cub3d
 
-* 공부한 기록은 [노션](https://www.notion.so/cub3D-b821e70bc0de4b52ac9c3e0567f833c3)으로.
-* 내가 보려고 만든 [서브젝트 번역본](https://github.com/moon9ua/42_seoul/blob/master/minishell/subject_kr_by_gmoon.md).
+공부한 기록은 [노션](https://www.notion.so/cub3D-b821e70bc0de4b52ac9c3e0567f833c3)으로.<br>
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/minishell/subject_kr_by_gmoon.md)로.
 
 ### 레이캐스팅
 

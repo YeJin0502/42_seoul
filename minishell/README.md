@@ -1,10 +1,15 @@
+
 # :pineapple: PINE APPLE SHELL
+
 ***minishell by [gmoon](https://github.com/moon9ua) and [sanam](https://github.com/simian114).***<br>
 ***@ 42 Seoul***
 
 ![GIF](GIF.gif)
 
-공부한 기록은 [노션](https://www.notion.so/minishell-d7163467fb3b441f98b972b18e1447b8)으로.
+---
+
+공부한 기록은 [노션](https://www.notion.so/minishell-d7163467fb3b441f98b972b18e1447b8)으로.<br>
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/minishell/subject_kr_by_gmoon.md)로.
 
 ### 참고자료
 

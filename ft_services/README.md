@@ -1,5 +1,7 @@
 # ft_services
 
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/ft_services/subject_kr_by_gmoon.md)로.
+
 ## 20.07.06 1일차
 
 * https://subicura.com/2019/05/19/kubernetes-basic-1.html
