@@ -1,8 +1,8 @@
 ***0 circle***
-* [x] [libft](https://github.com/moon9ua/42_seoul/wiki/0.-libft)
+* [x] [libft](https://github.com/moon9ua/42_seoul/tree/master/libft)
 
 ***1 circle***
-* [x] [netwhat](https://github.com/moon9ua/42_seoul/wiki/1.-netwhat)
+* [x] [netwhat](https://github.com/moon9ua/42_seoul/tree/master/netwhat)
 * [x] [get_next_line](https://github.com/moon9ua/42_seoul/wiki/1.-get_next_line)
 * [x] [printf](https://github.com/moon9ua/42_seoul/wiki/1.-printf)
 
