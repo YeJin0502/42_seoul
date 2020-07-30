@@ -21,7 +21,7 @@ RUN sed -i "s/minikube_ip/$ip/g" /etc/wordpress/wp-config.php
 # RUN printf "\ndefine( 'WP_HOME', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 # RUN printf "\ndefine( 'WP_SITEURL', 'http://$ip:5050' );\n" >> /etc/wordpress/wp-config.php
 
-RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
+# RUN sed -i "s/192.168.99.154/$ip/g" /tmp/wordpress.sql
 RUN chmod 755 /tmp/*
 
 EXPOSE 5050
