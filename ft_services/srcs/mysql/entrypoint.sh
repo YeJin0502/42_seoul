@@ -1,6 +1,6 @@
 #!/bin/sh
 
-nohup ./init_wordpress.sh &
+nohup /tmp/init_wordpress.sh &
 
 # /usr/bin/mysql_install_db --user=mysql --datadir="/var/lib/mysql"
 # /usr/bin/mysqld_safe --datadir="/var/lib/mysql"
