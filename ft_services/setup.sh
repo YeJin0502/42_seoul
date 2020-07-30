@@ -1,10 +1,10 @@
 clear
 
 # export MINIKUBE_HOME=~/goinfre
-# minikube start --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-35000
-# eval $(minikube docker-env)
+minikube start --vm-driver=virtualbox --extra-config=apiserver.service-node-port-range=1-35000
+eval $(minikube docker-env)
 
-sh srcs/clean.sh
+# sh srcs/clean.sh
 
 # export ip=$(minikube ip)
 ip=$(minikube ip)
