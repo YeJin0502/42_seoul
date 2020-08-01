@@ -329,5 +329,14 @@
 \# wsl 쿠버네티스
 * https://blog.aliencube.org/ko/2018/06/04/running-kubernetes-on-wsl/
 
-## 20.07.31 (금) 13일차
+## 20.08.01 (토) 13일차
 
+\# influxDB, telegraf, grafana
+* https://portal.influxdata.com/downloads/ : influxDB 공식 - v1.8.1 다운로드
+* https://thenewstack.io/how-to-setup-influxdb-telegraf-and-grafana-on-docker-part-1/ : 도커
+* https://www.popit.kr/influxdb_telegraf_grafana_1 : 한국어
+* http://blog.naver.com/PostView.nhn?blogId=hanajava&logNo=221842160382&categoryNo=54&parentCategoryNo=40&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postList : 한국어
+
+\# 리눅스 디렉토리 구조
+* https://medium.com/harrythegreat/%EB%A6%AC%EB%88%85%EC%8A%A4-%EA%B8%B0%EC%B4%88-%EB%A3%A8%ED%8A%B8%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-b3e4871af4b3
+* https://webdir.tistory.com/101
