@@ -328,3 +328,6 @@
 
 \# wsl 쿠버네티스
 * https://blog.aliencube.org/ko/2018/06/04/running-kubernetes-on-wsl/
+
+## 20.07.31 (금) 13일차
+
