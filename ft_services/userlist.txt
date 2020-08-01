@@ -1,2 +1,3 @@
 gmoon:gmoon
 wordpress_user:password
+admin:password_admin (맞나?)
