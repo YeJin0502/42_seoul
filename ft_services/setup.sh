@@ -14,6 +14,7 @@ docker build -t mysql-image srcs/mysql --build-arg ip=$ip
 docker build -t phpmyadmin-image srcs/phpmyadmin
 docker build -t wordpress-image srcs/wordpress --build-arg ip=$ip
 docker build -t influxdb-image srcs/influxdb --build-arg ip=$ip
+docker build -t telegraf-image srcs/telegraf --build-arg ip=$ip
 docker build -t grafana-image srcs/grafana --build-arg ip=$ip
 
 # sh srcs/build_image.sh
@@ -26,6 +27,7 @@ kubectl create -f srcs/yaml/mysql.yaml
 kubectl create -f srcs/yaml/phpmyadmin.yaml
 kubectl create -f srcs/yaml/wordpress.yaml
 kubectl create -f srcs/yaml/influxdb.yaml
+kubectl create -f srcs/yaml/telegraf.yaml
 kubectl create -f srcs/yaml/grafana.yaml
 # kubectl create -f srcs/yaml
 # 순서가 유의한가?
