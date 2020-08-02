@@ -80,5 +80,5 @@ spec:
           persistentVolumeClaim:
             claimName: influxdb-pvc
         - name: docker-sock
-            hostPath:
-              path: /var/run/docker.sock
+          hostPath:
+            path: /var/run/docker.sock
