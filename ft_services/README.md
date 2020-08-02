@@ -352,3 +352,6 @@ how-to-setup-influxdb-telegraf-and-grafana-on-docker-part-1/ : 도커
 * https://semode.tistory.com/236
 * https://linux.systemv.pe.kr/influxdb-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%84%A4%EC%A0%95/
 * https://miiingo.tistory.com/94
+
+\# telegraf.conf \# telegraf input
+* https://support.cloudz.co.kr/support/solutions/articles/42000044793-telegraf-%EC%84%A4%EC%A0%95-%EA%B0%80%EC%9D%B4%EB%93%9C
