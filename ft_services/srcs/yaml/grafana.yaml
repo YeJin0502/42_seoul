@@ -12,6 +12,7 @@ spec:
     - port: 3000
       name: grafana-port
       nodePort: 3000
+      targetPort: 3000
 
 ---
 
@@ -37,4 +38,4 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
-              name: grafana
+              name: grafana-port
