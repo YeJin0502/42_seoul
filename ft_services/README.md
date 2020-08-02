@@ -345,3 +345,10 @@ how-to-setup-influxdb-telegraf-and-grafana-on-docker-part-1/ : 도커
 
 \# alpine apk add repository
 * https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
+
+## 20.08.02 (일) 14일차
+
+\# influxdb.conf
+* https://semode.tistory.com/236
+* https://linux.systemv.pe.kr/influxdb-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%84%A4%EC%A0%95/
+* https://miiingo.tistory.com/94
