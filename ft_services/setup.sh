@@ -14,7 +14,7 @@ docker build -t mysql-image srcs/mysql --build-arg ip=$ip
 docker build -t phpmyadmin-image srcs/phpmyadmin
 docker build -t wordpress-image srcs/wordpress --build-arg ip=$ip
 docker build -t influxdb-image srcs/influxdb
-docker build -t grafana-image srcs/grafana
+docker build -t grafana-image srcs/grafana --build-arg ip=$ip
 
 # sh srcs/build_image.sh
 
