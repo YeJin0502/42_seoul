@@ -12,6 +12,24 @@ spec:
     - port: 8086
       name: influxdb-port
       targetPort: 8086
+      nodePort: 8086
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: influxdb-pv
+  labels:
+    type: local
+spec:
+  storageClassName: influxdb-db
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /var/lib/influxdb
 
 ---
 
@@ -22,11 +40,12 @@ metadata:
   labels:
     app: influxdb
 spec:
+  storageClassName: influxdb-db
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 
 ---
 
