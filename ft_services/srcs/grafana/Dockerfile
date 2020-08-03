@@ -10,7 +10,7 @@ COPY defaults.ini /usr/share/grafana/conf/defaults.ini
 RUN sed -i "s/change_to_ip/$ip/g" /usr/share/grafana/conf/defaults.ini
 COPY dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards
 COPY influxdb.yaml /usr/share/grafana/conf/provisioning/datasources
-COPY dashboards/* /var/lib/grafana/dashboards
+COPY dashboards /var/lib/grafana/dashboards
 
 EXPOSE 3000
 
