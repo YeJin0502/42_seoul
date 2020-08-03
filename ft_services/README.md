@@ -1,11 +1,13 @@
 # ft_services
 
-## 참고자료 및 검색키워드
+내가 보려고 만든 서브젝트 번역본은 [여기](https://github.com/moon9ua/42_seoul/blob/master/ft_services/subject_kr_by_gmoon.md)로.
+
+## 참고자료
 
 * https://github.com/simian114/ft_services/blob/master/README.md
 * https://github.com/t0mm4rx/ft_services/blob/master/ReadMe.md
 
-자세한 것은 [history.md](https://github.com/moon9ua/42_seoul/blob/master/ft_services/history.md)를 참고.
+자세한 참고자료와 검색 키워드는 [공부기록](https://github.com/moon9ua/42_seoul/blob/master/ft_services/history.md)을 참고.
 
 ## 개선할 점
 
