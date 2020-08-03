@@ -5,5 +5,8 @@ kubectl create -f srcs/yaml/ftps.yaml
 kubectl create -f srcs/yaml/mysql.yaml
 kubectl create -f srcs/yaml/phpmyadmin.yaml
 kubectl create -f srcs/yaml/wordpress.yaml
+kubectl create -f srcs/yaml/influxdb.yaml
+kubectl create -f srcs/yaml/telegraf.yaml
+kubectl create -f srcs/yaml/grafana.yaml
 # kubectl create -f srcs/yaml
 # 순서가 유의한가?
