@@ -6,9 +6,6 @@ RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/test
 ARG ip
 
 COPY entrypoint.sh /tmp
-# COPY defaults.ini /usr/share/grafana/conf/defaults.ini
-# RUN sed -i "s/change_to_ip/$ip/g" /usr/share/grafana/conf/defaults.ini
-
 COPY dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards
 COPY influxdb.yaml /usr/share/grafana/conf/provisioning/datasources
 RUN mkdir -p /var/lib/grafana/dashboards

@@ -100,7 +100,7 @@
               {
                 "key": "app",
                 "operator": "=",
-                "value": "mysql"
+                "value": "influxdb"
               }
             ]
           }
@@ -109,7 +109,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "mysql-rx_bytes",
+        "title": "influxdb-rx_bytes",
         "tooltip": {
           "shared": true,
           "sort": 0,

@@ -100,7 +100,7 @@
               {
                 "key": "app",
                 "operator": "=",
-                "value": "mysql"
+                "value": "phpmyadmin"
               }
             ]
           }
@@ -109,7 +109,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "mysql-rx_bytes",
+        "title": "phpmyadmin-rx_bytes",
         "tooltip": {
           "shared": true,
           "sort": 0,
