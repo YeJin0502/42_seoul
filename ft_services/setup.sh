@@ -6,6 +6,8 @@ eval $(minikube docker-env)
 
 # sh srcs/clean.sh
 
+minikube dashboard &
+
 # export ip=$(minikube ip)
 ip=$(minikube ip)
 docker build -t nginx-image srcs/nginx
