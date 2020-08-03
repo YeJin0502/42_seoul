@@ -1,3 +1,5 @@
-gmoon:gmoon
-wordpress_user:password
-admin:password_admin (맞나?)
+ftps - gmoon:gmoon
+mysql - wordpress_user:password
+wordpress - admin:password_admin
+grafana - admin:admin
+ssh - admin:admin
