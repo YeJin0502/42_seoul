@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:01:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 22:24:18 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/06 23:04:49 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int main()
         std::string cmd;
 
         std::cout << "[gmoon] >> ";
-        std::cin >> cmd;
+        // getline(std::cin, cmd, '\n');
+        getline(std::cin, cmd, '\n');
         if (cmd == "EXIT")
             exit(0);
         else if (cmd == "ADD")
@@ -32,5 +33,7 @@ int main()
         else
             // std::cout << "올바르지 않은 명령입니다." << std::endl;
             std::cout << "Bad command." << std::endl;
+        std::cin.clear();
+        // std::cin.ignore();
     }
 }

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:30:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 22:33:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/06 22:45:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,14 @@ std::string Contact::fields_name[11] =
     "favorite_meal", "underwear_color", "darkest_secret"
 };
 
-// Contact::Contact()
-// {
-    
-// }
-
-// Contact::Contact(int index)
-// {
-//     this->index = index;
-// }
-
 void Contact::init(int index)
 {
     this->index = index;
-    std::cout << "Enter contact information." << std::endl;
+    // std::cout << "Enter contact information." << std::endl;
     for (int i = 0; i < 11; i++)
     {
-        // std::cout << fields_name[i] << "를 입력하세요." << std::endl;
-        std::cout << fields_name[i] + ": ";
+        std::cout << fields_name[i] << "를 입력하세요: ";
+        // std::cout << fields_name[i] + ": ";
         std::cin >> fields[i];
     }
 }
