@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:30:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 21:34:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/06 22:33:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ std::string Contact::fields_name[11] =
     "postal_address", "email_address", "phone_number", "birthday_date",
     "favorite_meal", "underwear_color", "darkest_secret"
 };
-// 뭐지? 어떻게 초기화하는거지?
 
 // Contact::Contact()
 // {
@@ -30,17 +29,14 @@ std::string Contact::fields_name[11] =
 //     this->index = index;
 // }
 
-// void Contact::init_index(int index)
-// {
-//     this->index = index;
-// }
-
 void Contact::init(int index)
 {
     this->index = index;
+    std::cout << "Enter contact information." << std::endl;
     for (int i = 0; i < 11; i++)
     {
-        std::cout << fields_name[i] << "를 입력하세요." << std::endl;
+        // std::cout << fields_name[i] << "를 입력하세요." << std::endl;
+        std::cout << fields_name[i] + ": ";
         std::cin >> fields[i];
     }
 }
@@ -61,7 +57,5 @@ void Contact::display_summary()
 void Contact::display_fields()
 {
     for (int i = 0; i < 11; i++)
-    {
         std::cout << fields_name[i] + ": " + fields[i] << std::endl;
-    }
 }

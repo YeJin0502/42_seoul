@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:08:45 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 21:32:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/06 22:34:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ class Contact
     public:
         // Contact();
         // Contact(int index);
-        // void init_index(int index);
         void init(int index);
         void display_summary();
         void display_fields();

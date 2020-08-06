@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:01:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 22:00:17 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/06 22:24:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main()
         else if (cmd == "SEARCH")
             book.search();
         else
-            std::cout << "올바르지 않은 명령입니다." << std::endl;
+            // std::cout << "올바르지 않은 명령입니다." << std::endl;
+            std::cout << "Bad command." << std::endl;
     }
 }
