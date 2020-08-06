@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   book.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/04 16:30:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/04 19:21:15 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/06 19:17:26 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/06 21:32:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef BOOK_HPP
+# define BOOK_HPP
 
-class contact
+# include <iostream>
+# include "contact.hpp"
+
+class Book
 {
     private:
-        char *first;
-        char *last;
-        char *nickname;
-        char *login;
-        char *postal;
-        char *email;
-        char *phone;
-        char *birthday;
-        char *favorite;
-        char *underwear;
-        char *darkest;
+        Contact contacts[8];
+        int     count;
+
     public:
-        void add()
-        {
-            ;
-        }
-        int exit()
-        {
-            return (0);
-        }
+        Book();
+        ~Book();
+        void add();
+        void search();
 };
+
+#endif
