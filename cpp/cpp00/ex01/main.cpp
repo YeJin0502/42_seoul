@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:01:54 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 23:04:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/07 00:07:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int main()
         std::string cmd;
 
         std::cout << "[gmoon] >> ";
-        // getline(std::cin, cmd, '\n');
         getline(std::cin, cmd, '\n');
         if (cmd == "EXIT")
             exit(0);
@@ -31,9 +30,6 @@ int main()
         else if (cmd == "SEARCH")
             book.search();
         else
-            // std::cout << "올바르지 않은 명령입니다." << std::endl;
-            std::cout << "Bad command." << std::endl;
-        std::cin.clear();
-        // std::cin.ignore();
+            std::cout << "올바르지 않은 명령입니다." << std::endl;
     }
 }

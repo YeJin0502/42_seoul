@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 16:30:38 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 22:45:42 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/07 00:07:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ std::string Contact::fields_name[11] =
 void Contact::init(int index)
 {
     this->index = index;
-    // std::cout << "Enter contact information." << std::endl;
     for (int i = 0; i < 11; i++)
     {
         std::cout << fields_name[i] << "를 입력하세요: ";
-        // std::cout << fields_name[i] + ": ";
-        std::cin >> fields[i];
+        getline(std::cin, fields[i], '\n');
     }
 }
 
 void Contact::display_summary()
 {
     std::cout << "|" << std::setw(10) << index << "|";
-    for (int i = first_name; i <= nickname; i++) // enum의 장점은 가독성?
+    for (int i = first_name; i <= nickname; i++)
     {
         if (fields[i].length() > 10)
             std::cout << fields[i].substr(0, 9) + "." << "|";

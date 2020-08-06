@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 19:08:45 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/06 22:46:40 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/07 00:08:07 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Contact
         int                 index;
         std::string         fields[11];
         static std::string  fields_name[11];
-        
+
         enum fields_name {
             first_name = 0, last_name, nickname, login,
             postal_address, email_address, phone_number, birthday_date,
