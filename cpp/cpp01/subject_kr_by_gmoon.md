@@ -39,8 +39,8 @@ In both cases, the Pony objects must not exist after the function hands off cont
 
 | Exercies : 02 |
 | --- |
-| 제출 디렉토리: ex01/ |
-| 제출할 파일: ex01.cpp |
+| 제출 디렉토리: ex02/ |
+| 제출할 파일: ex02.cpp |
 | 금지 함수: 없음 |
 
 우선 **Zombie** 클래스를 만드세요. type과 name을 최소한 포함하고, **announce()** 멤버 함수를 추가하세요. 이 함수는 다음을 출력합니다: *<name (type)> Braiiiiiiinnnssss...*
@@ -54,3 +54,31 @@ In both cases, the Pony objects must not exist after the function hands off cont
 당신은 당신이 만든 것이 제대로 작동하는지 증명해 줄 main이 포함된 완전한 프로그램을 제출해야 합니다. 예를 들어, 새로 만들어진 좀비들이 announce하게 하세요.
 
 이제 진짜 요점입니다: 당신의 좀비들은 적절한 시기에 파괴되어야 합니다(즉 더이상 그들이 필요하지 않을 때). 또한 좀비들은 적절한 방식으로 할당되어야 합니다. 어떤 때에는 스택에 할당하는 것이 적절할 것이고, 어떨 때에는 힙이 더 나을 것입니다. 당신은 점수를 얻기 위해 왜 그런 선택을 했는지 정당화해야 합니다.
+
+## Exercise 03: Moar brainz!
+
+| Exercies : 03 |
+| --- |
+| 제출 디렉토리: ex03/ |
+| 제출할 파일: Zombie.cpp Zombie.hpp ZombieHorde.cpp ZombieHorde.hpp main.cpp |
+| 금지 함수: 없음 |
+
+앞에서 만들었던 Zombie 클래스를 다시 사용해서 ZombieHorde 클래스를 만드세요.
+
+이 클래스는 정수 N을 사용하는 생성자를 가질 것입니다. 생성 시, 랜덤한 이름을 가진 N개의 좀비 객체를 할당하고 저장해야 합니다. 그 후 각 좀비 객체에 대해 announce() 함수를 호출하는 announce() 함수를 가집니다.
+
+당신은 모든 좀비 객체를 단일 할당해야 하며, ZombieHorde가 파괴될 때 해제하여야 합니다. (You must allocate all the Zombie objects in a single allocation, and release them when the ZombieHorde it destroyed.)
+
+평소처럼 메인에 테스트를 제공하고 당신의 선택을 정당화하십시오.
+
+## Exercise 04: HI THIS IS BRAIN
+
+| Exercies : 04 |
+| --- |
+| 제출 디렉토리: ex04/ |
+| 제출할 파일: ex04.cpp |
+| 금지 함수: 없음 |
+
+"HI THIS IS BRAIN" 문자열을 포인터로, 레퍼런스로 가리키는 프로그램을 만드세요.
+
+포인터를 이용해 출력하고, 레퍼런스를 이용해 출력하세요.
