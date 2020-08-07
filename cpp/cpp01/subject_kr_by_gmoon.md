@@ -43,13 +43,13 @@ In both cases, the Pony objects must not exist after the function hands off cont
 | 제출할 파일: ex01.cpp |
 | 금지 함수: 없음 |
 
-우선 Zombie 클래스를 만드세요. type과 name을 최소한 포함하고, announce() 멤버 함수를 추가하세요. 이 함수는 다음을 출력합니다.
+우선 **Zombie** 클래스를 만드세요. type과 name을 최소한 포함하고, **announce()** 멤버 함수를 추가하세요. 이 함수는 다음을 출력합니다: *<name (type)> Braiiiiiiinnnssss...*
 
-<name (type)> Braiiiiiiinnnssss...
+실제로는 type과 name만 출력하면 어떤 내용이어도 상관은 없습니다.
 
-그 후, ZombieEvent 클래스를 만드세요. 이 클래스는  객체의 타입을 저장하는 setZombieType 함수를 가집니다. 그리고 `Zombie* newZombie(std::string name)` 함수는 선택된 타입으로 좀비를 생성하고, 이름을 붙이고, 리턴합니다.
+그 후, **ZombieEvent** 클래스를 만드세요. 이 클래스는 객체의 타입을 저장하는 **setZombieType** 함수를 가집니다. 그리고 **Zombie* newZombie(std::string name)** 함수는 선택된 타입으로 좀비를 생성하고, 이름을 붙이고, 리턴합니다.
 
-또한 randomChump 함수를 만들어야 합니다. 이 함수는 랜덤 이름을 가지는 좀비를 생성하고, announce합니다. 랜덤의 방법은 마음대로 정할 수 있습니다. 진짜로 랜덤한 이름이건, 일정 보기 중 랜덤을 선택하는 것이건, 상관 없습니다.
+또한 **randomChump** 함수를 만들어야 합니다. 이 함수는 랜덤 이름을 가지는 좀비를 생성하고, announce합니다. 랜덤의 방법은 마음대로 정할 수 있습니다. 진짜로 랜덤한 이름이건, 일정 보기 중 랜덤을 선택하는 것이건, 상관 없습니다.
 
 당신은 당신이 만든 것이 제대로 작동하는지 증명해 줄 main이 포함된 완전한 프로그램을 제출해야 합니다. 예를 들어, 새로 만들어진 좀비들이 announce하게 하세요.
 
