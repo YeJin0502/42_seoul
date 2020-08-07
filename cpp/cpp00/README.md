@@ -1,4 +1,4 @@
-# cpp_module_00
+# cpp00
 
 \# cpp
 * https://modoocode.com/135 : 모두의코드
