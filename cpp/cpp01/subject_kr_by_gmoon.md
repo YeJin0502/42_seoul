@@ -82,3 +82,12 @@ In both cases, the Pony objects must not exist after the function hands off cont
 "HI THIS IS BRAIN" 문자열을 포인터로, 레퍼런스로 가리키는 프로그램을 만드세요.
 
 포인터를 이용해 출력하고, 레퍼런스를 이용해 출력하세요.
+
+## Exercise 05: HI BRAIN THIS IS HUMAN
+
+| Exercies : 05 |
+| --- |
+| 제출 디렉토리: ex05/ |
+| 제출할 파일: Brain.cpp Brain.hpp Human.cpp Human.hpp main.cpp |
+| 금지 함수: 없음 |
+
