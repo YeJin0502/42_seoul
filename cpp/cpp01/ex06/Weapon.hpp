@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 18:09:55 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/08 18:26:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/08 20:49:43 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Weapon
         std::string   type_;
 
     public:
-        // Weapon();
+        Weapon();
         Weapon(std::string type);
         void                setType(std::string type);
         const std::string&  getType();
