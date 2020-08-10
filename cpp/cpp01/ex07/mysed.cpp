@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 04:22:06 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/10 06:55:28 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/10 16:26:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ std::string Mysed::replace(std::string line)
     int index;
 
     while ((index = line.find(s1_)) != -1)
-    {
         line.replace(index, s1_.length(), s2_);
-    }
     return (line);
 }
 
@@ -34,14 +32,16 @@ void Mysed::mysed()
 {
     std::ifstream in(filename_);
     std::string line;
+
+    if (filename_.length() == 0 || s1_.length() == 0 || s2_.length() == 0)
+        throw "비어있는 인자가 있습니다.";
+    if (!in.is_open())
+        throw "파일을 열 수 없습니다.";
+
     std::ofstream out(filename_ + ".replace");
 
-    if (!in.is_open())
-    {
-        std::cout << "파일을 찾을 수 없습니다." << std::endl;
-        return ;
-        // 오류 처리를 공부해야 할 듯? 예를 들어 throw.
-    }
+    if (!out.is_open())
+        throw "replace 파일을 생성할 수 없습니다.";
     while (getline(in, line))
     {
         out << replace(line);
@@ -51,20 +51,3 @@ void Mysed::mysed()
 }
 
 // 어짜피 목적 자체가 mysed를 실행하는 건데... 생성자에 넣어버리면 안되나? 오류 처리가 까다로워지는 걸까?
-
-// std::ifstream in(argv[1]);
-// std::string line;
-// std::string content;
-
-// // while (in.peek() != EOF) // 원래는 while (in) 이었는데 이건 한줄을 더 출력함... 정확한 공부 필요.
-// while (getline(in, line)) // getline이 정확히 뭘 반환하지?
-// {
-//     content.append(line);
-//     if (!in.eof())
-//         content.append("\n");
-// }
-// in.close();
-// std::cout << content << std::endl;
-
-// content를 모두 저장한 뒤 바꾸는 것. - 이 방법이 직관적으로 떠오르긴 함.
-// 한 라인 씩 단어 교체를 진행하고 파일에 쓰는 것. - 더 효율적일까?
