@@ -84,3 +84,74 @@ Destructor called
 Destructor called
 $>
 ```
+
+## Exercise 01: Towards a more useful fixed point class
+
+| Exercise : 01 |
+| --- |
+| 제출 디렉토리: ex01/ |
+| 제출할 파일: Fixed.class.hpp and Fixed.class.cpp, or Fixed.hpp and Fixed.cpp, or Fixed.h and Fixed.cc. Pick one, I don’t care unless it’s stupid. |
+| 허용 함수: roundf (from <cmath>) |
+
+ex00은 좋은 시작이었지만, 아직 우리의 클래스는 고정 소수점 값 0.0을 나타내는 것 말고는 쓸모가 없습니다. 다음의 public 생성자와 멤버함수를 당신의 클래스에 추가하세요:
+* constant 정수를 매개변수로 받아서 고정 소수점(8) 값으로 변환하는 생성자. fractional bits 값은 ex00처럼 초기화됩니다.
+* constant floating point를 매개변수로 받아서 고정 소수점(8) 값으로 변환하는 생성자. fractional bits 값은 ex00처럼 초기화됩니다.
+* 멤버함수 `float toFloat(void) const;` 이것은 고정 소수점 값을 floating point value로 변환합니다.
+* 멤버함수 ₩int toInt(void) const;` 이것은 고정 소수점 값을 정수 값으로 변환합니다.
+
+또한 당신은 다음의 함수 오버로드를 헤더와 소스 파일에 추가할 것입니다:
+* << 연산자 오버로드. 이것은 고정 소수점 값의 부동 소수점 표현을 매개변수 아웃풋 스트림으로 보낼 것입니다.
+
+``` c++
+#include <iostream>
+
+int main(void)
+{
+    Fixed a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
+
+    a = Fixed(1234.4321f);
+
+    std::cout << "a is " << a << std::endl;
+    std::cout << "b is " << b << std::endl;
+    std::cout << "c is " << c << std::endl;
+    std::cout << "d is " << d << std::endl;
+
+    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+
+    return 0;
+}
+```
+
+코드는 다음과 같습니다:
+결과는 다음처럼 나와야 합니다:
+```
+$> clang++ -Wall -Wextra -Werror Fixed.class.cpp main.cpp
+$> ./a.out
+Default constructor called
+Int constructor called
+Float constructor called
+Copy constructor called
+Assignation operator called
+Float constructor called
+Assignation operator called
+Destructor called
+a is 1234.43
+b is 10
+c is 42.4219
+d is 10
+a is 1234 as integer
+b is 10 as integer
+c is 42 as integer
+d is 10 as integer
+Destructor called
+Destructor called
+Destructor called
+Destructor called
+$>
+```

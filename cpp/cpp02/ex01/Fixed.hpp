@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:39:01 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/11 20:19:06 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/11 20:42:53 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,19 @@ class Fixed
 
     public:
         Fixed();
+        Fixed(const int value);
+        Fixed(const float value);
         ~Fixed();
         Fixed(const Fixed& ref);
+
         Fixed &operator = (const Fixed& ref); // 연산자 오버로딩을 집가서 봐야. &는 왜 붙이는걸까?
+
         int getRawBits() const;
         void setRawBits(int const raw);
+        float toFloat() const;
+        int toInt() const;
 };
+
+// << 는 왜 바깥에 하는걸까? 연산자 오버로딩에 대해 공부가 필요하다.
 
 #endif

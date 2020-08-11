@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:38:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/11 20:30:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/11 20:44:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ Fixed::Fixed()
     std::cout << "Default constructor called" << std::endl;
 
     fixed_point_value_ = 0;
+}
+
+Fixed::Fixed(const int value)
+{
+    fixed_point_value_ = value << BITS_;
+    // 이게 무슨 뜻? 고정 소수점과 비트 연산자, 컴퓨터과학 등에 대해 공부 필요. 
+}
+
+Fixed::Fixed(const float value)
+{
+    // ...
 }
 
 Fixed::~Fixed()
@@ -51,4 +62,14 @@ int Fixed::getRawBits() const
 void Fixed::setRawBits(int const raw)
 {
     fixed_point_value_ = raw;
+}
+
+float Fixed::toFloat() const
+{
+    // ...
+}
+
+int Fixed::toInt() const
+{
+    // ...
 }
