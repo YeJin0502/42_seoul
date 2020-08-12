@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoon <gmoon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:38:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/11 20:30:04 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/12 21:05:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &ref)
+Fixed::Fixed(const Fixed& ref)
 {
     std::cout << "Copy constructor called" << std::endl;
 
     *this = ref;
 }
 
-Fixed &Fixed::operator=(const Fixed &ref) // 이렇게 쓰는거 맞나?
+Fixed& Fixed::operator = (const Fixed& ref)
 {
     std::cout << "Assignation operator called" << std::endl;
 
@@ -45,7 +45,7 @@ int Fixed::getRawBits() const
 {
     std::cout << "getRawBits member function called" << std::endl;
 
-    return (fixed_point_value_); // 로우 비트가 뭔지를 모르겠음. 고정 소수점을 몰라서 ㅠㅠ
+    return (fixed_point_value_);
 }
 
 void Fixed::setRawBits(int const raw)

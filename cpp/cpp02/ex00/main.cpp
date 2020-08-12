@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoon <gmoon@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 17:16:12 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/11 17:17:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/12 21:04:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int main(void)
     Fixed c;
 
     c = b;
+    // a.setRawBits(11);
+    // b.setRawBits(22);
     std::cout << a.getRawBits() << std::endl;
     std::cout << b.getRawBits() << std::endl;
     std::cout << c.getRawBits() << std::endl;
@@ -26,7 +28,6 @@ int main(void)
 }
 
 /*
-// 결과
 Default constructor called
 Copy constructor called
 Assignation operator called // <-- This line may be missing depending on your implementation
