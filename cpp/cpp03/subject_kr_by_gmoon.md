@@ -1,0 +1,84 @@
+# C++ - Module 03
+
+Inheritance
+
+## 일반 지침
+
+cpp00과 동일.
+
+## Exercise 00: Aaaaand... OPEN!
+
+| Exercise : 00 |
+| --- |
+| 제출 디렉토리: ex00/ |
+| 제출할 파일: FragTrap.cpp FragTrap.hpp main.cpp |
+| 금지 함수: 없음 |
+
+여기에서 당신은 FR4G-TP 돌격 로봇/신발상자를 모델링하는 클래스를 만들어야 합니다.
+
+클래스는 FragTrap으로 불리며, 다음의 속성들을 지니며, 이 특정 값들로 초기화됩니다:
+
+* Hit Points (100)
+* Max hit points (100)
+* Energy points (100)
+* Max energy points (100)
+* Level (1)
+* Name (Parameter of constructor)
+* Melee attack damage (30)
+* Ranged attack damage (20)
+* Armor damage reduction (5)
+
+당신은 또한 이것을 더 생명체처럼 만들기 위해 몇 가지 함수들을 추가할 것입니다:
+
+* rangedAttack(std::string const & target)
+* meleeAttack(std::string const & target)
+* takeDamage(unsigned int amount)
+* beRapaired(unsigned int amount)
+
+모든 함수들에서 당신은 무슨 일이 일어났는 지를 묘사하도록 무엇인가를 표시해야 합니다. 예를 들어, rangedAttack 함수는 아마 이런 것을 표시할 수 있겠죠:
+
+`FR4G-TP <name> attacks <target> at range, causing <damage> points of damage!`
+
+생성자와 소멸자 또한 사람들이 이것이 적절히 호출되었는지를 볼 수 있도록 무엇인가를 표시해야 합니다. 이러한 문구가 재밌는 참조일 경우, 보너스 포인트를 받을 것입니다. (만약 FR4G-TP를 모르신다면, 최소한 구글링 해보시고, 적절한 인용을 사용하세요.)
+
+몇 가지 제약이 있습니다:
+* hit points의 숫자는 max hit points 숫자를 초과할 수 없습니다. energy points 또한 마찬가지입니다. 예를 들어, 만약 너무 많은 HP를 회복하였다면 max HP number로 설정해야 할 것입니다. 마찬가지로, 이것들은 0 이하로 떨어질 수 없습니다.
+* 데미지를 입을 경우, 당신은 armor damage reduction을 고려해야 합니다. (When you take damage, you have to take your armor damage reduction into account.)
+
+타겟에게 세미-랜덤한 공격의 효과를 주는 vaulthunter_dot_exe(std::string const & target) 함수를 추가함으로서 마치세요. 이 함수가 호출될 때마다 최소 다섯 개의 가능한 공격들 중에서 랜덤하게 선택된 재미있는 공격을 실행합니다. 어떤 방법도 상관없지만, 더 방법이 우아할수록 좋습니다. 이 기능을 실행하려면 25 energy points가 필요합니다. 충분한 energy points가 없다면 에너지가 부족하다는 것을 표시하는 것 외에는 아무 것도 하지 않습니다.
+
+당신은 코드가 잘 작동한다는 것을 증명할 충분한 테스트들과 함께 메인 문을 제출해야 합니다.
+
+## Exercise 01: Serena, my love!
+
+| Exercise : 01 |
+| --- |
+| 제출 디렉토리: ex01/ |
+| 제출할 파일: 앞의 exercise 파일 + ScavTrap.cpp ScavTrap.hpp |
+| 금지 함수: 없음 |
+
+충분한 클랩트랩이 더 없기 때문에, 이제 우리는 약간 다른 목적을 제공하는 또 다른 클랩트랩을 만들 것입니다: 악의 은신처가 될 문을 관리하고, 들어오려는 사람들에게 도전할 것입니다. (Manning the door of your soon-to-be evil lair, and challenging people who want to come in.)
+
+클래스의 이름은 ScavTrap이고 다음의 속성을 가집니다:
+
+* Hit points (100)
+* Max hit points (100)
+* Energy points (50)
+* Max energy points (50)
+* Level
+* Name (생성자의 매개변수)
+* Melee attack damage (20)
+* Ranged attack damage (15)
+* Armor damage reduction (3)
+
+FragTrap과 같은 함수를 추가하세요. 하지만 생성자, 소멸자, 공격들은 다른 결과를 출력해야 합니다. 결국, 클랩트랩은 어느 정도의 개인적 특성을 가져야만 합니다. ( After all, a Claptrap has to have some measure of individuality.)
+
+하나의 예외는 ScavTrap은 vaulthunter_dot_exe 함수를 가지지 않는다는 것입니다. 대신에 challengeNewcomer 함수를 가지고, 이 함수는 여러 개의 (재밌는) 도전 중 하나를 랜덤하게 선택하고 표준 출력에 내보냅니다.
+
+main 함수를 두 클래스를 테스트하기 위해 확장하세요.
+
+## Exercise 02: Repetitive work
+
+## Exercise 03: Now it's easier!
+
+## Exercise 04: Ultimate assault showbox
