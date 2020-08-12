@@ -97,4 +97,24 @@ ClapTrap 클래스에는 자체 생성자와 소멸자 메세지를 가집니다
 
 ## Exercise 03: Now it's easier!
 
+| Exercise : 03 |
+| --- |
+| 제출 디렉토리: ex03/ |
+| 제출할 파일: 앞의 exercise 파일 + NinjaTrap.cpp NinjaTrap.hpp |
+| 금지 함수: 없음 |
+
+지금까지 만든 모든 것을 이용해서, 다음의 속성을 가지는 NunjaTrap 클래스를 만드세요:
+
+* Hit Points (60)
+* Max hit points (60)
+* Energy points (120)
+* Max energy points (120)
+* Level (1)
+* Name (생성자의 매개변수)
+* Melee attack damage (60)
+* Ranged attack damage (5)
+* Armor damage reduction (0)
+
+이것의 특별한 공격은 ninjaShoebox 함수가 될 것입니다. 동일한 시그니처를 가진 여러 함수로, 각각 다른 Claptrap(NinjaTrap도 포함)을 매개변수로 참조하여 다른 행동을 합니다. 안타깝게도 아직은 어떠한 Claptrap도 사용할 방법이 없지만, 특정 방법으로 반응합니다. 오, 아마... 내일 보게 되겠네요. 당신이 뭘 하는지는 모르겠지만, 어쨌거나 재미있게 만들어보세요.
+
 ## Exercise 04: Ultimate assault showbox
