@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:38:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/12 21:11:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/12 21:30:11 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ Fixed& Fixed::operator = (const Fixed& ref)
     std::cout << "Assignation operator called" << std::endl;
 
     fixed_point_value_ = ref.getRawBits();
-    return (*this);
+    return (*this); // 이 부분 헷갈림.
 }
 
 int Fixed::getRawBits() const
