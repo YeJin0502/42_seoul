@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:38:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/12 20:13:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/12 21:11:12 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ Fixed::Fixed(const Fixed& ref)
     *this = ref;
 }
 
-Fixed &Fixed::operator = (const Fixed& ref) // 이거 반환값이 헷갈림.
+Fixed& Fixed::operator = (const Fixed& ref)
 {
     std::cout << "Assignation operator called" << std::endl;
 
