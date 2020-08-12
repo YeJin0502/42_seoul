@@ -79,6 +79,22 @@ main 함수를 두 클래스를 테스트하기 위해 확장하세요.
 
 ## Exercise 02: Repetitive work
 
+| Exercise : 02 |
+| --- |
+| 제출 디렉토리: ex02/ |
+| 제출할 파일: 앞의 exercise 파일 + ClapTrap.cpp ClapTrap.hpp |
+| 금지 함수: 없음 |
+
+클랩트랩들을 만드는 것이 아마 신경 쓰이기 시작했을 것입니다. 그렇죠?
+
+Well, before you can work less, you have to work more.
+
+이제 당신은 ClapTrap 클래스를 만들 것입니다. FragTrap과 ScavTrap은 이것으로부터 상속된 것이죠.
+
+모든 공통 함수를 ClapTrap 클래스에 배치해야하지만, 특정 함수들은 그대로 유지해야 합니다. 즉, FragTrap과 ScavTrap 클래스에는 두 클래스 모두에 공유되지 않는 것들만 있어야하고, 두 클래스 모두에 공유되는 것들은 부모 클래스에 있어야합니다.
+
+ClapTrap 클래스에는 자체 생성자와 소멸자 메세지를 가집니다. 또한 적절한 생성자/소멸자 연결이 나타나야 합니다. (FragTrap을 만들 때, ClapTrap을 만드는 것부터 시작해야 합니다. 소멸자는 반대의 순서입니다.) 테스트들은 이것을 보여주어야 합니다.
+
 ## Exercise 03: Now it's easier!
 
 ## Exercise 04: Ultimate assault showbox
