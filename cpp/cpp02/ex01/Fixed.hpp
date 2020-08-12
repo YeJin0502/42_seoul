@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:39:01 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/12 21:07:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/12 21:08:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
 
 class Fixed
 {
@@ -28,7 +29,7 @@ class Fixed
         ~Fixed();
         Fixed(const Fixed& ref);
 
-        Fixed &operator = (const Fixed& ref);
+        Fixed& operator = (const Fixed& ref);
 
         int getRawBits() const;
         void setRawBits(int const raw);
@@ -36,6 +37,6 @@ class Fixed
         int toInt() const;
 };
 
-// << 는 왜 바깥에 하는걸까? 연산자 오버로딩에 대해 공부가 필요하다.
+std::ostream& operator << (std::ostream& os, const Fixed& ref);
 
 #endif
