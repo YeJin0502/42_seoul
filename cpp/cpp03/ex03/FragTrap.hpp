@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:09:18 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 19:12:51 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:56:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ class FragTrap : virtual public ClapTrap
         void shhhh_trap(std::string const& target);
 
     public:
+        FragTrap();
         FragTrap(std::string name);
+        FragTrap(const FragTrap& ref);
         ~FragTrap();
+        FragTrap& operator = (const FragTrap& ref);
+
+        virtual void rangedAttack(std::string const& target);
+        virtual void meleeAttack(std::string const& target);
 
         void vaulthunter_dot_exe(std::string const& target);
 };

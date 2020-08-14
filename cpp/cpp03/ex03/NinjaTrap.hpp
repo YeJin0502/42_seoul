@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 05:04:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 19:53:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:59:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 # include "ScavTrap.hpp"
 
 class NinjaTrap : virtual public ClapTrap
-// class NinjaTrap : public ClapTrap
 {
     public:
+        NinjaTrap();
         NinjaTrap(std::string name);
+        NinjaTrap(const NinjaTrap& ref);
         ~NinjaTrap();
+        NinjaTrap& operator = (const NinjaTrap& ref);
+
+        virtual void rangedAttack(std::string const& target);
+        virtual void meleeAttack(std::string const& target);
 
         void ninjaShoebox(ClapTrap& trap);
         void ninjaShoebox(FragTrap& trap);

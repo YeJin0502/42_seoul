@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 03:27:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/13 04:46:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:51:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ class ClapTrap
         int armor_;
 
     public:
+        ClapTrap();
         ClapTrap(std::string name);
-        // ClapTrap(int hp, const int max_hp, int energy, const int max_energy, int level,
-        //         const std::string name, const int melee_attack, const int ranged_attack,
-        //         const int armor);
+        ClapTrap(const ClapTrap& ref);
         ~ClapTrap();
+        ClapTrap& operator = (const ClapTrap& ref);
 
         void rangedAttack(std::string const& target);
         void meleeAttack(std::string const& target);

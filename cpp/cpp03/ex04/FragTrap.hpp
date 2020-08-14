@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:09:18 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 20:25:12 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:56:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap
-// class FragTrap : public ClapTrap
 {
     private:
         void miniontrap(std::string const& target);
@@ -26,8 +25,11 @@ class FragTrap : virtual public ClapTrap
         void shhhh_trap(std::string const& target);
 
     public:
+        FragTrap();
         FragTrap(std::string name);
+        FragTrap(const FragTrap& ref);
         ~FragTrap();
+        FragTrap& operator = (const FragTrap& ref);
 
         virtual void rangedAttack(std::string const& target);
         virtual void meleeAttack(std::string const& target);

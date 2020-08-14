@@ -6,20 +6,44 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:59:51 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/13 03:14:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:42:21 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string name)
-: max_hp_(100), max_energy_(100), name_(name), melee_attack_(30), ranged_attack_(20), armor_(5)
+FragTrap::FragTrap()
 {
     hp_ = 100;
+    max_hp_ = 100;
     energy_ = 100;
+    max_energy_ = 100;
     level_ = 1;
+    melee_attack_ = 30;
+    ranged_attack_ = 20;
+    armor_ = 5;
+
+    std::cout << "FR4G-TP(이름 없음)이(가) 생성되었습니다." << std::endl;
+}
+
+FragTrap::FragTrap(std::string name)
+: name_(name)
+{
+    hp_ = 100;
+    max_hp_ = 100;
+    energy_ = 100;
+    max_energy_ = 100;
+    level_ = 1;
+    melee_attack_ = 30;
+    ranged_attack_ = 20;
+    armor_ = 5;
 
     std::cout << "FR4G-TP " + name_ + "이(가) 생성되었습니다." << std::endl;
+}
+
+FragTrap::FragTrap(const FragTrap& ref)
+{
+    *this = ref; // 헷갈림.
 }
 
 FragTrap::~FragTrap()
@@ -27,14 +51,28 @@ FragTrap::~FragTrap()
     std::cout << "FR4G-TP " + name_ + "이(가) 소멸합니다." << std::endl;
 }
 
+FragTrap&
+FragTrap::operator = (const FragTrap& ref)
+{
+    if (this != &ref) // &ref 의 의미를 잘 모르겠고, 이 조건문이 필요한 것도 아직 모르겠음.
+    {
+        hp_ = ref.hp_;
+        max_hp_ = ref.max_hp_;
+        energy_ = ref.energy_;
+        max_energy_ = ref.max_energy_;
+        level_ = ref.level_;
+        melee_attack_ = ref.melee_attack_;
+        ranged_attack_ = ref.ranged_attack_;
+        armor_ = ref.armor_;
+    }
+    return (*this); // 헷갈림.
+}
+
 void
 FragTrap::rangedAttack(std::string const& target)
 {
     std::cout << "FR4G-TP " << name_ << "이(가) 타겟 " << target << "을(를) 범위 공격하였습니다. " << std::endl;
     std::cout << ranged_attack_ << " 데미지를 입혔습니다." << std::endl;
-
-    // 그냥 출력만 하는건가? 의미가 별로 없네...
-    // printf나 파이썬에 비해 중간에 끼워넣기가 불편해서 띄어쓰기가 너무 어렵다... 원래 이런가? 너무 불편한데.
 }
 
 void

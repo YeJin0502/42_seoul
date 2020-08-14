@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:45:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 20:21:56 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 22:01:53 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 class ScavTrap : public ClapTrap
 {
     public:
+        ScavTrap();
         ScavTrap(std::string name);
+        ScavTrap(const ScavTrap& ref);
         ~ScavTrap();
+        ScavTrap& operator = (const ScavTrap& ref);
 
         void rangedAttack(std::string const& target);
         // 가상 함수, 가상 상속을 안해도... 포인터가 아니니까 다 되네.
