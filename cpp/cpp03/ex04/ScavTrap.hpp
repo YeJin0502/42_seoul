@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   NinjaTrap.hpp                                      :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/13 05:04:08 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 19:53:44 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/13 02:45:57 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/14 20:21:56 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NINJATRAP_HPP
-# define NINJATRAP_HPP
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
 # include "ClapTrap.hpp"
-# include "FragTrap.hpp"
-# include "ScavTrap.hpp"
 
-class NinjaTrap : virtual public ClapTrap
-// class NinjaTrap : public ClapTrap
+class ScavTrap : public ClapTrap
 {
     public:
-        NinjaTrap(std::string name);
-        ~NinjaTrap();
+        ScavTrap(std::string name);
+        ~ScavTrap();
 
-        void ninjaShoebox(ClapTrap& trap);
-        void ninjaShoebox(FragTrap& trap);
-        void ninjaShoebox(ScavTrap& trap);
-        void ninjaShoebox(NinjaTrap& trap);
+        void rangedAttack(std::string const& target);
+        // 가상 함수, 가상 상속을 안해도... 포인터가 아니니까 다 되네.
+        // 아직은 잘 모르겠음. 일단은 넘어가자.
+        void meleeAttack(std::string const& target);
+
+        void challengeNewcomer();
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 03:27:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 18:58:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 20:08:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ class ClapTrap
         ClapTrap(std::string name);
         virtual ~ClapTrap();
 
-        void rangedAttack(std::string const& target);
-        void meleeAttack(std::string const& target);
+        virtual void rangedAttack(std::string const& target);
+        virtual void meleeAttack(std::string const& target);
+
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 

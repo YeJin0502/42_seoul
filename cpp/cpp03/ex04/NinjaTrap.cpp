@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:46:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 19:01:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 20:08:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,18 @@ NinjaTrap::ninjaShoebox(NinjaTrap& trap)
 {
     std::cout << "받아라 NinjaTrap!" << std::endl;
     std::cout << name_ << "이 " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
+}
+
+void
+NinjaTrap::rangedAttack(std::string const& target)
+{
+    std::cout << "<NinjaTrap> ";
+    ClapTrap::rangedAttack(target);
+}
+
+void
+NinjaTrap::meleeAttack(std::string const& target)
+{
+    std::cout << "<NinjaTrap> ";
+    ClapTrap::meleeAttack(target);
 }

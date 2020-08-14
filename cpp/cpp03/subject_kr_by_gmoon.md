@@ -42,6 +42,7 @@ cpp00과 동일.
 생성자와 소멸자 또한 사람들이 이것이 적절히 호출되었는지를 볼 수 있도록 무엇인가를 표시해야 합니다. 이러한 문구가 재밌는 참조일 경우, 보너스 포인트를 받을 것입니다. (만약 FR4G-TP를 모르신다면, 최소한 구글링 해보시고, 적절한 인용을 사용하세요.)
 
 몇 가지 제약이 있습니다:
+
 * hit points의 숫자는 max hit points 숫자를 초과할 수 없습니다. energy points 또한 마찬가지입니다. 예를 들어, 만약 너무 많은 HP를 회복하였다면 max HP number로 설정해야 할 것입니다. 마찬가지로, 이것들은 0 이하로 떨어질 수 없습니다.
 * 데미지를 입을 경우, 당신은 armor damage reduction을 고려해야 합니다. (When you take damage, you have to take your armor damage reduction into account.)
 
@@ -115,6 +116,36 @@ ClapTrap 클래스에는 자체 생성자와 소멸자 메세지를 가집니다
 * Ranged attack damage (5)
 * Armor damage reduction (0)
 
-이것의 특별한 공격은 ninjaShoebox 함수가 될 것입니다. 동일한 시그니처를 가진 여러 함수로, 각각 다른 Claptrap(NinjaTrap도 포함)을 매개변수로 참조하여 다른 행동을 합니다. 안타깝게도 아직은 어떠한 Claptrap도 사용할 방법이 없지만, 특정 방법으로 반응합니다. 오, 아마... 내일 보게 되겠네요. 당신이 뭘 하는지는 모르겠지만, 어쨌거나 재미있게 만들어보세요.
+이것의 특별한 공격은 ninjaShoebox 함수가 될 것입니다. 동일한 시그니처를 가진 여러 함수로, 각각 다른 Claptrap(NinjaTrap도 포함)을 매개변수로 참조하여 다른 행동을 합니다. 안타깝게도 아직은 어떠한 Claptrap도 사용할 방법이 없지만, 특정 방법으로 반응합니다. 오, 아마... 내일 보게 되겠네요. 어떻게 하고 있는진 모르겠지만, 어쨌거나 재미있게 만들어보세요.
 
 ## Exercise 04: Ultimate assault showbox
+
+| Exercise : 04 |
+| --- |
+| 제출 디렉토리: ex04/ |
+| 제출할 파일: 앞의 exercise 파일 + SuperTrap.cpp SuperTrap.hpp |
+| 금지 함수: 없음 |
+
+자, 이제 절반은 Fragtrap이고 절반은 Ninjatrap인 Claptrap을 만들어서 두 세계의 장점을 결합해봅시다.
+
+이것의 이름은 SuperTrap이고, 이것은 FragTrap과 NinjaTrap을 상속받을 것입니다.
+
+이것의 속성은 다음과 같습니다:
+
+* Hit points (Fragtrap)
+* Max hit points (Fragtrap)
+* Energy points (Ninjatrap)
+* Max energy points (Ninjatrap)
+* Level (1)
+* Name (Parameter of constructor)
+* Melee attack damage (Ninjatrap)
+* Ranged attack damage (Fragtrap)
+* Armor damage reduction (Fragtrap)
+* rangedAttack (Fragtrap)
+* meleeAttack (Ninjatrap)
+
+이것은 두 스페셜 공격을 다 가질 것입니다.
+
+메인문은 새로운 클래스를 테스트하게끔 확장되어야겠죠.
+
+당연히, Supertrap의 Claptrap 부분은 한 번만 만들어야겠죠, 단 한번만... 네. 여기에 함정이 있습니다. 찾아보세요.
