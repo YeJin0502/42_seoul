@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:09:18 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 21:50:18 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 21:56:18 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
     private:
         void miniontrap(std::string const& target);
@@ -27,14 +27,13 @@ class FragTrap : public ClapTrap
     public:
         FragTrap();
         FragTrap(std::string name);
-        FragTrap(const FragTrap& ref); // const 안 붙이면 안되나? // 앞에 붙이는거랑 뒤에 붙이는게 다른가?
+        FragTrap(const FragTrap& ref);
         ~FragTrap();
         FragTrap& operator = (const FragTrap& ref);
 
-        void rangedAttack(std::string const& target);
-        void meleeAttack(std::string const& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+        virtual void rangedAttack(std::string const& target);
+        virtual void meleeAttack(std::string const& target);
+
         void vaulthunter_dot_exe(std::string const& target);
 };
 

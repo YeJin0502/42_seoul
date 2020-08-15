@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 23:59:51 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 21:49:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/15 22:45:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ FragTrap::FragTrap()
 }
 
 FragTrap::FragTrap(std::string name)
-: name_(name)
+: ClapTrap(name)
 {
     hp_ = 100;
     max_hp_ = 100;
@@ -44,7 +44,7 @@ FragTrap::FragTrap(std::string name)
 
 FragTrap::FragTrap(const FragTrap& ref)
 {
-    *this = ref; // 헷갈림.
+    *this = ref;
 }
 
 FragTrap::~FragTrap()
@@ -55,7 +55,7 @@ FragTrap::~FragTrap()
 FragTrap&
 FragTrap::operator = (const FragTrap& ref)
 {
-    if (this != &ref) // &ref 의 의미를 잘 모르겠고, 이 조건문이 필요한 것도 아직 모르겠음.
+    if (this != &ref)
     {
         hp_ = ref.hp_;
         max_hp_ = ref.max_hp_;
@@ -66,49 +66,7 @@ FragTrap::operator = (const FragTrap& ref)
         ranged_attack_ = ref.ranged_attack_;
         armor_ = ref.armor_;
     }
-    return (*this); // 헷갈림.
-}
-
-void
-FragTrap::rangedAttack(std::string const& target)
-{
-    std::cout << "FR4G-TP " << name_ << "이(가) 타겟 " << target << "을(를) 범위 공격하였습니다. " << std::endl;
-    std::cout << ranged_attack_ << " 데미지를 입혔습니다." << std::endl;
-}
-
-void
-FragTrap::meleeAttack(std::string const& target)
-{
-    std::cout << "FR4G-TP " << name_ << "이(가) 타겟 " << target << "을(를) 밀리 공격하였습니다. " << std::endl;
-    std::cout << melee_attack_ << " 데미지를 입혔습니다." << std::endl;
-}
-
-void
-FragTrap::takeDamage(unsigned int amount)
-{
-    int damage = amount - armor_;
-
-    if (damage < 0) damage = 0;
-    hp_ -= damage;
-    if (hp_ < 0) hp_ = 0;
-
-    std::cout << "FR4G-TP " << name_ << "이(가) ";
-    std::cout << amount - armor_ << "만큼 데미지를 입었습니다. " << std::endl;
-    std::cout << "HP가 " << hp_ << "가 되었습니다." << std::endl;
-}
-
-void
-FragTrap::beRepaired(unsigned int amount)
-{
-    hp_ += amount;
-    if (hp_ > max_hp_) hp_ = max_hp_;
-    energy_ += amount;
-    if (energy_ > max_energy_) energy_ = max_energy_;
-
-    std::cout << "FR4G-TP " << name_ << "이(가) ";
-    std::cout << amount << "만큼 회복하였습니다. " << std::endl;
-    std::cout << "HP가 " << hp_ << "이(가) 되었습니다." << std::endl;
-    std::cout << "ENERGY가 " << energy_ << "이(가) 되었습니다." << std::endl;
+    return (*this);
 }
 
 void
@@ -171,4 +129,18 @@ FragTrap::shhhh_trap(std::string const& target)
     std::cout << "FR4G-TP " << name_ << "이(가) 타겟 " << target << "에게 Shhhh....trap 스킬을 사용합니다. " << std::endl;
     std::cout << "\"홀로그램 가동\"" << std::endl;
     std::cout << "0 데미지를 입혔습니다." << std::endl;
+}
+
+void
+FragTrap::rangedAttack(std::string const& target)
+{
+    std::cout << "<FragTrap> ";
+    ClapTrap::rangedAttack(target);
+}
+
+void
+FragTrap::meleeAttack(std::string const& target)
+{
+    std::cout << "<FragTrap> ";
+    ClapTrap::meleeAttack(target);
 }

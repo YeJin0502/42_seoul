@@ -6,28 +6,17 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:45:57 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 21:46:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/14 22:01:53 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCAVTRAP_HPP
 # define SCAVTRAP_HPP
 
-# include <iostream>
+# include "ClapTrap.hpp"
 
-class ScavTrap
+class ScavTrap : public ClapTrap
 {
-    private:
-        int hp_;
-        int max_hp_;
-        int energy_;
-        int max_energy_;
-        int level_;
-        std::string name_;
-        int melee_attack_;
-        int ranged_attack_;
-        int armor_;
-
     public:
         ScavTrap();
         ScavTrap(std::string name);
@@ -36,9 +25,10 @@ class ScavTrap
         ScavTrap& operator = (const ScavTrap& ref);
 
         void rangedAttack(std::string const& target);
+        // 가상 함수, 가상 상속을 안해도... 포인터가 아니니까 다 되네.
+        // 아직은 잘 모르겠음. 일단은 넘어가자.
         void meleeAttack(std::string const& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+
         void challengeNewcomer();
 };
 

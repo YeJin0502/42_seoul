@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/14 18:46:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/14 22:01:05 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/15 22:43:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,28 @@ void
 NinjaTrap::ninjaShoebox(ClapTrap& trap)
 {
     std::cout << "받아라 ClapTrap!" << std::endl;
-    std::cout << name_ << "이 " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
+    std::cout << name_ << "이(가) " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
 }
 
 void
 NinjaTrap::ninjaShoebox(FragTrap& trap)
 {
     std::cout << "받아라 FragTrap!" << std::endl;
-    std::cout << name_ << "이 " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
+    std::cout << name_ << "이(가) " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
 }
 
 void
 NinjaTrap::ninjaShoebox(ScavTrap& trap)
 {
     std::cout << "받아라 ScavTrap!" << std::endl;
-    std::cout << name_ << "이 " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
+    std::cout << name_ << "이(가) " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
 }
 
 void
 NinjaTrap::ninjaShoebox(NinjaTrap& trap)
 {
     std::cout << "받아라 NinjaTrap!" << std::endl;
-    std::cout << name_ << "이 " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
+    std::cout << name_ << "이(가) " << trap.get_name() << "에게 ninjaShoebox를 사용했습니다." << std::endl;
 }
 
 void
