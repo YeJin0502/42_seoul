@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Peon.hpp                                           :+:      :+:    :+:   */
+/*   PowerFist.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 02:40:02 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:44:00 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/16 06:16:19 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/16 06:18:01 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PEON_HPP
-# define PEON_HPP
+#ifndef POWERFIST_HPP
+# define POWERFIST_HPP
 
-# include "Victim.hpp"
+# include "AWeapon.hpp"
 
-class Peon : public Victim
+class PowerFist : public AWeapon
 {
     public:
-        Peon();
-        Peon(std::string name);
-        Peon(const Peon& ref);
-        virtual ~Peon();
-        // Peon& operator = (const Peon& ref); // 안해도 되나? 왜? 상속을 정확히 모르겠다. 공부 필요.
+        PowerFist();
+        PowerFist(const PowerFist& ref);
+        virtual ~PowerFist();
+        PowerFist& operator = (const PowerFist& ref);
 
-        virtual void getPolymorphed() const;
+        virtual void attack() const;
 };
 
 #endif

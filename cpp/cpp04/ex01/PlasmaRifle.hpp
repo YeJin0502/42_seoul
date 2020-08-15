@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Peon.hpp                                           :+:      :+:    :+:   */
+/*   PlasmaRifle.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 02:40:02 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:44:00 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/16 06:01:03 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/16 06:14:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PEON_HPP
-# define PEON_HPP
+#ifndef PLASMARIFLE_HPP
+# define PLASMARIFLE_HPP
 
-# include "Victim.hpp"
+# include "AWeapon.hpp"
 
-class Peon : public Victim
+class PlasmaRifle : public AWeapon
 {
     public:
-        Peon();
-        Peon(std::string name);
-        Peon(const Peon& ref);
-        virtual ~Peon();
-        // Peon& operator = (const Peon& ref); // 안해도 되나? 왜? 상속을 정확히 모르겠다. 공부 필요.
+        PlasmaRifle();
+        PlasmaRifle(const PlasmaRifle& ref);
+        virtual ~PlasmaRifle();
+        PlasmaRifle& operator = (const PlasmaRifle& ref);
 
-        virtual void getPolymorphed() const;
+        virtual void attack() const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 02:57:33 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 03:36:48 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 04:44:15 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,9 @@ Peon::~Peon()
 //     }
 //     return (*this);
 // }
+
+void
+Peon::getPolymorphed() const
+{
+    std::cout << name_ + " has been turned into a pink pony!" << std::endl;
+}

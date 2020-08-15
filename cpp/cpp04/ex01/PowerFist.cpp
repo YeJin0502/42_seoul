@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Peon.hpp                                           :+:      :+:    :+:   */
+/*   PowerFist.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 02:40:02 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:44:00 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/16 06:18:09 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/16 06:20:26 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PEON_HPP
-# define PEON_HPP
+#include "PowerFist.hpp"
 
-# include "Victim.hpp"
+PowerFist::PowerFist()
+: AWeapon("Power Fist", 50, 8)
+{}
 
-class Peon : public Victim
+PowerFist::PowerFist(const PowerFist& ref)
 {
-    public:
-        Peon();
-        Peon(std::string name);
-        Peon(const Peon& ref);
-        virtual ~Peon();
-        // Peon& operator = (const Peon& ref); // 안해도 되나? 왜? 상속을 정확히 모르겠다. 공부 필요.
+    *this = ref;
+}
 
-        virtual void getPolymorphed() const;
-};
+PowerFist::~PowerFist()
+{}
 
-#endif
+PowerFist&
+PowerFist::operator = (const PowerFist& ref)
+{
+    if (this != &ref)
+        AWeapon::operator=(ref);
+    return (*this);
+}
+
+void
+PowerFist::attack() const
+{
+    std::cout << "* pschhh... SBAM! *" << std::endl;
+}
