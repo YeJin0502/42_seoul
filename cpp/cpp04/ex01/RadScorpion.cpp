@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PowerFist.cpp                                      :+:      :+:    :+:   */
+/*   RadScorpion.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 06:18:09 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 07:58:51 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/16 07:01:28 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/16 07:42:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PowerFist.hpp"
+#include "RadScorpion.hpp"
 
-PowerFist::PowerFist()
-: AWeapon("Power Fist", 8, 50)
-{}
+RadScorpion::RadScorpion()
+: Enemy(80, "RadScorpion")
+{
+    std::cout << "* click click click *" << std::endl;
+}
 
-PowerFist::PowerFist(const PowerFist& ref)
+RadScorpion::RadScorpion(const RadScorpion& ref)
 {
     *this = ref;
 }
 
-PowerFist::~PowerFist()
-{}
-
-PowerFist&
-PowerFist::operator = (const PowerFist& ref)
+RadScorpion::~RadScorpion()
 {
-    if (this != &ref)
-        AWeapon::operator=(ref);
-    return (*this);
+    std::cout << "* SPROTCH *" << std::endl;
 }
 
-void
-PowerFist::attack() const
+RadScorpion&
+RadScorpion::operator = (const RadScorpion& ref)
 {
-    std::cout << "* pschhh... SBAM! *" << std::endl;
+    if (this != &ref)
+        Enemy::operator = (ref);
+    return (*this);
 }

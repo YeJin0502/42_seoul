@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 05:33:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 05:58:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 06:40:12 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ AWeapon::AWeapon(const AWeapon& ref) // 복사연산자를 항상 모르겠음.
 : name_(ref.name_), apcost_(ref.apcost_), damage_(ref.damage_) // 이렇게 해도 되나?
 {
     // *this = ref;
-    // 이런 방법도 있는데... 뭐가 더 나은 것이지? 근소하게 위가 더 효율적인가?
+    // 이런 방법도 있는데... 뭐가 더?
 }
 
 AWeapon::~AWeapon()

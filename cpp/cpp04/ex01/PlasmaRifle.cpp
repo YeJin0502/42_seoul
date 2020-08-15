@@ -6,14 +6,14 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 06:02:03 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 06:21:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 07:58:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PlasmaRifle.hpp"
 
 PlasmaRifle::PlasmaRifle()
-: AWeapon("Plasma Rifle", 21, 5)
+: AWeapon("Plasma Rifle", 5, 21)
 {}
 
 PlasmaRifle::PlasmaRifle(const PlasmaRifle& ref)

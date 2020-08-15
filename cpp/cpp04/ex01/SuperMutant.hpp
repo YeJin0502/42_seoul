@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PowerFist.cpp                                      :+:      :+:    :+:   */
+/*   SuperMutant.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 06:18:09 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 07:58:51 by gmoon            ###   ########.fr       */
+/*   Created: 2020/08/16 06:51:27 by gmoon             #+#    #+#             */
+/*   Updated: 2020/08/16 06:54:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PowerFist.hpp"
+#ifndef SUPERMUTANT_HPP
+# define SUPERMUTANT_HPP
 
-PowerFist::PowerFist()
-: AWeapon("Power Fist", 8, 50)
-{}
+# include "Enemy.hpp"
 
-PowerFist::PowerFist(const PowerFist& ref)
+class SuperMutant : public Enemy
 {
-    *this = ref;
-}
+    public:
+        SuperMutant();
+        SuperMutant(const SuperMutant& ref);
+        virtual ~SuperMutant();
+        SuperMutant& operator = (const SuperMutant& ref);
 
-PowerFist::~PowerFist()
-{}
+        virtual void takeDamage(int damage);
+};
 
-PowerFist&
-PowerFist::operator = (const PowerFist& ref)
-{
-    if (this != &ref)
-        AWeapon::operator=(ref);
-    return (*this);
-}
-
-void
-PowerFist::attack() const
-{
-    std::cout << "* pschhh... SBAM! *" << std::endl;
-}
+#endif
