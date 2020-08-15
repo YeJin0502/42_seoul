@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 01:37:50 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 01:50:52 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 03:36:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Victim::Victim(std::string name)
     std::cout << "Some random victim called " + name_ + " just appeared!" << std::endl;
 }
 
-Victim::Victim(Victim& ref)
+Victim::Victim(const Victim& ref)
 : name_(ref.name_)
 {
     std::cout << "Some random victim called " + name_ + " just appeared!" << std::endl;
@@ -35,7 +35,7 @@ Victim::~Victim()
 }
 
 Victim&
-Victim::operator = (Victim& ref)
+Victim::operator = (const Victim& ref)
 {
     if (this != &ref) // this랑 *this 헷갈림. // &ref 대신 ref 하면 안되나?
     {
@@ -48,6 +48,12 @@ const std::string&
 Victim::get_name() const
 {
     return (name_);
+}
+
+void
+Victim::getPolymorphed() const
+{
+    std::cout << name_ + " has been turned into a cute little sheep!" << std::endl;
 }
 
 std::ostream&

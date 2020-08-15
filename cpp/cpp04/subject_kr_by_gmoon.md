@@ -52,6 +52,8 @@ name과 title을 가지는 Sorcerer 클래스를 만드는 것으로 시작하�
 우리의 희생자는 소서러에 의해 "다형성화"될 수 있습니다. `void getPolymorphed() const` 함수를 추가하고, 다음을 표시하세요:<br>
 `NAME has been turned into a cute little sheep!`
 
+또한 Sorcerer에 `void polymorph(Victim const &)`을 추가해서, 사람들을 변형시킬 수 있게 하세요.
+
 이제, 약간의 다양성을 추가하기 위해, 소서러는 일반적인 희생자 뿐 아니라 다른 것도 변형시키고자 합니다. 문제 없어요, 조금만 더 만들면 됩니다!
 
 Peon 클래스를 만드세요.

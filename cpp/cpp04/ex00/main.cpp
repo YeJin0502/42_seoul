@@ -6,24 +6,52 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:25:39 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 01:51:02 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 03:47:09 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Sorcerer.hpp"
 #include "Victim.hpp"
+#include "Peon.hpp"
+
+// int main()
+// {
+//     std::cout << "==============================" << std::endl;
+
+//     Sorcerer a("robert", "ROB");
+//     Sorcerer b(a);
+//     Sorcerer c;
+
+//     c = b;
+//     std::cout << c;
+
+//     std::cout << "==============================" << std::endl;
+
+//     Victim aa("moongua");
+
+//     std::cout << aa;
+
+//     std::cout << "==============================" << std::endl;
+
+//     Peon aaa("gmoon");
+//     Peon bbb(aaa);
+//     Peon ccc;
+
+//     ccc = bbb;
+//     std::cout << ccc;
+// }
 
 int main()
 {
-    Sorcerer a("robert", "ROB");
-    Sorcerer b("gmoon", "MOON");
-    Sorcerer c(a);
-    Sorcerer d;
+    Sorcerer robert("Robert", "the Magnificent");
 
-    d = b;
-    std::cout << d;
+    Victim jim("Jimmy");
+    Peon joe("Joe");
 
-    Victim aa("moongua");
+    std::cout << robert << jim << joe;
 
-    std::cout << aa;
+    robert.polymorph(jim);
+    robert.polymorph(joe);
+
+    return 0;
 }

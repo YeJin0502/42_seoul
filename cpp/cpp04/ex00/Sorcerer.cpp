@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:15:48 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 01:35:32 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 03:46:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ Sorcerer::operator = (const Sorcerer& ref)
         title_ = ref.title_;
     }
     return (*this);
+}
+
+void
+Sorcerer::polymorph(Victim const &ref) // const Victim하고 다른가?
+{
+    ref.getPolymorphed();
 }
 
 const std::string& Sorcerer::get_name() const

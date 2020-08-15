@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:09:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 01:35:34 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 03:42:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SORCERER_HPP
 
 # include <iostream>
+# include "Victim.hpp"
 
 class Sorcerer
 {
@@ -32,6 +33,8 @@ class Sorcerer
         // const std::string& get_name(); // 안됨.
         // std::string& get_name() const; // 안됨.
         const std::string& get_title() const;
+
+        void polymorph(Victim const &ref);
 };
 
 std::ostream& operator << (std::ostream& out, const Sorcerer& ref);

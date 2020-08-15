@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 01:36:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 01:52:49 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/16 03:36:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 
 class Victim
 {
-    private:
+    protected:
         std::string name_;
 
     public:
         Victim();
         Victim(std::string name);
-        Victim(Victim& ref);
+        Victim(const Victim& ref);
         virtual ~Victim();
-        Victim& operator = (Victim& ref);
+        Victim& operator = (const Victim& ref);
 
         const std::string& get_name() const;
+
+        void getPolymorphed() const;
 };
 
 std::ostream& operator << (std::ostream& out, const Victim& ref); // const를 빼면 컴파일 안됨. 왜?
