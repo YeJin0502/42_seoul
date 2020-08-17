@@ -266,3 +266,152 @@ me attacks RadScorpion with a Plasma Rifle$
 * SPROTCH *$
 me has 22 AP and wields a Plasma Rifle$
 ```
+
+## Exercise 02: This code is unclean. PURIFY IT!
+
+| Exercise : 02 |
+| --- |
+| 제출 디렉토리: ex02/ |
+| 제출할 파일: Squad.hpp, Squad.cpp, TacticalMarine.hpp, TacticalMarine.cpp, AssaultTerminator.hpp, AssaultTerminator.cpp, ISpaceMarine.hpp, ISquad.hpp, main.cpp |
+| 금지 함수: 없음 |
+
+당신의 미션은 Valiant Lion Crusaders에 걸맞는 군대를 만드는 것입니다.
+
+당신의 미래 군대의 요소들인 Squad와 Tactical Space Marine(TacticalMarine)을 구현해야 합니다.
+
+Squad부터 시작하겠습니다. 당신이 구현해야할 인터페이스는 다음과 같습니다(ISquad.hpp 포함):
+```
+class ISquad
+{
+    public:
+        virtual ~ISquad() {}
+        virtual int getCount() const = 0;
+        virtual ISpaceMarine* getUnit(int) const = 0;
+        virtual int push(ISpaceMarine*) = 0;
+};
+```
+
+당신의 구현은 다음과 같습니다:
+* getCount() 스쿼드의 현재 유닛의 수를 리턴합니다.
+* getUnit(N) N번째 유닛의 포인터를 리턴합니다. (당연히 0부터 시작합니다. 인덱스 범위를 벗어나게 지정하면 Null 포인터를 반환합니다.)
+* push(XXX) XXX 유닛을 스쿼드의 끝에 추가합니다. 추가 후 스쿼드의 유닛의 수를 리턴합니다. (null 유닛을 추가하거나, 이미 스쿼드에 있는 유닛을 추가하는 것은 전혀 의미가 없습니다.)
+
+결국 우리가 만들라고하는 스쿼드는 Space Marine들의 간단한 컨테이너이고, 당신의 군대를 올바르게 구성하는 데에 쓰입니다.
+
+복사 생성자나 할당의 경우 깊은 복사여야 합니다. 할당 시, 이전에 스쿼드가 있었다면 반드시 파괴되고 대체되어야 합니다. 당신은 모든 유닛이 new로 생성될 것이라 가정할 수 있습니다.
+
+스쿼드가 파괴될 때, 그 안의 유닛들도 순서대로 파괴됩니다.
+
+TacticalMarine의 구현해야 할 인터페이스입니다(ISpaceMarine.hpp 포함):
+```
+class ISpaceMarine
+{
+    public:
+        virtual ~ISpaceMarine() {}
+        virtual ISpaceMarine* clone() const = 0;
+        virtual void battleCry() const = 0;
+        virtual void rangedAttack() const = 0;
+        virtual void meleeAttack() const = 0;
+};
+```
+
+구성요소들:
+* clone() 현재 개체의 복사본을 리턴
+* 생성 시, "Tactical Marine ready for battle!" 표시
+* battleCry() "For the holy PLOT!" 표시
+* rangedAttack() "* attacks with a bolter *" 표시
+* meleeAttack() "* attacks with a chainsword *" 표시
+* 죽을 때, "Aaargh..." 표시
+
+거의 같은 방식으로, AssaultTerminator을 구현합니다:
+* Birth: "* teleports from space *"
+* battleCry(): "This code is unclean. PURIFY IT!"
+* rangedAttack : "* does nothing *"
+* meleeAttack : "* attacks with chainfists *"
+* Death: "I'll be back..."
+
+약간의 테스트 코드입니다. 보통, 당신은 더 꼼꼼히 해야합니다.
+```
+int main()
+{
+    ISpaceMarine *bob = new TacticalMarine;
+    ISpaceMarine *jim = new AssaultTerminator;
+
+    ISquad *vlc = new Squad;
+    vlc->push(bob);
+    vlc->push(jim);
+    for (int i = 0; i < vlc->getCount(); ++i)
+    {
+        ISpaceMarine *cur = vlc->getUnit(i);
+        cur->battleCry();
+        cur->rangedAttack();
+        cur->meleeAttack();
+    }
+    delete vlc;
+
+    return 0;
+}
+```
+
+결과:
+```
+$> clang++ -W -Wall -Werror *.cpp
+$> ./a.out | cat -e
+Tactical Marine ready for battle!$
+* teleports from space *$
+For the holy PLOT!$
+* attacks with a bolter *$
+* attacks with a chainsword *$
+This code is unclean. PURIFY IT!$
+* does nothing *$
+* attacks with chainfists *$
+Aaargh...$
+I'll be back...$
+```
+
+성적을 받기 위해, 당신의 main 함수를 꼼꼼히 만드세요.
+
+## Exercise 03: Bocal Fantasy
+
+| Exercise : 03 |
+| --- |
+| 제출 폴더: ex03/ |
+| 제출할 파일: AMateria.hpp, AMateria.cpp, Ice.hpp, Ice.cpp, Cure.hpp, Cure.cpp, Character.hpp, Character.cpp, MateriaSource.hpp, MateriaSource.cpp, ICharacter.hpp, IMateriaSource.hpp, main.cpp |
+| 금지 함수: 없음 |
+
+다음의 AMateria 클래스를 완성시키고, 필요한 멤버 함수를 구현하세요.
+```
+class AMateria
+{
+    private:
+        [...]
+        unsigned int _xp;
+    public:
+        AMateria(std::string const & type);
+        [...]
+        [...] ~AMateria();
+
+        std::string const & getType() const; //Returns the materia type
+        unsigned int getXP() const; //Returns the Materia's XP
+
+        virtual AMateria* clone() const = 0;
+        virtual void use(ICharacter& target);
+};
+```
+
+Materia의 XP 시스템은 다음과 같습니다:
+
+XP는 0으로 시작하며, use()를 호출할 때마다 10씩 증가합니다. 이것을 다룰 영리한 방법을 찾아보세요!
+
+구체적인 Materias인 Ice와 Cure을 만드세요. 이것들은 소문자로 된 이름을 갖습니다. (Ice는 "ice"로...)
+
+clone()은 Materia의 타입의 새로운 인스턴스를 리턴합니다.
+
+use(ICharacter&)은 다음을 표시합니다:
+* Ice: "* shoots an ice bolt at NAME *"
+* Cure: "* heals NAME's wounds *"
+(당연히 NAME은 매개변수인 캐릭터의 이름으로 대체하세요.)
+
+💡 Materia를 다른 곳에 할당할 때, type을 복사하는 것은 의미가 없습니다...
+
+
