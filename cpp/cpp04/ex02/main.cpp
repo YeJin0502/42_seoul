@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 08:16:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/18 08:16:43 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/08/28 13:36:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,16 @@ int main()
 
     return 0;
 }
+
+/*
+Tactical Marine ready for battle!$
+* teleports from space *$
+For the holy PLOT!$
+* attacks with a bolter *$
+* attacks with a chainsword *$
+This code is unclean. PURIFY IT!$
+* does nothing *$
+* attacks with chainfists *$
+Aaargh...$
+I'll be back...$
+*/
