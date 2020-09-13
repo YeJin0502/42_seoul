@@ -3,6 +3,9 @@
 \# c++ 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/ : 내가 궁금했던 내용이 다 나와있다.
 
+\# c++ 컨테이너
+* http://tcpschool.com/cpp/cpp_container_intro : 같은 타입의 여러 객체를 저장하는 일종의 집합.
+
 ---
 
 * const

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 13:52:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/28 14:55:29 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/13 23:19:17 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,39 @@
 
 Squad::Squad()
 {
-    size_ = 0;
+    size_ = 0; // 이런 값 대입은 {} 위에 하는 것이 나은 듯.
     squad_ = 0;
 }
 
 Squad::Squad(const Squad& ref)
 {
-    // operator = (ref); // 이거 이해 잘 안됨. 리턴도 아니고.. 이건 결국 왼쪽에 this 객체가 들어가는 함수로 보면 되는건가?
+    // 파괴하는 내용 추가해야 하나? 아니면 할당 연산자에서만 하면 되지않나?
+
+    // operator = (ref);
+    // 이거 이해 잘 안됨. 리턴도 아니고.. 이건 결국 왼쪽에 this 객체가 들어가는 함수로 보면 되는건가?
+    // 아래랑 같은 내용이겠지?
+    *this = ref;
 }
 
 Squad&
 Squad::operator = (const Squad& ref)
 {
-    // if (this != &ref)
-    // {
-        
-    // }
-    // return (*this);
+    if (this != &ref)
+    {
+        if (squad_)
+            deleteSquad();
+        size_ = ref.size_; // 이게 되네? getCount() 써야하는거 아닌가? private이 헷갈린다.
+        squad_ = new ISpaceMarine*[size_];
+        for (int i = 0; i < size_; i++)
+            squad_[i] = ref.getUnit(i)->clone();
+    }
+    return (*this);
+}
+
+Squad::~Squad()
+{
+    if (squad_)
+        deleteSquad();
 }
 
 int
@@ -42,18 +58,38 @@ Squad::getCount() const
 ISpaceMarine*
 Squad::getUnit(int i) const
 {
-    return (squad_[i]); // 이렇게 하면 되나?
+    if (size_ <= i || i < 0)
+        return (nullptr);
+    return (squad_[i]);
 }
 
 int
 Squad::push(ISpaceMarine* unit)
 {
-    // size_ += 1;
+    if (!unit)
+        return (size_);
+    for (int i = 0; i < size_; i++)
+        if (squad_[i] == unit)
+            return (size_);
+    
+    size_ += 1;
+    ISpaceMarine** tmp = new ISpaceMarine*[size_];
+    for (int i = 0; i < size_ - 1; i++)
+        tmp[i] = squad_[i];
+    tmp[size_ - 1] = unit;
+    delete[] squad_;
+    // 배열을 가르키는 포인터만 해제한다는 건가?
+    // 해제하면, tmp의 포인터들은 왜 영향을 안받는지 잘 모름.
+    squad_ = tmp;
 
-    // ISpaceMarine **ret = new ISpaceMarine*[size_]; // 이게 헷갈림. 클래스의 배열도 헷갈리고, cpp의 동적할당 자체도 헷갈림.
+    return (size_);
+}
 
-    // for (int i = 0; i < size_; i++)
-    //     ret[i] = unit;
-    // return (size_);
-} // 되나?
-
+void
+Squad::deleteSquad()
+{
+    for (int i = 0; i < size_; i++)
+        delete squad_[i];
+    // delete squad_;
+    delete[] squad_; // 위랑 무슨 차이?
+}
