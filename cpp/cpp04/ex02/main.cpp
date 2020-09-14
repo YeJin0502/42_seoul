@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 08:16:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 11:40:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/14 22:26:34 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main()
 
     std::cout << "==================== my test1 ====================" << std::endl;
     ISpaceMarine *gmoon = new TacticalMarine;
-    ISpaceMarine *seo = new TacticalMarine(); // 위와 아래는 무슨 차이?
+    ISpaceMarine *seo = new TacticalMarine();
     // ISpaceMarine *kim = new TacticalMarine(*gmoon); // 이런 식으로는 안됨.
     // ISpaceMarine *kim = new TacticalMarine(*(TacticalMarine *)gmoon); // 이런 식으로 되는 듯? 유닛들은 멤버 변수가 없어 의미가 없으므로, 스쿼드에서 테스트.
     ISquad *cadet = new Squad;
