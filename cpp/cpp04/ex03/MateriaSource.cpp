@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 22:51:56 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 23:13:03 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/14 23:56:27 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ MateriaSource::operator = (const MateriaSource& ref)
             delInven();
         _inven = new AMateria*[4];
         for (int i = 0; i < 4; i++)
-            _inven[i] = ref._inven[i];
+            if (ref._inven[i])
+                _inven[i] = ref._inven[i];
     }
     return (*this);
 }
