@@ -405,9 +405,9 @@ XP는 0으로 시작하며, use()를 호출할 때마다 10씩 증가합니다. 
 
 구체적인 Materias인 Ice와 Cure을 만드세요. 이것들은 소문자로 된 이름을 갖습니다. (Ice는 "ice"로...)
 
-clone()은 Materia의 타입의 새로운 인스턴스를 리턴합니다.
+`clone()`은 Materia의 타입의 새로운 인스턴스를 리턴합니다.
 
-use(ICharacter&)은 다음을 표시합니다:
+`use(ICharacter&)`은 다음을 표시합니다:
 * Ice: "* shoots an ice bolt at NAME *"
 * Cure: "* heals NAME's wounds *"
 (당연히 NAME은 매개변수인 캐릭터의 이름으로 대체하세요.)
