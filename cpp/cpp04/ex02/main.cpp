@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 08:16:28 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/13 23:32:13 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/14 11:40:44 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main()
 {
-    ISpaceMarine *bob = new TacticalMarine;
+    ISpaceMarine *bob = new TacticalMarine; // 업 캐스팅?
     ISpaceMarine *jim = new AssaultTerminator;
 
     ISquad *vlc = new Squad;

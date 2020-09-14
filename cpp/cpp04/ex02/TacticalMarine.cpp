@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 19:35:04 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/13 22:46:23 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/14 11:42:28 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ TacticalMarine::TacticalMarine(const TacticalMarine& ref)
 TacticalMarine&
 TacticalMarine::operator = (const TacticalMarine& ref)
 {
-    (void) ref; // 이건 뭐지?
+    (void) ref;
     return (*this);
 }
 

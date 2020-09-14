@@ -414,4 +414,86 @@ use(ICharacter&)은 다음을 표시합니다:
 
 💡 Materia를 다른 곳에 할당할 때, type을 복사하는 것은 의미가 없습니다...
 
+Character 클래스를 만드세요.
+```
+class ICharacter
+{
+    public:
+        virtual ~ICharacter() {}
+        virtual std::string const & getName() const = 0;
+        virtual void equip(AMateria* m) = 0;
+        virtual void unequip(int idx) = 0;
+        virtual void use(int idx, ICharacter& target) = 0;
+};
+```
 
+캐릭터는 최대 4개의 Materia 인벤토리를 가지고 있으며, 처음에는 비어있습니다. 이 순서대로 슬롯 0~3에 Materia를 장착합니다.
+
+가득찬 인벤토리에 장착을 시도하거나 존재하지 않는 Materia를 사용, 장착하려고 하는 경우 아무 일도 일어나지 않습니다.
+
+unequip 메서드는 Materia를 삭제해서는 안됩니다!
+
+use 메서드는 idx 슬롯에 있는 Materia를 사용하고, ...
+(The use(int, ICharacter&) method will have to use the Materia at the idx slot, and pass target as parameter to the AMateria::use method.)
+
+❗ 당연히, 인벤토리에 있는 모든 AMateria를 지원할 수 있어야합니다.
+
+당신의 캐릭터는 이름을 매개변수로 갖는 생성자가 있어야합니다. 복사나 할당은 깊어야합니다. 캐릭터의 오래된 Materia는 삭제해야 합니다. 캐릭터 소멸시에도 마찬가지입니다.
+
+이제 캐릭터가 Materia를 장착하고 사용할 수 있게 되었습니다.
+
+나는 Materia를 손으로 직접 만드는 것을 싫어하기 때문에, 그것의 실제 타입을 알아야 합니다... 따라서 당신은 Materia의 똑똑한 Source를 만들어야 합니다.
+
+MateriaSource 클래스를 만드세요.
+```
+class IMateriaSource
+{
+    public:
+        virtual ~IMateriaSource() {}
+        virtual void learnMateria(AMateria*) = 0;
+        virtual AMateria* createMateria(std::string const & type) = 0;
+};
+```
+
+`learnMateria`는 매개변수로 전달된 Materia를 복사하고, 나중에 복제할 수 있도록 메모리에 저장해야 합니다. Character와 비슷한 방식으로, Source는 최대 4개의 Materia를 알 수 있으며, 반드시 고유하지는 않습니다.
+
+`createMateria`는 매개변수와 유형이 같은 (이전에 Source에서 학습한) Materia 복사본을 리턴합니다. 유형을 알 수 없는 경우 0을 반환합니다.
+
+간단히 말해, 당신의 Source는 Materia의 "템플릿"을 배우고, 필요에 따라 새로 생성할 수 있어야 합니다. You’ll then be able to create a Materia without knowing it "real" type, just a string identifying it. Life’s good, eh?
+
+메인문이고, 필요한 내용을 보충하세요.
+```
+int main()
+{
+    IMateriaSource* src = new MateriaSource();
+    src->learnMateria(new Ice());
+    src->learnMateria(new Cure());
+
+    ICharacter* me = new Character("me");
+
+    AMateria* tmp;
+    tmp = src->createMateria("ice");
+    me->equip(tmp);
+    tmp = src->createMateria("cure");
+    me->equip(tmp);
+
+    ICharacter* bob = new Character("bob");
+
+    me->use(0, *bob);
+    me->use(1, *bob);
+
+    delete bob;
+    delete me;
+    delete src;
+
+    return 0;
+}
+```
+
+결과:
+```
+$> clang++ -W -Wall -Werror *.cpp
+$> ./a.out | cat -e
+* shoots an ice bolt at bob *$
+* heals bob's wounds *$
+```
