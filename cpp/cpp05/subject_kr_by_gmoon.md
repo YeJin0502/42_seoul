@@ -39,7 +39,7 @@ catch (std::exception & e)
 }
 ```
 
-ostream에 <name>과 <grade>를 출력하는 << 연산자 오버로딩을 제공해야 합니다.
+ostream에 `<name>, bureaucrat grade <grade>`를 출력하는 << 연산자 오버로딩을 제공해야 합니다.
 
 당연히, 적절한 메인문도 제출하세요.
 
@@ -52,4 +52,14 @@ ostream에 <name>과 <grade>를 출력하는 << 연산자 오버로딩을 제공
 | 금지 함수: 없음 |
 | 비고: 없음 |
 
-이제 관료들이 있으니, 그들에게 그들의 시간과 관련된 무언가를 주는 것이 좋습니다. 
+이제 관료들이 있으니, 그들에게 그들의 시간과 관련된 무언가를 주는 것이 좋습니다. 작성할 서류(form) 더미보다 더 나은 일이 뭡니까?
+
+form 클래스를 만드세요. name, sign 여부를 나타내는 부울(시작은 False), 서명에 필요한 grade, 실행에 필요한 grade를 가집니다. name과 grade들은 constant하며 (protect가 아니라) private입니다. grade들은 Bureaucrat에서와 동일한 조건을 가지마 범위를 벗어난 경우 Form::GradeTooHighException과 Form::GradeTooLowException 예외가 발생합니다.
+
+이전처럼, 모든 속성에 대한 getter를 만들고, 양식의 상태를 완전히 설명하는 << 연산자에 대한 오버로드를 만드세요.
+
+또한 Bureaucrat를 취하는 `beSigned` 함수를 만들고, 관료의 등급이 충분히 높으면 싸인합니다. 항상 기억하세요. grade 1이 grade 2보다 높습니다. grade가 너무 낮으면, Form::GradeTooLowException를 던지세요.
+
+또한 Bureaucrat에 `signForm` 함수를 만드세요. 싸인이 잘 수행되면 `<bureaucrat> signs <form>`을 출력하고, 그렇지 않으면 `<bureaucrat> cannot sign <form> because <reason>`을 출력하세요.
+
+적절한 메인문을 작성하세요.
