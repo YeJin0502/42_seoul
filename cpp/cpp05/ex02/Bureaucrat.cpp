@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:42:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/19 21:19:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/20 00:08:50 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,25 @@ Bureaucrat::signForm(Form& form)
     try
     {
         form.beSigned(*this);
-        std::cout << this->name_ << " signs " << form.getName() << "." << std::endl;
+        std::cout << name_ << " signs " << form.getName() << "." << std::endl;
     }
     catch (std::exception & e)
     {
-        std::cout << this->name_ << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+        std::cout << name_ << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
+void
+Bureaucrat::executeForm(Form const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << name_ << " executes " << form.getName() << std::endl;
+    }
+    catch (std::exception & e)
+    {
+        std::cout << name_ << " cannot execute " << form.getName() << " because " << e.what() << std::endl;
     }
 }
 
@@ -165,6 +179,6 @@ Bureaucrat::GradeTooLowException::what() const throw()
 
 std::ostream& operator << (std::ostream& out, const Bureaucrat& ref)
 {
-    out << ref.getName() << ", bureaucrat grate " << ref.getGrade();
+    out << ref.getName() << ", bureaucrat grade " << ref.getGrade();
     return (out);
 }

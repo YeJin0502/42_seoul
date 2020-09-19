@@ -6,49 +6,34 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 02:35:05 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/17 02:55:19 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/19 21:20:30 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main()
 {
-    int i = 1;
+    Form cpp05 = Form("cpp05", 15, 50);
 
-    std::cout << "==========" << i++ << "==========" << std::endl;
+    std::cout << cpp05 << std::endl;
+
     try
     {
-        Bureaucrat gmoon = Bureaucrat("gmoon", 1);
-        std::cout << gmoon << std::endl;
+        Bureaucrat gmoon = Bureaucrat("gmoon", 20);
+        gmoon.signForm(cpp05);
+        std::cout << cpp05 << std::endl;
     }
     catch (std::exception & e)
     {
         std::cout << e.what() << std::endl;
     }
-
-    std::cout << "==========" << i++ << "==========" << std::endl;
     try
     {
-        Bureaucrat error = Bureaucrat("error", 0);
-        std::cout << error << std::endl;
-    }
-    catch (std::exception & e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-
-    std::cout << "==========" << i++ << "==========" << std::endl;
-    try
-    {
-        Bureaucrat gmoon = Bureaucrat("gmoon", 149);
-        std::cout << gmoon << std::endl;
-
-        gmoon.downGrade();
-        std::cout << gmoon << std::endl;
-
-        gmoon.downGrade();
-        std::cout << gmoon << std::endl;
+        Bureaucrat gmoon = Bureaucrat("gmoon", 10);
+        gmoon.signForm(cpp05);
+        std::cout << cpp05 << std::endl;
     }
     catch (std::exception & e)
     {

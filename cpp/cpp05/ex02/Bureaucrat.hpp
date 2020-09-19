@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 22:54:21 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/19 18:58:31 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/19 22:51:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ class Bureaucrat
         void downGrade() throw(GradeTooLowException);
 
         void signForm(Form& form);
+        void executeForm(Form const & form);
 };
 
 std::ostream& operator << (std::ostream& out, const Bureaucrat& ref);
