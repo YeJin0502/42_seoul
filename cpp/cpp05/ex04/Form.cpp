@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 18:11:01 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/20 00:32:14 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 00:59:06 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,71 @@ Form::validGrade(int grade)
     return (grade);
 }
 
+Form::GradeTooHighException::GradeTooHighException()
+{}
+
+Form::GradeTooHighException::GradeTooHighException(const GradeTooHighException& ref)
+{
+    *this = ref;
+}
+
+Form::GradeTooHighException&
+Form::GradeTooHighException::operator = (const GradeTooHighException& ref)
+{
+    (void) ref;
+    return (*this);
+}
+
+Form::GradeTooHighException::~GradeTooHighException()
+{}
+
 const char*
 Form::GradeTooHighException::what() const throw()
 {
-    return ("Grade is too high.");
+    return ("Form's grade is too high.");
 }
+
+Form::GradeTooLowException::GradeTooLowException()
+{}
+
+Form::GradeTooLowException::GradeTooLowException(const GradeTooLowException& ref)
+{
+    *this = ref;
+}
+
+Form::GradeTooLowException&
+Form::GradeTooLowException::operator = (const GradeTooLowException& ref)
+{
+    (void) ref;
+    return (*this);
+}
+
+Form::GradeTooLowException::~GradeTooLowException()
+{}
 
 const char*
 Form::GradeTooLowException::what() const throw()
 {
-    return ("Grade is too low.");
+    return ("Form's grade is too low.");
 }
+
+Form::NotSigned::NotSigned()
+{}
+
+Form::NotSigned::NotSigned(const NotSigned& ref)
+{
+    *this = ref;
+}
+
+Form::NotSigned&
+Form::NotSigned::operator = (const NotSigned& ref)
+{
+    (void) ref;
+    return (*this);
+}
+
+Form::NotSigned::~NotSigned()
+{}
 
 const char*
 Form::NotSigned::what() const throw()

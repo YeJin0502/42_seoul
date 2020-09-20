@@ -6,11 +6,29 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 01:13:36 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/20 01:34:57 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 01:03:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
+
+Intern::InvalidName::InvalidName()
+{}
+
+Intern::InvalidName::InvalidName(const InvalidName& ref)
+{
+    *this = ref;
+}
+
+Intern::InvalidName&
+Intern::InvalidName::operator = (const InvalidName& ref)
+{
+    (void) ref;
+    return (*this);
+}
+
+Intern::InvalidName::~InvalidName()
+{}
 
 const char*
 Intern::InvalidName::what() const throw()

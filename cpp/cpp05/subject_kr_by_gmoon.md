@@ -122,8 +122,48 @@ Intern 클래스를 만들어봅시다. 인턴은 이름도, 등급도, 어떤 �
 
 중앙 관료제는 사무실 블록으로 구성되어 있습니다. 이러한 각 블록은 기능을 수행하기 위해 인턴과 두 명의 관료가 필요하며, 명령만 내리면 양식 작성, 서명, 실행할 수 있습니다.
 
-따라서, OfficeBlock 클래스를 만드세요. 인턴 하나, 서명 관료 하나, 실행 관료 하나에 대한 포인터(혹은 참조)를 전달하여 구성됩니다. 비어있게 구성할 수도 있습니다. 다른 구성은 가능하지 않아야합니다. (복사나 할당이 불가능합니다.)
+따라서, OfficeBlock 클래스를 만듭시다. 인턴 하나, 서명 관료 하나, 실행 관료 하나에 대한 포인터(혹은 참조)를 전달하여 생성됩니다. 비어있게 생성할 수도 있습니다. 다른 생성은 가능하지 않아야합니다. (즉 복사나 할당이 불가능합니다.)
 
-새로운 인턴을 설정하거나 관료를 서명시키거나 실행시키는 기능이 있습니다.
+새로운 인턴을 설정하거나, 관료가 서명하거나, 관료가 실행하는 기능이 있습니다.
 
-유일한 "
+유일한 "유용한" 함수는 `doBureaucracy`이며, form의 이름과 target의 이름을 취합니다. 순서대로, 인턴이 요청된 form을 생성하고, 두 번째 관료가 서명하고, 두 번째 관료가 실행하도록 합니다. 인턴과 관료는 무슨 일이 일어나고 있는지 출력합니다. 에러가 발생하면, 이 함수에서 예외가 발생해야 합니다. 우아하게 만들기 위해 이전의 작업물들을 수정할 수 있습니다.
+
+당연히, 이 세 지점이 모두 채워지지 않으면 관료제를 할 수 없습니다.
+
+늘 그렇듯, 메인문을 잘 작성하세요.
+
+```c++
+int main()
+{
+    Intern idiotOne;
+    Bureaucrat hermes = Bureaucrat("Hermes Conrad", 37);
+    Bureaucrat bob = Bureaucrat("Bobby Bobson", 123);
+    OfficeBlock ob;
+    ob.setIntern(idiotOne);
+    ob.setSigner(bob);
+    ob.setExecutor(hermes);
+    try
+    {
+    ob.doBureaucracy("mutant pig termination", "Pigley");
+    }
+    catch (Some::SpecificException & e)
+    {
+    /* specific known error happens, say something */
+    }
+    catch (std::exception & e)
+    {
+    /* oh god, unknown error, what to do ?! */
+    }
+}
+```
+
+```
+zaz@blackjack ex04 $ ./ex04
+Intern creates a Mutant Pig Termination Form (s.grade 130, ex.grade 50) targeted on Pigley (Unsigned)
+Bureaucrat Bobby Bobson (Grade 123) signs a Mutant Pig Termination Form (s.grade 130, ex.grade 50)
+targeted on Pigley (Unsigned)
+Bureaucrat Hermes Conrad (Grade 37) executes a Mutant Pig Termination Form (s.grade 130, ex.grade 50)
+targeted on Pigley (Signed)
+That'll do, Pigley. That'll do ...
+zaz@blackjack ex04 $
+```

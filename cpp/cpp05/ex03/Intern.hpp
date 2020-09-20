@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 01:09:56 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/20 01:33:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 01:02:36 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ class Intern
     public:
         class InvalidName : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                InvalidName();
+                InvalidName(const InvalidName& ref);
+                InvalidName& operator = (const InvalidName& ref);
+                virtual ~InvalidName();
+                
+                virtual const char* what() const throw();
         };
 
         Intern();

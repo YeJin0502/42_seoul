@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 17:43:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/19 18:45:09 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 01:00:39 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,47 @@
 # define FORM_HPP
 
 # include <iostream>
+# include <fstream>
 # include "Bureaucrat.hpp"
 
 class Form
 {
     private:
-        const std::string name_; // const가 앞에?
+        const std::string name_;
         bool sign_ = false;
-        const int grade_for_sign_; // const는 다시 내손으로 정리해봐야.
+        const int grade_for_sign_;
         const int grade_for_exec_;
+        std::string target_;
 
         int validGrade(int grade);
 
     public:
         class GradeTooHighException : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                GradeTooHighException();
+                GradeTooHighException(const GradeTooHighException& ref);
+                GradeTooHighException& operator = (const GradeTooHighException& ref);
+                virtual ~GradeTooHighException();
+
+                virtual const char* what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                GradeTooLowException();
+                GradeTooLowException(const GradeTooLowException& ref);
+                GradeTooLowException& operator = (const GradeTooLowException& ref);
+                virtual ~GradeTooLowException();
+                
+                virtual const char* what() const throw();
         };
 
         Form();
-        Form(std::string name, int grade_for_sign, int grade_for_exec) throw(GradeTooHighException, GradeTooLowException);
-        Form(const Form& ref) throw(GradeTooHighException, GradeTooLowException); // 엄밀히는 위에서 다 걸러져서 여기서는 할 필요 없지 않나?
+        Form(std::string name, int grade_for_sign, int grade_for_exec, std::string target)
+            throw(GradeTooHighException, GradeTooLowException);
+        Form(const Form& ref)
+            throw(GradeTooHighException, GradeTooLowException);
         Form& operator = (const Form& ref);
         virtual ~Form();
 
@@ -46,8 +62,9 @@ class Form
         bool getSign() const;
         int getGradeForSign() const;
         int getGradeForExec() const;
+        std::string getTarget() const;
 
-        void beSigned(Bureaucrat& bur) throw(GradeTooLowException); // 매개변수로 뭘 받지?
+        void beSigned(Bureaucrat& bur) throw(GradeTooLowException);
 };
 
 std::ostream& operator << (std::ostream& out, const Form& ref);

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 17:43:25 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/19 23:32:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 00:58:13 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,33 @@ class Form
     public:
         class GradeTooHighException : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                GradeTooHighException();
+                GradeTooHighException(const GradeTooHighException& ref);
+                GradeTooHighException& operator = (const GradeTooHighException& ref);
+                virtual ~GradeTooHighException();
+
+                virtual const char* what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                GradeTooLowException();
+                GradeTooLowException(const GradeTooLowException& ref);
+                GradeTooLowException& operator = (const GradeTooLowException& ref);
+                virtual ~GradeTooLowException();
+                
+                virtual const char* what() const throw();
         };
         class NotSigned : public std::exception
         {
-            virtual const char* what() const throw();
+            public:
+                NotSigned();
+                NotSigned(const NotSigned& ref);
+                NotSigned& operator = (const NotSigned& ref);
+                virtual ~NotSigned();
+                
+                virtual const char* what() const throw();
         };
 
         Form();
