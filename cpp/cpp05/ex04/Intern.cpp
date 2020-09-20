@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 01:13:36 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/21 01:03:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 01:44:47 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ Intern::makeForm(std::string name, std::string target)
     throw(InvalidName)
 {
     Form* ret = 0;
+
     if (name == "presidential pardon")
         ret = new PresidentialPardonForm(target);
     else if (name == "robotomy request")
@@ -67,6 +68,12 @@ Intern::makeForm(std::string name, std::string target)
         ret = new ShrubberyCreationForm(target);
     else
         throw InvalidName();
-    std::cout << "Intern creates " << ret->getName() << std::endl;
+
+    std::cout << "Intern creates " << ret->getName();
+    std::cout << " (s.grade " << ret->getGradeForSign() << " e.grade " << ret->getGradeForExec() << ") ";
+    std::cout << "targeted on " << ret->getTarget();
+    std::cout << " (signed " << ret->getSign() << ")";
+    std::cout << std::endl;
+
     return (ret);
 }

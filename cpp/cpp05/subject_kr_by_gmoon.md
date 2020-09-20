@@ -167,3 +167,24 @@ targeted on Pigley (Signed)
 That'll do, Pigley. That'll do ...
 zaz@blackjack ex04 $
 ```
+
+## Exercise 05: Endless red-tape generator
+
+| Exercise : 05 |
+| --- |
+| 제출 디렉토리: ex05/ |
+| 제출할 파일: Same as before + CentralBureaucracy.cpp CentralBureaucracy.hpp |
+| 금지 함수: 없음 |
+| 비고: 없음 |
+
+이제 당신은 모든 것을 깔끔한 작은 패키지로 포장하기만 하면 됩니다.
+
+CentralBureaucracy 클래스를 만드세요. 이것은 매개변수 없이 생성되고, 생성시 20개의 비어있는 오피스 블록을 가집니다.
+
+이것은 개체를 대상에 공급할 수 있습니다. 인턴은 자동으로 사용자 개입 없이 자동으로 생성됩니다.
+
+개체에 공급되는 관료는 사무실 블록의 자리를 채우는 데 사용됩니다. 사용 가능한 좌석이 없는 경우, 그들을 거부하거나 대기 장소에 저장할 수 있습니다.
+
+그 후 대기열의 사람 이름을 문자열로 취하는 `queueUp` 함수를 사용해서 대상을 대기열에 넣을 수 있습니다.
+
+...

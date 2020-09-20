@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 15:42:35 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/20 00:08:50 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/21 01:46:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ Bureaucrat::signForm(Form& form)
     try
     {
         form.beSigned(*this);
-        std::cout << name_ << " signs " << form.getName() << "." << std::endl;
+        std::cout << name_;
+        std::cout << " (" << grade_ << ")";
+        std::cout << " signs " << form.getName() << std::endl;
     }
     catch (std::exception & e)
     {
@@ -109,7 +111,9 @@ Bureaucrat::executeForm(Form const & form)
     try
     {
         form.execute(*this);
-        std::cout << name_ << " executes " << form.getName() << std::endl;
+        std::cout << name_;
+        std::cout << " (" << grade_ << ")";
+        std::cout << " executes " << form.getName() << std::endl;
     }
     catch (std::exception & e)
     {
