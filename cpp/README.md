@@ -66,8 +66,7 @@
     ```
 * [ ] const, char 등에 대한 여러 공부 필요.
 
----
-
+### 공부가 필요한 내용들
 * [ ] const 위치
     * 포인터에서의 const
     * 레퍼런스에서의 const
@@ -85,3 +84,31 @@
 
 * [ ] 생성자 리스트
     * https://psychoria.tistory.com/11
+
+## cpp06
+
+### float vs double
+* https://codingdog.tistory.com/entry/c%EC%96%B8%EC%96%B4-double%ED%98%95-vs-float%ED%98%95-%EC%96%B4%EB%96%A4-%EC%B0%A8%EC%9D%B4%EA%B0%80-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94<br>
+    > 정확도의 차이
+
+### 변수의 타입 확인
+`std::cout << typeid(<변수>).name() << std::endl;`
+
+### 소수점 자리수 출력
+* https://pmoncode.tistory.com/20
+* https://semaph.tistory.com/7
+* https://boycoding.tistory.com/152
+    > `std::cout << std::fixed; std::cout.precision(1);`
+
+### 공부가 필요한 내용
+
+* [ ] 리터럴 값이란?
+* [ ] 캐스트, 캐스팅이란?
+    * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
+
+---
+
+### C++ 참고 사이트
+* https://en.cppreference.com/w/
+* http://www.cplusplus.com/
+* https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm
