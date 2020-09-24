@@ -109,7 +109,7 @@
 * https://boycoding.tistory.com/204
 * https://boycoding.tistory.com/205
 
-### 캐스트, 캐스팅
+### 캐스트, 캐스팅, 형변환
 * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
 * https://mynameisdabin.tistory.com/20
 * https://doitnow-man.tistory.com/215
@@ -125,9 +125,9 @@
     > `std::numeric_limits<int>::min()`  
     > INT_MIN은 왜 안되는거지? INT32_MIN, INT64_MIN 등은 뭐지? 내가 아는 int의 최소값은 INT32_MIN이던데.
 
----
 
-### C++ 참고 사이트
+
+## C++ 참고 사이트
 * https://en.cppreference.com/w/
 * http://www.cplusplus.com/
 * https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm

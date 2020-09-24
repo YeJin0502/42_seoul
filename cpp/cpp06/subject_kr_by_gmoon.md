@@ -59,3 +59,21 @@ double: 42.0
 `Data * deserialize(void * raw);` 함수를 작성하세요. 이 함수는 힙에 할당된 `struct Data {std::string s1; int n; std::string s2;};`로 정의된 데이터 구조로 역 직렬화합니다.
 
 두 함수를 잘 작동하는지 증명해줄 프로그램으로 래핑하세요.
+
+## Exercise 02:  Identify real type
+
+| Exercise : 02 |
+| --- |
+| 제출 디렉토리: ex02/ |
+| 제출할 파일: Any file you need and a Makefile |
+| 허용 함수: 없음 |
+
+public virtual 소멸자만을 가지는 Base 클래스를 만드세요. Base를 public으로 상속받는 빈 클래스 A, B, C를 만드세요.
+
+`Base* generate(void);` 함수를 작성하세요. 이 함수는 A 또는 B 또는 C를 임의로 인스턴스화하고, 인스턴스를 Base 포인터로 반환합니다. 임의성을 위해 원하는 것을 자유롭게 사용하세요.
+
+`void identify_from_pointer(Base* p);` 함수를 작성하세요. 이 함수는 p의 실제 유형에 따라 "A" 또는 "B" 또는 "C"를 표시합니다.
+
+`void identify_from_reference(Base& p);` 함수를 작성하세요. 이 함수는 p의 실제 유형에 따라 "A" 또는 "B" 또는 "C"를 표시합니다.
+
+이 세 함수들을 잘 작동하는지 증명하는 프로그램으로 묶으세요. `<typeinfo>`를 포함하는 것은 금지입니다.
