@@ -1,17 +1,20 @@
 ## cpp05
 
+### 초기화 리스트
+* https://psychoria.tistory.com/11
+    > 초기화 리스트를 사용해야만 하는 경우.
+
 ### const 멤버변수
 * 값이 고정된 멤버변수.
 * 일반 변수의 맨 앞에 const가 붙는다.
-    * 포인터나 레퍼런스에서는 얘기가 좀 다를 듯?
-* 따라서 생성자에서 먼저 초기화(`{}` 바깥에서)하고, 이후 불변.
-* 복사생성자에서도 먼저 초기화.
+* 따라서 생성자에서 초기화 리스트로 초기화하고, 이후 불변.
+* 복사생성자에서도 초기화 리스트.
     ```c++
     Form::Form(const Form& ref)
     throw(GradeTooHighException, GradeTooLowException)
     :   name_(ref.name_),
         grade_for_sign_(validGrade(ref.grade_for_sign_)),
-        grade_for_exec_(validGrade(ref.grade_for_exec_)) // 먼저 초기화
+        grade_for_exec_(validGrade(ref.grade_for_exec_)) // 초기화 리스트
     {
         *this = ref;
     }
@@ -44,7 +47,7 @@
 ### const char*
 * `char* str = "hello world!";`을 컴파일하면 `ISO C++11 does not allow conversion from string literal to 'char*'` 오류가 발생한다.
 * 따라서 const를 붙여서, `const char* str = "hello world!";`와 같이 해주어야 한다.
-* 한편, 여러줄의 선언은 다음과 같이 한다. 여러 방법이 있는 것 같다.
+* [ ] 한편, 여러줄의 선언은 다음과 같이 한다. 여러 방법이 있는 것 같다.
     ```
     const char *TREE =
     {
@@ -64,7 +67,6 @@
         "  ______/____\\____ \n"
     };
     ```
-* [ ] const, char 등에 대한 여러 공부 필요.
 
 ### 공부가 필요한 내용들
 * [ ] const 위치
@@ -82,8 +84,7 @@
     * \<fstream>, \<iostream> 등의 관계.
         * \<iostream>만 포함하면 ofstream같은 객체가 선언이 안된다.
 
-* [ ] 생성자 리스트
-    * https://psychoria.tistory.com/11
+
 
 ## cpp06
 
@@ -111,10 +112,18 @@
 ### 캐스트, 캐스팅
 * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
 * https://mynameisdabin.tistory.com/20
+* https://doitnow-man.tistory.com/215
 
 ### 난수 생성
 * https://modoocode.com/304
     > 다른 사람들의 풀이에서 rand()가 잘 보이지 않는 이유.
+
+### 정수 제한
+* https://docs.microsoft.com/ko-kr/cpp/c-language/cpp-integer-limits?view=vs-2019
+    > C++ 표준 라이브러리 헤더 <limits>에 정수 제한 상수가 정의되어 있다.
+* https://riptutorial.com/ko/cplusplus/example/15879/%EC%88%AB%EC%9E%90-%ED%98%95%EC%9D%98-%EB%B2%94%EC%9C%84
+    > `std::numeric_limits<int>::min()`  
+    > INT_MIN은 왜 안되는거지? INT32_MIN, INT64_MIN 등은 뭐지? 내가 아는 int의 최소값은 INT32_MIN이던데.
 
 ---
 
@@ -122,3 +131,4 @@
 * https://en.cppreference.com/w/
 * http://www.cplusplus.com/
 * https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm
+* https://riptutorial.com/ko/cplusplus

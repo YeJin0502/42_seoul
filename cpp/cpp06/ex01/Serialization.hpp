@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 16:41:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/23 17:35:58 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/25 06:50:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SERIALIZATION_HPP
 
 # include <iostream>
+# include <random>
+# include <limits>
 
 typedef struct s_Data {std::string s1; int n; std::string s2;} Data;
 
