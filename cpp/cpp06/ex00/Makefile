@@ -13,10 +13,11 @@ $(NAME):
 
 all: $(NAME)
 
-clean:
-	rm -f $(OBJ)
+# clean:
+# 	rm -f $(OBJ)
 
-fclean: clean
+# fclean: clean
+fclean:
 	rm -f $(NAME)
 
 re: fclean all

@@ -91,7 +91,7 @@
 * https://codingdog.tistory.com/entry/c%EC%96%B8%EC%96%B4-double%ED%98%95-vs-float%ED%98%95-%EC%96%B4%EB%96%A4-%EC%B0%A8%EC%9D%B4%EA%B0%80-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94<br>
     > 정확도의 차이
 
-### 변수의 타입 확인
+### 변수 타입 확인
 `std::cout << typeid(<변수>).name() << std::endl;`
 
 ### 소수점 자리수 출력
@@ -100,11 +100,21 @@
 * https://boycoding.tistory.com/152
     > `std::cout << std::fixed; std::cout.precision(1);`
 
-### 공부가 필요한 내용
+### 자료형의 크기 및 범위
+* https://myblog.opendocs.co.kr/archives/1230
+    > int는 4바이트, char는 1바이트.
 
-* [ ] 리터럴 값이란?
-* [ ] 캐스트, 캐스팅이란?
-    * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
+### 동적 메모리 할당
+* https://boycoding.tistory.com/204
+* https://boycoding.tistory.com/205
+
+### 캐스트, 캐스팅
+* https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
+* https://mynameisdabin.tistory.com/20
+
+### 난수 생성
+* https://modoocode.com/304
+    > 다른 사람들의 풀이에서 rand()가 잘 보이지 않는 이유.
 
 ---
 

@@ -45,3 +45,17 @@ int: 42
 float: 42.0f
 double: 42.0
 ```
+
+## Exercise 01: Serialization
+
+| Exercise : 01 |
+| --- |
+| 제출 디렉토리: ex01/ |
+| 제출할 파일: Any file you need and a Makefile |
+| 허용 함수: 없음 |
+
+`void * serialize (void);` 함수를 작성하세요. 이 함수는 직렬화된(serialized) 데이터의 조각을 나타내는, 바이트 열의 힙 주소를 반환합니다. 직렬화된 데이터는 '8개의 영숫자 문자들로 구성된 임의 배열'과, '임의 정수', 다시 '8개의 영숫자 문자들로 구성된 임의 배열', 즉 이 세 요소의 연결입니다. 임의의 값을 생성하기 위해 원하는 것을 자유롭게 사용하세요.
+
+`Data * deserialize(void * raw);` 함수를 작성하세요. 이 함수는 힙에 할당된 `struct Data {std::string s1; int n; std::string s2;};`로 정의된 데이터 구조로 역 직렬화합니다.
+
+두 함수를 잘 작동하는지 증명해줄 프로그램으로 래핑하세요.
