@@ -125,6 +125,10 @@
 
 ## cpp05
 
+### try catch exception
+* https://egg-money.tistory.com/205
+* https://blog.hexabrain.net/179
+
 ### 초기화 리스트
 * https://psychoria.tistory.com/11
     > 초기화 리스트를 사용해야만 하는 경우.
