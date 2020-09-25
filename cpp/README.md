@@ -2,7 +2,7 @@
 <details>
 <summary>정리 필요</summary>
 
-## cpp00
+## cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
 
 ### cpp
 * https://modoocode.com/135 : 모두의코드
@@ -27,7 +27,7 @@
 
 
 
-## cpp01
+## cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
 
 ### c++ 네이밍
 * https://torbjorn.tistory.com/257 : 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
@@ -58,7 +58,7 @@
 
 
 
-## cpp02
+## cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
@@ -87,7 +87,7 @@
 
 
 
-## cpp03
+## cpp03: 상속
 
 ### switch case
 * https://boycoding.tistory.com/186
@@ -103,7 +103,7 @@
 
 
 
-## cpp04
+## cpp04: 다형성, 추상 클래스, 인터페이스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
@@ -123,7 +123,7 @@
 
 
 
-## cpp05
+## cpp05: 예외
 
 ### try catch exception
 * https://egg-money.tistory.com/205
@@ -177,7 +177,7 @@
 * `char* str = "hello world!";`을 컴파일하면 `ISO C++11 does not allow conversion from string literal to 'char*'` 오류가 발생한다.
 * 따라서 const를 붙여서, `const char* str = "hello world!";`와 같이 해주어야 한다.
 * [ ] 한편, 여러줄의 선언은 다음과 같이 한다. 여러 방법이 있는 것 같다.
-    ```
+    ```c++
     const char *TREE =
     {
         "\n"
@@ -212,7 +212,12 @@
 
 
 
-## cpp06
+## cpp06: 캐스트(형변환)
+
+### 캐스트, 캐스팅
+* https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
+* https://mynameisdabin.tistory.com/20
+* https://doitnow-man.tistory.com/215
 
 ### float vs double
 * https://codingdog.tistory.com/entry/c%EC%96%B8%EC%96%B4-double%ED%98%95-vs-float%ED%98%95-%EC%96%B4%EB%96%A4-%EC%B0%A8%EC%9D%B4%EA%B0%80-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94<br>
@@ -235,11 +240,6 @@
 * https://boycoding.tistory.com/204
 * https://boycoding.tistory.com/205
 
-### 캐스트, 캐스팅, 형변환
-* https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
-* https://mynameisdabin.tistory.com/20
-* https://doitnow-man.tistory.com/215
-
 ### 난수 생성
 * https://modoocode.com/304
     > 다른 사람들의 풀이에서 rand()가 잘 보이지 않는 이유.
@@ -253,6 +253,110 @@
 
 
 
+## cpp07: 템플릿
+
+### 템플릿
+* https://thrillfighter.tistory.com/408
+    > 템플릿이란? 함수나 클래스를 만들 수 있는 틀.
+
+    > 템플릿 문법
+    > ```c++
+    > template <typename T>
+    > T myFunc(T a, T b)
+    > {
+    >     return a + b;
+    > }
+    > ```
+
+### 템플릿 사용
+* `myfunc<int>(a, b)`
+* `myfunc(a, b)`
+* `::myfunc(a, b)`
+* 첫 번째는 std::stirng을 넣는 경우, `error: call to 'swap' is ambiguous` 오류가 뜨는 경우가 있었음. 왜?
+* 두 번째는 컴파일러가 알아서 자료형을 판별한다고 함.
+* 세 번째는 두 번째랑 같은 것 아닐까? 네임스페이스가 없어서 저런 형태가 아닐까 추측.
+
+### 함수 포인터
+* https://boycoding.tistory.com/233
+* https://m.blog.naver.com/PostView.nhn?blogId=tipsware&logNo=221619466275&proxyReferer=https:%2F%2Fwww.google.com%2F
+* https://aahc.tistory.com/17
+    > 함수의 이름 자체가 하나의 함수 포인터. (그래서 매개변수로 넘겨줄 수 있는건가?)
+
+    > 함수 포인터는 참조하거나 역참조해도 여전히 같은 기능을 수행함.
+    > ```c++
+    > // 아래는 전부 같은 기능을 하는 코드임.
+    > fun_ptr = &fun;
+    > fun_ptr = fun;
+    > fun_ptr = *fun;
+    > fun_ptr = **fun;
+    > ```
+
+### 클래스 템플릿
+* http://tcpschool.com/cpp/cpp_template_class
+* https://blockdmask.tistory.com/45
+    > 멤버함수가 클래스 외부에서 선언되면, 다시 템플릿 선언을 해주어야 함.
+    > ```c++
+    > template <typename T>
+    > Array<T>::Array()
+    > {
+    >     ...
+    > }
+    > ```
+
+### [] 연산자 오버로딩
+* https://www.qaupot.com/wordpress/?p=2304
+
+### typename vs class
+* https://hashcode.co.kr/questions/554/%ED%85%9C%ED%94%8C%EB%A6%BF%EC%97%90%EC%84%9C-typename%ED%82%A4%EC%9B%8C%EB%93%9C%EC%99%80-class%ED%82%A4%EC%9B%8C%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4
+
+### 클래스 템플릿의 멤버함수는 헤더파일에서 구현
+* cpp 파일을 따로 만들어서 구현하면 `undefined reference to `Array<int>::Array(unsigned int)'`의 에러가 뜬다.
+* 따라서 헤더파일 내에서 멤버함수를 구현해야 하는 듯.
+
+### 배열의 기본 초기화
+```c++
+int* a = new int;
+std::cout << *a << std::endl; // 0으로 초기화
+// std::cout << a << std::endl; // int* a의 주소
+
+char* b = new char;
+std::cout << (int) *b << std::endl; // 0으로 초기화
+```
+기본으로 0으로 초기화된다.
+
+### int* array = new int[0];
+* https://stackoverflow.com/questions/1087042/c-new-int0-will-it-allocate-memory
+* https://roybatty.tistory.com/14
+    > `int* array = new int[0];`은 크기가 0인 배열(NULL이 아님) 할당. 그러나 역참조(*array)의 동작은 정의되어 있지 않음.  
+
+    > `delete[]`는 NULL에 대해 동작 취하지 않으므로 안전(권장하지는 않음). 크기가 0인 배열 또한 안전.
+
+    > 그런데 왜 안전하다면 ex02의 생성자에서 `delete[] array_;`를 하면 에러가 나는거지?
+    > ```
+    > Array<T>::Array()
+    > {
+    >     if (array_) // array_는 클래스 생성시 생성되므로, 항상 존재하는 것 아닌가? 항상 통과하는 조건문?
+    >         delete[] array_; // 안전하다면 왜 delete[]하면 seg fault가 뜨지?
+    >     size_ = 0;
+    >     array_ = new T[0]; // 빈 배열이 뭐지?
+    >     // array_ = nullptr; // 위하고 차이가 뭐지?
+    > }
+    > ```
+* 빈 배열이 뭘까? 할당에 실패하면 nullptr이 되나? 그래서 nullptr이 아니고 값은 없는 걸 빈 배열이라고 하는건가?
+
+### 동적 배열
+* 이게 동적배열 때문인건가?
+    ```c++
+    int* int_array = new int[0];
+    int_array[0] = 1;
+    int_array[1] = 2;
+    int_array[3] = 3; // 에러가 안난다?
+
+    std::cout << int_array[3] << std::endl; // 에러가 안난다? 왜? 이게 동적배열?
+    ```
+* https://egg-money.tistory.com/161
+
+
 ## C++ 참고 사이트
 
 ### 공식
@@ -262,5 +366,4 @@
 ### 준 공식
 * https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm
 * https://riptutorial.com/ko/cplusplus
-
-
+* https://modoocode.com/143
