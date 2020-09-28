@@ -2,7 +2,7 @@
 <details>
 <summary>정리 필요</summary>
 
-## cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
+# cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
 
 ### cpp
 * https://modoocode.com/135 : 모두의코드
@@ -27,7 +27,7 @@
 
 
 
-## cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
+# cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
 
 ### c++ 네이밍
 * https://torbjorn.tistory.com/257 : 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
@@ -58,7 +58,7 @@
 
 
 
-## cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
+# cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
@@ -87,7 +87,7 @@
 
 
 
-## cpp03: 상속
+# cpp03: 상속
 
 ### switch case
 * https://boycoding.tistory.com/186
@@ -103,7 +103,7 @@
 
 
 
-## cpp04: 다형성, 추상 클래스, 인터페이스
+# cpp04: 다형성, 추상 클래스, 인터페이스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
@@ -123,7 +123,7 @@
 
 
 
-## cpp05: 예외
+# cpp05: 예외
 
 ### try catch exception
 * https://egg-money.tistory.com/205
@@ -212,7 +212,7 @@
 
 
 
-## cpp06: 캐스트(형변환)
+# cpp06: 캐스트(형변환)
 
 ### 캐스트, 캐스팅
 * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
@@ -253,7 +253,7 @@
 
 
 
-## cpp07: 템플릿
+# cpp07: 템플릿
 
 ### 템플릿
 * https://thrillfighter.tistory.com/408
@@ -344,20 +344,48 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
     > ```
 * 빈 배열이 뭘까? 할당에 실패하면 nullptr이 되나? 그래서 nullptr이 아니고 값은 없는 걸 빈 배열이라고 하는건가?
 
-### 동적 배열
-* 이게 동적배열 때문인건가?
+### 동적 할당
+* 왜 에러가 안날까?
     ```c++
     int* int_array = new int[0];
     int_array[0] = 1;
     int_array[1] = 2;
     int_array[3] = 3; // 에러가 안난다?
 
-    std::cout << int_array[3] << std::endl; // 에러가 안난다? 왜? 이게 동적배열?
+    std::cout << int_array[3] << std::endl; // 에러가 안난다? 왜?
     ```
 * https://egg-money.tistory.com/161
 
 
-## C++ 참고 사이트
+
+# cpp08: 컨테이너, 반복자(iterator), 알고리즘
+
+### exception 클래스
+* https://docs.microsoft.com/ko-kr/cpp/standard-library/exception-class?view=vs-2019
+
+### map
+* https://blockdmask.tistory.com/87
+* https://twpower.github.io/91-how-to-use-map-in-cpp
+    > pair 객체로 다룬다. `it->first`, `it->second` 이런 식으로 key나 value에 접근.
+* https://hugman.tistory.com/entry/C-map%EC%97%90%EC%84%9C-find-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4%EC%84%9C-%EC%97%86%EB%8A%94-%ED%95%AD%EB%AA%A9-%EC%B0%BE%EA%B8%B0
+    > map의 find 메서드 사용법
+* https://en.cppreference.com/w/cpp/utility/pair
+    > pair 객체
+
+### C++ 표준 라이브러리 컨테이너
+* https://docs.microsoft.com/ko-kr/cpp/standard-library/stl-containers?view=vs-2019
+* array
+    * https://boycoding.tistory.com/213
+
+### sort algorithm
+* https://blockdmask.tistory.com/178
+
+### stack
+* https://kldp.org/node/71479
+    > stack이나 queue는 컨테이너에 대한 접근을 제한하는 어댑터. 즉, 컨테이너 어댑터이다.
+
+
+# C++ 참고 사이트
 
 ### 공식
 * https://en.cppreference.com/w/
@@ -367,3 +395,6 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 * https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm
 * https://riptutorial.com/ko/cplusplus
 * https://modoocode.com/143
+
+### 그 외
+* https://boycoding.tistory.com/category/C%2B%2B%20%EC%9D%B4%EC%95%BC%EA%B8%B0
