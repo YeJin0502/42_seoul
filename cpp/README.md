@@ -242,14 +242,14 @@
 
 ### 난수 생성
 * https://modoocode.com/304
-    > 다른 사람들의 풀이에서 rand()가 잘 보이지 않는 이유.
+    > 다른 사람들의 풀이에서 `rand()`가 잘 보이지 않는 이유.
 
 ### 정수 제한
 * https://docs.microsoft.com/ko-kr/cpp/c-language/cpp-integer-limits?view=vs-2019
-    > C++ 표준 라이브러리 헤더 <limits>에 정수 제한 상수가 정의되어 있다.
+    > C++ 표준 라이브러리 헤더 `<limits>`에 정수 제한 상수가 정의되어 있다.
 * https://riptutorial.com/ko/cplusplus/example/15879/%EC%88%AB%EC%9E%90-%ED%98%95%EC%9D%98-%EB%B2%94%EC%9C%84
     > `std::numeric_limits<int>::min()`  
-    > INT_MIN은 안되나? INT32_MIN, INT64_MIN 등은 뭐지? 내가 아는 int의 최소값은 INT32_MIN이던데...
+    > `INT_MIN`은 안되나? `INT32_MIN`, `INT64_MIN` 등은 뭐지? 내가 아는 int의 최소값은 `INT32_MIN`이던데...
 
 
 
@@ -363,6 +363,14 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 ### exception 클래스
 * https://docs.microsoft.com/ko-kr/cpp/standard-library/exception-class?view=vs-2019
 
+### C++ 표준 라이브러리 컨테이너
+* https://docs.microsoft.com/ko-kr/cpp/standard-library/stl-containers?view=vs-2019
+* https://min-zero.tistory.com/entry/C-STL-2-1-%EB%B0%98%EB%B3%B5%EC%9E%90-%EB%B0%98%EB%B3%B5%EC%9E%90iterator
+    > 컨테이너, 반복자, 알고리즘 종류
+
+### array
+* https://boycoding.tistory.com/213
+
 ### map
 * https://blockdmask.tistory.com/87
 * https://twpower.github.io/91-how-to-use-map-in-cpp
@@ -372,17 +380,44 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 * https://en.cppreference.com/w/cpp/utility/pair
     > pair 객체
 
-### C++ 표준 라이브러리 컨테이너
-* https://docs.microsoft.com/ko-kr/cpp/standard-library/stl-containers?view=vs-2019
-* array
-    * https://boycoding.tistory.com/213
-
-### sort algorithm
+### sort
 * https://blockdmask.tistory.com/178
 
 ### stack
 * https://kldp.org/node/71479
     > stack이나 queue는 컨테이너에 대한 접근을 제한하는 어댑터. 즉, 컨테이너 어댑터이다.
+* https://stackoverflow.com/questions/38136137/does-stack-have-iterators-in-c
+    > stack에는 반복자가 없으나, 상속을 통해 protected 멤버인 c(the underlying container)에 접근해서 반복자를 사용하는 클래스를 만들 수 있음. (예제 포함)
+* https://docs.microsoft.com/ko-kr/cpp/standard-library/stack-class?view=vs-2019
+    > container_type이란 기본 컨테이너. 즉 `std::deque<T>` 인 듯?
+
+### auto
+* https://boycoding.tistory.com/184
+    > 값에 맞춰서 변수의 형식이 자동으로 결정되는 타입 추론 기능.
+
+### iterator
+* https://egg-money.tistory.com/200
+* https://m.blog.naver.com/PostView.nhn?blogId=kks227&logNo=60208809639&proxyReferer=https:%2F%2Fwww.google.com%2F
+* `begin()`, `cbegin()`, `rbegin()`, `crbegin`
+    * `cbegin()`: const_iterator 반환. 포인터는 변경 가능하나, 포인터가 가르키는 값이 변경 불가능.
+        ```c++
+        auto it = mst.cbegin();
+        std::cout << *it << std::endl;
+        it++; // 변경 가능.
+        std::cout << *it << std::endl;
+        // *it += 10; // 포인터가 가르키는 값 변경 불가능(컴파일 에러).
+        ```
+    * `rbegin`: 뒤집어진 순서로 반환.
+        ```c++
+        // mst에 {1,2,3} 저장된 상태
+        for (auto it = mst.rbegin(); it < mst.rend(); it++)
+            std::cout << *it << std::endl; // 3 2 1 출력
+        ```
+
+### ipp 확장자
+* https://simcho999.blogspot.com/2018/01/c-cpp-h-hpp-c.html
+    > 헤더의 정의는 hpp, 템플릿의 정의는 tpp, 인라인 함수 정의는 ipp에?
+
 
 
 # C++ 참고 사이트

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:32:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/28 18:43:47 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/29 13:51:20 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,62 @@ template <typename T>
 class MutantStack : public std::stack<T>
 {
     public:
-        std::iterator begin();
-        std::iterator end();
+        MutantStack() {}
+        MutantStack(const MutantStack& ref)
+        {
+            std::stack<T>::operator = (ref); // 연산자 함수 쓰는 것이 어색함.
+        }
+        MutantStack& operator = (const MutantStack& ref)
+        {
+            std::stack<T>::operator = (ref);
+            return (*this); // 복사 생성자랑 할당 연산자 맞게 했나?
+        }
+        virtual ~MutantStack() {}
+
+        // auto begin(); // 반환 타입을 auto로 하는 것은 C++ 14부터.
+        // {
+        //     return (this->c.begin());
+        // }
+        // auto end()
+        // {
+        //     return (this->c.end());
+        // }
+
+        typename std::stack<T>::container_type::iterator begin()
+        {
+            return (this->c.begin());
+        }
+        typename std::stack<T>::container_type::const_iterator cbegin() const noexcept
+        {
+            return (this->c.cbegin());
+        }
+
+        typename std::stack<T>::container_type::iterator end()
+        {
+            return (this->c.end());
+        }
+        typename std::stack<T>::container_type::const_iterator cend() const noexcept
+        {
+            return (this->c.cend());
+        }
+
+        typename std::stack<T>::container_type::reverse_iterator rbegin()
+        {
+            return (this->c.rbegin());
+        }
+        typename std::stack<T>::container_type::const_reverse_iterator crbegin() const noexcept
+        {
+            return (this->c.crbegin());
+        }
+
+        typename std::stack<T>::container_type::reverse_iterator rend()
+        {
+            return (this->c.rend());
+        }
+        typename std::stack<T>::container_type::const_reverse_iterator crend() const noexcept
+        {
+            return (this->c.crend());
+        }
 };
 
 #endif
