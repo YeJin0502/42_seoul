@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 18:32:16 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/29 13:51:20 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/29 14:19:51 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ class MutantStack : public std::stack<T>
         //     return (this->c.end());
         // }
 
-        typename std::stack<T>::container_type::iterator begin()
+        typedef typename std::stack<T>::container_type::iterator iterator;
+        typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+
+        typename std::stack<T>::container_type::iterator begin() // iterator로 바꾸는게 낫지만, 형식 어색하니 연습삼아 다 적음.
         {
             return (this->c.begin());
         }
@@ -58,6 +61,9 @@ class MutantStack : public std::stack<T>
         {
             return (this->c.cend());
         }
+
+        typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+        typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
         typename std::stack<T>::container_type::reverse_iterator rbegin()
         {
