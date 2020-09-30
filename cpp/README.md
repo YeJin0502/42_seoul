@@ -1,130 +1,58 @@
 ## cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
 
-### 레퍼런스, 참조
-* https://modoocode.com/141
-
-### 객체, 클래스, 인스턴스
-* https://modoocode.com/172
-* https://andrew0409.tistory.com/8
-
-### string
-* https://modoocode.com/233
-
-### setw()
-
 ### cin clear ignore
 * https://satrol.tistory.com/m/69 : 숫자만 입력받기
 * https://dodnet.tistory.com/488 : 숫자를 입력해야 빠져나가는 루프문.
 
+### 초기화 리스트
+* https://m.blog.naver.com/PostView.nhn?blogId=krinlion&logNo=40138012756&proxyReferer=https:%2F%2Fwww.google.com%2F
+* https://psychoria.tistory.com/11
+    > 초기화 리스트를 사용해야만 하는 경우들.  
+    > 특히 부모 클래스의 멤버 변수를 초기화하려면, 초기화 리스트에 부모 클래스의 생성자를 써주어야 한다.   
+    > ```c++
+    > Peon::Peon(std::string name)
+    > :   Victim(name) // 부모 클래스의 생성자로 멤버 변수 초기화.
+    > // :   name_(name) // 컴파일 에러.
+    > {
+    >     std::cout << "Zog zog." << std::endl;
+    > }
+    > ```
 
+### const
+* https://dhna.tistory.com/25 : const 위치에 따른 동작
+* https://www.cppkorea.org/CppCoreGuidelines/Const/ : C++ 핵심 가이드라인 - const
+* https://dydtjr1128.github.io/cpp/2020/01/08/Cpp-const.html
 
-## cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
-
-### C++ 네이밍
-* https://torbjorn.tistory.com/257
-    > 구글에서는 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
-
-### 랜덤 문자열 생성
-* https://m.blog.naver.com/ktguni/221249010968
-    > `rand()`, `srand()`, `time()`을 사용.
+### const 멤버변수
+* 값이 고정된 멤버변수.
+* 따라서 생성자에서 초기화 리스트로 초기화하고, 이후 불변.
+* 복사생성자에서도 초기화 리스트.
+    ```c++
+    Form::Form(const Form& ref)
+    throw(GradeTooHighException, GradeTooLowException)
+    :   name_(ref.name_),
+        grade_for_sign_(validGrade(ref.grade_for_sign_)),
+        grade_for_exec_(validGrade(ref.grade_for_exec_)) // 초기화 리스트
+    {
+        *this = ref;
+    }
+    ```
+* 할당연산자에서도 const 멤버변수는 (불변이므로) 할당하지 못한다.
+    ```c++
+    Form&
+    Form::operator = (const Form& ref)
+    {
+        if (this != &ref)
+        {
+            sign_ = ref.sign_; // const가 아닌 멤버변수만 할당
+        }
+        return (*this);
+    }
+    ```
 
 ### const 함수
 * https://dydtjr1128.github.io/cpp/2019/08/05/Cpp-const-after-function.html
     > 함수 뒤에 const는 함수가 멤버 변수를 변경할 수 없다는 뜻.
-
-### stringstream
-* `#include <sstream>`
-
-### const 멤버변수 초기화
-* https://simplesolace.tistory.com/entry/const-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%A4%EB%B2%84%EB%B3%80%EC%88%98-%EC%B4%88%EA%B8%B0%ED%99%94%ED%95%98%EA%B8%B0
-    > 초기화하려면 `생성자 : id_(id)` 이런 식으로 생성자 시작 전에.
-
-### 파일 입출력
-* `#include <fstream>`
-* https://modoocode.com/213
-* https://modoocode.com/215
-
-
-
-## cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
-
-### 할당 연산자 오버로딩
-* https://edykim.com/ko/post/c-operator-overloading-guidelines/
-* https://blog.hexabrain.net/177
-* https://modoocode.com/202
-
-### 복사 생성자
-* https://udpark.tistory.com/29
-
-### 비트 연산자
-* http://tcpschool.com/c/c_operator_bitwise
-    > `<<` 비트들을 왼쪽으로 이동시킴.
-
-### 고정 소수점
-* https://gsmesie692.tistory.com/94
-    > 고정 소수점은 10진수를 2진수로 바꾸고 정수부와 소수부에 나누어 그대로 저장.
-
-### roundf
-* http://www.cplusplus.com/reference/cmath/round/
-
-### 소수 2진법 변환
-* http://cjyuko.blogspot.com/2018/05/10-2.html
-
-### ostream 연산자 오버로드
-* https://docs.microsoft.com/ko-kr/cpp/standard-library/overloading-the-output-operator-for-your-own-classes?view=vs-2019
-
-
-
-## cpp03: 상속
-
-### switch case
-* https://boycoding.tistory.com/186
-* https://studymake.tistory.com/129
-
-### const
-* https://dhna.tistory.com/25 : const 위치에 따른 동작
-* https://www.cppkorea.org/CppCoreGuidelines/Const/ : c++ 핵심 가이드라인 - const
-* https://dydtjr1128.github.io/cpp/2020/01/08/Cpp-const.html
-
-### 가상 상속
-* 다중 상속에서 생기는 멤버 중복 생성 문제를 해결하기 위해, 상속 시 `virtual` 키워드를 사용하여 가상 상속.
-* 즉, 가상 상속을 사용하면, 다이아몬드 구조로 상속받을 때 이미 할당받은 변수공간은 추가로 생성하지 않는다.
-
-### 가상 함수와 오버라이딩
-* 가상 함수를 왜 사용하나?
-    ```c++
-    Child c, *pC;
-    pC = &c;
-    pC->myfunc(); // Child::myfunc()를 호출.
-
-    Parent *pP;
-    pP = &c;
-    pP->myfunc(); // Parent::myfunc()를 호출. 이를 '정적 바인딩'이라 함.
-    ```
-* 오버라이딩이란? 파생 클래스에서 가상 함수를 재작성하여, 기본 클래스의 가상 함수를 무력화시키는 것.
-* 즉, 가상 함수를 사용하면, 위와 같은 상황에서 부모 클래스의 포인터를 이용하든 자식 클래스의 포인터를 이용하든 Child::myfunc()를 호출하게 되고, 이를 오버라이딩이라 한다.
-    ```c++
-    Child c, *pC;
-    pC = &c;
-    pC->myfunc(); // Child::myfunc()를 호출.
-
-    Parent *pP;
-    pP = &c;
-    pP->myfunc(); // Child::myfunc()를 호출. 이를 '동적 바인딩'이라 함.
-    ```
-* 다시 말해, 가상 함수 없이 '함수 재정의'를 하면 '정적 바인딩'이 일어나고, '가상 함수를 통해 오버라이딩'을 하면 '동적 바인딩'이 일어난다.
-
-### 오버로딩과 오버라이딩
-* 오버로딩: 이름은 같지만 매개변수의 수나 타입이 다른 메서드를 중복으로 선언하는 것.
-* 오버라이딩: 자식 클래스에서 부모 클래스의 가상 함수를 재정의하는 것.
-
-
-
-## cpp04: 다형성, 추상 클래스, 인터페이스
-
-### 할당 연산자 오버로딩
-* https://edykim.com/ko/post/c-operator-overloading-guidelines/
-    > `if (this != &ref)`를 하는 이유.
 
 ### const와 포인터
 * https://boycoding.tistory.com/206
@@ -180,10 +108,167 @@
     * 함수의 매개변수로 상수 참조를 사용할 수 있다. 이렇게 하면, **복사본을 만들 필요 없이** 매개변수를 전달할 수 있다. (따라서 큰 자료형은 상수 참조로 전달할 것.)
     * 상수 참조이므로, 값은 변경할 수 없다.
 
+    ```c++
+    std::string add_world(const std::string& str)
+    // const std::string& add_world(const std::string& str) // 컴파일 에러
+    {
+        return (ret);
+    }
+    int main()
+    {
+        std::string a = "hello";
+        std::cout << add_world(a) << std::endl;
+    }
+    ```
+    * 지역변수는 사라지므로, const int&로 반환할 수 없다.
+
+    ```c++
+    const std::string& Sorcerer::get_name() const
+    {
+        return (name_);
+    }
+    ```
+    * 하지만 클래스의 멤버변수는 유지되는 동안 const int&로 반환할 수 있다. (적절한 방법인지는 모르겠다.)
+
 ### l-value와 r-value
 * https://m.blog.naver.com/luku756/221808884092
     > l-value: 식 이후에 사라지지 않는 값. 이름을 지니는 변수.  
-    > r-value: 표현식 이후에 사라지는 값. 임시 변수. 
+    > r-value: 표현식 이후에 사라지는 값. 임시 변수.
+
+
+
+## cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
+
+### C++ 네이밍
+* https://torbjorn.tistory.com/257
+    > 구글에서는 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
+
+### 랜덤 문자열 생성
+* https://m.blog.naver.com/ktguni/221249010968
+    > `rand()`, `srand()`, `time()`을 사용.
+
+### stringstream
+* `#include <sstream>`
+
+### 파일 입출력
+* `#include <fstream>`
+* https://modoocode.com/213
+* https://modoocode.com/215
+
+
+
+## cpp02: Ad-hoc 다형성, 연산자 오버로드, 캐노니컬 클래스
+
+### Ad-hoc 다형성
+* http://blog.daum.net/it-focus/143
+    > Ad-hoc 다형성이란 가짜 다형성. 실제로 진짜 다형성을 가진 것이 아니라, 다른 것들이 모여 하나처럼 보이는 것.  
+    > 오버로딩과 코어션으로 나뉨.  
+    > * 오버로딩: 하나의 함수를 매개변수의 수나 타입에 따라 사용.  
+    > * 코어션: float 매개변수가 필요할 때, int를 넣어줘도 됨. 즉, 타입 변환.
+* http://wiki.hash.kr/index.php/%EB%8B%A4%ED%98%95%EC%84%B1
+    > Ad-hoc 다형성이란 임시 다형성. 오버로딩을 의미.
+
+### Coplien form, Canonical class form
+* 두 용어의 차이는 잘 모르겠다. 캐노니컬이 코플린을 포함한다고 들었다.
+* https://stackoverflow.com/questions/21219590/coplien-form-example-c
+* http://www.cplusplus.com/articles/y8hv0pDG/
+* https://www.francescmm.com/orthodox-canonical-class-form/
+    > **기본 생성자, 복사 생성자, 소멸자, 할당 연산자.**
+
+### 할당 연산자 오버로딩
+* https://edykim.com/ko/post/c-operator-overloading-guidelines/
+    > `if (this != &ref)`를 하는 이유.
+* https://modoocode.com/202
+
+### ostream 연산자 오버로딩
+* https://docs.microsoft.com/ko-kr/cpp/standard-library/overloading-the-output-operator-for-your-own-classes?view=vs-2019
+
+### 비트 연산자
+* http://tcpschool.com/c/c_operator_bitwise
+    > `<<` 비트들을 왼쪽으로 이동시킴.
+
+### 고정 소수점
+* https://gsmesie692.tistory.com/94
+    > 고정 소수점은 10진수를 2진수로 바꾸고 정수부와 소수부에 나누어 그대로 저장.
+
+### 소수 2진법 변환
+* http://cjyuko.blogspot.com/2018/05/10-2.html
+
+
+
+## cpp03: 상속
+
+### switch case
+* https://boycoding.tistory.com/186
+* https://studymake.tistory.com/129
+
+### 가상 상속
+* 다중 상속에서 생기는 멤버 중복 생성 문제를 해결하기 위해, 상속 시 `virtual` 키워드를 사용하여 가상 상속.
+* 즉, 가상 상속을 사용하면, 다이아몬드 구조로 상속받을 때 이미 할당받은 변수공간은 추가로 생성하지 않는다.
+
+### 가상 함수와 오버라이딩
+* 가상 함수를 왜 사용하나?
+    ```c++
+    Child c, *pC;
+    pC = &c;
+    pC->myfunc(); // Child::myfunc()를 호출.
+
+    Parent *pP;
+    pP = &c;
+    pP->myfunc(); // Parent::myfunc()를 호출. 이를 '정적 바인딩'이라 함.
+    ```
+* 오버라이딩이란? 파생 클래스에서 가상 함수를 재작성하여, 기본 클래스의 가상 함수를 무력화시키는 것.
+* 즉, 가상 함수를 사용하면, 위와 같은 상황에서 부모 클래스의 포인터를 이용하든 자식 클래스의 포인터를 이용하든 Child::myfunc()를 호출하게 되고, 이를 오버라이딩이라 한다.
+    ```c++
+    Child c, *pC;
+    pC = &c;
+    pC->myfunc(); // Child::myfunc()를 호출.
+
+    Parent *pP;
+    pP = &c;
+    pP->myfunc(); // Child::myfunc()를 호출. 이를 '동적 바인딩'이라 함.
+    ```
+* 다시 말해, 가상 함수 없이 '함수 재정의'를 하면 '정적 바인딩'이 일어나고, '가상 함수를 통해 오버라이딩'을 하면 '동적 바인딩'이 일어난다.
+
+### 오버로딩과 오버라이딩
+* 오버로딩: 이름은 같지만 매개변수의 수나 타입이 다른 메서드를 중복으로 선언하는 것.
+* 오버라이딩: 자식 클래스에서 부모 클래스의 가상 함수를 재정의하는 것.
+
+
+
+## cpp04: 다형성, 추상 클래스, 인터페이스
+
+### 다형성
+* http://blog.daum.net/it-focus/143
+* https://micropilot.tistory.com/3072  
+* https://github.com/utilForever/modern-cpp-tutorial/blob/master/Articles/The%20Four%20Polymorphisms%20in%20C%2B%2B.md
+    > * 서브타입 다형성: 런타임에 가상 테이블을 통해 이뤄지므로, '런타임 다형성'이라고도 한다. Base 클래스의 포인터나 레퍼런스로 상속 클래스를 사용하는 기능을 뜻한다. 가상 함수를 오버라이딩해서 구현한다.  
+    > * 매개변수 다형성: 컴파일 타임에 이뤄지므로, '컴파일 타임 다형성'이라고도 한다. 템플릿을 통해 구현한다.  
+    > * 임시 다형성: 오버로딩  
+    > * 강제 다형성: 캐스팅  
+
+### 추상 클래스
+* 순수 가상 함수: `virtual void attack() const = 0;`의 형식. 클래스 내에서 구현하지 않고, 상속 클래스에서 구현한다.
+* 추상 클래스: 순수 가상 함수를 하나 이상 가지는 클래스. 상속을 위한 기본 클래스로, 인스턴스화가 불가능.
+
+### 공부가 필요한 부분
+* [ ] getter을 써야만 하는 경우?
+    ```c++
+    PlasmaRifle::PlasmaRifle(const PlasmaRifle& ref)
+    :   AWeapon(ref.getName(), ref.getDamage(), ref.getAPCost()) // 얘는 왜 그냥 ref.name_이 안되고 getter을 써야하는걸까?
+    {}
+
+    Enemy::Enemy(const Enemy& ref)
+    :   hp_(ref.hp_),
+        type_(ref.type_) // 얘는 getter을 안써도 되는데. 무슨 차이?
+    {}
+    ```
+* [ ] 상속 시, 부모 클래스의 생성자가 실행되는 듯.  
+초기화리스트에서 생성자를 지정해주지 않으면, 기본생성자가 실행된다.  
+이 때, 부모 클래스의 생성자가 private이면 컴파일 오류.
+컴파일 오류를 피하기 위해서는 private을 protected로 바꾸거나, 초기화 리스트에서 기본생성자가 아닌 다른 생성자를 지정해주어야 한다.
+* [ ] 복사생성자와 할당연산자 어떤 식으로 구현해야 효율적인지. 복사생성자에서는 초기화 리스트로 다 복사해서 넣는게 나은지, 할당연산자를 불러오는게 나은지! 그 실행 과정이나 순서도 모르겠음. 기본생성자가 실행되고 할당연산자가 실행되나? 잘 모름.
+
 
 
 ## cpp05: 예외
@@ -191,38 +276,6 @@
 ### try catch exception
 * https://egg-money.tistory.com/205
 * https://blog.hexabrain.net/179
-
-### 초기화 리스트
-* https://psychoria.tistory.com/11
-    > 초기화 리스트를 사용해야만 하는 경우.
-
-### const 멤버변수
-* 값이 고정된 멤버변수.
-* 일반 변수의 맨 앞에 const가 붙는다.
-* 따라서 생성자에서 초기화 리스트로 초기화하고, 이후 불변.
-* 복사생성자에서도 초기화 리스트.
-    ```c++
-    Form::Form(const Form& ref)
-    throw(GradeTooHighException, GradeTooLowException)
-    :   name_(ref.name_),
-        grade_for_sign_(validGrade(ref.grade_for_sign_)),
-        grade_for_exec_(validGrade(ref.grade_for_exec_)) // 초기화 리스트
-    {
-        *this = ref;
-    }
-    ```
-* 할당연산자에서도 const 멤버변수는 (불변이므로) 할당하지 못한다.
-    ```c++
-    Form&
-    Form::operator = (const Form& ref)
-    {
-        if (this != &ref)
-        {
-            sign_ = ref.sign_; // const가 아닌 멤버변수만 할당
-        }
-        return (*this);
-    }
-    ```
 
 ### 두 클래스가 서로를 사용할 때
 * A 클래스와 B 클래스가 멤버함수에서 서로 매개변수로 참조한다고 하자. 이 경우, `error unknown type name 'A'`, `error unknown type name 'B'` 등의 오류가 발생한다.
@@ -259,19 +312,6 @@
         "  ______/____\\____ \n"
     };
     ```
-
-### 공부가 필요한 내용
-* const 위치
-    * 포인터에서의 const
-    * 레퍼런스에서의 const
-        * https://boycoding.tistory.com/208
-* 매개변수나 반환값
-    * 포인터? 레퍼런스? 복사본?
-    * std::string의 경우?
-* 복사생성자와 할당연산자 등의 작동 순서 및 원리
-* 파일 입출력
-    * \<fstream>, \<iostream> 등의 관계.
-        * \<iostream>만 포함하면 ofstream같은 객체가 선언이 안된다.
 
 
 
@@ -482,7 +522,7 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
     > 헤더의 정의는 hpp, 템플릿의 정의는 tpp, 인라인 함수 정의는 ipp에?
 
 
----
+
 ## C++ 참고 사이트
 
 ### 공식
@@ -493,6 +533,7 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 * https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rzahg/rzahgcandcplus.htm
 * https://riptutorial.com/ko/cplusplus
 * https://modoocode.com/143
+* https://www.cppkorea.org/CppCoreGuidelines/home/
 
 ### 그 외
 * https://boycoding.tistory.com/category/C%2B%2B%20%EC%9D%B4%EC%95%BC%EA%B8%B0

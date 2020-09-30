@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 06:51:27 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 06:54:10 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 01:11:03 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class SuperMutant : public Enemy
     public:
         SuperMutant();
         SuperMutant(const SuperMutant& ref);
-        virtual ~SuperMutant();
         SuperMutant& operator = (const SuperMutant& ref);
+        virtual ~SuperMutant();
 
         virtual void takeDamage(int damage);
 };

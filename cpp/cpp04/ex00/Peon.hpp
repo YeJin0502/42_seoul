@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 02:40:02 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:44:00 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:45:33 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 
 class Peon : public Victim
 {
-    public:
+    private:
         Peon();
+    
+    public:
         Peon(std::string name);
         Peon(const Peon& ref);
+        Peon& operator = (const Peon& ref);
         virtual ~Peon();
-        // Peon& operator = (const Peon& ref); // 안해도 되나? 왜? 상속을 정확히 모르겠다. 공부 필요.
 
         virtual void getPolymorphed() const;
 };

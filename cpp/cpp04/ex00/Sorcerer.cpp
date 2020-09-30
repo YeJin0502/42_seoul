@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:15:48 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/30 17:17:55 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:34:31 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,9 @@ Sorcerer::Sorcerer(std::string name, std::string title)
 }
 
 Sorcerer::Sorcerer(const Sorcerer &ref)
-: name_(ref.name_), title_(ref.title_)
 {
+    *this = ref;
     std::cout << name_ + ", " + title_ + ", is born!" << std::endl;
-}
-
-Sorcerer::~Sorcerer()
-{
-    std::cout << name_ + ", " + title_ + ", is dead. Consequences will never be the same!" << std::endl;
 }
 
 Sorcerer&
@@ -44,27 +39,31 @@ Sorcerer::operator = (const Sorcerer& ref)
     return (*this);
 }
 
-void
-Sorcerer::polymorph(Victim const &ref) // const Victim하고 다른가?
+Sorcerer::~Sorcerer()
 {
-    ref.getPolymorphed();
+    std::cout << name_ + ", " + title_ + ", is dead. Consequences will never be the same!" << std::endl;
 }
 
-const std::string& Sorcerer::get_name() const
-// const std::string& Sorcerer::get_name() // 안됨.
-// std::string& Sorcerer::get_name() const // 안됨.
+std::string Sorcerer::get_name() const
+// const std::string& Sorcerer::get_name() const
 {
     return (name_);
 }
 
-const std::string& Sorcerer::get_title() const
+std::string Sorcerer::get_title() const
 {
     return (title_);
 }
 
+void
+Sorcerer::polymorph(Victim const &ref)
+{
+    ref.getPolymorphed();
+}
+
 std::ostream&
-operator << (std::ostream& out, const Sorcerer& ref) // 출력 쪽을 잘 모름.
+operator << (std::ostream& out, const Sorcerer& ref)
 {
     out << "I am " << ref.get_name() << ", " << ref.get_title() << ", and I like ponies!" << std::endl;
-    return (out); // 이렇게 하는건가?
+    return (out);
 }

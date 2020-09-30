@@ -6,27 +6,35 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 01:37:50 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 03:36:31 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:36:06 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Victim.hpp"
 
 Victim::Victim()
-{
-
-}
+{}
 
 Victim::Victim(std::string name)
-: name_(name)
+:   name_(name)
 {
     std::cout << "Some random victim called " + name_ + " just appeared!" << std::endl;
 }
 
 Victim::Victim(const Victim& ref)
-: name_(ref.name_)
 {
+    *this = ref;
     std::cout << "Some random victim called " + name_ + " just appeared!" << std::endl;
+}
+
+Victim&
+Victim::operator = (const Victim& ref)
+{
+    if (this != &ref)
+    {
+        name_ = ref.name_;
+    }
+    return (*this);
 }
 
 Victim::~Victim()
@@ -34,17 +42,7 @@ Victim::~Victim()
     std::cout << "Victim " + name_ + " just died for no apparent reason!" << std::endl;
 }
 
-Victim&
-Victim::operator = (const Victim& ref)
-{
-    if (this != &ref) // this랑 *this 헷갈림. // &ref 대신 ref 하면 안되나?
-    {
-        name_ = ref.name_;
-    }
-    return (*this);
-}
-
-const std::string&
+std::string
 Victim::get_name() const
 {
     return (name_);

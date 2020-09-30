@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 01:36:37 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:43:39 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:45:35 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ class Victim
 {
     protected:
         std::string name_;
+        Victim();
 
     public:
-        Victim();
         Victim(std::string name);
         Victim(const Victim& ref);
-        virtual ~Victim();
         Victim& operator = (const Victim& ref);
+        virtual ~Victim();
 
-        const std::string& get_name() const;
+        std::string get_name() const;
 
         virtual void getPolymorphed() const;
 };

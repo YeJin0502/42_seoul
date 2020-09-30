@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:25:39 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:54:08 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:59:08 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,10 @@
 #include "Victim.hpp"
 #include "Peon.hpp"
 
-// int main()
-// {
-//     std::cout << "==============================" << std::endl;
-
-//     Sorcerer a("robert", "ROB");
-//     Sorcerer b(a);
-//     Sorcerer c;
-
-//     c = b;
-//     std::cout << c;
-
-//     std::cout << "==============================" << std::endl;
-
-//     Victim aa("moongua");
-
-//     std::cout << aa;
-
-//     std::cout << "==============================" << std::endl;
-
-//     Peon aaa("gmoon");
-//     Peon bbb(aaa);
-//     Peon ccc;
-
-//     ccc = bbb;
-//     std::cout << ccc;
-// }
-
 int main()
 {
+    std::cout << "==============================" << std::endl;
+
     Sorcerer robert("Robert", "the Magnificent");
 
     Victim jim("Jimmy");
@@ -53,8 +28,23 @@ int main()
     robert.polymorph(jim);
     robert.polymorph(joe);
 
-    return 0;
-}
+    std::cout << "==============================" << std::endl;
 
-// 아마 메인문을 강화해야 할 듯..?
-// 잘 모르는 포인터들도 써보는게 좋을 듯.
+    Victim* pP = new Peon("pP");
+    Victim* pV = new Victim("pV");
+
+    pP->getPolymorphed();
+    pV->getPolymorphed();
+
+    delete pP;
+    delete pV;
+
+    std::cout << "==============================" << std::endl;
+
+    Victim* test1 = new Peon("test1");
+    Peon test2(*(Peon*)test1);
+
+    std::cout << test2;
+
+    std::cout << "==============================" << std::endl;
+}

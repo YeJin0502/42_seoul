@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 06:01:03 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 06:14:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 00:11:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class PlasmaRifle : public AWeapon
     public:
         PlasmaRifle();
         PlasmaRifle(const PlasmaRifle& ref);
-        virtual ~PlasmaRifle();
         PlasmaRifle& operator = (const PlasmaRifle& ref);
+        virtual ~PlasmaRifle();
 
         virtual void attack() const;
 };

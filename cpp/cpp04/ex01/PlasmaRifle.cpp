@@ -6,33 +6,39 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 06:02:03 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 07:58:46 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 00:36:58 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PlasmaRifle.hpp"
 
 PlasmaRifle::PlasmaRifle()
-: AWeapon("Plasma Rifle", 5, 21)
+:   AWeapon("Plasma Rifle", 5, 21)
 {}
+
 
 PlasmaRifle::PlasmaRifle(const PlasmaRifle& ref)
-// : AWeapon("Plasma Rifle", 21, 5) // 해야 하나?
+:   AWeapon(ref.getName(), ref.getDamage(), ref.getAPCost())
+{} // 기본생성자가 private이면 이런 식으로.
+
+/*
+PlasmaRifle::PlasmaRifle(const PlasmaRifle& ref)
 {
     *this = ref;
-}
-
-PlasmaRifle::~PlasmaRifle()
-{}
+} // 기본생성자가 public이면 이런 식으로.
+*/
 
 PlasmaRifle&
 PlasmaRifle::operator = (const PlasmaRifle& ref)
 {
-    if (this != &ref)
-        AWeapon::operator=(ref);
-        // 캐노니컬에 맞춰야 해서 만들지만, 안 만들어도 돌아가나? 된다면 왜? 함수 취급..?
+    // if (this != &ref)
+        // AWeapon::operator = (ref);
+    AWeapon::operator = (ref); // 어짜피 함수 내에 조건문이 있으므로.
     return (*this);
 }
+
+PlasmaRifle::~PlasmaRifle()
+{}
 
 void
 PlasmaRifle::attack() const

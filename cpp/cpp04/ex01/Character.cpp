@@ -6,14 +6,14 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 07:08:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 07:59:01 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 01:26:00 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-// Character::Character()
-// {} // 있어야하나? 그게 기본 형식인가? 그렇다면 어떻게 구현해야?
+Character::Character()
+{}
 
 Character::Character(std::string const & name)
 : name_(name), ap_(40), weapon_(NULL)
@@ -21,14 +21,11 @@ Character::Character(std::string const & name)
 
 Character::Character(const Character& ref)
 {
-    *this = ref; // 이건 얕은 복사라 문제가 되지 않을까? 그럼 어떻게 해야?
-    // 어떤 경우에 문제가 생기는지를 main 문으로 테스트해서 봐야.
+    *this = ref;
 }
 
 Character::~Character()
-{
-    // 무기 delete 해줘야하나? 모르겠는데.
-}
+{}
 
 Character&
 Character::operator = (const Character& ref)
@@ -58,7 +55,7 @@ Character::equip(AWeapon* weapon)
 void
 Character::attack(Enemy* enemy)
 {
-    if (!weapon_ || !enemy) // 맞나?
+    if (!weapon_ || !enemy)
         return ;
     else if (ap_ - weapon_->getAPCost() < 0)
         return ;
@@ -70,7 +67,7 @@ Character::attack(Enemy* enemy)
         delete enemy;
 }
 
-std::string const &
+std::string
 Character::getName() const
 {
     return (name_);
@@ -82,7 +79,7 @@ Character::getWeapon() const
     return (weapon_);
 }
 
-int const &
+int
 Character::getAP() const
 {
     return (ap_);

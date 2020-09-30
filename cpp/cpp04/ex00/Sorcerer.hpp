@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:09:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/30 17:00:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 23:34:10 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ class Sorcerer
     public:
         Sorcerer(std::string name, std::string title);
         Sorcerer(const Sorcerer& ref);
-        virtual ~Sorcerer();
         Sorcerer& operator = (const Sorcerer& ref);
+        virtual ~Sorcerer();
 
-        const std::string& get_name() const;
-        // const std::string& get_name(); // 안됨.
-        // std::string& get_name() const; // 안됨.
-        const std::string& get_title() const;
+        // const std::string& get_name() const; // 혹시 이게 더 낫나?
+        std::string get_name() const;
+        std::string get_title() const;
 
         void polymorph(Victim const &ref);
 };
