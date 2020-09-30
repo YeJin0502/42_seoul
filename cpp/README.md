@@ -1,13 +1,4 @@
-
-<details>
-<summary>정리 필요</summary>
-
-# cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
-
-### cpp
-* https://modoocode.com/135 : 모두의코드
-* https://boycoding.tistory.com/135?category=1006674 : 소년코딩
-* https://blog.hexabrain.net/167
+## cpp00: 네임스페이스, 클래스, 멤버 함수, 표준입출력 스트림, 초기화 리스트, static, const...
 
 ### 레퍼런스, 참조
 * https://modoocode.com/141
@@ -27,38 +18,35 @@
 
 
 
-# cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
+## cpp01: 메모리 할당, 레퍼런스, 포인터, 파일 스트림
 
-### c++ 네이밍
-* https://torbjorn.tistory.com/257 : 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
+### C++ 네이밍
+* https://torbjorn.tistory.com/257
+    > 구글에서는 멤버변수 뒤에 추가로 언더바(_) 붙여서 구분.
 
 ### 랜덤 문자열 생성
-* https://m.blog.naver.com/ktguni/221249010968 : `rand()`, `srand()`, `time()`을 사용.
+* https://m.blog.naver.com/ktguni/221249010968
+    > `rand()`, `srand()`, `time()`을 사용.
 
-### c++ const 함수
-* https://dydtjr1128.github.io/cpp/2019/08/05/Cpp-const-after-function.html : 함수 뒤에 const는 함수가 멤버 변수를 변경할 수 없다는 뜻.
+### const 함수
+* https://dydtjr1128.github.io/cpp/2019/08/05/Cpp-const-after-function.html
+    > 함수 뒤에 const는 함수가 멤버 변수를 변경할 수 없다는 뜻.
 
 ### stringstream
 * `#include <sstream>`
 
 ### const 멤버변수 초기화
-* https://simplesolace.tistory.com/entry/const-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%A4%EB%B2%84%EB%B3%80%EC%88%98-%EC%B4%88%EA%B8%B0%ED%99%94%ED%95%98%EA%B8%B0 : 초기화하려면 `생성자 : id_(id)` 이런 식으로 생성자 시작 전에.
+* https://simplesolace.tistory.com/entry/const-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%A4%EB%B2%84%EB%B3%80%EC%88%98-%EC%B4%88%EA%B8%B0%ED%99%94%ED%95%98%EA%B8%B0
+    > 초기화하려면 `생성자 : id_(id)` 이런 식으로 생성자 시작 전에.
 
-### c++ 파일 입출력
+### 파일 입출력
 * `#include <fstream>`
-* https://modoocode.com/213 : c++의 입출력. 좋은 내용인데 다는 안 읽음... 나중에.
-* https://modoocode.com/215 : c++의 파일 입출력.
-
-### throw
-* https://modoocode.com/230 : c++에서의 예외처리. `try`, `catch`, `throw`.
-
-### c++ 예외 처리
-* https://blog.hexabrain.net/179 : 이외에 좋은 글 많음.
-* https://www.cppkorea.org/CppCoreGuidelines/Errors/ : 읽기는 어렵지만... 나중에 도움될 수?
+* https://modoocode.com/213
+* https://modoocode.com/215
 
 
 
-# cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
+## cpp02: Ad-hoc 다형성(오버라이딩), 연산자 오버로드, 캐노니컬 클래스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
@@ -87,7 +75,7 @@
 
 
 
-# cpp03: 상속
+## cpp03: 상속
 
 ### switch case
 * https://boycoding.tistory.com/186
@@ -98,32 +86,107 @@
 * https://www.cppkorea.org/CppCoreGuidelines/Const/ : c++ 핵심 가이드라인 - const
 * https://dydtjr1128.github.io/cpp/2020/01/08/Cpp-const.html
 
-### 상속
-* https://wikidocs.net/21857 : 다른 것들도 볼만할 듯. 글들이 짧고 코드 위주라 좋음.
+### 가상 상속
+* 다중 상속에서 생기는 멤버 중복 생성 문제를 해결하기 위해, 상속 시 `virtual` 키워드를 사용하여 가상 상속.
+* 즉, 가상 상속을 사용하면, 다이아몬드 구조로 상속받을 때 이미 할당받은 변수공간은 추가로 생성하지 않는다.
+
+### 가상 함수와 오버라이딩
+* 가상 함수를 왜 사용하나?
+    ```c++
+    Child c, *pC;
+    pC = &c;
+    pC->myfunc(); // Child::myfunc()를 호출.
+
+    Parent *pP;
+    pP = &c;
+    pP->myfunc(); // Parent::myfunc()를 호출. 이를 '정적 바인딩'이라 함.
+    ```
+* 오버라이딩이란? 파생 클래스에서 가상 함수를 재작성하여, 기본 클래스의 가상 함수를 무력화시키는 것.
+* 즉, 가상 함수를 사용하면, 위와 같은 상황에서 부모 클래스의 포인터를 이용하든 자식 클래스의 포인터를 이용하든 Child::myfunc()를 호출하게 되고, 이를 오버라이딩이라 한다.
+    ```c++
+    Child c, *pC;
+    pC = &c;
+    pC->myfunc(); // Child::myfunc()를 호출.
+
+    Parent *pP;
+    pP = &c;
+    pP->myfunc(); // Child::myfunc()를 호출. 이를 '동적 바인딩'이라 함.
+    ```
+* 다시 말해, 가상 함수 없이 '함수 재정의'를 하면 '정적 바인딩'이 일어나고, '가상 함수를 통해 오버라이딩'을 하면 '동적 바인딩'이 일어난다.
+
+### 오버로딩과 오버라이딩
+* 오버로딩: 이름은 같지만 매개변수의 수나 타입이 다른 메서드를 중복으로 선언하는 것.
+* 오버라이딩: 자식 클래스에서 부모 클래스의 가상 함수를 재정의하는 것.
 
 
 
-# cpp04: 다형성, 추상 클래스, 인터페이스
+## cpp04: 다형성, 추상 클래스, 인터페이스
 
 ### 할당 연산자 오버로딩
 * https://edykim.com/ko/post/c-operator-overloading-guidelines/
+    > `if (this != &ref)`를 하는 이유.
 
-### 컨테이너
-* http://tcpschool.com/cpp/cpp_container_intro
-    > 같은 타입의 여러 객체를 저장하는 일종의 집합.
+### const와 포인터
+* https://boycoding.tistory.com/206
+* `const int* ptr`
+    ```c++
+    int value = 5;
+    const int* ptr = &value;
 
-### 공부가 필요한 내용
-* const
-    * 연산자 오버로딩에서의 const \<class\>&
-    * getter에서의 const 반환
-    * getter에서의 함수명 뒤의 const
-* Coplien 형식을 잘 못 알고 있나? 캐노니컬하고 코플린은 정확히 뭐지?
+    value = 4; // 컴파일 가능. 상수가 아닌 값이므로.
+    *ptr = 6; // 컴파일 에러. 변경 불가능. (상수 취급)
 
-</details>
+    int value2 = 7;
+    ptr = &value2; // 컴파일 가능. 변경 가능.
+    ```
+    * (const int)* ptr 이라는 뜻으로, 즉 '상수를 가르키는 포인터'.
+    * 포인터가 가르키는 값이 상수로, 변경 불가능. 포인터는 변경 가능.
+    * 상수가 아닌 값을 가르켜도, 상수로 취급한다.
+* `int* const ptr`
+    ```c++
+    int value = 5;
+    int* const ptr = &value;
+
+    *ptr = 6; // 컴파일 가능. 변경 가능.
+
+    int value2 = 7;
+    ptr = &value2; // 컴파일 에러. 변경 불가능.
+    ```
+    * **일반 상수 변수와 마찬가지로, 선언 시 초기화해야 한다.** (반대로, 상수는 선언 시 초기화해야 한다는 뜻.)
+    * int* (const ptr) 이라는 뜻으로, 즉 '상수 포인터'.
+    * 포인터가 상수로, 변경 불가능. 포인터가 가르키는 값은 변경 가능.
+
+### const와 레퍼런스
+* https://boycoding.tistory.com/208
+* `const int& ref`의 초기화
+    ```c++
+    int value = 5;
+    const int& ref = value; // 가능. non-const l-value.
+
+    const int value2 = 6;
+    const int& ref2 = value2; // 가능. const l-value.
+
+    const int& ref3 = 7; // 가능. r-value.
+    ```
+    * const 참조는 non-const 값, const 값, r-value로 초기화할 수 있다.
+    * 포인터와 마찬가지로 상수가 아닌 값을 참조해도 상수로 취급.
+* `const int& ref`의 사용
+    ```c++
+    void changeN(const int& ref) // 복사본을 만들지 않음.
+    {
+        ref = 6; // 불가능.
+    }
+    ```
+    * 함수의 매개변수로 상수 참조를 사용할 수 있다. 이렇게 하면, **복사본을 만들 필요 없이** 매개변수를 전달할 수 있다. (따라서 큰 자료형은 상수 참조로 전달할 것.)
+    * 상수 참조이므로, 값은 변경할 수 없다.
+
+### l-value와 r-value
+* https://m.blog.naver.com/luku756/221808884092
+    > l-value: 식 이후에 사라지지 않는 값. 이름을 지니는 변수.  
+    > r-value: 표현식 이후에 사라지는 값. 임시 변수. 
 
 
-
-# cpp05: 예외
+## cpp05: 예외
 
 ### try catch exception
 * https://egg-money.tistory.com/205
@@ -212,7 +275,7 @@
 
 
 
-# cpp06: 캐스트(형변환)
+## cpp06: 캐스트(형변환)
 
 ### 캐스트, 캐스팅
 * https://eastroot1590.tistory.com/entry/C-%ED%83%80%EC%9E%85-%EC%BA%90%EC%8A%A4%ED%8C%85
@@ -253,7 +316,7 @@
 
 
 
-# cpp07: 템플릿
+## cpp07: 템플릿
 
 ### 템플릿
 * https://thrillfighter.tistory.com/408
@@ -358,7 +421,7 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 
 
 
-# cpp08: 컨테이너, 반복자(iterator), 알고리즘
+## cpp08: 컨테이너, 반복자(iterator), 알고리즘
 
 ### exception 클래스
 * https://docs.microsoft.com/ko-kr/cpp/standard-library/exception-class?view=vs-2019
@@ -419,8 +482,8 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
     > 헤더의 정의는 hpp, 템플릿의 정의는 tpp, 인라인 함수 정의는 ipp에?
 
 
-
-# C++ 참고 사이트
+---
+## C++ 참고 사이트
 
 ### 공식
 * https://en.cppreference.com/w/

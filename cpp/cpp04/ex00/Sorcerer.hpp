@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:09:44 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 04:43:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 17:00:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ class Sorcerer
     private:
         std::string name_;
         std::string title_;
+        Sorcerer();
 
     public:
-        Sorcerer();
         Sorcerer(std::string name, std::string title);
         Sorcerer(const Sorcerer& ref);
         virtual ~Sorcerer();

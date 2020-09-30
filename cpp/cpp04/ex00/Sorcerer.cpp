@@ -6,19 +6,18 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 00:15:48 by gmoon             #+#    #+#             */
-/*   Updated: 2020/08/16 03:46:51 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/09/30 17:17:55 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Sorcerer.hpp"
 
 Sorcerer::Sorcerer()
-{
-    
-}
+{}
 
 Sorcerer::Sorcerer(std::string name, std::string title)
-: name_(name), title_(title)
+:   name_(name),
+    title_(title)
 {
     std::cout << name_ + ", " + title_ + ", is born!" << std::endl;
 }
