@@ -6,19 +6,20 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 13:52:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/10/01 15:03:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 16:04:16 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Squad.hpp"
 
 Squad::Squad()
-{
-    size_ = 0;
-    squad_ = 0;
-}
+:   size_(0),
+    squad_(nullptr)
+{}
 
 Squad::Squad(const Squad& ref)
+:   size_(0),
+    squad_(nullptr) // 초기화 안해주면 할당연산자의 if (squad_) 문에 들어가버림.
 {
     *this = ref;
 }

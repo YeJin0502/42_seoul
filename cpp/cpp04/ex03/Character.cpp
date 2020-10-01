@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 21:51:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/10/01 15:20:56 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 16:16:45 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 Character::Character()
 {
-    _inven = new AMateria*[4]; // 맞나? 포인터랑 배열이 헷갈림.
+    _inven = new AMateria*[4];
+    for (int i = 0; i < 4; i++)
+        _inven[i] = nullptr; // 초기화 해줘야.
 }
 
 Character::Character(std::string const & name)
 :   _name(name)
 {
     _inven = new AMateria*[4];
+    for (int i = 0; i < 4; i++)
+        _inven[i] = nullptr;
 }
 
 Character::Character(const Character& ref)
 {
+    _inven = new AMateria*[4];
+    for (int i = 0; i < 4; i++)
+        _inven[i] = nullptr;
     *this = ref;
 }
 

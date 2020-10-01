@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 18:40:10 by gmoon             #+#    #+#             */
-/*   Updated: 2020/10/01 15:13:59 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 16:17:24 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Character : public ICharacter
     private:
         std::string _name;
         AMateria** _inven;
-        // AMateria*[4] _inven; // 이런 식으로는?
+        // AMateria*[4] _inven; // 이런 식으로 하고, ` _inven = new AMateria*[4];`을 생략할 수 있음.
 
         Character();
         void delInven();
