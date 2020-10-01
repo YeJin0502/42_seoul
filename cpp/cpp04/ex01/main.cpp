@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 07:40:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/10/01 14:56:22 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 16:23:08 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ int main()
 
     me->equip(test);
     me->attack(enemy);
+
+    delete me;
+    delete pr;
+    delete pf;
+    delete test;
+    delete enemy;
 }
