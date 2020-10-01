@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 18:40:10 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 21:59:25 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:13:59 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class Character : public ICharacter
         AMateria** _inven;
         // AMateria*[4] _inven; // 이런 식으로는?
 
+        Character();
         void delInven();
 
     public:
-        Character();
         Character(std::string const & name);
         Character(const Character& ref);
         Character& operator = (const Character& ref);

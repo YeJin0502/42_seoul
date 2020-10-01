@@ -6,15 +6,11 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 23:15:39 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/15 00:02:08 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:28:06 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
-
-// #include "IMateriaSource.hpp"
-// #include "ICharacter.hpp"
-
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
@@ -53,7 +49,6 @@ int main()
     ICharacter* kim = new Character("kim");
 
     AMateria* tmp;
-    // std::cout << "zz" << std::endl;
     tmp = src->createMateria("ice");
     gmoon->equip(tmp);
     tmp = src->createMateria("cure");
@@ -69,10 +64,15 @@ int main()
     gmoon->use(2, *kim);
     gmoon->use(2, *kim);
 
+    std::cout << tmp->getXP() << std::endl;
     std::cout << test->getXP() << std::endl;
 
     gmoon->unequip(2);
     gmoon->use(2, *kim);
+
+    tmp = test;
+    std::cout << tmp->getXP() << std::endl;
+    gmoon->use(1, *kim);
 
     delete src;
     delete gmoon;

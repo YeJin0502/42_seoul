@@ -6,20 +6,19 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 21:51:49 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 22:59:38 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:20:56 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
 Character::Character()
-// : _name(nullptr), _inven(nullptr) // 널포인터 맞나? 이름도?
 {
     _inven = new AMateria*[4]; // 맞나? 포인터랑 배열이 헷갈림.
 }
 
 Character::Character(std::string const & name)
-: _name(name)
+:   _name(name)
 {
     _inven = new AMateria*[4];
 }
@@ -83,7 +82,7 @@ Character::unequip(int idx)
 void
 Character::use(int idx, ICharacter& target)
 {
-    if (idx < 0 || idx > 3 || !_inven[idx]) // 예외처리를 더 일관적으로 고칠 수 있을 듯.
+    if (idx < 0 || idx > 3 || !_inven[idx])
         return ;
     _inven[idx]->use(target);
 }

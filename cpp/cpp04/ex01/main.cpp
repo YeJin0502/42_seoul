@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 07:40:58 by gmoon             #+#    #+#             */
-/*   Updated: 2020/10/01 01:28:26 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 14:56:22 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "RadScorpion.hpp"
 #include "PlasmaRifle.hpp"
 #include "PowerFist.hpp"
+#include "SuperMutant.hpp"
 
 int main()
 {
@@ -39,5 +40,11 @@ int main()
     me->attack(b);
     std::cout << *me;
 
-    return 0;
-} // 추가 필요
+    std::cout << "=========================" << std::endl;
+
+    AWeapon* test = new PlasmaRifle(*(PlasmaRifle*)pr);
+    Enemy* enemy = new SuperMutant();
+
+    me->equip(test);
+    me->attack(enemy);
+}

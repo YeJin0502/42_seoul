@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:47:48 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 18:13:54 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:19:42 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 # include <iostream>
 
-class ICharacter; // 이렇게 안하면 오류나려나?
+class ICharacter;
 
 class AMateria
 {
     private:
-        // std::string const & _type;
-        std::string _type; // 어떻게 하는 것이 적절하지?
+        std::string _type;
         unsigned int _xp;
+        AMateria();
 
     public:
-        AMateria();
         AMateria(std::string const & type);
         AMateria(const AMateria& ref);
         AMateria& operator = (const AMateria& ref);

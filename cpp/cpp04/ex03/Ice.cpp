@@ -6,19 +6,18 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 18:20:40 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 23:27:44 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:18:54 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
 Ice::Ice()
-: AMateria("ice")
-{
-
-}
+:   AMateria("ice")
+{}
 
 Ice::Ice(const Ice& ref)
+:   AMateria("ice")
 {
     *this = ref;
 }
@@ -36,9 +35,7 @@ Ice::operator = (const Ice& ref)
 }
 
 Ice::~Ice()
-{
-    
-}
+{}
 
 Ice*
 Ice::clone() const

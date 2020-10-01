@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 23:18:11 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/14 23:22:27 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:15:46 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ class Cure : public AMateria
 {
     public:
         Cure();
-        // Cure(std::string const & type);
         Cure(const Cure& ref);
         Cure& operator = (const Cure& ref);
         virtual ~Cure();

@@ -6,7 +6,7 @@
 /*   By: gmoon <gmoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 19:23:00 by gmoon             #+#    #+#             */
-/*   Updated: 2020/09/13 20:02:45 by gmoon            ###   ########.fr       */
+/*   Updated: 2020/10/01 15:00:25 by gmoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class TacticalMarine : public ISpaceMarine
 {
     public:
         TacticalMarine();
-        TacticalMarine(const TacticalMarine& ref); // const ~ 형식으로 안하면 오류남.
+        TacticalMarine(const TacticalMarine& ref);
         TacticalMarine& operator = (const TacticalMarine& ref);
         virtual ~TacticalMarine();
 
