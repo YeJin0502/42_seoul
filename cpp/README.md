@@ -270,7 +270,6 @@
 초기화리스트에서 생성자를 지정해주지 않으면, 기본생성자가 실행된다.  
 이 때, 부모 클래스의 생성자가 private이면 컴파일 오류.
 컴파일 오류를 피하기 위해서는 private을 protected로 바꾸거나, 초기화 리스트에서 기본생성자가 아닌 다른 생성자를 지정해주어야 한다.
-* [ ] 복사생성자와 할당연산자 어떤 식으로 구현해야 효율적인지. 복사생성자에서는 초기화 리스트로 다 복사해서 넣는게 나은지, 할당연산자를 불러오는게 나은지! 그 실행 과정이나 순서도 모르겠음. 기본생성자가 실행되고 할당연산자가 실행되나? 잘 모름.
 
 
 
@@ -342,10 +341,6 @@
 * https://myblog.opendocs.co.kr/archives/1230
     > int는 4바이트, char는 1바이트.
 
-### 동적 메모리 할당
-* https://boycoding.tistory.com/204
-* https://boycoding.tistory.com/205
-
 ### 난수 생성
 * https://modoocode.com/304
     > 다른 사람들의 풀이에서 `rand()`가 잘 보이지 않는 이유.
@@ -409,9 +404,6 @@
     > }
     > ```
 
-### [] 연산자 오버로딩
-* https://www.qaupot.com/wordpress/?p=2304
-
 ### typename vs class
 * https://hashcode.co.kr/questions/554/%ED%85%9C%ED%94%8C%EB%A6%BF%EC%97%90%EC%84%9C-typename%ED%82%A4%EC%9B%8C%EB%93%9C%EC%99%80-class%ED%82%A4%EC%9B%8C%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4
 
@@ -434,33 +426,7 @@ std::cout << (int) *b << std::endl; // 0으로 초기화
 * https://stackoverflow.com/questions/1087042/c-new-int0-will-it-allocate-memory
 * https://roybatty.tistory.com/14
     > `int* array = new int[0];`은 크기가 0인 배열(NULL이 아님) 할당. 그러나 역참조(*array)의 동작은 정의되어 있지 않음.  
-
     > `delete[]`는 NULL에 대해 동작 취하지 않으므로 안전(권장하지는 않음). 크기가 0인 배열 또한 안전.
-
-    > 그런데 왜 안전하다면 ex02의 생성자에서 `delete[] array_;`를 하면 에러가 나는거지?
-    > ```
-    > Array<T>::Array()
-    > {
-    >     if (array_) // array_는 클래스 생성시 생성되므로, 항상 존재하는 것 아닌가? 항상 통과하는 조건문?
-    >         delete[] array_; // 안전하다면 왜 delete[]하면 seg fault가 뜨지?
-    >     size_ = 0;
-    >     array_ = new T[0]; // 빈 배열이 뭐지?
-    >     // array_ = nullptr; // 위하고 차이가 뭐지?
-    > }
-    > ```
-* 빈 배열이 뭘까? 할당에 실패하면 nullptr이 되나? 그래서 nullptr이 아니고 값은 없는 걸 빈 배열이라고 하는건가?
-
-### 동적 할당
-* 왜 에러가 안날까?
-    ```c++
-    int* int_array = new int[0];
-    int_array[0] = 1;
-    int_array[1] = 2;
-    int_array[3] = 3; // 에러가 안난다?
-
-    std::cout << int_array[3] << std::endl; // 에러가 안난다? 왜?
-    ```
-* https://egg-money.tistory.com/161
 
 
 
