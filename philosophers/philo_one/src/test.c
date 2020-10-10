@@ -62,6 +62,7 @@ int main()
 }
 */
 
+/*
 void* thread_fuction(void* data)
 {
     *(int*)data += 10;
@@ -84,4 +85,67 @@ int main()
     printf("메인 스레드가 자식 스레드를 기다리는 것을 마쳤습니다.\n");
     printf("return_value: %d\n", *(int*)return_value);
     return (0);
+}
+*/
+
+/*
+void *threadRoutine(void *argumentPointer)
+{
+    while(1)
+        printf("a\n");
+ 
+    return (NULL);
+}
+ 
+int main()
+{
+    pthread_t threadID;
+    char tmp[10];
+ 
+    pthread_create(&threadID, NULL, threadRoutine, NULL);
+ 
+    // threadID를 가진 thread를 detach한다.
+    // printf(" == If you want Detach, write everything and enter == \n");
+    // scanf("%s",tmp);
+ 
+    // pthread_detach(threadID);
+ 
+    printf(" == Complete == \n");
+ 
+    while(1){printf("b\n");}
+    return 0;
+}
+*/
+
+#include <unistd.h>
+
+pthread_mutex_t mutex_lock;
+int g_count = 0;
+ 
+void *t_function(void *data)
+{
+    char* thread_name = (char*)data;
+ 
+    // pthread_mutex_lock(&mutex_lock);
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%s COUNT %d\n", thread_name, g_count);
+        g_count++;
+        sleep(1);
+    }
+    // pthread_mutex_unlock(&mutex_lock);
+    return (NULL);
+}
+
+int main()
+{
+    pthread_t p_thread1, p_thread2;
+
+    pthread_mutex_init(&mutex_lock, NULL);
+ 
+    pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+    pthread_create(&p_thread2, NULL, t_function, (void *)"Thread2");
+ 
+    pthread_join(p_thread1, NULL);
+    pthread_join(p_thread2, NULL);
 }

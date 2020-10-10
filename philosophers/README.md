@@ -15,128 +15,179 @@
 * https://www.crocus.co.kr/481?category=204622
 * https://www.crocus.co.kr/482?category=204622
 
+### 메모리 영역(code, data, stack, heap)
+* https://sfixer.tistory.com/entry/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%98%81%EC%97%ADcode-data-stack-heap
+
 ### 뮤텍스와 세마포어
 * https://velog.io/@conatuseus/OS-%EC%84%B8%EB%A7%88%ED%8F%AC%EC%96%B4%EC%99%80-%EB%AE%A4%ED%85%8D%EC%8A%A4
 * https://jwprogramming.tistory.com/13
 * https://worthpreading.tistory.com/90
 * https://loginfo.dev/Semaphore-and-Mutex
 
-### 스레드
-* https://reakwon.tistory.com/56
+### 시간 관련 함수
 
-### philo_one 함수
+* `void usleep(unsigned long useconds);`   
+마이크로초만큼 대기. 마이크로초는 1/1000000초. unistd.h 헤더에 선언.
 
-* 시간 관련 함수
+* `int gettimeofday(struct timeval *tv, struct timezone *tz);`  
+현재 시간을 가져온다. 성공시 1, 실패시 -1 리턴. 두번째 인자에는 NULL을 넣으면 된다고 한다.
 
-    `void usleep(unsigned long useconds);`   
-    마이크로초만큼 대기. 마이크로초는 1/1000000초. unistd.h 헤더에 선언.
+```c
+#include <sys/time.h> // gettimeofday()
+#include <unistd.h> // usleep()
 
-    `int gettimeofday(struct timeval *tv, struct timezone *tz);`  
-    현재 시간을 가져온다. 성공시 1, 실패시 -1 리턴. 두번째 인자에는 NULL을 넣으면 된다고 한다.
+int main()
+{
+    struct timeval start_time;
+    struct timeval now_time;
 
-    ```c
-    #include <sys/time.h> // gettimeofday()
-    #include <unistd.h> // usleep()
-
-    int main()
+    gettimeofday(&start_time, NULL);
+    while (1)
     {
-        struct timeval start_time;
-        struct timeval now_time;
-
-        gettimeofday(&start_time, NULL);
-        while (1)
-        {
-            gettimeofday(&now_time, NULL);
-            /*
-            printf("1초마다 출력! %ld\n",
-                    (now_time.tv_sec - start_time.tv_sec) +
-                    (now_time.tv_usec - start_time.tv_usec) / 1000000);
-                // 1초마다 메세지가 출력된다.
-            */
-            printf("1초마다 출력! %ld\n",
-                    (now_time.tv_sec - start_time.tv_sec));
-                // 위와 마찬가지로 1초마다 나온다.
-                // usec이 뭘 의미하는걸까?
-            usleep(1000 * 1000);
-        }
+        gettimeofday(&now_time, NULL);
+        /*
+        printf("1초마다 출력! %ld\n",
+                (now_time.tv_sec - start_time.tv_sec) +
+                (now_time.tv_usec - start_time.tv_usec) / 1000000);
+            // 1초마다 메세지가 출력된다.
+        */
+        printf("1초마다 출력! %ld\n",
+                (now_time.tv_sec - start_time.tv_sec));
+            // 위와 마찬가지로 1초마다 나온다.
+            // usec이 뭘 의미하는걸까?
+        usleep(1000 * 1000);
     }
-    ```
+}
+```
 
-* 스레드 함수
+### 스레드 함수
 
-    * `int pthread_create(pthread_t *thread, pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);`  
-    새로운 스레드를 생성한다.  
+> * https://www.crocus.co.kr/484
+> * https://www.crocus.co.kr/482?category=204622
+> * https://bitsoul.tistory.com/160
+> * https://reakwon.tistory.com/56
 
-    * `int pthread_join(pthread_t thread, void **retval);`  
-    다른 스레드가 종료되는걸 기다린다.  
-    thread는 스레드, retval은 스레드의 리턴값을 받을 곳.
-    메인 스레드가 종료되면 자식 스레드까지 종료되므로, 자식 스레드가 수행되기 전에 종료될 수 있다. 따라서 이 함수를 사용해서 자식 스레드의 종료까지 대기하는 것.
+* `int pthread_create(pthread_t *thread, pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);`  
+새로운 스레드를 생성한다.  
+성공시 0 리턴.  
+create만 하면 자원(메모리)를 회수하지 않으므로, join이나 detach를 써주어야 함.  
+    * `thread`: 새로운 스레드의 ID가 이 변수에 저장된다.
+    * `attr`: 스레드의 특성을 정의하기 위해 사용하는데, 보통 NULL을 준다.
+    * `start_routine`: 스레드가 실행하는 함수 포인터.
+    * `arg`: 스레드 함수로 넘어가는 매개변수.
 
-    > https://www.crocus.co.kr/484
-    > https://bitsoul.tistory.com/160
+* `int pthread_join(pthread_t thread, void **retval);`  
+다른 스레드가 종료되는걸 기다린다.  
+메인 스레드가 종료되면 자식 스레드까지 종료되므로, 자식 스레드가 수행되기 전에 종료될 수 있다. 따라서 이 함수를 사용해서 자식 스레드의 종료까지 대기하는 것.  
+즉, 자식 스레드가 끝이 나면, 부모 스레드가 움직인다.  
+결과 값에 관심이 있을 때, 리턴 값을 받고 자원을 반환시킴.
+    * `thread`: 기다릴 스레드의 ID.
+    * `retval`: 스레드의 리턴값을 받을 곳.
 
-    ```c
-    #include <pthread.h> // 컴파일시 clang(gcc) -pthread 옵션을 붙여줘야.
-     
-    void* thread_fuction(void* data)
-    {
-        *(int*)data += 10; // 전달받은 포인터가 가르키는 값 변경.
+* `int pthread_detach(pthread_t th);`  
+실행중인 스레드를 분리(detach) 상태로 만든다.  
+join으로 기다리지 않고, 독립적으로 동작하기를 원할 때 사용.  
+결과 값에 관심이 없을 때, 스레드가 끝나면 알아서 자원을 반환하도록 함.  
+join과 detach의 또 다른 차이는, **스레드를 띄우는 함수가 여러개**인 경우 발생한다(스레드가 여러개인 경우가 아님!). join을 사용하면 **한 스레드가 종료되어야 그 함수가 종료되고 다음 함수가 작동**하므로, 원하는 동작을 얻지 못할 수 있다. (http://blog.daum.net/yykoo/79)
+    * `th`: 분리시킬 스레드의 ID.
 
-        printf("자식 스레드: %d\n", *(*int)data);
-        return (NULL);
-    }
+```c
+#include <pthread.h> // 컴파일시 clang(gcc) -pthread 옵션을 붙여줘야.
+    
+void* thread_fuction(void* data)
+{
+    *(int*)data += 10; // 전달받은 포인터가 가르키는 값 변경.
 
-    int main()
-    {
-        pthread_t threadID;
-        int data = 1;
+    printf("자식 스레드: %d\n", *(*int)data);
+    return (NULL);
+}
 
-        printf("스레드 생성\n");
-        pthread_create(&threadID, NULL, thread_fuction, (void*)&data); // 성공하면 0 리턴.
+int main()
+{
+    pthread_t threadID;
+    int data = 1;
 
-        printf("메인 스레드가 자식 스레드를 기다립니다.\n");
-        pthread_join(threadID, NULL); // "자식 스레드: 11" 출력
-        // join 함수가 없으면 자식 스레드의 출력이 나오지 않는다.
+    printf("스레드 생성\n");
+    pthread_create(&threadID, NULL, thread_fuction, (void*)&data); // 성공하면 0 리턴.
 
-        printf("메인 스레드가 자식 스레드를 기다리는 것을 마쳤습니다.\n");
-        printf("메인 스레드: %d\n", data); // "메인 스레드: 11" 출력
-        return (0);
-    }
-    ```
+    printf("메인 스레드가 자식 스레드를 기다립니다.\n");
+    pthread_join(threadID, NULL); // "자식 스레드: 11" 출력
+    // join 함수가 없으면 자식 스레드의 출력이 나오지 않는다.
 
-    ```c
-    #include <pthread.h>
+    printf("메인 스레드가 자식 스레드를 기다리는 것을 마쳤습니다.\n");
+    printf("메인 스레드: %d\n", data); // "메인 스레드: 11" 출력
+    return (0);
+}
+```
 
-    void* thread_fuction(void* data)
-    {
-        *(int*)data += 10;
-        printf("자식 스레드 실행\n");
-        return (data);
-    }
+```c
+#include <pthread.h>
 
-    int main()
-    {
-        pthread_t threadID;
-        int data = 1;
-        void* return_value;
+void* thread_fuction(void* data)
+{
+    *(int*)data += 10;
+    printf("자식 스레드 실행\n");
+    return (data);
+}
 
-        pthread_create(&threadID, NULL, thread_fuction, (void*)&data);
-        printf("스레드 생성\n");
+int main()
+{
+    pthread_t threadID;
+    int data = 1;
+    void* return_value;
 
-        printf("메인 스레드가 자식 스레드를 기다립니다.\n");
-        pthread_join(threadID, &return_value); // &return_value에 리턴값 저장.
+    pthread_create(&threadID, NULL, thread_fuction, (void*)&data);
+    printf("스레드 생성\n");
 
-        printf("메인 스레드가 자식 스레드를 기다리는 것을 마쳤습니다.\n");
-        printf("return_value: %d\n", *(int*)return_value); // "return_value: 11" 출력
-        return (0);
-    }
-     ```
+    printf("메인 스레드가 자식 스레드를 기다립니다.\n");
+    pthread_join(threadID, &return_value); // &return_value에 리턴값 저장.
 
-    * `int pthread_detach(pthread_t th);`  
-    실행중인 스레드를 분리(detach) 상태로 만든다.
+    printf("메인 스레드가 자식 스레드를 기다리는 것을 마쳤습니다.\n");
+    printf("return_value: %d\n", *(int*)return_value); // "return_value: 11" 출력
+    return (0);
+}
+```
+
+### 뮤텍스 함수
 
 * `int pthread_mutex_init(pthread_mutex_t * mutex, const pthread_mutex_attr *attr);`  
 뮤텍스 객체를 초기화한다.
+
+```c
+pthread_mutex_t mutex_lock;
+int g_count = 0;
+ 
+void *t_function(void *data)
+{
+    char* thread_name = (char*)data;
+ 
+    pthread_mutex_lock(&mutex_lock);
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%s COUNT %d\n", thread_name, g_count);
+        g_count++;
+        sleep(1);
+    }
+    pthread_mutex_unlock(&mutex_lock);
+    // lock과 unlock을 주석처리 하면, "0,0,2,2,4,4"로 결과가 출력.
+    // sleep(1)도 주석처리 하면, "0,1,2,0,4,5" 등 뒤죽박죽의 결과가 출력.
+    return (NULL);
+}
+
+int main()
+{
+    pthread_t p_thread1, p_thread2;
+
+    pthread_mutex_init(&mutex_lock, NULL);
+ 
+    pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+    pthread_create(&p_thread2, NULL, t_function, (void *)"Thread2");
+ 
+    pthread_join(p_thread1, NULL);
+    pthread_join(p_thread2, NULL);
+    // join 함수는 스레드1이 종료되길 기다리고 스레드2를 실행시키는게 아니다! 부모 스레드가 기다려줄 뿐.
+} // "0,1,2,3,4,5" 출력.
+```
 
 * `int pthread_mutex_destroy(pthread_mutex_t *mutex);`  
 뮤텍스를 파괴한다.
