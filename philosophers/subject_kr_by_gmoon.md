@@ -44,7 +44,7 @@
 | 제출 파일 | philo_one/ |
 | Makefile | O |
 | 인자 | number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat] |
-| 외부 함수 |  memset, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock |
+| 외부 함수 | memset, malloc, free, write, usleep, gettimeofday, pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock |
 | libft 허용 | X |
 | 설명 | philosopher with threads and mutex |
 
