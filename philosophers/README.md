@@ -88,7 +88,6 @@ create만 하면 자원(메모리)를 회수하지 않으므로, join이나 deta
 실행중인 스레드를 분리(detach) 상태로 만든다.  
 join으로 기다리지 않고, 독립적으로 동작하기를 원할 때 사용.  
 결과 값에 관심이 없을 때, 스레드가 끝나면 알아서 자원을 반환하도록 함.  
-join과 detach의 또 다른 차이는, **스레드를 띄우는 함수가 여러개**인 경우 발생한다(스레드가 여러개인 경우가 아님!). join을 사용하면 **한 스레드가 종료되어야 그 함수가 종료되고 다음 함수가 작동**하므로, 원하는 동작을 얻지 못할 수 있다. (http://blog.daum.net/yykoo/79)
     * `th`: 분리시킬 스레드의 ID.
 
 ```c
@@ -147,6 +146,190 @@ int main()
     return (0);
 }
 ```
+
+### pthread_join vs pthread_detach
+* pthread_create 시 함수는 실행을 시작한다. join은 메인 스레드에서 종료를 대기하는 것 뿐.
+    ```c
+    int g_count = 0;
+    
+    void *t_function(void *data)
+    {
+        char* thread_name = (char*)data;
+    
+        for (int i = 0; i < 5; i++)
+        {
+            printf("%s COUNT %d\n", thread_name, g_count);
+            g_count++;
+            sleep(1);
+        }
+        return (NULL);
+    }
+
+    int main()
+    {
+        pthread_t p_thread1;
+        pthread_t p_thread2;
+
+        pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+        pthread_create(&p_thread2, NULL, t_function, (void *)"Thread2"); // 스레드2도 시작
+        pthread_join(p_thread1, NULL);
+        pthread_join(p_thread2, NULL);
+    }
+    /*
+    Thread1 COUNT 0
+    Thread2 COUNT 0
+    Thread1 COUNT 2
+    Thread2 COUNT 2
+    Thread1 COUNT 4
+    Thread2 COUNT 4
+    */
+    ```
+
+    ```c
+    int g_count = 0;
+    
+    void *t_function(void *data)
+    {
+        char* thread_name = (char*)data;
+    
+        for (int i = 0; i < 5; i++)
+        {
+            printf("%s COUNT %d\n", thread_name, g_count);
+            g_count++;
+            sleep(1);
+        }
+        return (NULL);
+    }
+
+    int main()
+    {
+        pthread_t p_thread1;
+        pthread_t p_thread2;
+
+        pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+        pthread_join(p_thread1, NULL); // 이후 코드가 바로 실행되지 않으므로, 스레드1이 종료된 후 스레드2가 생성됨.
+        pthread_create(&p_thread2, NULL, t_function, (void *)"Thread2");
+        pthread_join(p_thread2, NULL);
+    }
+    /*
+    Thread1 COUNT 0
+    Thread1 COUNT 1
+    Thread1 COUNT 2
+    Thread2 COUNT 3
+    Thread2 COUNT 4
+    Thread2 COUNT 5
+    */
+    ```
+
+* join을 사용하면 뒤의 코드가 바로 실행되지 않는다. (blocking이라고 표현)
+    ```c
+    int g_count = 0;
+    
+    void *t_function(void *data)
+    {
+        char* thread_name = (char*)data;
+    
+        for (int i = 0; i < 4; i++)
+        {
+            printf("%s COUNT %d\n", thread_name, g_count);
+            g_count++;
+            sleep(1);
+        }
+        return (NULL);
+    }
+
+    int main()
+    {
+        pthread_t p_thread1;
+
+        pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1"); // 스레드의 함수 실행
+        for (int i = 0; i < 2; i++)
+        {
+            printf("main: %d\n", i);
+            sleep(1);
+        } // 그러나 메인문이 종료되면 프로그램 종료
+    }
+    /*
+    main: 0
+    Thread1 COUNT 0
+    main: 1
+    Thread1 COUNT 1
+    */
+    ```
+
+    ```c
+    int g_count = 0;
+ 
+    void *t_function(void *data)
+    {
+        char* thread_name = (char*)data;
+    
+        for (int i = 0; i < 4; i++)
+        {
+            printf("%s COUNT %d\n", thread_name, g_count);
+            g_count++;
+            sleep(1);
+        }
+        return (NULL);
+    }
+
+    int main()
+    {
+        pthread_t p_thread1;
+
+        pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+        pthread_join(p_thread1, NULL); // 스레드의 함수가 실행
+        for (int i = 0; i < 2; i++) // 이후 나머지 코드 실행
+        {
+            printf("main: %d\n", i);
+            sleep(1);
+        }
+    }
+    /*
+    Thread1 COUNT 0
+    Thread1 COUNT 1
+    Thread1 COUNT 2
+    Thread1 COUNT 3
+    main: 0
+    main: 1
+    */
+    ```
+
+    ```c
+    int g_count = 0;
+    
+    void *t_function(void *data)
+    {
+        char* thread_name = (char*)data;
+    
+        for (int i = 0; i < 4; i++)
+        {
+            printf("%s COUNT %d\n", thread_name, g_count);
+            g_count++;
+            sleep(1);
+        }
+        return (NULL);
+    }
+
+    int main()
+    {
+        pthread_t p_thread1;
+
+        pthread_create(&p_thread1, NULL, t_function, (void *)"Thread1");
+        pthread_detach(p_thread1); // 스레드1이 분리
+        for (int i = 0; i < 2; i++) // 메인 스레드도 실행
+        {
+            printf("main: %d\n", i);
+            sleep(1);
+        } // 메인 스레드가 끝나면 프로그램 종료..? 자원 해제만 보장하는 건가?
+    }
+    /*
+    main: 0
+    Thread1 COUNT 0
+    main: 1
+    Thread1 COUNT 1
+    */
+    ```
 
 ### 뮤텍스 함수
 
